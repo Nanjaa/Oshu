@@ -2,21 +2,16 @@ $(document).ready(function() {
 
 // begin
 
-	var cookies = 100;
+	var remainingLife = 3600;
 
-	$('#test').click(function() {
-		cookieClick(1);
-	});
-
-	function cookieClick(number) {
-		cookies = cookies - number;
-		$('#number').text(cookies);
-		var percent = cookies + "%";
+	function lifeBar() {
+		remainingLife = remainingLife - 1;
+		var percent = ((remainingLife/3600)*100) + "%";
 		$('#life').css('width', percent);
-		if(cookies >= 66) {
+		if(remainingLife >= 2400) {
 			$('#life').css('background-color', 'green');
 		}
-		else if(cookies >= 33) {
+		else if(remainingLife >= 1200) {
 			$('#life').css('background-color', 'orange');
 		}
 		else {
@@ -24,48 +19,40 @@ $(document).ready(function() {
 		}
 	};
 
-	$('#test2').click(function() {
-		buyCursor();
-	});
+	var minutes = 60;
+	var seconds = 60;
 
-	var cursors = 1;
+	function timer(seconds) {
+		if(seconds < 10) {
+			seconds = '0' + seconds;
+			$('#seconds').text(seconds);
+		}
+		else {
+			$('#seconds').text(seconds);
+		}
+	};
 
-	function buyCursor() {
-		var cursorCost = Math.floor(10 * Math.pow(1.1, cursors));
-		if(cookies >= cursorCost) {
-			cursors = cursors + 1;
-			cookies = cookies - cursorCost;
-			$('#number').text(cookies);
-			$('#cursors').text(cursors);
-		};
-		var nextCost = Math.floor(10 * Math.pow(1.1, cursors));
-		$('#cursorCost').text(nextCost);
+	function loseLife() {
+		seconds = seconds - 1;
+		timer(seconds);
+		if(seconds == -1) {
+			seconds = 59;
+			$('#seconds').text(seconds);
+			minutes = minutes - 1;
+			$('#minutes').text(minutes);
+		};		
 	};
 
 	var life = setInterval(function() {
-		if(cookies === 0) {
-			console.log('finished');
+		if(remainingLife === 0) {
 			clearInterval(life);
 			return;
 		}
-		cookieClick(cursors);
-	}, 100);
+		loseLife();
+		lifeBar();
+	}, 10);
 
 	window.setInterval(life);
-
-	$('#stop').click(function() {
-		clearInterval(life);
-	})
-
-	// window.setInterval(function() {
-	// 	if(cookies === 0) {
-	// 		console.log('finished');
-	// 		clearInterval();
-	// 		return;
-	// 	}
-	// 	cookieClick(cursors);
-	// }, 10);
-
 
 
 
