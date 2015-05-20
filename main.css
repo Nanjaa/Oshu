@@ -36,10 +36,7 @@ pre {
 	text-align: left;
 	overflow: none;
 }
-#clock {
-	float: right;
-}
-#clock2 {
+#clock, #map {
 	background-color: yellow;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -49,11 +46,23 @@ pre {
 	border: 1px solid black;
 	float: right;
 }
-#clock2 p {
+#clock p, #map p {
 	margin: 0px;
 	text-align: center;
 }
-#clockNumbers {
+#clockNumbers, #mapPreview {
 	background-color: orange;
 	border: 1px solid black;
+}
+#map {
+	float: left;
+	width: 200px;
+	height: 150px;
+	cursor: pointer;
+}
+#mapPreview {
+	height: 120px;
+}
+#gameConsole {
+	height: 750px;
 }
