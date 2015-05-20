@@ -23,14 +23,37 @@
 	margin-bottom: 0;
 	border: 1px solid black;
 }
-#number {
-	margin-top: 0;
-	margin-bottom: 0;
-	padding: 2px;
-	float: right;
-	border: 1px solid black;
-}
 .clock {
 	text-align: right;
 	margin: 0;
+}
+pre {
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+}
+#map {
+	text-align: left;
+	overflow: none;
+}
+#clock {
+	float: right;
+}
+#clock2 {
+	background-color: yellow;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 0px;
+	padding-bottom: 5px;
+	width: 100px;
+	border: 1px solid black;
+	float: right;
+}
+#clock2 p {
+	margin: 0px;
+	text-align: center;
+}
+#clockNumbers {
+	background-color: orange;
+	border: 1px solid black;
 }

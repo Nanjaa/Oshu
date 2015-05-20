@@ -219,7 +219,7 @@ hr {
  */
 
 pre {
-  overflow: auto;
+  overflow: none;
 }
 
 /**
