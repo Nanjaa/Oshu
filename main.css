@@ -1,3 +1,6 @@
+p {
+	margin: 0;
+}
 #wrapper {
 	background-color: gray;
 	padding-top: 2%;
@@ -31,7 +34,7 @@
 #interaction {
 	width: 95%;
 	background-color: black;
-	height: 500px;
+	height: 525px;
 	color: white;
 	margin-left: auto;
 	margin-right: auto;
@@ -76,14 +79,7 @@ pre {
 	height: 750px;
 }
 #mapEnlarged {
-	position: absolute;
-	border: 3px solid black;
-	background-color: pink;
-	height: 590px;
-	width: 80%;
-	margin: 5%;
-	text-align: center;
-	display: none;
+	background-color: gray;
 }
 #mapEnlargedMap, #mapEnlargedList {
 	border: 1px solid black;
@@ -116,26 +112,32 @@ pre {
 #Luneda {
 	color: #c1e3da;
 	margin-left: 10%;
+	margin-top: 350px;
 }
 #Kanedos {
 	color: #ff9a00;
 	margin-left: 20%;
+	margin-top: 350px;
 }
 #Tyrianne {
 	color: #db1600;
 	margin-left: 30%;
+	margin-top: 150px;
 }
 #Kaprika {
 	color: #1c9600;
 	margin-left: 40%;
+	margin-top: 300px;
 }
 #AliNada {
 	color: #969696;
 	margin-left: 50%;
+	margin-top: 150px;
 }
 #Carpic {
 	color: #5650ff;	
 	margin-left: 70%;
+	margin-top: 75px;
 }
 #shipStatus {
 	border: 1px solid black;
@@ -152,7 +154,10 @@ pre {
 	padding: 8px;
 	text-align: left;
 }
-#shipPicture, #shipStatusDetails {
+#shipPicture, #inventory, #bucketList {
+	display: inline-flex;
+}
+#shipStatusDetails {
 	display: inline-block;
 }
 #gameStats {
@@ -182,4 +187,21 @@ pre {
 }
 #shipHealth {
 	text-align: right;
+}
+#inventory {
+	background-color: white;
+	border: 1px solid black;
+	padding: 10px;
+}
+.inventory {
+	display: inline-block;
+	border: 1px solid black;
+	padding: 5px;
+}
+#bucketList {
+	background-color: white;
+	height: 170px;
+	float: right;
+	padding-left: 10px;
+	width: 500px;
 }

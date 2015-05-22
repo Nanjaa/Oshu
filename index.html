@@ -36,7 +36,7 @@
     <div class="console">
       <div id="life"></div>
     </div>
-
+<!-- game console -->
     <div class="console" id="gameConsole">
       <!-- clock -->
       <div id="clock">
@@ -45,105 +45,121 @@
           <p class="clock" id="number"><span id="minutes">60</span>:<span id="seconds">00</span></p>
         </div>
       </div>
+  <!-- ============ INTERACTION =========== -->
       <div id="interaction">
-        <p>hello I am interaction</p>
+        <div id="mapEnlarged">
+      <!-- map enlarged -->
+<!-- the following are all the planets listed on the map -->
+          <pre id="Luneda" class="planet" distance="1">
+  ..
+.u%%u.
+%8888%
+`n%%n'
+  ``
+          </pre>
+          <pre id="Kanedos" class="planet" distance="3">
+         .-..
+  .-8###8-.||
+,%88%8%88%//.
+%8%%8%8%%//88
+8%88%8%8//88%
+`8%%8%8//%88'        
+((.&88//8%^'
+ '--'
+          </pre>
+          <pre id="Tyrianne" class="planet" distance="7">
+  ..
+.u%%u.
+%8888%
+`n%%n'
+  ``  
+          </pre>
+          <pre id="Kaprika" class="planet" distance="5">
+  ..
+.u%%u.
+%8888%
+`n%%n'
+  ``
+          </pre>
+          <pre id="AliNada" class="planet" distance="9">
+          ......
+        ,%GG8G8&&.
+   ....%G8G8G8G8&&&.....
+.::'''%O8G8G8G8G8&&&''''':.
+::    OOG8G8G8G8G8&&      ::
+'::...OOOO8G8G8G8G&&....::'
+  '''''&O8G8G8G8&&&''''''
+        'G8G8&&&&'
+          '''''
+          </pre>
+          <pre id="Carpic" class="planet" distance="11">
+  .%%&&.
+'%%%%%%&.
+'%@%%%&&'
+'%%%%&&&'
+ '&8&&%'
+          </pre>
+<!-- end of planets list -->
+        </div>
       </div>
-
+<!-- ========== GAME STATS ============ -->
       <div id="gameStats">
         <div id="shipStatus">
           <div id="shipPicture">
 <!-- ship ascii art -->
-<pre id="myShip">
-|'\
-=[_|'')--.___
-=[+--,------'
- [_/
-</pre>
+            <pre id="myShip">
+   |\____
+SS={o} [_\.__
+SS=[.________'>
+    [_/
+            </pre>
 <!-- end of ascii art -->
           </div>
-          <div id="shipStatusDetails">
-            <div id="shipHealth">
-              <div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div>
-              <div class="statusCategory"><p>Health</p></div>
-            </div>
-            <div id="shipFuel">
-              <div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div>
-              <div class="statusCategory"><p>Fuel</p></div>
-            </div>
+        <div id="shipStatusDetails">
+          <div id="shipHealth">
+            <div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div>
+            <div class="statusCategory"><p>Health</p></div>
           </div>
-        </div>
-        <!-- map -->
-        <div id="map">
-          <p>Map</p>
-          <div id="mapPreview">
-            <p>hello this is the map</p>
+          <div id="shipFuel">
+            <div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div>
+            <div class="statusCategory"><p>Fuel</p></div>
           </div>
         </div>
       </div>
-
-
-
-
-
-      <!-- map enlarged -->
-      <div id="mapEnlarged">
-        <p id="close">X</p>
-        <div id="mapEnlargedMap">
-<!-- the following are all the planets listed on the map -->
-<pre id="Luneda" class="planet">
-,d88b,
-88888%
-\?8jY'   
-</pre>
-<pre id="Kanedos" class="planet">
-         .-..
-  ,o8888o, ||
-,888888888//,
-888888888//88
-8888888//'888
-`8888//'8888'        
-( `,'/888P'
-`-,,'
-</pre>
-<pre id="Tyrianne" class="planet">
-,d88b,
-88888%
-\?8jY'   
-</pre>
-<pre id="Kaprika" class="planet">
-,d88b,
-88888%
-\?8jY'   
-</pre>
-<pre id="AliNada" class="planet">
-        ,MMM8&&&.
-      .OMMMMM88&&&..._
-.::'''OOOMMM88&&&&&'''::.
-::    OOMMMM88&&&&&     ::
-'::...OOOOMM88&&&&&....::'
-  `''''OOOMM88&&&&''''`
-        'MMM8&&&'
-</pre>
-<pre id="Carpic" class="planet">
-   MM8&&
- MMMMM88&&
-OOMMM88&&&&
- OOMM88&&&
-   MM8&&
-</pre>
-
-<!-- end of planets list -->
+      <!-- map -->
+      <div id="map">
+        <p>Map</p>
+        <div id="mapPreview">
+          <p>hello this is the map</p>
         </div>
-        <div id="mapEnlargedList">again</div>
       </div>
-      <!-- end -->
+      <!-- inventory -->
+      <div id="inventory">
+        <div class="inventory"><p>Coins: 22</p></div>
+        <div class="inventory"><p>Crystals: 40</p></div>
+        <div class="inventory"><p>Electric Fruit</p></div>
+      </div>
+      <!-- bucketlist -->
+      <div id="bucketList">
+        <div id="list">
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+        </div>
+      </div>
     </div>
+    <!-- end -->
   </div>
+</div>
 
 <!-- javascript -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="script.js"></script>
+<script src="objects.js"></script>
+<script src="travel.js"></script>
 <script src="lifeBar.js"></script>
 
 
