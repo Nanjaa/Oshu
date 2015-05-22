@@ -154,8 +154,10 @@ pre {
 	padding: 8px;
 	text-align: left;
 }
-#shipPicture, #inventory, #bucketList {
-	display: inline-flex;
+#inventory, #bucketList, #shipStatus {
+	display: inline-block;
+	width: 30%;
+	margin: 0px;
 }
 #shipStatusDetails {
 	display: inline-block;
@@ -203,5 +205,4 @@ pre {
 	height: 170px;
 	float: right;
 	padding-left: 10px;
-	width: 500px;
 }

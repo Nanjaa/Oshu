@@ -4,11 +4,20 @@ $(document).ready(function() {
 
 	$('.planet').mouseover(function() {
 		var distanceCost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
+		console.log(distanceCost);
 		var currentTime = $('#minutes').text();
 		var newTime = currentTime - distanceCost;
 		$('.planet').click(function() {
-			$('#minutes').text(newTime);
-			myLocation.current = $(this).attr('distance');			
+			if(newTime <= 0) {
+				console.log(distanceCost);
+				console.log(newTime);
+				console.log("not possible!");
+				error.play();
+			}
+			else {
+				$('#minutes').text(newTime);
+				myLocation.current = $(this).attr('distance');				
+			}
 		});
 	});
 
