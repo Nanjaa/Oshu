@@ -19,6 +19,8 @@ $(document).ready(function() {
 		}
 	};
 
+
+
 	var minutes = 60;
 	var seconds = 00;
 
