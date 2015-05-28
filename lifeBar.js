@@ -2,10 +2,16 @@ $(document).ready(function() {
 
 // begin
 
+	$('.planet').click(function() {
+		console.log(remainingLife);
+
+	});
+
 	var remainingLife = 3600;
 
 	function lifeBar() {
 		remainingLife = remainingLife - 1;
+		$('#remainingLife').attr('remainingLife', remainingLife);
 		var percent = ((remainingLife/3600)*100) + "%";
 		$('#life').css('width', percent);
 		if(remainingLife >= 2400) {

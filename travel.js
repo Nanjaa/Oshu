@@ -37,10 +37,6 @@ $(document).ready(function() {
 		}
 	}
 
-	$('.planet').click(function() {
-
-	});
-
 	function highlightPlanet() {
 		$('#Luneda').css('color', '#c1e3da');
 		$('#Kanedos').css('color', '#ff9a00');
