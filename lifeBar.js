@@ -7,13 +7,14 @@ $(document).ready(function() {
 
 	});
 
-	var remainingLife = 3600;
+	var remainingLife = Oshu.remainingLife;
 
 	function lifeBar() {
 		remainingLife = remainingLife - 1;
 		$('#remainingLife').attr('remainingLife', remainingLife);
 		var percent = ((remainingLife/3600)*100) + "%";
 		$('#life').css('width', percent);
+		Oshu.remainingLife = remainingLife;
 		if(remainingLife >= 2400) {
 			$('#life').css('background-color', 'green');
 		}

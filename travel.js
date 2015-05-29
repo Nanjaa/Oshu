@@ -1,10 +1,12 @@
 $(document).ready(function() {
 
 	var planetNumber = $(this).attr('distance')
+	var distanceCost = 0;
+	var distanceBar = 0;
 
 	$('.planet').mouseover(function() {
-		var distanceCost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
-		var distanceBar = distanceCost * 60;
+		distanceCost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
+		distanceBar = distanceCost * 60;
 
 		var currentTime = $('#minutes').text();
 		var newTime = currentTime - distanceCost;
@@ -20,9 +22,11 @@ $(document).ready(function() {
 				myLocation.current = $(this).attr('distance');	
 				// highlightPlanet();
 				lifeEvent(distanceCost, distanceBar);
+				distanceCost = 0;
+				distanceBar = 0;
 				// $(this).css('color', 'white');
 				// $(this).attr('selected', 'yes');
-			}
+			};
 		});
 	});
 
