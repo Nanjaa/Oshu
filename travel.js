@@ -1,33 +1,22 @@
 $(document).ready(function() {
 
-	var planetNumber = $(this).attr('distance')
-	var distanceCost = 0;
-	var distanceBar = 0;
-
 	$('.planet').mouseover(function() {
-		distanceCost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
-		distanceBar = distanceCost * 60;
-
-		var currentTime = $('#minutes').text();
-		var newTime = currentTime - distanceCost;
-		console.log(distanceCost);
+		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
+console.log(minutesLost);
+	});
 
 
-		$('.planet').click(function() {
-			if(newTime <= 0) {
-				console.log("not possible!");
-				error.play();
-			}
-			else {
-				myLocation.current = $(this).attr('distance');	
-				// highlightPlanet();
-				lifeEvent(distanceCost, distanceBar);
-				distanceCost = 0;
-				distanceBar = 0;
-				// $(this).css('color', 'white');
-				// $(this).attr('selected', 'yes');
-			};
-		});
+
+	$('.planet').click(function() {
+		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
+		if(($('#minutes').text() - minutesLost) <= 0) {
+console.log("not possible!");
+			error.play();
+		}
+		else {
+			lifeEvent(minutesLost);
+			myLocation.current = $(this).attr('distance');
+		};
 	});
 
 	// var colored = false;

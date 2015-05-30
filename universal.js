@@ -1,18 +1,17 @@
-function lifeEvent(timer, bar) {
+function lifeEvent(minutesLost) {
 // calculate loss
-console.log('timer ' + timer);
-console.log('bar ' + bar);
+
+	// first, the timer
+	var currentTime = $('#minutes').text();
+	var newTime = currentTime - minutesLost;
+
+	// next, the life bar
+	var bar = minutesLost * 60;
 	var remainingLife = Oshu.remainingLife;
 	Oshu.remainingLife = remainingLife - bar;
-	console.log('remaininglife: ' + remainingLife);
-	$('#remainingLife').attr('remainingLife', remainingLife);
-
-	var currentTime = $('#minutes').text();
-	var newTime = currentTime - timer;
-// display loss
-	var percent = ((remainingLife/3600)*100) + "%";
+	
+	// display the loss
+	var percent = ((Oshu.remainingLife/3600)*100) + "%";
 	$('#life').css('width', percent);
 	$('#minutes').text(newTime);
-
-	return;
-}
+};

@@ -2,23 +2,17 @@ $(document).ready(function() {
 
 // begin
 
-	$('.planet').click(function() {
-		console.log(remainingLife);
-
-	});
-
-	var remainingLife = Oshu.remainingLife;
-
 	function lifeBar() {
+		var remainingLife = Oshu.remainingLife;
 		remainingLife = remainingLife - 1;
-		$('#remainingLife').attr('remainingLife', remainingLife);
-		var percent = ((remainingLife/3600)*100) + "%";
-		$('#life').css('width', percent);
 		Oshu.remainingLife = remainingLife;
-		if(remainingLife >= 2400) {
+		
+		var percent = ((Oshu.remainingLife/3600)*100) + "%";
+		$('#life').css('width', percent);
+		if(Oshu.remainingLife >= 2400) {
 			$('#life').css('background-color', 'green');
 		}
-		else if(remainingLife >= 1200) {
+		else if(Oshu.remainingLife >= 1200) {
 			$('#life').css('background-color', 'orange');
 		}
 		else {
@@ -53,7 +47,7 @@ $(document).ready(function() {
 	};
 
 	var life = setInterval(function() {
-		if(remainingLife === 0) {
+		if(Oshu.remainingLife === 0) {
 			clearInterval(life);
 			return;
 		}
