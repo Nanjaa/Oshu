@@ -16,12 +16,13 @@
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Orbitron|Audiowide|Press+Start+2P' rel='stylesheet' type='text/css'>
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="landing.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -32,121 +33,42 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div id="wrapper">
-    <div class="console">
-      <div id="life"></div>
-    </div>
-<!-- game console -->
-    <div class="console" id="gameConsole">
-      <!-- clock -->
-      <div id="clock">
-        <p>Clock</p>
-        <div id="clockNumbers">
-          <p class="clock" id="number"><span id="minutes">60</span>:<span id="seconds">00</span></p>
-        </div>
-      </div>
-  <!-- ============ INTERACTION =========== -->
-      <div id="interaction">
-        <div id="mapEnlarged">
-      <!-- map enlarged -->
-<!-- the following are all the planets listed on the map -->
-          <pre id="Luneda" class="planet" distance="1">
-  ..
-.u%%u.
-%8888%
-`n%%n'
-  ``
-          </pre>
-          <pre id="Kanedos" class="planet" distance="3">
-         .-..
-  .-8###8-.||
-,%88%8%88%//.
-%8%%8%8%%//88
-8%88%8%8//88%
-`8%%8%8//%88'        
-((.&88//8%^'
- '--'
-          </pre>
-          <pre id="Tyrianne" class="planet" distance="7">
-  ..
-.u%%u.
-%8888%
-`n%%n'
-  ``  
-          </pre>
-          <pre id="Kaprika" class="planet" distance="5">
-  ..
-.u%%u.
-%8888%
-`n%%n'
-  ``
-          </pre>
-          <pre id="AliNada" class="planet" distance="9">
-          ......
-        ,%GG8G8&&.
-   ....%G8G8G8G8&&&.....
-.::'''%O8G8G8G8G8&&&''''':.
-::    OOG8G8G8G8G8&&      ::
-'::...OOOO8G8G8G8G&&....::'
-  '''''&O8G8G8G8&&&''''''
-        'G8G8&&&&'
-          '''''
-          </pre>
-          <pre id="Carpic" class="planet" distance="11">
- .o%%&&.
-'%%%%%%&.
-'%@%%%&&'
-'%%%%&&&'
- '&8&&%'
-          </pre>
-<!-- end of planets list -->
-        </div>
-      </div>
-<!-- ========== GAME STATS ============ -->
-      <div id="gameStats">
-        <div id="shipStatus">
-          <div id="shipPicture">
-<!-- ship ascii art -->
-            <pre id="myShip">
-   |\____
-SS={o} [_\.__
-SS=[.________'>
-    [_/
-            </pre>
-<!-- end of ascii art -->
-          </div>
-        <div id="shipStatusDetails">
-          <div id="shipHealth">
-            <div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div>
-            <div class="statusCategory"><p>Health</p></div>
-          </div>
-          <div id="shipFuel">
-            <div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div>
-            <div class="statusCategory"><p>Fuel</p></div>
-          </div>
-        </div>
-      </div>
-      <!-- inventory -->
-      <div id="inventory">
-        <div class="inventory"><p>Coins: 22</p></div>
-        <div class="inventory"><p>Crystals: 40</p></div>
-        <div class="inventory"><p>Electric Fruit</p></div>
-      </div>
-      <!-- bucketlist -->
-      <div id="bucketList">
-        <div id="list">
-          <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-            <li>Item 5</li>
-        </div>
-      </div>
-    </div>
-    <!-- end -->
+
+  <div id="landing">
+    <h1>Oshu</h1>
+    <h3>A Fulfillment Odyssey</h3>
+    <h5 id="play"><span id="clickPlay">Play</span></h5>
+  <pre id="oshuBack">
+          *           *        o          |
+              o                         > o <
+    *                    *                |
+o                 *               *
+        *             *
+
+            .oOOo.
+            OOOOOO
+            &OOOO%
+            `OOOO'
+      .oOOo.. 88
+      o@@@@@@0000OOo.
+            @@0000OOoo.
+            @@@000O.OOo
+            @@@000O .OOo
+            @@@000O  oOO.
+            @@@@00O  .OOo
+            @@@@@0OO oOo.
+            @@@@@0OO.oOO.
+            @@@@@@0OOoOo
+  </pre>
+    <h4>By Stephanie Olfert</h4>
   </div>
-</div>
+
+  <div id="welcome">
+    <h1 id="one">Headlines One</h1>
+    <h1 id="two">Headlines Two</h1>
+    <h1 id="three">Paragraphs</h1>
+    <a href="game.html">hellohello</a>
+  </div>
 
 <!-- sounds -->
 
@@ -157,10 +79,7 @@ SS=[.________'>
 <!-- javascript -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="universal.js"></script>
-<script src="objects.js"></script>
-<script src="travel.js"></script>
-<script src="lifeBar.js"></script>
+<script src="landing.js"></script>
 
 
 <!-- End Document
