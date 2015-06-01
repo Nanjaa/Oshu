@@ -15,11 +15,14 @@ body {
 	display: none;
 }
 #one {
-	font-family: 'Orbitron', sans-serif;
-}
-#two {
 	font-family: 'Audiowide', cursive;
 }
-#three {
+#two {
 	font-family: 'Press Start 2P', cursive;
+}
+#three {
+	font-family: 'Orbitron', sans-serif;
+}
+#four {
+	font-family: 'Share Tech Mono';
 }
