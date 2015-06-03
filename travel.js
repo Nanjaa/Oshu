@@ -1,8 +1,14 @@
 $(document).ready(function() {
 
+
 	$('.planet').mouseover(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
+		$('#planetName').text($(this).attr('id'));
 console.log(minutesLost);
+	});
+
+	$('.planet').mouseout(function() {
+		$('#planetName').text('');
 	});
 
 
@@ -19,34 +25,24 @@ console.log("not possible!");
 		};
 	});
 
-	// var colored = false;
-	// var attr = $('#item').attr('selected');
+	$('.planet').click(function() {
+		if($(this).attr('id') == AliNada) {
+			console.log('it worked');
+		};
+	});
+
+	// var selected = planets.
 	// if(attr === 'yes') {
 	// 	if (colored) {
-	// 		$('#item').css('color', 'white');
+	// 		$(this).css('color', 'white');
 	// 		colored = false;
 	// 	}
 	// 	else {
-	// 		$('#item').css('color', 'originalcolor');
+	// 		$(this).css('color', 'originalcolor');
 	// 		colored = true;
 	// 	}
 	// }
 
-	// function highlightPlanet() {
-	// 	$('#Luneda').css('color', '#c1e3da');
-	// 	$('#Kanedos').css('color', '#ff9a00');
-	// 	$('#Tyrianne').css('color', '#db1600');
-	// 	$('#Kaprika').css('color', '#1c9600');
-	// 	$('#AliNada').css('color', '#969696');
-	// 	$('#Carpic').css('color', '#5650ff');
-
-	// 	$('#Luneda').attr('selected', 'no');
-	// 	$('#Kanedos').css('color', '#ff9a00');
-	// 	$('#Tyrianne').css('color', '#db1600');
-	// 	$('#Kaprika').css('color', '#1c9600');
-	// 	$('#AliNada').css('color', '#969696');
-	// 	$('#Carpic').css('color', '#5650ff');
-	// };
 
 
 	// function hightlightplanettest() {

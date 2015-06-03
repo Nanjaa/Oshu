@@ -206,3 +206,12 @@ pre {
 	float: right;
 	padding-left: 10px;
 }
+
+
+#planetName {
+	color: green;
+	font-size: 50px;
+	float: left;
+	margin-left: 15px;
+	font-family: 'Orbitron', sans-serif;
+}
