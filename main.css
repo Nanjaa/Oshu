@@ -45,11 +45,7 @@ pre {
 	padding: 0;
 	line-height: 1;
 }
-#map {
-	text-align: left;
-	overflow: none;
-}
-#clock, #map {
+#clock {
 	background-color: yellow;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -58,7 +54,7 @@ pre {
 	width: 100px;
 	border: 1px solid black;
 }
-#clock p, #map p {
+#clock p {
 	margin: 0px;
 	text-align: center;
 }
@@ -66,44 +62,9 @@ pre {
 	background-color: orange;
 	border: 1px solid black;
 }
-#map {
-	display: inline-block;
-	width: 200px;
-	height: 150px;
-	cursor: pointer;
-}
-#mapPreview {
-	height: 120px;
-}
+
 #gameConsole {
 	height: 750px;
-}
-#mapEnlarged {
-	background-color: gray;
-}
-#mapEnlargedMap, #mapEnlargedList {
-	border: 1px solid black;
-	margin: 20px;
-	height: 100px;
-}
-#mapEnlargedMap {
-	height: 550px;
-	background-color: black;
-	color: white;
-	text-align: left;
-}
-#mapEnlargedList {
-	width: 30%;
-	float: right;
-	background-color: yellow;
-	color: black;
-	margin-top: -300px;
-	height: 278px;
-}
-#close {
-	float: right;
-	margin-right: 6px;
-	cursor: pointer;
 }
 .planet {
 	cursor: pointer;
@@ -214,4 +175,43 @@ pre {
 	float: left;
 	margin-left: 15px;
 	font-family: 'Orbitron', sans-serif;
+}
+
+#map {
+	display: none;
+	height: 525px;
+}
+#lunedaMap {
+	height: 
+}
+#electricSeas {
+	color: #00dfff;
+	float: left;
+}
+#sand {
+	color: #ffe697;
+	display: inline-block;
+}
+.lunedaCity {
+	display: inline-block;
+	position: absolute;
+}
+#futureQuest, #weather {
+	border: 3px solid green;
+}
+#markets {
+	border-radius: 50%;
+	width: 300px;
+	height: 300px;
+	border: 3px solid green;
+}
+#cityCentre {
+	border: 3px solid green;
+}
+#mechanic {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	border: 3px solid green;
+	margin-left: 70%;
 }
