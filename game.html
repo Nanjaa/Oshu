@@ -107,7 +107,7 @@
 
         <!-- begin luneda -->
         <div id="lunedaMap">
-          <pre id="electricSeas">
+          <pre class="lunedaCity" id="electricSeas">
   ))
   ((
    ~))
@@ -144,9 +144,9 @@
       ((
   ~  ((
           </pre>
-          <pre id="sand">
+          <pre class="lunedaCity" id="sand">
 
-.             .
+.             
 
 
 
@@ -183,20 +183,61 @@
     .
           </pre>
           <pre class="lunedaCity" id="futureQuest">
-            FutureQuest
+ ___________________
+|                   |
+|   FUTURE QUESTS   |
+|                   |
+|     _________     |
+|    |    |    |    |
+|    |   o|o   |    |
+|____|____|____|____|
           </pre>
           <pre class="lunedaCity" id="weather">
-            WEather
+  _______________
+ /WEATHER BEAREAU\
+ |   _________   |
+ |  |    |    |  |
+ |  |   o|o   |  |
+ |__|____|____|__|
           </pre>
           <div class="lunedaCity" id="markets">
             Markets
-            <div class="lunedaCity" id="cityCentre">
-              city center
-            </div>
+            <pre class="lunedaCity" id="cityCentre">
+
+
+
+city center
+
+
+           </pre>
           </div>
-          <div class="lunedaCity" id="mechanic">
-            mechanic
-          </div>
+          <pre class="lunedaCity" id="mechanic">
+   _______________
+  /               \
+ /    MECHANIC     \
+/___________________\
+ |       ___       |
+ |      |   |      |
+ |      |  o|      |
+ |______|___|______|
+          </pre>
+        </div>
+        <!-- this div will return anyone to the city -->
+        <div class="return">
+          Return
+        </div>
+        <!-- this div will be used throughout the world to communicate -->
+        <div class="cityDetails lunedaInteract">
+          Hello I am interaction
+        </div>
+        <!-- go to the beach or the sea -->
+        <div class="beach">
+          <pre class="cityDetails" id="beach">
+Beach
+          </pre>
+          <pre class="cityDetails" id="seas">
+Seas
+          </pre>
         </div>
         <!-- end of Luneda -->
       </div>
@@ -259,6 +300,8 @@ SS=[.________'>
 <script src="objects.js"></script>
 <script src="travel.js"></script>
 <script src="lifeBar.js"></script>
+<!-- planets -->
+<script src="luneda.js"></script>
 
 
 <!-- End Document

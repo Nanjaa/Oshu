@@ -169,6 +169,13 @@ pre {
 }
 
 
+
+
+
+
+
+
+
 #planetName {
 	color: green;
 	font-size: 50px;
@@ -181,37 +188,72 @@ pre {
 	display: none;
 	height: 525px;
 }
+
+
+
+
+
 #lunedaMap {
 	height: 
 }
 #electricSeas {
 	color: #00dfff;
-	float: left;
 }
 #sand {
 	color: #ffe697;
-	display: inline-block;
+	margin-left: 5%;
 }
 .lunedaCity {
 	display: inline-block;
 	position: absolute;
-}
-#futureQuest, #weather {
-	border: 3px solid green;
+	cursor: pointer;
 }
 #markets {
 	border-radius: 50%;
 	width: 300px;
 	height: 300px;
-	border: 3px solid green;
+	border: 1px solid white;
+	margin-left: 30%;
+	margin-top: 100px;
+	text-align: center;
 }
 #cityCentre {
-	border: 3px solid green;
+	border: 1px solid white;
+	margin-left: 35%;
+	margin-top: 75px;
+	display: block;
 }
 #mechanic {
-	border-radius: 50%;
-	width: 100px;
+	margin-top: 375px;
+	margin-left: 58%;
+}
+#futureQuest {
+	margin-left: 14%;
+}
+#weather {
+	margin-left: 62%;
+	margin-top: 30px;
+}
+.cityDetails {
+	display: none;
+}
+.return {
+	float: left;
+	padding: 5px;
+	border: 1px solid white;
+	margin: 10px;
+	background-color: black;
+	display: none;
+	cursor: pointer;
+}
+.lunedaInteract {
+	position: absolute;
+	width: 70%;
+	border: 1px solid white;
+	padding: 5px;
 	height: 100px;
-	border: 3px solid green;
-	margin-left: 70%;
+	margin-top: 390px;
+	margin-left: 7%;
+
+
 }
