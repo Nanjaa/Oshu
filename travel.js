@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+	$('#myShip').click(function() {
+		$('.visitPlanet').hide();
+		$('#map').show();
+	})
 
 	$('.planet').mouseover(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
