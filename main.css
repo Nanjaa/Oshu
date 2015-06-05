@@ -1,3 +1,12 @@
+/*WHAT'S DISPLAYING NOW*/
+
+#map {
+	display: none;
+}
+
+
+
+
 p {
 	margin: 0;
 }
@@ -44,6 +53,7 @@ pre {
 	margin: 0;
 	padding: 0;
 	line-height: 1;
+	position: absolute;
 }
 #clock {
 	background-color: yellow;
@@ -185,7 +195,6 @@ pre {
 }
 
 #map {
-	display: none;
 	height: 525px;
 }
 
@@ -193,9 +202,9 @@ pre {
 
 
 
-#lunedaMap {
-	height: 
-}
+/*#lunedaMap {
+	display: none;
+}*/
 #electricSeas {
 	color: #00dfff;
 }
@@ -249,14 +258,29 @@ pre {
 .lunedaInteract {
 	position: absolute;
 	width: 70%;
-	border: 1px solid white;
+	border: 1px solid #c1e3da;
 	padding: 5px;
 	height: 100px;
 	margin-top: 390px;
 	margin-left: 7%;
-
-
+	font-family: 'Share Tech Mono';
+	color: #c1e3da;
 }
+#tikiHut {
+	margin-left: 65%;
+	margin-top: 80px;
+}
+#equipment {
+	margin-left: 50%;
+	margin-top: 200px;
+}
+.beachDetails {
+	cursor: pointer;
+}
+
+
+
+
 #myShip {
 	cursor: pointer;
 }
