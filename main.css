@@ -292,6 +292,9 @@ pre {
 .beachDetails {
 	cursor: pointer;
 }
+.options {
+	cursor: pointer;
+}
 
 
 
