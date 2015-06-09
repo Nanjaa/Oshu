@@ -18,6 +18,7 @@ $(document).ready(function() {
 		};
 	}) (jQuery);
 
+
 	function playText() {
 		$('#intro').writeText(text.introduction);
 		oshuIntro.play();

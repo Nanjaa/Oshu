@@ -1,10 +1,12 @@
 $(document).ready(function() {
 
+	// anytime you click the spaceship, you return to the maps page
 	$('#myShip').click(function() {
 		$('.visitPlanet').hide();
 		$('#map').show();
-	})
+	});
 
+	// display the name of the planet while hovering, hide otherwise
 	$('.planet').mouseover(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
 		$('#planetName').text($(this).attr('id'));
@@ -16,7 +18,7 @@ console.log(minutesLost);
 	});
 
 
-
+	// lose time as you travel to another planet
 	$('.planet').click(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
 		if(($('#minutes').text() - minutesLost) <= 0) {
@@ -30,8 +32,9 @@ console.log("not possible!");
 	});
 
 	$('.planet').click(function() {
-		if($(this).attr('id') == AliNada) {
-			console.log('it worked');
+		for (var i = 0; i < planets.length; i++) {
+			// console.log(planets.i.color)
+			console.log('hello');
 		};
 	});
 
