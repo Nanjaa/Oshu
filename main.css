@@ -164,7 +164,6 @@ pre {
 #inventory {
 	background-color: white;
 	border: 1px solid black;
-	padding: 10px;
 }
 .inventory {
 	display: inline-block;
@@ -177,9 +176,9 @@ pre {
 	float: right;
 	padding-left: 10px;
 }
-
-
-
+.inventory {
+	float: left;
+}
 
 
 

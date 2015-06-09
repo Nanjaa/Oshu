@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	// all the text that will be used throughout this level
 	var beachText = {
 		inUse: false,
 		welcome: "You have arrived on the beaches of the Electric Sea. There is a buzzing sound that mixes gently with the sound of the waves crashing.",
@@ -8,14 +8,17 @@ $(document).ready(function() {
 		rentalComplete: "Fantastic! Here's your ElectroSuit. And because you seem like a nice gal, here's a camera for you to take pictures underwater with. You have an hour to swim, then I'll need the equipment back. Have a great day!",
 		rentalOptions: "Do you want to rent an ElectroSuit?",
 		rentalInUse: "Go have fun with your equipment! But remember to bring it back...",
+		rentalNo: "That's alright! Don't try to swim, though. Unless, of course, you want to be fish food!",
 		seaLife: "You step into the sea, and submerge yourself. There are fish everywhere. You try to take as many pictures as you can before you have to return the suit!",
 		seaDeath: "You step into the sea without protection. The electricity swallows you up, and you feel yourself losing control. Slowly, everything fades"	
 	};
 
+	// resets the .lunedaInteract box
 	function resetText() {
-		$('#lunedaInteract').writeText('');
+		$('.lunedaInteract').writeText('');
 	};
 
+	// brings you to the planet from the system map
 	$('#Luneda').click(function() {
 		$('#map').hide();
 		$('#lunedaMap').show();
@@ -25,12 +28,15 @@ $(document).ready(function() {
 		};
 	});
 
+	// brings up the common divs betwee all the city details
 	$('.lunedaCity').click(function() {
 		resetText();
 		$('.lunedaCity').hide();
 		$('.return').show();
 		$('.lunedaInteract').show();
 	});
+
+	// takes you back to the city map from any city details
 	function lunedaReturn() {
 		$('.return').hide();
 		$('.cityDetails').hide();
@@ -39,11 +45,14 @@ $(document).ready(function() {
 	$('.return').click(function() {
 		lunedaReturn();
 	});
+
+	// brings you to the sea city detail
 	$('.visitSea').click(function() {
 		$('#beach').show();
 		$('.lunedaInteract').writeText(beachText.welcome);
 	});
 
+	// interact with the equipment shack
 	$('#equipment').click(function() {
 		rentalActivate();
 	});
@@ -69,19 +78,13 @@ $(document).ready(function() {
 						$('.lunedaInteract').append('<ul><li class="options" id="yesRental">Yes</li><li class="options" id="noRental">No</li></ul>')
 					};
 					setTimeout(yesNo(), 1000);
-
-					$('.options').click(function() {
-						var coins = Oshu.coins;
-						if(coins >= 50) {
-							beachText.inUse = true;
-							coins = coins - 50;
-							Oshu.coins = coins;
-							$('#coinsAmt').text(coins);
-							$('.lunedaInteract').writeText(beachText.rentalComplete);
-						}
-						else {
-							$('.lunedaInteract').writeText(beachText.rentalNoCoins);
-						}
+					// select yes
+					$('#yesRental').click(function() {
+						clickYes();
+					});
+					// select no
+					$('#noRental').click(function() {
+						clickNo();
 					});
 				};
 			}, 1000);				
@@ -89,7 +92,22 @@ $(document).ready(function() {
 	};
 
 	function clickYes() {
+		var coins = Oshu.coins;
+		if(coins >= 50) {
+			$('#inventory').append('<div class="inventory"><p>ElectroSuit</p>');
+			beachText.inUse = true;
+			coins = coins - 50;
+			Oshu.coins = coins;
+			$('#coinsAmt').text(coins);
+			$('.lunedaInteract').writeText(beachText.rentalComplete);
+		}
+		else {
+			$('.lunedaInteract').writeText(beachText.rentalNoCoins);
+		}
+	};
 
+	function clickNo() {
+		$('.lunedaInteract').writeText(beachText.rentalNo);
 	};
 
 	// $('#myShip').click(function() {
