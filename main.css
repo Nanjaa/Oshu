@@ -225,12 +225,6 @@ pre {
 	margin-top: 100px;
 	text-align: center;
 }
-#cityCentre {
-	border: 1px solid white;
-	margin-left: 35%;
-	margin-top: 75px;
-	display: block;
-}
 #mechanic {
 	margin-top: 375px;
 	margin-left: 58%;
@@ -293,6 +287,13 @@ pre {
 }
 .options {
 	cursor: pointer;
+}
+#markets {
+	text-align: left;
+}
+#marketCentre {
+	margin-top: 110px;
+	margin-left: 95px;
 }
 
 

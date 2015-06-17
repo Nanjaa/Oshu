@@ -5,7 +5,8 @@ var Oshu = {
 	milo: 0,
 	items: {
 		electricFruit: 0,
-		sunstone: 0		
+		sunstone: 0,
+		electroSuit: false
 	},
 	
 	quests: {

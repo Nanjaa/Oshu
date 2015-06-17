@@ -9,9 +9,25 @@ $(document).ready(function() {
 		rentalOptions: "Do you want to rent an ElectroSuit?",
 		rentalInUse: "Go have fun with your equipment! But remember to bring it back...",
 		rentalNo: "That's alright! Don't try to swim, though. Unless, of course, you want to be fish food!",
+		drinksWelcome: "You've come to the right place, my friend! I have the coldest drinks on this most sunny of days!",
+		drinksGoodbye: "Come back anytime, my friend. Stay safe!",
 		seaLife: "You step into the sea, and submerge yourself. There are fish everywhere. You try to take as many pictures as you can before you have to return the suit!",
-		seaDeath: "You step into the sea without protection. The electricity swallows you up, and you feel yourself losing control. Slowly, everything fades"	
+		seaDeath: "You step into the sea without protection. The electricity swallows you up, and you feel yourself losing control. Slowly, everything fades..."	
 	};
+
+	(function($) {
+		$.fn.writeText = function(content) {
+			$('.lunedaInteract').text('');
+			var contentArray = content.split(""),
+				current = 0,
+				elem = this;
+				setInterval(function() {
+					if(current < contentArray.length) {
+						elem.text(elem.text() + contentArray[current++]);
+					}
+				}, 30);
+		};
+	}) (jQuery);
 
 	// resets the .lunedaInteract box
 	function resetText() {
@@ -28,7 +44,7 @@ $(document).ready(function() {
 		};
 	});
 
-	// brings up the common divs betwee all the city details
+	// brings up the common divs between all the city details
 	$('.lunedaCity').click(function() {
 		resetText();
 		$('.lunedaCity').hide();
@@ -46,13 +62,22 @@ $(document).ready(function() {
 		lunedaReturn();
 	});
 
+	// ________________________________________________________________
+	// | ==============================================================|
+	// |															   |
+	// |						THE   BEACH 						   |
+	// |															   |
+	// |===============================================================|
+	// |_______________________________________________________________|
+
+
 	// brings you to the sea city detail
 	$('.visitSea').click(function() {
 		$('#beach').show();
 		$('.lunedaInteract').writeText(beachText.welcome);
 	});
 
-	// interact with the equipment shack
+	//************************ interact with the equipment shack ************************
 	$('#equipment').click(function() {
 		rentalActivate();
 	});
@@ -94,6 +119,7 @@ $(document).ready(function() {
 	function clickYes() {
 		var coins = Oshu.coins;
 		if(coins >= 50) {
+			Oshu.items.electroSuit = true;
 			$('#inventory').append('<div class="inventory"><p>ElectroSuit</p>');
 			beachText.inUse = true;
 			coins = coins - 50;
@@ -110,26 +136,21 @@ $(document).ready(function() {
 		$('.lunedaInteract').writeText(beachText.rentalNo);
 	};
 
-	// $('#myShip').click(function() {
-	// 	console.log('wtf');
-	// })
-
-	(function($) {
-		$.fn.writeText = function(content) {
-			$('.lunedaInteract').text('');
-			var contentArray = content.split(""),
-				current = 0,
-				elem = this;
-				setInterval(function() {
-					if(current < contentArray.length) {
-						elem.text(elem.text() + contentArray[current++]);
-					}
-				}, 30);
-		};
-	}) (jQuery);
+	//************************ interact with the drinks stand ************************
 
 
 
+	//************************ interact with the sea ************************
+
+	$('#closerSeas').click(function() {
+		$('#beach').hide();
+		if(Oshu.items.electroSuit) {
+			$('.lunedaInteract').writeText(beachText.seaLife);
+		}
+		else {
+			$('.lunedaInteract').writeText(beachText.seaDeath);
+		}
+	})
 
 
 });
