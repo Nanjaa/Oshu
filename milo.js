@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+	// your status with MILO
+	var status = 0;
+	
 	// all milo text 
 
 	var text = {

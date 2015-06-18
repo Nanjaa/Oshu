@@ -54,6 +54,7 @@ pre {
 	padding: 0;
 	line-height: 1;
 	position: absolute;
+	cursor: pointer;
 }
 #clock {
 	background-color: yellow;
@@ -75,10 +76,6 @@ pre {
 
 #gameConsole {
 	height: 750px;
-}
-.planet {
-	cursor: pointer;
-	position: absolute;
 }
 #Luneda {
 	color: #c1e3da;
@@ -214,7 +211,6 @@ pre {
 .lunedaCity {
 	display: inline-block;
 	position: absolute;
-	cursor: pointer;
 }
 #markets {
 	border-radius: 50%;
@@ -295,8 +291,25 @@ pre {
 	margin-top: 110px;
 	margin-left: 95px;
 }
-
-
+.theMarkets, .fruitStand {
+	display: none;
+}
+#fruitStand {
+	margin-top: 100px;
+	margin-left: 5%;
+}
+#shop2 {
+	margin-top: 225px;
+	margin-left: 33%;
+}
+#shop3 {
+	margin-top: 100px;
+	margin-left: 60%;
+}
+#shopper {
+	margin-top: 60px;
+	margin-left: 100px;
+}
 
 
 #myShip {
