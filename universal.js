@@ -15,3 +15,38 @@ function lifeEvent(minutesLost) {
 	$('#life').css('width', percent);
 	$('#minutes').text(newTime);
 };
+
+(function($) {
+	$.fn.writeText = function(content) {
+		$('.lunedaInteract').text('');
+		var contentArray = content.split(""),
+		current = 0,
+		elem = this;
+
+		setInterval(function() {
+			if(current < contentArray.length) {
+				elem.text(elem.text() + contentArray[current++]);
+			}
+			// else {
+
+			// };
+		}, 30);
+	};
+}) (jQuery);
+
+
+	// function writeText(content) {
+	// 	$('.lunedaInteract').text('');
+	// 	var contentArray = content.split(""),
+	// 	current = 0,
+	// 	elem = this;
+	// 	setInterval(function() {
+	// 		if(current < contentArray.length && test == false) {
+	// 			elem.text(elem.text() + contentArray[current++]);
+	// 		}
+	// 		else {
+	// 			elem.text(elem.text() + contentArray);
+	// 			test = false;
+	// 		};
+	// 	}, 30);
+	// };
