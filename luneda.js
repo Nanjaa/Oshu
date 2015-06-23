@@ -15,24 +15,15 @@ $(document).ready(function() {
 		seaDeath: "You step into the sea without protection. The electricity swallows you up, and you feel yourself losing control. Slowly, everything fades..."	
 	};
 
-	(function($) {
-		$.fn.writeText = function(content) {
-			$('.lunedaInteract').text('');
-			var contentArray = content.split(""),
-				current = 0,
-				elem = this;
-				setInterval(function() {
-					if(current < contentArray.length) {
-						elem.text(elem.text() + contentArray[current++]);
-					}
-				}, 30);
-		};
-	}) (jQuery);
+
+	// $(this).click(function() {
+	// 	$('.lunedaInteract').text('');
+	// 	console.log('happy!');
+	// });
 
 	// resets the .lunedaInteract box
-	function resetText() {
-		$('.lunedaInteract').writeText('');
-	};
+
+
 
 	// brings you to the planet from the system map
 	$('#Luneda').click(function() {
@@ -46,7 +37,6 @@ $(document).ready(function() {
 
 	// brings up the common divs between all the city details
 	$('.lunedaCity').click(function() {
-		resetText();
 		$('.lunedaCity').hide();
 		$('.return').show();
 		$('.lunedaInteract').show();
@@ -162,14 +152,24 @@ $(document).ready(function() {
 	// |===============================================================|
 	// |_______________________________________________________________|
 
+
+	var marketText = {
+		marketWelcome: "You arrive in a marketplace, filled with stands of all different kinds. You step towards a few of them.",
+		fruitWelcome: "You step into the fruit stand, and are surrounded by a rainbow of produce."
+	};
+
 	$('.markets').click(function() {
 		$('.lunedaCity').hide();
+		$('.marketStands').hide();
 		$('.theMarkets').show();
+		$('.marketDetails').show();
+		$('.lunedaInteract').writeText(marketText.marketWelcome);
 	});
 
 	$('#fruitStand').click(function() {
-		$('.theMarkets').hide();
+		$('.marketDetails').hide();
 		$('.fruitStand').show();
+
 	});
 
 

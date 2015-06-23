@@ -18,18 +18,25 @@ function lifeEvent(minutesLost) {
 
 (function($) {
 	$.fn.writeText = function(content) {
-		$('.lunedaInteract').text('');
+		$('.gameText').text('');
 		var contentArray = content.split(""),
-		current = 0,
-		elem = this;
+			current = 0,
+			click = false,
+			clicked = false,
+			elem = this;
 
 		setInterval(function() {
-			if(current < contentArray.length) {
+			$(this).click(function() {
+				click = true;
+			});
+			if(current < contentArray.length && click == false && contentArray.length != $('.gameText').text().length) {
 				elem.text(elem.text() + contentArray[current++]);
 			}
-			// else {
-
-			// };
+			else if(click == true && clicked == false) {
+				elem.text('');
+				elem.text(elem.text() + content);
+				clicked = true;
+			}
 		}, 30);
 	};
 }) (jQuery);
