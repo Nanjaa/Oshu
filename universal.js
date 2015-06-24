@@ -25,6 +25,8 @@ function lifeEvent(minutesLost) {
 			clicked = false,
 			elem = this;
 
+		console.log(contentArray);
+
 		setInterval(function() {
 			$(this).click(function() {
 				click = true;

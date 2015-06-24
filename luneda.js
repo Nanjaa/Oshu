@@ -78,6 +78,11 @@ $(document).ready(function() {
 		}
 		else {
 			$('.lunedaInteract').writeText(beachText.rentalWelcome)
+			// plays the sound effect of the man talking
+			if($('.lunedaInteract').text().length < beachText.rentalWelcome.length) {
+				maleVoice.play();
+			}
+
 			// checks when to ask for response
 			var rentalOptions = setInterval(function() {
 				if($('.lunedaInteract').text() == beachText.rentalWelcome) {
@@ -155,7 +160,7 @@ $(document).ready(function() {
 
 	var marketText = {
 		marketWelcome: "You arrive in a marketplace, filled with stands of all different kinds. You step towards a few of them.",
-		fruitWelcome: "You step into the fruit stand, and are surrounded by a rainbow of produce."
+		fruitWelcome: "You step into the fruit stand, and are surrounded by a rainbow of produce. A boy with brown, curly hair approaches you. 'Hello! What would you like to buy?'"
 	};
 
 	$('.markets').click(function() {
