@@ -174,7 +174,8 @@ $(document).ready(function() {
 	$('#fruitStand').click(function() {
 		$('.marketDetails').hide();
 		$('.fruitStand').show();
-
+		$('.lunedaInteract').writeText(marketText.fruitWelcome);
+		maleVoice.play();
 	});
 
 
