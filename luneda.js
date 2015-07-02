@@ -72,6 +72,28 @@ $(document).ready(function() {
 		rentalActivate();
 	});
 
+
+
+	var displayRentalOptions = setInterval(function() {
+		if($('.lunedaInteract').text() == beachText.rentalOptions) {
+			clearInterval(displayRentalOptions);
+			function yesNo() {
+				$('.lunedaInteract').append('<ul><li class="options" id="yesRental">Yes</li><li class="options" id="noRental">No</li></ul>')
+			};
+			setTimeout(yesNo(), 1000);
+			// select yes
+			$('#yesRental').click(function() {
+				clickYes();
+			});
+			// select no
+			$('#noRental').click(function() {
+				clickNo();
+			});
+		};
+	}, 1000);				
+
+
+
 	function rentalActivate() {
 		if(beachText.inUse == true) {
 			$('.lunedaInteract').writeText(beachText.rentalInUse);
@@ -91,23 +113,7 @@ $(document).ready(function() {
 				};
 			}, 1000);
 			// checks when to display yes/no
-			var displayRentalOptions = setInterval(function() {
-				if($('.lunedaInteract').text() == beachText.rentalOptions) {
-					clearInterval(displayRentalOptions);
-					function yesNo() {
-						$('.lunedaInteract').append('<ul><li class="options" id="yesRental">Yes</li><li class="options" id="noRental">No</li></ul>')
-					};
-					setTimeout(yesNo(), 1000);
-					// select yes
-					$('#yesRental').click(function() {
-						clickYes();
-					});
-					// select no
-					$('#noRental').click(function() {
-						clickNo();
-					});
-				};
-			}, 1000);				
+			displayRentalOptions();
 		};
 	};
 
@@ -116,11 +122,9 @@ $(document).ready(function() {
 		if(coins >= 50) {
 			Oshu.items.electroSuit = true;
 			$('#inventory').append('<div class="inventory"><p>ElectroSuit</p>');
-			beachText.inUse = true;
-			coins = coins - 50;
-			Oshu.coins = coins;
-			$('#coinsAmt').text(coins);
 			$('.lunedaInteract').writeText(beachText.rentalComplete);
+			var price = 50;
+			payMoney(price);
 		}
 		else {
 			$('.lunedaInteract').writeText(beachText.rentalNoCoins);
@@ -160,7 +164,14 @@ $(document).ready(function() {
 
 	var marketText = {
 		marketWelcome: "You arrive in a marketplace, filled with stands of all different kinds. You step towards a few of them.",
-		fruitWelcome: "You step into the fruit stand, and are surrounded by a rainbow of produce. A boy with brown, curly hair approaches you. 'Hello! What would you like to buy?'"
+		fruitWelcome: "You step into the fruit stand, and are surrounded by a rainbow of produce. A boy with brown, curly hair approaches you. 'Hello! What would you like to buy?'",
+		electange: "Electange, eh? The best supercharged fruit out there! 25 coins.",
+		ganifruit: "I love ganifruit. They're tangy and tasty and full of vitamins! 10 coins each.",
+		electangeOptions: "Would you like to buy an electange?",
+		ganifruitOptions: "Would you like to buy a ganifruit?",
+		yes: "Wonderful! Here's your fruit, my good android. Enjoy!",
+		no: "That's fine. If you ever get a craving for some unbelievably amazing fruit, you know where I am!",
+		needMore: "Sorry little lady! You don't have enough coins to buy this fruit! Come back another time."
 	};
 
 	$('.markets').click(function() {
@@ -177,6 +188,73 @@ $(document).ready(function() {
 		$('.lunedaInteract').writeText(marketText.fruitWelcome);
 		maleVoice.play();
 	});
+
+	var yes = marketText.yes;
+	var no = marketText.no;
+
+	$('#electange').click(function() {
+		$('.lunedaInteract').writeText(marketText.electange);
+		text1 = marketText.electange;
+		text2 = marketText.electangeOptions;
+		var price = 25;
+		var needMore = marketText.needMore;
+		displayOptions(text1, text2, price, yes, no, needMore);
+		var stop = false;
+		var boughtElectange = setInterval(function() {
+			if($('.lunedaInteract').text() == yes && stop == false) {
+				// adds item to inventory if not already there
+				if(Oshu.items.electange == 0) {
+					$('#inventory').append('<div class="inventory"><p>Electange: <span class="electangeAmt"></span></p>');
+				}
+				// then adds quantity amt
+				var electange = Oshu.items.electange + 1;
+				Oshu.items.electange = electange;
+				$('.electangeAmt').text(electange);
+				stop = true;
+			};
+		}, 1);		
+	});
+
+
+
+	$('#ganifruit').click(function() {
+		$('.lunedaInteract').writeText(marketText.ganifruit);
+		var text1 = marketText.ganifruit;
+		var text2 = marketText.ganifruitOptions;
+		var price = 10;
+		var needMore = marketText.needMore;
+		displayOptions(text1, text2, price, yes, no, needMore);
+		var stop = false;
+		var boughtGanifruit = setInterval(function() {
+			if($('.lunedaInteract').text() == yes && stop == false) {
+				// adds item to inventory if not already there
+				if(Oshu.items.ganifruit == 0) {
+					$('#inventory').append('<div class="inventory"><p>Ganifruit: <span class="ganifruitAmt"></span></p>');
+				}
+				// then adds quantity amt
+				var ganifruit = Oshu.items.ganifruit + 1;
+				console.log(ganifruit);
+				Oshu.items.ganifruit = ganifruit;
+				$('.ganifruitAmt').text(ganifruit);
+				stop = true;
+			};
+		}, 1);
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

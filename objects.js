@@ -4,7 +4,8 @@ var Oshu = {
 	crystals: 0,
 	milo: 0,
 	items: {
-		electricFruit: 0,
+		ganifruit: 0,
+		electange: 0,
 		sunstone: 0,
 		electroSuit: false
 	},

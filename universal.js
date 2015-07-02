@@ -1,3 +1,7 @@
+// ------------------------------------------------------
+// 					LOSE LIFE
+// ------------------------------------------------------
+
 function lifeEvent(minutesLost) {
 // calculate loss
 
@@ -16,6 +20,10 @@ function lifeEvent(minutesLost) {
 	$('#minutes').text(newTime);
 };
 
+// ------------------------------------------------------
+// 					WRITE TEXT
+// ------------------------------------------------------
+
 (function($) {
 	$.fn.writeText = function(content) {
 		$('.gameText').text('');
@@ -25,9 +33,7 @@ function lifeEvent(minutesLost) {
 			clicked = false,
 			elem = this;
 
-		console.log(contentArray);
-
-		setInterval(function() {
+	setInterval(function() {
 			$(this).click(function() {
 				click = true;
 			});
@@ -59,3 +65,55 @@ function lifeEvent(minutesLost) {
 	// 		};
 	// 	}, 30);
 	// };
+
+// ------------------------------------------------------
+// 					PAY MONEY
+// ------------------------------------------------------
+
+function payMoney(price) {
+	var coins = Oshu.coins;
+	coins = coins - price;
+	Oshu.coins = coins;
+	$('#coinsAmt').text(coins);
+};
+
+function displayOptions(text1, text2, price, yes, no, needMore) {
+	// the following chunk has to do with displaying the "do you want to buy" question
+	var displayOptions = setInterval(function() {
+		showOptions(text1);
+	}, 1000);
+	function showOptions(text1) {
+		if($('.lunedaInteract').text() == text1) {
+			clearInterval(displayOptions);
+			setTimeout(function() {
+				$('.lunedaInteract').writeText(text2);
+			}, 2000);
+		};				
+	};
+	// now to display the yes or no options
+	var displayYesNo = setInterval(function() {
+		showYesNo(text2, price, yes, no, needMore)
+	}, 1000);	
+	function showYesNo(text2, price, yes, no, needMore) {
+		if($('.lunedaInteract').text() == text2) {
+			clearInterval(displayYesNo);
+			function yesNo(price) {
+				$('.lunedaInteract').append('<ul><li class="options yes">Yes</li><li class="options no">No</li></ul>')
+			};
+			setTimeout(yesNo(), 1000);
+		};
+		$('.yes').click(function() {
+			var coins = Oshu.coins;
+			if(coins >= price) {
+	 			$('.lunedaInteract').writeText(yes);	
+	 			payMoney(price);			
+			}
+			else {
+				$('.lunedaInteract').writeText(needMore);
+			}
+		});
+		$('.no').click(function() {
+			$('.lunedaInteract').writeText(no);
+		})
+	}
+};
