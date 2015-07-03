@@ -2,6 +2,33 @@
 // 					LOSE LIFE
 // ------------------------------------------------------
 
+selectList();
+var bucketListArray = {
+
+}
+function selectList() {
+	test = Oshu.quests;
+}
+
+for(i = 0; i<6; i++) {
+	var listNumber = Math.random();
+	console.log(Oshu.quests[i])
+	// if(listNumber < 0.33) {
+	// 	console.log(Oshu.quests[i].1);
+	// }
+	// else if(listNumber < 0.66) {
+	// 	console.log(Oshu.quests[i].2);
+	// }
+	// else {
+	// 	console.log(Oshu.quests[i].3)
+	// }
+
+}
+
+// ------------------------------------------------------
+// 					LOSE LIFE
+// ------------------------------------------------------
+
 function lifeEvent(minutesLost) {
 // calculate loss
 
