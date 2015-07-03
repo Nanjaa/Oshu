@@ -127,7 +127,7 @@ pre {
 	padding: 8px;
 	text-align: left;
 }
-#inventory, #bucketList, #shipStatus {
+#inventory, #shipStatus {
 	display: inline-block;
 	width: 30%;
 	margin: 0px;
@@ -171,12 +171,6 @@ pre {
 	display: inline-block;
 	border: 1px solid black;
 	padding: 5px;
-}
-#bucketList {
-	background-color: white;
-	height: 170px;
-	float: right;
-	padding-left: 10px;
 }
 .inventory {
 	float: left;
@@ -331,4 +325,14 @@ pre {
 
 #myShip {
 	cursor: pointer;
+}
+
+#bucketList {
+	width: 97%;
+	margin-top: 10px;
+}
+li {
+	border: 1px solid black;
+	margin-left: 10px;
+	width: 100%;
 }
