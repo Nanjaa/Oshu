@@ -72,68 +72,35 @@ $(document).ready(function() {
 		rentalActivate();
 	});
 
-
-
-	var displayRentalOptions = setInterval(function() {
-		if($('.lunedaInteract').text() == beachText.rentalOptions) {
-			clearInterval(displayRentalOptions);
-			function yesNo() {
-				$('.lunedaInteract').append('<ul><li class="options" id="yesRental">Yes</li><li class="options" id="noRental">No</li></ul>')
-			};
-			setTimeout(yesNo(), 1000);
-			// select yes
-			$('#yesRental').click(function() {
-				clickYes();
-			});
-			// select no
-			$('#noRental').click(function() {
-				clickNo();
-			});
-		};
-	}, 1000);				
-
-
-
 	function rentalActivate() {
 		if(beachText.inUse == true) {
 			$('.lunedaInteract').writeText(beachText.rentalInUse);
 		}
 		else {
-			$('.lunedaInteract').writeText(beachText.rentalWelcome)
 			// plays the sound effect of the man talking
 			if($('.lunedaInteract').text().length < beachText.rentalWelcome.length) {
 				maleVoice.play();
 			}
-
-			// checks when to ask for response
-			var rentalOptions = setInterval(function() {
-				if($('.lunedaInteract').text() == beachText.rentalWelcome) {
-					clearInterval(rentalOptions);
-					setTimeout($('.lunedaInteract').writeText(beachText.rentalOptions), 10000);
-				};
-			}, 1000);
-			// checks when to display yes/no
-			displayRentalOptions();
+			var text1 = beachText.rentalWelcome;
+			$('.lunedaInteract').writeText(text1);
+			var text2 = beachText.rentalOptions;
+			var price = 50;
+			var yes = beachText.rentalComplete;
+			var no = beachText.rentalNo;
+			var needMore = beachText.rentalNoCoins;
+			displayOptions(text1, text2, price, yes, no, needMore);
+			var stop = false;
+			var boughtSuit = setInterval(function() {
+				if($('.lunedaInteract').text() == yes && stop == false) {
+				// adds item to inventory if not already there
+					$('#inventory').append('<div class="inventory"><p>ElectroSuit</p>');
+					Oshu.items.electroSuit = true;
+					stop = true;
+				}
+			}, 1)
 		};
 	};
-
-	function clickYes() {
-		var coins = Oshu.coins;
-		if(coins >= 50) {
-			Oshu.items.electroSuit = true;
-			$('#inventory').append('<div class="inventory"><p>ElectroSuit</p>');
-			$('.lunedaInteract').writeText(beachText.rentalComplete);
-			var price = 50;
-			payMoney(price);
-		}
-		else {
-			$('.lunedaInteract').writeText(beachText.rentalNoCoins);
-		}
-	};
-
-	function clickNo() {
-		$('.lunedaInteract').writeText(beachText.rentalNo);
-	};
+// $('.lunedaInteract').writeText(beachText.rentalComplete);
 
 	//************************ interact with the drinks stand ************************
 
