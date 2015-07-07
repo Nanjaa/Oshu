@@ -10,36 +10,36 @@ var Oshu = {
 		electroSuit: false
 	},
 	
-	quests: {
-		Luneda: {
-			1: 'Swim the electric seas of Luneda',
-			2: 'See the electric storms of Luneda',
-			3: 'Taste the electric fruit of Luneda'
-		},
-		Kanedos: {
-			1: 'See the Mercury Fighting Pits',
-			2: 'Take a Kanedos style martial arts class',
-			3: 'Visit the Crater Valley on Kanedos'
-		},
-		Tyrianne: {
-			1: "Visit the galaxy's largest library on Tyrianne",
-			2: 'Buy a sunstone from Tyrianne',
-			3: 'See the alien philosophers of Tyrianne'
-		},
-		Kaprika: {
-			1: 'Find a fairy on Kaprika',
-			2: 'Sleep in the life pools of Kaprika',
-			3: 'Climb the highest tree in Kaprika'
-		},
-		AliNada: {
-			1: "Visit brother's grave on AliNada"
-		},
-		Capric: {
-			1: 'Steal something in the Thieves District of Capric',
-			2: 'Ride a Swampie on Capric',
-			3: 'See the whirlwind storms of Capric'
-		}
-	},
+	quests: [
+		['Luneda',
+			['Swim the electric seas of Luneda',
+			'See the electric storms of Luneda',
+			'Taste the electric fruit of Luneda']
+		],
+		['Kanedos', [
+			'See the Mercury Fighting Pits',
+			'Take a Kanedos style martial arts class',
+			'Visit the Crater Valley on Kanedos']
+		],
+		['Tyrianne', [
+			"Visit the galaxy's largest library on Tyrianne",
+			'Buy a sunstone from Tyrianne',
+			'See the alien philosophers of Tyrianne']
+		],
+		['Kaprika', [
+			'Find a fairy on Kaprika',
+			'Sleep in the life pools of Kaprika',
+			'Climb the highest tree in Kaprika']
+		],
+		['AliNada', [
+			"Visit brother's grave on AliNada"]
+		],
+		['Capric', [
+			'Steal something in the Thieves District of Capric',
+			'Ride a Swampie on Capric',
+			'See the whirlwind storms of Capric']
+		]
+	],
 
 	completed: {
 		Luneda: false,

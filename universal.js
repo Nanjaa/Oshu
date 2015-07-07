@@ -1,29 +1,43 @@
 // ------------------------------------------------------
 // 					LOSE LIFE
 // ------------------------------------------------------
+randomizeQuests()
+function randomizeQuests() {
+	for(var i=0; i<Oshu.quests.length; i++) {
+		var listNumber = Math.random();
+		if(Oshu.quests[i] == Oshu.quests[4]) {
+			$('.bucketList').append('<li>' + Oshu.quests[i][1][0] + '</li>')
 
-selectList();
-var bucketListArray = {
+		}
+		else if(listNumber < 0.33) {
+			$('.bucketList').append('<li>' + Oshu.quests[i][1][0] + '</li>')
+		}
+		else if(listNumber < 0.66) {
+			$('.bucketList').append('<li>' + Oshu.quests[i][1][1] + '</li>')
 
+		}
+		else {
+			$('.bucketList').append('<li>' + Oshu.quests[i][1][2] + '</li>')
+
+		}
+	}	
 }
-function selectList() {
-	test = Oshu.quests;
-}
 
-for(i = 0; i<6; i++) {
-	var listNumber = Math.random();
-	console.log(Oshu.quests[i])
-	// if(listNumber < 0.33) {
-	// 	console.log(Oshu.quests[i].1);
-	// }
-	// else if(listNumber < 0.66) {
-	// 	console.log(Oshu.quests[i].2);
-	// }
-	// else {
-	// 	console.log(Oshu.quests[i].3)
-	// }
 
-}
+// for(i = 0; i<6; i++) {
+// 	var listNumber = Math.random();
+// 	console.log(Oshu.quests[i])
+// 	if(listNumber < 0.33) {
+// 		console.log(Oshu.quests[i]);
+// 	}
+// 	else if(listNumber < 0.66) {
+// 		console.log(Oshu.quests.Kanedos[1]);
+// 	}
+// 	else {
+// 		console.log(Oshu.quests.Kanedos[2])
+// 	}
+
+// }
 
 // ------------------------------------------------------
 // 					LOSE LIFE
