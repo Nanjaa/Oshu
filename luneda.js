@@ -138,7 +138,9 @@ $(document).ready(function() {
 		ganifruitOptions: "Would you like to buy a ganifruit?",
 		yes: "Wonderful! Here's your fruit, my good android. Enjoy!",
 		no: "That's fine. If you ever get a craving for some unbelievably amazing fruit, you know where I am!",
-		needMore: "Sorry little lady! You don't have enough coins to buy this fruit! Come back another time."
+		needMore: "Sorry little lady! You don't have enough coins to buy this fruit! Come back another time.",
+		clothesWelcome: "You step into the clothes stand. Inside is a rainbow of fabrics. The stand contains authentic Lunedian clothing.",
+		souvenirWelcome: "A kitchy souvenir shop stands before you. You see cheap novelties such as bobbleheads and snowglobes, as well as postcards of all kinds."
 	};
 
 	$('.markets').click(function() {
@@ -154,6 +156,17 @@ $(document).ready(function() {
 		$('.fruitStand').show();
 		$('.lunedaInteract').writeText(marketText.fruitWelcome);
 		maleVoice.play();
+	});
+
+	$('#clothesStand').click(function() {
+		$('.marketDetails').hide();
+		$('.clothesStand').show();
+		$('.lunedaInteract').writeText(marketText.clothesWelcome);
+	});
+	$('#souvenirStand').click(function() {
+		$('.marketDetails').hide();
+		$('.souvenirStand').show();
+		$('.lunedaInteract').writeText(marketText.souvenirWelcome);
 	});
 
 	var yes = marketText.yes;
@@ -207,10 +220,6 @@ $(document).ready(function() {
 			};
 		}, 1);
 	});
-
-
-
-
 
 
 

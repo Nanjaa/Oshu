@@ -297,19 +297,19 @@ pre {
 	margin-top: 100px;
 	margin-left: 5%;
 }
-#shop2 {
+#souvenirStand {
 	margin-top: 225px;
 	margin-left: 33%;
 }
-#shop3 {
+#clothesStand {
 	margin-top: 100px;
 	margin-left: 60%;
 }
-#fruitMan {
+#fruitMan, #clothesGirl, #souvenirGirl {
 	margin-top: 150px;
 	margin-left: 2%;
 }
-#fruitDisplay {
+#fruitDisplay, #clothesDisplay, #souvenirDisplay {
 	margin-top: 50px;
 	margin-left: 10%;
 }
@@ -320,6 +320,22 @@ pre {
 #ganifruit {
 	margin-top: 175px;
 	margin-left: 47%;
+}
+#dresses {
+	margin-top: 175px;
+	margin-left: 23%;
+}
+#snowglobes {
+	margin-top: 75px;
+	margin-left: 3%
+}
+#bobbleheads {
+	margin-top: 165px;
+	margin-left: 25%
+}
+#postcards {
+	margin-top: 120px;
+	margin-left: 65%
 }
 
 
