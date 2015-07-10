@@ -1,6 +1,6 @@
 /*WHAT'S DISPLAYING NOW*/
 
-#map {
+#lunedaMap {
 	display: none;
 }
 body {
@@ -351,4 +351,27 @@ li {
 	border: 1px solid black;
 	margin-left: 10px;
 	width: 100%;
+}
+#kanedosMap {
+	display: none;
+}
+#kanedome {
+	margin-top: 175px;
+	margin-left: 43%;
+}
+#camelRental {
+	margin-top: 50px;
+	margin-left: 40%;
+}
+#kanedosJewelry {
+	margin-top: 150px;
+	margin-left: 10%;
+}
+#kanedosGas {
+	margin-top: 325px;
+	margin-left: 5%;
+}
+#bitchSlap {
+	margin-top: 425px;
+	margin-left: 50%;
 }
