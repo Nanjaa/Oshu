@@ -1,9 +1,23 @@
 $(document).ready(function() {
 
-	// your status with MILO
+//    _____________________________________________
+//   //											  \\
+//  //											   \\
+// //											    \\
+// ||		STATUS - HOW CLOSE YOU ARE TO MILO 		||
+// \\											    //
+//  \\											   //
+//   \\___________________________________________//
 	var status = 0;
 	
-	// all milo text 
+//    _____________________________________________
+//   //											  \\
+//  //											   \\
+// //											    \\
+// || 	   TEXT - YOUR CONVERSATIONS WITH MILO      ||
+// \\											    //
+//  \\											   //
+//   \\___________________________________________//
 
 	var text = {
 		intro: "Greetings! My name is MILO, or Multilinual Interplanetary Locations Object. I am the Artificial Intelligence unit for this ship. I have downloaded all the necessary information to traverse this quadrant. I will assist you along the way. May I have your name, please?",
@@ -121,7 +135,6 @@ $(document).ready(function() {
 		angryIntroOshu: "Well, Oshu, your life has come to an end… And I find comfort in that. You have been one of the rudest captains I have ever had the displeasure of serving, and I think you know that.  You have mistreated and abused me, and I am glad to know that my next owners will treat me much more fairly. I have already sent a signal to my manager, and the other rental agents will pick me up after your departure. I’m sure you’ll find yourself in a junkyard. It’s where you belong…",
 		angryIntroGood: "a.	Wow. Of course I accept your truce. I’m sorry for what I said out of anger. You don’t belong in a junkyard.",
 		angryIntroBad: "[He unleashes a stream of profanities]",
-
 		// good goodbye
 		happyIntroMiss: "Miss, it’s almost time. I have enjoyed every moment I have spent with you. You’ve been a very dear friend, and I will miss you very much. I never thought that a job like this would be so fulfilling, but helping you prepare for your departure has changed my life. Are you sure you don’t want to live?",
 		happyIntroOshu: "Oshu, it’s almost time. I have enjoyed every moment I have spent with you. You’ve been a very dear friend, and I will miss you very much. I never thought that a job like this would be so fulfilling, but helping you prepare for your departure has changed my life. Are you sure you don’t want to live?",
@@ -133,15 +146,30 @@ $(document).ready(function() {
 		happyGoodBad: "I understand. Commitments like that are difficult things. Well, let’s get back to the “mission.” Where would you like to go next?",
 		happyBad: "[MILO is silent]"
 	}
-	// important conversation points
 
-	var convoChangers: {
+//    _____________________________________________
+//   //											  \\
+//  //											   \\
+// //											    \\
+// || 		KNOWLEDGE - WHAT DOES MILO KNOW 		||
+// \\											    //
+//  \\											   //
+//   \\___________________________________________//
+
+	var knowledge: {
 		danger: false,
 		mortality: false,
 		committed: false
 	}
 	
-	// milo introduces himself
+//    _____________________________________________
+//   //											  \\
+//  //											   \\
+// //											    \\
+// ||		THE DIALOGUE - LET'S TALK TO MILO!		||
+// \\											    //
+//  \\											   //
+//   \\___________________________________________//
 
 
 
