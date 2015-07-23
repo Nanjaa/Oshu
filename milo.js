@@ -171,7 +171,12 @@ $(document).ready(function() {
 //  \\											   //
 //   \\___________________________________________//
 
-
+	// 50%
+	var fiftyPercent = setInterval(function() {
+		if($('#minutes').text() == 30) {
+			console.log('halfway point')
+		}
+	}, 1);
 
 
 

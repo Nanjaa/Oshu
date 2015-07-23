@@ -34,11 +34,6 @@ var Oshu = {
 		['AliNada', [
 			"Visit brother's grave on AliNada"]
 		],
-		['Capric', [
-			'Steal something in the Thieves District of Capric',
-			'Ride a Swampie on Capric',
-			'See the whirlwind storms of Capric']
-		]
 	],
 
 	completed: {
@@ -46,8 +41,7 @@ var Oshu = {
 		Kanedos: false,
 		Kaprika: false,
 		Tyrianne: false,
-		AliNada: false,
-		Capric: false
+		AliNada: false
 	}
 };
 
@@ -58,8 +52,7 @@ var myLocation = {
 	Kanedos: false,
 	Tyrianne: false,
 	Kaprika: false,
-	AliNada: false,
-	Capric: false
+	AliNada: false
 };
 
 var planets = {
@@ -101,14 +94,6 @@ var planets = {
 		distance: 9,
 		id: '#AliNada',
 		name: 'AliNada',
-		first: true
-	},
-	Capric: {
-		color: '#560ff',
-		selected: false,
-		distance: 11,
-		id: '#Capric',
-		name: 'Capric',
 		first: true
 	}
 };
