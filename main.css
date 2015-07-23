@@ -375,3 +375,10 @@ li {
 	margin-top: 425px;
 	margin-left: 50%;
 }
+#miloInteraction {
+	padding: 50px;
+	font-family: "Share Tech Mono";
+	font-size: 20px;
+	position: absolute;
+
+}

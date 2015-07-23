@@ -1,16 +1,16 @@
 $(document).ready(function() {
 
 	// anytime you click the spaceship, you return to the maps page
-	$('#myShip').click(function() {
+	$('#returnToShip').click(function() {
 		$('.visitPlanet').hide();
 		$('#map').show();
+		Oshu.onBoard = true;
 	});
 
 	// display the name of the planet while hovering, hide otherwise
 	$('.planet').mouseover(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
 		$('#planetName').text($(this).attr('id'));
-console.log(minutesLost);
 	});
 
 	$('.planet').mouseout(function() {
@@ -22,12 +22,12 @@ console.log(minutesLost);
 	$('.planet').click(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
 		if(($('#minutes').text() - minutesLost) <= 0) {
-console.log("not possible!");
 			error.play();
 		}
 		else {
 			lifeEvent(minutesLost);
 			myLocation.current = $(this).attr('distance');
+			Oshu.onBoard = false;
 		};
 	});
 

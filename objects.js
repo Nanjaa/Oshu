@@ -1,4 +1,5 @@
 var Oshu = {
+	onBoard: true,
 	remainingLife: 3600,
 	coins: 50,
 	crystals: 0,

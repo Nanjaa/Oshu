@@ -51,8 +51,8 @@ $(document).ready(function() {
 		tyrianneNeutGoodGoodMiss: "Would… would you?! I know there’s not much you can get a simple AI like me but, Miss, if you did bring a gift back, I would feel as though I went there myself.",
 		bookmarkOshu: "Oh, Oshu! You really did it! You really brought me a gift! And what is it? A bookmark!",
 		bookmarkMiss: "Oh, miss! You really did it! You really brought me a gift! And what is it? A bookmark!",
-		bobbleheadOshu: "Oh, Oshu! You really did it! You really brought me a gift! And what is it? A bobblehead!"
-		bobbleheadMiss: "Oh, miss! You really did it! You really brought me a gift! And what is it? A bobblehead!"
+		bobbleheadOshu: "Oh, Oshu! You really did it! You really brought me a gift! And what is it? A bobblehead!",
+		bobbleheadMiss: "Oh, miss! You really did it! You really brought me a gift! And what is it? A bobblehead!",
 		moonbankOshu: "Oh, Oshu! You really did it! You really brought me a gift! And what is it? A SIGNED COPY OF “MOONBANK TIDE?!” This must have cost a fortune! Oh, I am the happiest robot in all the galaxy! I couldn’t be more ecstatic! Oshu, I wish I could embrace you. If I were human, I would probably even cry. Oh, I couldn’t ask for a more wonderful companion. Is that alright? To call you a companion? You feel more than just a captain.",
 		moonbankMiss: "Oh, miss! You really did it! You really brought me a gift! And what is it? A SIGNED COPY OF “MOONBANK TIDE?!” This must have cost a fortune! Oh, I am the happiest robot in all the galaxy! I couldn’t be more ecstatic! Miss, I wish I could embrace you. If I were human, I would probably even cry. Oh, I couldn’t ask for a more wonderful companion. Is that alright? To call you a companion? You feel more than just a captain.",
 		// begin the first confrontation over mortality
@@ -156,11 +156,12 @@ $(document).ready(function() {
 //  \\											   //
 //   \\___________________________________________//
 
-	var knowledge: {
+	var knowledge= {
+		name: true,
 		danger: false,
 		mortality: false,
 		committed: false
-	}
+	};
 	
 //    _____________________________________________
 //   //											  \\
@@ -171,12 +172,58 @@ $(document).ready(function() {
 //  \\											   //
 //   \\___________________________________________//
 
-	// 50%
-	var fiftyPercent = setInterval(function() {
-		if($('#minutes').text() == 30) {
-			console.log('halfway point')
+
+	// First, the function that will be used on all timed MILO events
+	function timedMilo(event, timer) {
+		var eventWait = setInterval(function() {
+			if($('#minutes').text() == timer) {
+				clearInterval(eventWait);
+				// checks to see if Oshu is on board. If not, system will wait until she is
+				if(Oshu.onBoard == true) {
+					event();
+				}
+				else {
+					console.log('waiting');
+					var oshuNotBoarded = setInterval(function() {
+						if(Oshu.onBoard == true) {
+							clearInterval(oshuNotBoarded);
+							event();
+						}
+					}, 1);
+				}
+
+			}
+		}, 1);		
+	}
+
+	// Next, let's determine if you are "miss" or "Oshu"
+
+	function missVsOshu(missText, missAudio, oshuText, oshuAudio) {
+		if(knowledge.name == false) {
+			$('#miloInteraction').writeText(missText);
+			missAudio.play();			
 		}
-	}, 1);
+		else {
+			$('#miloInteraction').writeText(oshuText);
+			oshuAudio.play();			
+		}
+	} 
+
+    // _________________________________________//
+	//											//
+	//											//
+	//		FIFTY PERCENT -- THE NOVATACEA		//
+	//											//
+	//__________________________________________//
+
+	function fifty() {
+		$('#map').hide();
+		missVsOshu(text.novaIntroMiss, novaIntroMiss, text.novaIntroOshu, novaIntroOshu)
+
+	};
+
+	timedMilo(fifty, 30);
+
 
 
 
