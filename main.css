@@ -380,5 +380,9 @@ li {
 	font-family: "Share Tech Mono";
 	font-size: 20px;
 	position: absolute;
-
+}
+#miloResponse {
+	color: green;
+	padding-top: 25px;
+	cursor: pointer;
 }
