@@ -1,5 +1,19 @@
 $(document).ready(function() {
 
+
+         				   
+//         										____________________/{}\____________________
+// 										______/{{ WELCOME TO THE WONDERFUL WORLD OF MILO! }}\_______
+//  								  /{   The following dialogue objects are a bit confusing...    }\
+// 									 /{       If you want to follow the dialogue a bit easier,       }\
+//  						        |{    refer to the speech timeline, found in the speech folder    }|
+//   								  \_____________________________/{}\_____________________________/
+
+
+
+
+
+
 //    _____________________________________________
 //   //											  \\
 //  //											   \\
@@ -151,6 +165,89 @@ $(document).ready(function() {
 //   //											  \\
 //  //											   \\
 // //											    \\
+// ||  RESPONSES - HOW DO YOU INTERACT WITH MILO?   ||
+// \\											    //
+//  \\											   //
+//   \\___________________________________________//
+
+	var resonse = {
+		// introduction
+		introGood: "Oshu",
+		introBad: "Not really any of your business.",
+		introNeut: "Ignore him",
+		// kanedos
+		kanedosGood: "Thank you, MILO. I will be careful.",
+		kanedosBad: "MILO, you will never tell me what to do again.",
+		kanedosNeut: "Ignore him",
+		// tyrianne
+		tyrianneGood: "Would you like me to bring you back a souvenir?",
+		tyrianneNeut: "You're jealous, aren't you?",
+		tyrianneNeutTwo: "Ignore him",
+		// tyrianne return confrontation
+		confrontationGood: "I'll consider it, MILO.",
+		confrontationNeut: "I'm sorry, MILO. It was important to me that I lived as human as possible. It makes me feel closer to my family.",
+		confrontationBad: "This isn't your choice, MILO.",
+		// aliNada
+		aliNadaGoodOrBad: "I know, that's where I'm going.",
+		aliNadaGoodGood: "Of course, MILO. How would you have known?",
+		aliNadaGoodGoodGood: "His name was Andy. He was my brother.",
+		aliNadaGoodGoodNeut: "Your assumption before was way less intrusive than this, MILO.",
+		aliNadaGoodGoodBad: "You need to stop pestering me, MILO.",
+		aliNadaGoodGoodNeut: "It's fine.",
+		aliNadaGoodBad: "It was rude of you to make assumptions about my intentions here.",
+		aliNadaNeut: "Ignore him",
+		
+		// =============================================================================================================================================
+		// |																																			|
+		// |														CRITICAL HEALTH POINTS 																|
+		// |																																			|
+		// =============================================================================================================================================
+		// 50%
+		novaGood: "What is it?",
+		novaGoodGood: "A what? Let me see.",
+		novaGoodGoodGood: "It's really something, isn't it?",
+		novaGoodGoodBad: "It's alright, I guess.",
+		novaGoodBad: "Sorry, MILO. I'm just not interested in this... novatapolo...",
+		novaNeut: "I'm sorry, MILO. I don't have time for this.",
+		novaNeutGood: "Fine. What is it?",
+		novaNeutBad: "I said no, MILO.",
+		novaBad: "Why would I care what's outside some cheap ship's window?",
+		novaBadGood: "I take it back. I'm just a little stressed right now. Sorry, MILO.",
+		novaBadNeut: "Nevermind.",
+		novaBadBad: "That's right! C.H.E.A.P. CHEAP!",
+		// 75%
+		familyGood: "It's a lot of ups and downs, but at the end of the day, you still care about each other.",
+		familyGoodGood: "Yes, I always felt accepted. People considered me one of the family, regardless of my origin.",
+		familyGoodGoodGood: "My brother.",
+		familyGoodGoodGoodGood: "He was a soldier from Capric, but was often stationed on Luneda. He always told me about the great times he'd have there while he was deployed. Then, his platoon was attacked by some raiders they were trying to bust. He didn't make it, but they captioned the Raidleader.",
+		familyGoodGoodGoodNeut: "I'm sorry, MILO, but I miss him. I don't want to talk about him anymore.",
+		familyGoodGoodNeut: "I could never pick a favorite!",
+		familyGoodGoodBad: "Let's talk about something else...",
+		familyGoodNeut: "Don't you consider adoptees to be part of the family, MILO?",
+		familyGoodBad: "I don't want to talk about my family anymore, MILO. I'ts really personal.",
+		familyNeut: "It gives meaning to my life.",
+		familyNeutGood: "No, that's not it. There is still meaning without them, but not in the same way.",
+		familyNeutNeut: "I do feel a sort of hopelessness without my family...",
+		familyNeutNeutGood: "None taken. Thank you, MILO.",
+		familyNeutNeutBad: "You don't know what you're talking about.",
+		familyNeutBad: "I don't want to talk about my family anymore, MILO.",
+		familyBad: "I don't want to talk about my family, MILO...",
+		// 90%
+		angryGood: "You're right, MILO. I have treated you terribly. I was just afraid of dying... Truce?",
+		angryNeut: "Ignore him",
+		angryBad: "Oh shut up, MILO. Nobody cares.",
+		happyNeutConversed: "We talked about this already, MILO. I haven't changed my mind about it.",
+		happyNeutNoConversed: "I can't, MILO. This program makes me feel closer to my family.",
+		happyGood: "You know... Yes. Let's do it!",
+		happyGoodGood: "I promise!",
+		happyGoodBad: "I can't make any promises, MILO,",
+		happyBad: "If living meant dealing with you another second, I'd take death without hesitation."
+	}
+
+//    _____________________________________________
+//   //											  \\
+//  //											   \\
+// //											    \\
 // || 		KNOWLEDGE - WHAT DOES MILO KNOW 		||
 // \\											    //
 //  \\											   //
@@ -207,7 +304,23 @@ $(document).ready(function() {
 			$('#miloInteraction').writeText(oshuText);
 			oshuAudio.play();			
 		}
-	} 
+	}
+
+	// Wait for MILO to finish speaking before responding
+
+	function miloResponse(miloTextMiss, miloTextOshu, responseOne, responseTwo, responseThree) {
+		var miloSpeaking = setInterval(function() {
+			if($('#miloInteraction').text() === miloTextOshu) {
+				clearInterval(miloSpeaking);
+				$('#miloInteraction').append('<ul id="miloResponse"><li>' + responseOne + '</li><li>' + responseTwo + '</li><li>' + responseThree + '</li></ul>');
+			}
+			else if($('#miloInteraction').text() === miloTextMiss) {
+				clearInterval(miloSpeaking);
+				$('#miloInteraction').append('<ul id="miloResponse"><li>' + responseOne + '</li><li>' + responseTwo + '</li><li>' + responseThree + '</li></ul>');
+			}
+		}, 1)		
+	}
+
 
     // _________________________________________//
 	//											//
@@ -219,7 +332,7 @@ $(document).ready(function() {
 	function fifty() {
 		$('#map').hide();
 		missVsOshu(text.novaIntroMiss, novaIntroMiss, text.novaIntroOshu, novaIntroOshu)
-
+		miloResponse(text.novaIntroMiss, text.novaIntroOshu)
 	};
 
 	timedMilo(fifty, 30);
