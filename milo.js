@@ -110,7 +110,7 @@ $(document).ready(function() {
 		novaGoodGoodOshu: "Look at it, Oshu. Is that not the most incredible creature you’ve ever seen in your life? Oh, I wish this moment would last forever!",
 		novaGoodGoodGood: "It really is. There it goes! Wow. I’m so glad I got to experience this with someone else. Alright, back to work. Where should we go?",
 		novaGoodGoodBad: "To each his own, I suppose. It’s too bad you can’t see the creature the way I see it.",
-		novaGoodNeut: "A *nevatacea*. And that’s fine. Your loss…",
+		novaGoodBad: "A *novatacea*. And that’s fine. Your loss…",
 		novaNeutMiss: "But, miss, it’s one of the rarest creatures in the galaxy! You simply must!",
 		novaNeutOshu: "But, Oshu, it’s one of the rarest creatures in the galaxy! You simply must!",
 		// if the player selects yes, *TRANSFER PLAYER TO THE NOVAGOOD STORYLINE*
@@ -171,18 +171,16 @@ $(document).ready(function() {
 //   \\___________________________________________//
 
 	var response = {
+		ignore: "[Ignore him]",
 		// introduction
 		introGood: "Oshu",
 		introBad: "Not really any of your business.",
-		introNeut: "Ignore him",
 		// kanedos
 		kanedosGood: "Thank you, MILO. I will be careful.",
 		kanedosBad: "MILO, you will never tell me what to do again.",
-		kanedosNeut: "Ignore him",
 		// tyrianne
 		tyrianneGood: "Would you like me to bring you back a souvenir?",
 		tyrianneNeut: "You're jealous, aren't you?",
-		tyrianneNeutTwo: "Ignore him",
 		// tyrianne return confrontation
 		confrontationGood: "I'll consider it, MILO.",
 		confrontationNeut: "I'm sorry, MILO. It was important to me that I lived as human as possible. It makes me feel closer to my family.",
@@ -195,7 +193,6 @@ $(document).ready(function() {
 		aliNadaGoodGoodBad: "You need to stop pestering me, MILO.",
 		aliNadaGoodGoodNeut: "It's fine.",
 		aliNadaGoodBad: "It was rude of you to make assumptions about my intentions here.",
-		aliNadaNeut: "Ignore him",
 		
 		// =============================================================================================================================================
 		// |																																			|
@@ -208,7 +205,6 @@ $(document).ready(function() {
 		novaGoodGoodGood: "It's really something, isn't it?",
 		novaGoodGoodBad: "It's alright, I guess.",
 		novaGoodBad: "Sorry, MILO. I'm just not interested in this... novatapolo...",
-		novaGoodNeut: "[Ignore him]",
 		novaNeut: "I'm sorry, MILO. I don't have time for this.",
 		novaNeutGood: "Fine. What is it?",
 		novaNeutBad: "I said no, MILO.",
@@ -235,7 +231,6 @@ $(document).ready(function() {
 		familyBad: "I don't want to talk about my family, MILO...",
 		// 90%
 		angryGood: "You're right, MILO. I have treated you terribly. I was just afraid of dying... Truce?",
-		angryNeut: "Ignore him",
 		angryBad: "Oh shut up, MILO. Nobody cares.",
 		happyNeutConversed: "We talked about this already, MILO. I haven't changed my mind about it.",
 		happyNeutNoConversed: "I can't, MILO. This program makes me feel closer to my family.",
@@ -257,7 +252,7 @@ $(document).ready(function() {
 	var knowledge= {
 		name: true,
 		danger: false,
-		mortality: false,
+		mortality: true,
 		committed: false
 	};
 	
@@ -348,6 +343,15 @@ $(document).ready(function() {
 		clearInteraction();
 	})
 
+	// conclude interaction 
+	function concludeInteraction() {
+		$('#miloResponse').hide();
+		setTimeout(function() {
+			$('#miloInteraction').hide();
+			$('#map').show();
+		}, 7000);
+	}
+
     // _________________________________________//
 	//											//
 	//											//
@@ -363,26 +367,62 @@ $(document).ready(function() {
 		// What is it?
 		$('#good').click(function() {
 			if(fiftyTimeline == 'novaIntro') {
-				miloResponse(text.novaGood, novaGood, response.novaGoodGood, response.novaGoodBad, response.novaGoodNeut);
+				miloResponse(text.novaGood, novaGood, response.novaGoodGood, response.novaGoodBad, response.ignore);
 				fiftyTimeline = 'What is it';
 			}
 			else if(fiftyTimeline == 'What is it') {
-				missVsOshu(text.novaGoodGoodMiss, novaGoodGoodMiss, text.novaGoodGoodOshu, novaGoodGoodOshu, response.novaGoodGoodGood, response.novaGoodGoodBad, response.novaGoodNeut);
+				missVsOshu(text.novaGoodGoodMiss, novaGoodGoodMiss, text.novaGoodGoodOshu, novaGoodGoodOshu, response.novaGoodGoodGood, response.novaGoodGoodBad, response.ignore);
 				fiftyTimeline = 'A what? Let me see.';
+			}
+			else if(fiftyTimeline == 'I dont have time for this') {
+				miloResponse(text.novaGood, novaGood, response.novaGoodGood, response.novaGoodBad, response.ignore);
+				fiftyTimeline = 'What is it';
+			}
+			else if(fiftyTimeline == 'Why would I care') {
+				if(knowledge.mortality == true) {
+					missVsOshu(text.novaBadGoodKnowsMiss, novaBadGoodKnowsOshu, text.novaBadGoodKnowsMiss, novaBadGoodKnowsMiss, '', '', '')
+					concludeInteraction();
+				}
+				else {
+					miloResponse(text.novaBadGood, novaBadGood, '','','');
+					concludeInteraction();
+				}
 			}
 			else if('A what? Let me see.') {
 				$('#miloSays').writeText(text.novaGoodGoodGood); 
 				novaGoodGoodGood.play();
-				$('#miloResponse').hide();
-				setTimeout(function() {
-					$('#miloInteraction').hide();
-					$('#map').show();
-				}, 5000);
+				concludeInteraction()
 			};
 		});
 		$('#bad').click(function() {
 			if(fiftyTimeline == 'novaIntro') {
-
+				miloResponse(text.novaBad, novaBad, response.novaBadGood, response.novaBadBad, response.ignore);
+				fiftyTimeline = 'Why would I care';
+			}
+			else if(fiftyTimeline == 'Why would I care') {
+				miloResponse(text.novaBadBad, novaBadBad, '','','');
+				concludeInteraction();	
+			}
+			else if(fiftyTimeline == 'What is it') {
+				miloResponse(text.novaGoodBad, novaGoodBad, '','','');
+				concludeInteraction();
+			}
+			else if(fiftyTimeline == 'A what? Let me see.') {
+				miloResponse(text.novaGoodGoodBad, novaGoodGoodBad, '','','');
+				concludeInteraction();
+			}
+			else if(fiftyTimeline == 'I dont have time for this') {
+				miloResponse(text.novaNeutBad, novaNeutBad, '','','');
+				concludeInteraction();
+			}
+		});
+		$('#neut').click(function() {
+			if(fiftyTimeline == 'novaIntro') {
+				missVsOshu(text.novaNeutMiss, novaNeutMiss, text.novaNeutOshu, novaNeutOshu, response.novaNeutGood, response.novaNeutBad, response.ignore);
+				fiftyTimeline = 'I dont have time for this';
+			}
+			else {
+				concludeInteraction();
 			}
 		})
 		// 
