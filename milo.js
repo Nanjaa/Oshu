@@ -208,6 +208,7 @@ $(document).ready(function() {
 		novaGoodGoodGood: "It's really something, isn't it?",
 		novaGoodGoodBad: "It's alright, I guess.",
 		novaGoodBad: "Sorry, MILO. I'm just not interested in this... novatapolo...",
+		novaGoodNeut: "[Ignore him]",
 		novaNeut: "I'm sorry, MILO. I don't have time for this.",
 		novaNeutGood: "Fine. What is it?",
 		novaNeutBad: "I said no, MILO.",
@@ -295,7 +296,8 @@ $(document).ready(function() {
 
 	// Next, let's determine if you are "miss" or "Oshu"
 
-	function missVsOshu(missText, missAudio, oshuText, oshuAudio) {
+	function missVsOshu(missText, missAudio, oshuText, oshuAudio, responseOne, responseTwo, responseThree) {
+		presentOptions(responseOne, responseTwo, responseThree);
 		if(knowledge.name == false) {
 			$('#miloSays').writeText(missText);
 			missAudio.play();			
@@ -306,20 +308,13 @@ $(document).ready(function() {
 		}
 	}
 
-	// Wait for MILO to finish speaking before responding
+	// if it is not a timed event, and there's not a miss or oshu reference, use this function
 
-	function miloResponse(miloTextMiss, miloTextOshu, responseOne, responseTwo, responseThree) {
-		var miloSpeaking = setInterval(function() {
-			if($('#miloSays').text() === miloTextOshu) {
-				clearInterval(miloSpeaking);
-				presentOptions(responseOne, responseTwo, responseThree);
-			}
-			else if($('#miloSays').text() === miloTextMiss) {
-				clearInterval(miloSpeaking);
-				presentOptions(responseOne, responseTwo, responseThree);
-			}
-		}, 1);	
-	};
+	function miloResponse(miloText, miloAudio, responseOne, responseTwo, responseThree) {
+		$('#miloSays').writeText(miloText);
+		miloAudio.play();
+		presentOptions(responseOne, responseTwo, responseThree);
+	}
 
 	function presentOptions(responseOne, responseTwo, responseThree) {
 		$('#miloResponse').show()
@@ -328,6 +323,30 @@ $(document).ready(function() {
 		$('#neut').writeText(responseThree);
 	};
 
+	// clear the board before every response
+
+	function clearInteraction() {
+		$('#miloSays').text('');
+		$('#good').text('');
+		$('#bad').text('');
+		$('#neut').text('');
+	}
+
+	// adjust the standing with MILO after choosing an option, and also clear all the options
+
+	$('#good').click(function() {
+		clearInteraction();
+		status = status + 1;
+		console.log(status)		
+	});
+	$('#bad').click(function() {
+		clearInteraction();
+		status = status - 1;
+		console.log(status)		
+	});
+	$('#neut').click(function() {
+		clearInteraction();
+	})
 
     // _________________________________________//
 	//											//
@@ -338,17 +357,21 @@ $(document).ready(function() {
 
 	function fifty() {
 		$('#map').hide();
-		missVsOshu(text.novaIntroMiss, novaIntroMiss, text.novaIntroOshu, novaIntroOshu)
-		miloResponse(text.novaIntroMiss, text.novaIntroOshu, response.novaGood, response.novaBad, response.novaNeut);
+		missVsOshu(text.novaIntroMiss, novaIntroMiss, text.novaIntroOshu, novaIntroOshu, response.novaGood, response.novaBad, response.novaNeut)
+		// What is it?
 		$('#good').click(function() {
-			console.log('good')
+			miloResponse(text.novaGood, novaGood, response.novaGoodGood, response.novaGoodBad, response.novaGoodNeut);
 		})
-		$('#neut').click(function() {
-			console.log('neut')
+		// A what? Let me see.
+		$('#good').click(funciton() {
+			miloResponse(text.novaGoodGood, novaGoodGood, response.novaGoodGoodGood, response.novaGoodGoodBad, response.novaGoodGoodNeut);
 		})
-		$('#bad').click(function() {
-			console.log('bad')
-		})
+		// 
+		// 
+
+		// Why would I care what's outside some cheap ship's window?
+
+		// if you select neut
 	};
 
 	timedMilo(fifty, 30);
