@@ -170,7 +170,7 @@ $(document).ready(function() {
 //  \\											   //
 //   \\___________________________________________//
 
-	var resonse = {
+	var response = {
 		// introduction
 		introGood: "Oshu",
 		introBad: "Not really any of your business.",
@@ -297,11 +297,11 @@ $(document).ready(function() {
 
 	function missVsOshu(missText, missAudio, oshuText, oshuAudio) {
 		if(knowledge.name == false) {
-			$('#miloInteraction').writeText(missText);
+			$('#miloSays').writeText(missText);
 			missAudio.play();			
 		}
 		else {
-			$('#miloInteraction').writeText(oshuText);
+			$('#miloSays').writeText(oshuText);
 			oshuAudio.play();			
 		}
 	}
@@ -310,16 +310,23 @@ $(document).ready(function() {
 
 	function miloResponse(miloTextMiss, miloTextOshu, responseOne, responseTwo, responseThree) {
 		var miloSpeaking = setInterval(function() {
-			if($('#miloInteraction').text() === miloTextOshu) {
+			if($('#miloSays').text() === miloTextOshu) {
 				clearInterval(miloSpeaking);
-				$('#miloInteraction').append('<ul id="miloResponse"><li>' + responseOne + '</li><li>' + responseTwo + '</li><li>' + responseThree + '</li></ul>');
+				presentOptions(responseOne, responseTwo, responseThree);
 			}
-			else if($('#miloInteraction').text() === miloTextMiss) {
+			else if($('#miloSays').text() === miloTextMiss) {
 				clearInterval(miloSpeaking);
-				$('#miloInteraction').append('<ul id="miloResponse"><li>' + responseOne + '</li><li>' + responseTwo + '</li><li>' + responseThree + '</li></ul>');
+				presentOptions(responseOne, responseTwo, responseThree);
 			}
-		}, 1)		
-	}
+		}, 1);	
+	};
+
+	function presentOptions(responseOne, responseTwo, responseThree) {
+		$('#miloResponse').show()
+		$('#good').writeText(responseOne);
+		$('#bad').writeText(responseTwo);
+		$('#neut').writeText(responseThree);
+	};
 
 
     // _________________________________________//
@@ -332,7 +339,16 @@ $(document).ready(function() {
 	function fifty() {
 		$('#map').hide();
 		missVsOshu(text.novaIntroMiss, novaIntroMiss, text.novaIntroOshu, novaIntroOshu)
-		miloResponse(text.novaIntroMiss, text.novaIntroOshu)
+		miloResponse(text.novaIntroMiss, text.novaIntroOshu, response.novaGood, response.novaBad, response.novaNeut);
+		$('#good').click(function() {
+			console.log('good')
+		})
+		$('#neut').click(function() {
+			console.log('neut')
+		})
+		$('#bad').click(function() {
+			console.log('bad')
+		})
 	};
 
 	timedMilo(fifty, 30);

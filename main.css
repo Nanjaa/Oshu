@@ -376,13 +376,17 @@ li {
 	margin-left: 50%;
 }
 #miloInteraction {
-	padding: 50px;
 	font-family: "Share Tech Mono";
 	font-size: 20px;
 	position: absolute;
+	width: 550px;
+	padding-top: 50px;
+	padding-left: 25px;
+	padding-right: 25px;
 }
 #miloResponse {
 	color: green;
 	padding-top: 25px;
 	cursor: pointer;
+	display: none;
 }
