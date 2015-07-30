@@ -50,8 +50,7 @@ p {
 	background-color: black;
 	height: 525px;
 	color: white;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 15px;
 	margin-top: 20px;
 }
 pre {
@@ -84,32 +83,27 @@ pre {
 }
 #Luneda {
 	color: #c1e3da;
-	margin-left: 10%;
-	margin-top: 350px;
+	margin-left: 40px;
+	margin-top: 400px;
 }
 #Kanedos {
 	color: #ff9a00;
-	margin-left: 20%;
-	margin-top: 350px;
+	margin-left: 150px;
+	margin-top: 300px;
 }
 #Tyrianne {
 	color: #db1600;
-	margin-left: 30%;
+	margin-left: 200px;
 	margin-top: 150px;
 }
 #Kaprika {
 	color: #1c9600;
-	margin-left: 40%;
-	margin-top: 300px;
+	margin-left: 325px;
+	margin-top: 250px;
 }
 #AliNada {
 	color: #969696;
-	margin-left: 50%;
-	margin-top: 150px;
-}
-#Carpic {
-	color: #5650ff;	
-	margin-left: 70%;
+	margin-left: 325px;
 	margin-top: 75px;
 }
 #shipStatus {
@@ -205,7 +199,7 @@ pre {
 }
 #sand {
 	color: #ffe697;
-	margin-left: 5%;
+	margin-left: 50px;
 }
 .lunedaCity {
 	display: inline-block;
@@ -216,19 +210,19 @@ pre {
 	width: 300px;
 	height: 300px;
 	border: 1px solid white;
-	margin-left: 30%;
+	margin-left: 212px;
 	margin-top: 100px;
 	text-align: center;
 }
 #mechanic {
 	margin-top: 375px;
-	margin-left: 58%;
+	margin-left: 407px;
 }
 #futureQuest {
-	margin-left: 14%;
+	margin-left: 95px;
 }
 #weather {
-	margin-left: 62%;
+	margin-left: 435px;
 	margin-top: 30px;
 }
 .cityDetails {
@@ -264,12 +258,12 @@ pre {
 	float: bottom;
 }
 #tikiHut {
-	margin-left: 65%;
+	margin-left: 450px;
 	margin-top: 80px;
 	color: #f6b045;
 }
 #equipment {
-	margin-left: 50%;
+	margin-left: 375px;
 	margin-top: 200px;
 	color: #a45119;
 }
@@ -295,15 +289,15 @@ pre {
 }
 #fruitStand {
 	margin-top: 100px;
-	margin-left: 5%;
+	margin-left: 50px;
 }
 #souvenirStand {
 	margin-top: 225px;
-	margin-left: 33%;
+	margin-left: 225px;
 }
 #clothesStand {
 	margin-top: 100px;
-	margin-left: 60%;
+	margin-left: 400px;
 }
 #fruitMan, #clothesGirl, #souvenirGirl {
 	margin-top: 150px;
@@ -357,23 +351,23 @@ li {
 }
 #kanedome {
 	margin-top: 175px;
-	margin-left: 43%;
+	margin-left: 300px;
 }
 #camelRental {
 	margin-top: 50px;
-	margin-left: 40%;
+	margin-left: 300px;
 }
 #kanedosJewelry {
 	margin-top: 150px;
-	margin-left: 10%;
+	margin-left: 100px;
 }
 #kanedosGas {
 	margin-top: 325px;
-	margin-left: 5%;
+	margin-left: 50px;
 }
 #bitchSlap {
 	margin-top: 425px;
-	margin-left: 50%;
+	margin-left: 375px;
 }
 #miloInteraction {
 	font-family: "Share Tech Mono";
