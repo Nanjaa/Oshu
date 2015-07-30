@@ -355,16 +355,35 @@ $(document).ready(function() {
 	//											//
 	//__________________________________________//
 
+	var fiftyTimeline = 'novaIntro';
+
 	function fifty() {
 		$('#map').hide();
 		missVsOshu(text.novaIntroMiss, novaIntroMiss, text.novaIntroOshu, novaIntroOshu, response.novaGood, response.novaBad, response.novaNeut)
 		// What is it?
 		$('#good').click(function() {
-			miloResponse(text.novaGood, novaGood, response.novaGoodGood, response.novaGoodBad, response.novaGoodNeut);
-		})
-		// A what? Let me see.
-		$('#good').click(funciton() {
-			miloResponse(text.novaGoodGood, novaGoodGood, response.novaGoodGoodGood, response.novaGoodGoodBad, response.novaGoodGoodNeut);
+			if(fiftyTimeline == 'novaIntro') {
+				miloResponse(text.novaGood, novaGood, response.novaGoodGood, response.novaGoodBad, response.novaGoodNeut);
+				fiftyTimeline = 'What is it';
+			}
+			else if(fiftyTimeline == 'What is it') {
+				missVsOshu(text.novaGoodGoodMiss, novaGoodGoodMiss, text.novaGoodGoodOshu, novaGoodGoodOshu, response.novaGoodGoodGood, response.novaGoodGoodBad, response.novaGoodNeut);
+				fiftyTimeline = 'A what? Let me see.';
+			}
+			else if('A what? Let me see.') {
+				$('#miloSays').writeText(text.novaGoodGoodGood); 
+				novaGoodGoodGood.play();
+				$('#miloResponse').hide();
+				setTimeout(function() {
+					$('#miloInteraction').hide();
+					$('#map').show();
+				}, 5000);
+			};
+		});
+		$('#bad').click(function() {
+			if(fiftyTimeline == 'novaIntro') {
+
+			}
 		})
 		// 
 		// 
