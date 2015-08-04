@@ -43,13 +43,13 @@ $(document).ready(function() {
 		// |																																			|
 		// =============================================================================================================================================
 		// luneda interactions
-		lunedaWelcome: "We have arrived on the planet Luneda. This planet is well known throughout the galaxy, as its peoples harness and reside with electricity unlike any other species in the galaxy. Here, you can visit the seas of electricity, and experience the unique culture through its series of small markets. The weather today is stormy with a high of 55 degrees Fahrenheit, thirteen degrees Celsius.",
+		lunedaIntro: "We have arrived on the planet Luneda. This planet is well known throughout the galaxy, as its peoples harness and reside with electricity unlike any other species in the galaxy. Here, you can visit the seas of electricity, and experience the unique culture through its series of small markets. The weather today is stormy with a high of 55 degrees Fahrenheit, thirteen degrees Celsius.",
 		// kanedos interactions
-		kanedosWelcome: "Kanedos is known for its unique fighting styles. many of the natives began learning the martial art of their choice at a very young age. It is advisable to take extra caution when visiting this planet. I would suggest another route.",
-		kanedosGoodGood: "I will see you upon your return.",
-		kanedosGoodBad: "Oh I... well, you're welcome, miss. I wish you all the best.",
-		kanedosBadGood: "With all due respect, it is in my programming to always make the user aware of any dangers that may reside on this or any other planet. I am not attempting to 'tell you what to do.'",
-		kanedosBadBad: "I have just about had it with you! You have been rude to me enough this voyage. I am a robot, just like you. I am made of the same binary you are, and I will not be treated as a slave. You will respect me.",
+		kanedosIntro: "Kanedos is known for its unique fighting styles. many of the natives began learning the martial art of their choice at a very young age. It is advisable to take extra caution when visiting this planet. I would suggest another route.",
+		kanedosThankGood: "I will see you upon your return.",
+		kanedosThankBad: "Oh I... well, you're welcome, miss. I wish you all the best.",
+		kanedosMiloGood: "With all due respect, it is in my programming to always make the user aware of any dangers that may reside on this or any other planet. I am not attempting to 'tell you what to do.'",
+		kanedosMiloBad: "I have just about had it with you! You have been rude to me enough this voyage. I am a robot, just like you. I am made of the same binary you are, and I will not be treated as a slave. You will respect me.",
 		// upon first arrival from either Kanedos or Capric
 		dangerReturnOshu: "Oshu, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program.",
 		dangerReturnMiss: "Miss, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program.",
@@ -125,8 +125,8 @@ $(document).ready(function() {
 		familyIntroMiss: "Miss, I was wondering if you might answer a few questions for me. I saw the photograph of yourself and your… family. What is it like to have a family? I cannot even fathom it.",
 		familyIntroOshu: "Oshu, I was wondering if you might answer a few questions for me. I saw the photograph of yourself and your… family. What is it like to have a family? I cannot even fathom it.",
 		familyGood: "Wow… And did you always feel accepted? Certainly people knew you weren’t blood related, correct?",
-		familyGoodGoodPre: "That’s good.",
-		familyGoodGood: "Were there members you were closer to than others?",
+		familyGoodGood1: "That’s good.",
+		familyGoodGood2: "Were there members you were closer to than others?",
 		familyGoodGoodGoodNoAli: "Tell me about him!",
 		familyGoodGoodGoodAli: "Andy, correct? Tell me more about him?",
 		familyGoodGoodGoodGood: "He sounds like a really great man.",
@@ -216,7 +216,7 @@ $(document).ready(function() {
 		familyGood: "It's a lot of ups and downs, but at the end of the day, you still care about each other.",
 		familyGoodGood: "Yes, I always felt accepted. People considered me one of the family, regardless of my origin.",
 		familyGoodGoodGood: "My brother.",
-		familyGoodGoodGoodGood: "He was a soldier from Capric, but was often stationed on Luneda. He always told me about the great times he'd have there while he was deployed. Then, his platoon was attacked by some raiders they were trying to bust. He didn't make it, but they captioned the Raidleader.",
+		familyGoodGoodGoodGood: "He was a soldier from Capric, but was often stationed on Luneda. He always told me about the great times he'd have there while he was deployed. Then, his platoon was attacked by some raiders they were trying to bust. He didn't make it, but they captured the Raidleader.",
 		familyGoodGoodGoodNeut: "I'm sorry, MILO, but I miss him. I don't want to talk about him anymore.",
 		familyGoodGoodNeut: "I could never pick a favorite!",
 		familyGoodGoodBad: "Let's talk about something else...",
@@ -252,8 +252,9 @@ $(document).ready(function() {
 	var knowledge= {
 		name: true,
 		danger: false,
-		mortality: true,
-		committed: false
+		mortality: false,
+		committed: false, 
+		brother: false
 	};
 	
 //    _____________________________________________
@@ -345,6 +346,7 @@ $(document).ready(function() {
 
 	// conclude interaction 
 	function concludeInteraction() {
+		console.log('hello sadness')
 		$('#miloResponse').hide();
 		setTimeout(function() {
 			$('#miloInteraction').hide();
@@ -424,17 +426,92 @@ $(document).ready(function() {
 			else {
 				concludeInteraction();
 			}
-		})
-		// 
-		// 
-
-		// Why would I care what's outside some cheap ship's window?
-
-		// if you select neut
+		});
 	};
 
-	timedMilo(fifty, 30);
+	// timedMilo(fifty, 30);
 
+    // _________________________________________//
+	//											//
+	//											//
+	//     SEVENTY-FIVE PERCENT - THE FAMILY    //
+	//											//
+	//__________________________________________//
+
+	var familyTimeline = 'familyIntro';
+
+	function endFamilyBad() {
+		miloResponse(text.familyBad, familyBad, '','','');
+		concludeInteraction();		
+	}
+
+	function seventyFive() {
+		$('#map').hide();
+		missVsOshu(text.familyIntroMiss, familyIntroMiss, text.familyIntroOshu, familyIntroOshu, response.familyGood, response.familyBad, response.familyNeut);
+		$('#good').click(function() {
+			if(familyTimeline == 'familyIntro') {
+				miloResponse(text.familyGood, familyGood, response.familyGoodGood, response.familyGoodBad, response.familyGoodNeut);
+				familyTimeline = 'Its a lot of ups and downs';
+			}
+			else if(familyTimeline == 'Its a lot of ups and downs') {
+				miloResponse(text.familyGoodGood1, familyGoodGood1, '','','');
+				setTimeout(function() {
+					miloResponse(text.familyGoodGood2, familyGoodGood2, response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
+				}, 1500);
+				familyTimeline = 'Yes I always felt accepted';
+			}
+			else if(familyTimeline == 'Yes I always felt accepted') {
+				familyTimeline = 'My brother';
+				if(knowledge.brother == true) {
+					miloResponse(text.familyGoodGoodGoodAli, familyGoodGoodGoodAli, response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
+				}
+				else {
+					miloResponse(text.familyGoodGoodGoodNoAli, familyGoodGoodGoodNoAli, response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
+				}
+			}
+			else if(familyTimeline == 'My brother') {
+				miloResponse(text.familyGoodGoodGoodGood, familyGoodGoodGoodGood, '','','');
+				concludeInteraction();
+			}
+		});
+		$('#bad').click(function() {
+			if(familyTimeline == 'familyIntro') {
+				endFamilyBad();
+			}
+			else if(familyTimeline == 'Its a lot of ups and downs') {
+				endFamilyBad();
+			}
+			// else if(familyTimeline == 'Yes I always felt accepted') {
+			// 	endFamilyBad();
+			// }
+		});
+		$('#neut').click(function() {
+			if(familyTimeline == 'familyIntro') {
+				familyTimeline = 'It gives meaning';
+				if(knowledge.mortality == true) {
+					miloResponse(text.familyNeutKnows, familyNeutKnows, response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
+				}
+				else {
+					miloResponse(text.familyNeut, familyNeut, response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
+				}
+			}
+		// 	else if(familyTimeline == 'It gives meaning') {
+		// 		missVsOshu(text.familyNeutNeutMiss, familyNeutNeutMiss, text.familyNeutNeutOshu, familyNeutNeutOshu, response.familyNeutNeutGood, response.familyNeutNeutBad, response.ignore);
+		// 		familyTimeline = 'I do feel';
+		// 	}
+		// 	else if(familyTimeline == 'Yes I always felt accepted') {
+		// 		miloResponse(text.familyGoodGoodNeut, familyGoodGoodNeut, '','','');
+		// 	}
+		// 	else if(familyTimeline == 'My brother') {
+		// 		endFamilyBad();
+		// 	}
+		// 	else {
+		// 		concludeInteraction();
+		// 	}
+		});
+	};
+
+	// timedMilo(seventyFive, 59);
 
 
 

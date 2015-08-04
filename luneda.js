@@ -30,7 +30,7 @@ $(document).ready(function() {
 		$('#map').hide();
 		$('#lunedaMap').show();
 		if(planets.Luneda.first == true) {
-			luneda.play();
+			lunedaIntro.play();
 			planets.Luneda.first = false;
 		};
 	});
