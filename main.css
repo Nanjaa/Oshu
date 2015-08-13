@@ -52,6 +52,7 @@ p {
 	color: white;
 	margin-left: 15px;
 	margin-top: 20px;
+	float: left;
 }
 pre {
 	margin: 0;
@@ -336,15 +337,11 @@ pre {
 #myShip {
 	cursor: pointer;
 }
-
-#bucketList {
-	width: 97%;
-	margin-top: 10px;
-}
 li {
 	border: 1px solid black;
 	margin-left: 10px;
 	width: 100%;
+	padding-left: 5px;
 }
 #kanedosMap {
 	display: none;
@@ -382,5 +379,19 @@ li {
 	color: green;
 	padding-top: 25px;
 	cursor: pointer;
+	display: none;
+}
+#bucketList {
+	margin-left: 10px;
+	float: left;
+	margin-top: 20px;
+}
+.bucketList {
+	list-style-type: none;
+}
+.tyrianneCity {
+	display: none;
+}
+.kaprikaCity {
 	display: none;
 }
