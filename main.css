@@ -336,11 +336,14 @@ pre {
 
 #myShip {
 	cursor: pointer;
+	border: 1px solid black;
+	padding: 7px;
+	position: relative;
+	display: inline-block;
 }
 li {
 	border: 1px solid black;
 	margin-left: 10px;
-	width: 100%;
 	padding-left: 5px;
 }
 #kanedosMap {
@@ -381,12 +384,17 @@ li {
 	cursor: pointer;
 	display: none;
 }
-#bucketList {
-	margin-left: 10px;
+#bucketList, #inventory, #shipStats {
+	margin-left: 30px;
 	float: left;
 	margin-top: 20px;
+	width: 600px;
+	padding: 10px;
 }
-.bucketList {
+#bucketList {
+	background-color: green;
+}
+.bucketList, .inventoryItem {
 	list-style-type: none;
 }
 .tyrianneCity {
@@ -394,4 +402,21 @@ li {
 }
 .kaprikaCity {
 	display: none;
+}
+.quest, .inventoryItem {
+	background-color: white;
+}
+h1 {
+	color: white;
+	font-family: 'Orbitron', sans-serif;
+	font-size: 40px;
+}
+#inventory {
+	background-color: blue;
+}
+#shipStats {
+	background-color: pink;
+}
+#boardShip {
+	display: inline-block;
 }

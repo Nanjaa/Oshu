@@ -688,57 +688,34 @@ __/__________  |   |_| |_| |_| |_|   |
           </pre>
         </div>
 <!-- ========== GAME STATS ============ -->
-<!--       <div id="gameStats">
-        <div id="shipStatus">
-          <div id="shipPicture"> -->
-<!-- ship ascii art -->
-<!--             <pre id="myShip">
-   |\____
-SS={o} [_\.__
-SS=[.________'>
-    [_/
-            </pre> -->
-<!-- end of ascii art -->
-<!--           </div> -->
- <!--        <div id="shipStatusDetails">
-          <div id="shipHealth">
-            <div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div><div class="shipHealth"></div>
-            <div class="statusCategory"><p>Health</p></div>
-          </div>
-          <div id="shipFuel">
-            <div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div><div class="shipFuel"></div>
-            <div class="statusCategory"><p>Fuel</p></div>
-          </div>
-        </div>
-      </div> -->
-      <!-- inventory -->
- <!--      <div id="inventory">
-        <div class="inventory"><p>Coins: <span id="coinsAmt">50</span></p></div>
-        <div class="inventory"><p>Crystals: <span id="crystalsAmt">0</span></p></div>
-      </div> -->
-      <!-- bucketlist -->
-<!--       <div id="bucketList">
-        <div id="list">
-          <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Item 4</li>
-            <li>Item 5</li>
-        </div>
-      </div>
-    </div> -->
-    <!-- end -->
-
     <!--       T E S T ! ! !       -->
   </div>
+
+  <!-- ship stats -->
+  <div id="shipStats">
+    <h1 id="shipTitle">Ship Status</h1>
+    <pre id="myShip">
+|\____
+SS={o} [_\.__
+SS=[.________'>
+[_/
+    </pre>
+    <ul>
+      <li>Return to Ship</li>
+      <li>Gas:<span id="gasAmt">100%</span></li>
+    </ul>
+  </div>
+  <!-- bucket list -->
     <div id="bucketList">
+      <h1 id="bucketTitle">Bucket List</h1>
       <ul class="bucketList">
-<!--         <li class="bucketList" id="bucketOne"></li>
-        <li class="bucketList" id="bucketTwo"></li>
-        <li class="bucketList" id="bucketThree"></li>
-        <li class="bucketList" id="bucketFour"></li>
-        <li class="bucketList" id="bucketFive"></li> -->
+      </ul>
+    </div>
+  <!-- inventory -->
+    <div id="inventory">
+      <h1 id="inventoryTitle">Inventory</h1>
+      <ul class="inventoryList">
+        <li class="inventoryItem">Coins:<span id="coinsAmt">0</span></li>
       </ul>
     </div>
   </div>

@@ -19,7 +19,7 @@ var Oshu = {
 		],
 		['Kanedos', [
 			'See the Mercury Fighting Pits',
-			'Take a Kanedos style martial arts class',
+			'Take a Kanedos martial arts class',
 			'Visit the Crater Valley on Kanedos']
 		],
 		['Tyrianne', [

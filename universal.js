@@ -6,18 +6,18 @@ function randomizeQuests() {
 	for(var i=0; i<Oshu.quests.length; i++) {
 		var listNumber = Math.random();
 		if(Oshu.quests[i] == Oshu.quests[4]) {
-			$('.bucketList').append('<li>' + Oshu.quests[i][1][0] + '</li>')
+			$('.bucketList').append('<li class="quest">' + Oshu.quests[i][1][0] + '</li>')
 
 		}
 		else if(listNumber < 0.33) {
-			$('.bucketList').append('<li>' + Oshu.quests[i][1][0] + '</li>')
+			$('.bucketList').append('<li class="quest">' + Oshu.quests[i][1][0] + '</li>')
 		}
 		else if(listNumber < 0.66) {
-			$('.bucketList').append('<li>' + Oshu.quests[i][1][1] + '</li>')
+			$('.bucketList').append('<li class="quest">' + Oshu.quests[i][1][1] + '</li>')
 
 		}
 		else {
-			$('.bucketList').append('<li>' + Oshu.quests[i][1][2] + '</li>')
+			$('.bucketList').append('<li class="quest">' + Oshu.quests[i][1][2] + '</li>')
 
 		}
 	}	
