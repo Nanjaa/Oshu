@@ -1,5 +1,5 @@
 // ------------------------------------------------------
-// 					LOSE LIFE
+// 					GENERIZE QUESTS
 // ------------------------------------------------------
 randomizeQuests()
 function randomizeQuests() {
@@ -22,22 +22,6 @@ function randomizeQuests() {
 		}
 	}	
 }
-
-
-// for(i = 0; i<6; i++) {
-// 	var listNumber = Math.random();
-// 	console.log(Oshu.quests[i])
-// 	if(listNumber < 0.33) {
-// 		console.log(Oshu.quests[i]);
-// 	}
-// 	else if(listNumber < 0.66) {
-// 		console.log(Oshu.quests.Kanedos[1]);
-// 	}
-// 	else {
-// 		console.log(Oshu.quests.Kanedos[2])
-// 	}
-
-// }
 
 // ------------------------------------------------------
 // 					LOSE LIFE
@@ -91,22 +75,6 @@ function lifeEvent(minutesLost) {
 }) (jQuery);
 
 
-	// function writeText(content) {
-	// 	$('.lunedaInteract').text('');
-	// 	var contentArray = content.split(""),
-	// 	current = 0,
-	// 	elem = this;
-	// 	setInterval(function() {
-	// 		if(current < contentArray.length && test == false) {
-	// 			elem.text(elem.text() + contentArray[current++]);
-	// 		}
-	// 		else {
-	// 			elem.text(elem.text() + contentArray);
-	// 			test = false;
-	// 		};
-	// 	}, 30);
-	// };
-
 // ------------------------------------------------------
 // 					PAY MONEY
 // ------------------------------------------------------
@@ -158,3 +126,16 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 		})
 	}
 };
+
+// ------------------------------------------------------
+// 					PLAY AUDIO
+// ------------------------------------------------------
+
+function play(source) {
+	$('#audio').attr('src', 'soundEffects/femVoice.wav');
+	audio.play();
+}
+
+$('#AliNada').click(function() {
+	play()
+})
