@@ -30,7 +30,7 @@ $(document).ready(function() {
 		$('#map').hide();
 		$('#lunedaMap').show();
 		if(planets.Luneda.first == true) {
-			lunedaIntro.play();
+			play('speech/lunedaIntro.mp3');
 			planets.Luneda.first = false;
 		};
 	});
@@ -79,7 +79,7 @@ $(document).ready(function() {
 		else {
 			// plays the sound effect of the man talking
 			if($('.lunedaInteract').text().length < beachText.rentalWelcome.length) {
-				maleVoice.play();
+				maleVoice();
 			}
 			var text1 = beachText.rentalWelcome;
 			$('.lunedaInteract').writeText(text1);
@@ -155,7 +155,7 @@ $(document).ready(function() {
 		$('.marketDetails').hide();
 		$('.fruitStand').show();
 		$('.lunedaInteract').writeText(marketText.fruitWelcome);
-		maleVoice.play();
+		maleVoice();
 	});
 
 	$('#clothesStand').click(function() {
