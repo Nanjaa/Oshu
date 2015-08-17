@@ -132,10 +132,13 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 // ------------------------------------------------------
 
 function play(source) {
-	$('#audio').attr('src', 'soundEffects/femVoice.wav');
+	$('#audio').attr('src', source);
 	audio.play();
 }
 
-$('#AliNada').click(function() {
-	play()
-})
+function maleVoice() {
+	play('soundEffects/maleVoice.wav');
+}
+function femVoice() {
+	play('soundEffects/femVoice.wav');
+}
