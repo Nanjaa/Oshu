@@ -23,7 +23,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="css/main.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -686,13 +686,26 @@ __/__________  |   |_| |_| |_| |_|   |
           <pre class="kaprikaCity" id="mysteriousShop">
 
           </pre>
+            <div id="shipStats">
+              <h1 id="shipTitle">Ship Status</h1>
+              <pre id="myShip">
+|\____
+SS={o} [_\.__
+SS=[.________'>
+[_/
+              </pre>
+              <ul>
+                <li>Return to Ship</li>
+                <li>Gas:<span id="gasAmt">100%</span></li>
+              </ul>
+            </div>
         </div>
 <!-- ========== GAME STATS ============ -->
     <!--       T E S T ! ! !       -->
   </div>
 
   <!-- ship stats -->
-  <div id="shipStats">
+<!--   <div id="shipStats">
     <h1 id="shipTitle">Ship Status</h1>
     <pre id="myShip">
 |\____
@@ -704,7 +717,7 @@ SS=[.________'>
       <li>Return to Ship</li>
       <li>Gas:<span id="gasAmt">100%</span></li>
     </ul>
-  </div>
+  </div> -->
   <!-- bucket list -->
     <div id="bucketList">
       <h1 id="bucketTitle">Bucket List</h1>
@@ -725,7 +738,7 @@ SS=[.________'>
 
 <!-- error sound effect -->
 <audio id="error">
-  <source src="error.wav" cc="http://freesound.org/people/tcpp/sounds/151309/">
+  <source src="soundEffects/error.wav" cc="http://freesound.org/people/tcpp/sounds/151309/">
 </audio>
 
 <!-- male voice -->
@@ -969,15 +982,15 @@ SS=[.________'>
 <!-- javascript -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="objects.js"></script>
-<script src="universal.js"></script>
-<script src="travel.js"></script>
-<script src="lifeBar.js"></script>
+<script src="scripts/objects.js"></script>
+<script src="scripts/universal.js"></script>
+<script src="scripts/travel.js"></script>
+<script src="scripts/lifeBar.js"></script>
 <!-- planets -->
-<script src="luneda.js"></script>
-<script src="kanedos.js"></script>
+<script src="scripts/luneda.js"></script>
+<script src="scripts/kanedos.js"></script>
 <!-- MILO -->
-<script src="milo.js"></script>
+<script src="scripts/milo.js"></script>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
