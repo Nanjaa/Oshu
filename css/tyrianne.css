@@ -5,7 +5,35 @@
 	margin-top: 150px;
 }
 /*hide the planet*/
-#tyrianneMap {
+/*#tyrianneMap {
+	display: none;
+}*/
+/*planet details*/
+
+#map {
 	display: none;
 }
-/*planet details*/
+#library {
+	color: #4e4bb4;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+#fuzzbuttFactory {
+	color: #cec29c;
+	margin-left: 240px;
+	margin-top: 275px;
+}
+#tyrianneMechanic {
+	color: #b42b2b;
+	margin-left: 50px;
+	margin-top: 300px;
+}
+#poorMan {
+	color: tan;
+	margin-left: 25px;
+	margin-top: 25px;
+}
+#tyrianneJewelry {
+	color: #f4b234;
+	margin-left: 325px;
+}
