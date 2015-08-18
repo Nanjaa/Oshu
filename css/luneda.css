@@ -44,25 +44,18 @@
 	display: inline-block;
 	position: absolute;
 }
-#markets {
-	border-radius: 50%;
-	width: 300px;
-	height: 300px;
-	border: 1px solid white;
-	margin-left: 212px;
-	margin-top: 100px;
-	text-align: center;
-}
-#mechanic {
+#lunedaMechanic {
 	margin-top: 375px;
 	margin-left: 407px;
+	color: #2bb442;
 }
-#futureQuest {
+#danceHall {
 	margin-left: 95px;
+	color: #ff4386;
 }
 #weather {
-	margin-left: 435px;
-	margin-top: 30px;
+	margin-left: 425px;
+	color: #43b8ff;
 }
 #tikiHut {
 	margin-left: 450px;
@@ -83,10 +76,18 @@
 }
 #markets {
 	text-align: left;
+	color: #b05900;
+	border-radius: 50%;
+	width: 300px;
+	height: 300px;
+	border: 1px solid #ff9f28;
+	margin-left: 212px;
+	margin-top: 100px;
 }
 #marketCentre {
 	margin-top: 110px;
 	margin-left: 95px;
+	color: #ff9f28;
 }
 .theMarkets, .fruitStand {
 	display: none;
