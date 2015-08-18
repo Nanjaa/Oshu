@@ -5,14 +5,11 @@
 	margin-top: 150px;
 }
 /*hide the planet*/
-/*#tyrianneMap {
-	display: none;
-}*/
-/*planet details*/
-
-#map {
+#tyrianneMap {
 	display: none;
 }
+/*planet details*/
+
 #library {
 	color: #4e4bb4;
 	margin-left: 50px;
