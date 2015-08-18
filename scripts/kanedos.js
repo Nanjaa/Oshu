@@ -5,7 +5,7 @@ $(document).ready(function() {
 		$('#map').hide();
 		$('#kanedosMap').show();
 		if(planets.Kanedos.first == true) {
-			kanedos.play();
+			play('speech/kanedosIntro.mp3');
 			planets.Kanedos.first = false;
 		};
 	});

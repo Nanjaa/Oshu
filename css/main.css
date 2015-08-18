@@ -397,10 +397,13 @@ li {
 .bucketList, .inventoryItem {
 	list-style-type: none;
 }
-.tyrianneCity {
+#tyrianneMap {
 	display: none;
 }
-.kaprikaCity {
+/*#kaprikaMap {
+	display: none;
+}*/
+#map {
 	display: none;
 }
 .quest, .inventoryItem {
