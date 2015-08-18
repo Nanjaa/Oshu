@@ -38,41 +38,5 @@ $(document).ready(function() {
 		};
 	});
 
-	// var selected = planets.
-	// if(attr === 'yes') {
-	// 	if (colored) {
-	// 		$(this).css('color', 'white');
-	// 		colored = false;
-	// 	}
-	// 	else {
-	// 		$(this).css('color', 'originalcolor');
-	// 		colored = true;
-	// 	}
-	// }
-
-
-
-	// function hightlightplanettest() {
-	// 	for (var i = 0; i < planets.length; i++) {
-	// 		$(planets[i].id).css('color', planets[i].color);
-	// 	}
-	// };
-
-
-
-
-
-	// function highlighted() {
-	// 	var highlight = setInterval(function() {
-	// 		highlightPlanet();
-	// 		console.log('test');
-	// 	}, 1000);		
-	// }
-
-
-
-
-
-
 
 });
