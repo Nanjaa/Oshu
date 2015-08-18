@@ -1,0 +1,31 @@
+/*the planet on the map*/
+#Kanedos {
+	color: #ff9a00;
+	margin-left: 150px;
+	margin-top: 300px;
+}
+/*hide the planet*/
+#kanedosMap {
+	display: none;
+}
+/*planet details*/
+#kanedome {
+	margin-top: 175px;
+	margin-left: 300px;
+}
+#camelRental {
+	margin-top: 50px;
+	margin-left: 300px;
+}
+#kanedosJewelry {
+	margin-top: 150px;
+	margin-left: 100px;
+}
+#kanedosGas {
+	margin-top: 325px;
+	margin-left: 50px;
+}
+#bitchSlap {
+	margin-top: 425px;
+	margin-left: 375px;
+}

@@ -1,8 +1,5 @@
 /*WHAT'S DISPLAYING NOW*/
 
-#lunedaMap {
-	display: none;
-}
 body {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -82,31 +79,6 @@ pre {
 #gameConsole {
 	height: 750px;
 }
-#Luneda {
-	color: #c1e3da;
-	margin-left: 40px;
-	margin-top: 400px;
-}
-#Kanedos {
-	color: #ff9a00;
-	margin-left: 150px;
-	margin-top: 300px;
-}
-#Tyrianne {
-	color: #db1600;
-	margin-left: 200px;
-	margin-top: 150px;
-}
-#Kaprika {
-	color: #1c9600;
-	margin-left: 325px;
-	margin-top: 250px;
-}
-#AliNada {
-	color: #969696;
-	margin-left: 325px;
-	margin-top: 75px;
-}
 #shipStatus {
 	border: 1px solid black;
 	background-color: pink;
@@ -170,12 +142,6 @@ pre {
 .inventory {
 	float: left;
 }
-
-
-
-
-
-
 #planetName {
 	color: green;
 	font-size: 50px;
@@ -183,48 +149,8 @@ pre {
 	margin-left: 15px;
 	font-family: 'Orbitron', sans-serif;
 }
-
 #map {
 	height: 525px;
-}
-
-
-
-
-
-/*#lunedaMap {
-	display: none;
-}*/
-#electricSeas {
-	color: #00dfff;
-}
-#sand {
-	color: #ffe697;
-	margin-left: 50px;
-}
-.lunedaCity {
-	display: inline-block;
-	position: absolute;
-}
-#markets {
-	border-radius: 50%;
-	width: 300px;
-	height: 300px;
-	border: 1px solid white;
-	margin-left: 212px;
-	margin-top: 100px;
-	text-align: center;
-}
-#mechanic {
-	margin-top: 375px;
-	margin-left: 407px;
-}
-#futureQuest {
-	margin-left: 95px;
-}
-#weather {
-	margin-left: 435px;
-	margin-top: 30px;
 }
 .cityDetails {
 	display: none;
@@ -238,102 +164,6 @@ pre {
 	display: none;
 	cursor: pointer;
 }
-.lunedaInteract {
-	position: absolute;
-	width: 70%;
-	border: 1px solid #c1e3da;
-	padding: 5px;
-	height: 100px;
-	margin-top: 390px;
-	margin-left: 7%;
-	font-family: 'Share Tech Mono';
-	color: #c1e3da;
-}
-.lunedaOptions {
-	width: 30%;
-	padding: 5px;
-	border: 1px solid #c1e3da;
-	height: auto;
-	margin-left: auto;
-	margin-right: auto;
-	float: bottom;
-}
-#tikiHut {
-	margin-left: 450px;
-	margin-top: 80px;
-	color: #f6b045;
-}
-#equipment {
-	margin-left: 375px;
-	margin-top: 200px;
-	color: #a45119;
-}
-#closerSeas {
-	color: #00dfff;
-	margin-top: 60px;
-}
-.beachDetails {
-	cursor: pointer;
-}
-.options {
-	cursor: pointer;
-}
-#markets {
-	text-align: left;
-}
-#marketCentre {
-	margin-top: 110px;
-	margin-left: 95px;
-}
-.theMarkets, .fruitStand {
-	display: none;
-}
-#fruitStand {
-	margin-top: 100px;
-	margin-left: 50px;
-}
-#souvenirStand {
-	margin-top: 225px;
-	margin-left: 225px;
-}
-#clothesStand {
-	margin-top: 100px;
-	margin-left: 400px;
-}
-#fruitMan, #clothesGirl, #souvenirGirl {
-	margin-top: 150px;
-	margin-left: 2%;
-}
-#fruitDisplay, #clothesDisplay, #souvenirDisplay {
-	margin-top: 50px;
-	margin-left: 10%;
-}
-#electange {
-	margin-top: 175px;
-	margin-left: 22%;
-}
-#ganifruit {
-	margin-top: 175px;
-	margin-left: 47%;
-}
-#dresses {
-	margin-top: 175px;
-	margin-left: 23%;
-}
-#snowglobes {
-	margin-top: 75px;
-	margin-left: 3%
-}
-#bobbleheads {
-	margin-top: 165px;
-	margin-left: 25%
-}
-#postcards {
-	margin-top: 120px;
-	margin-left: 65%
-}
-
-
 #myShip {
 	cursor: pointer;
 	border: 1px solid black;
@@ -345,29 +175,6 @@ li {
 	border: 1px solid black;
 	margin-left: 10px;
 	padding-left: 5px;
-}
-#kanedosMap {
-	display: none;
-}
-#kanedome {
-	margin-top: 175px;
-	margin-left: 300px;
-}
-#camelRental {
-	margin-top: 50px;
-	margin-left: 300px;
-}
-#kanedosJewelry {
-	margin-top: 150px;
-	margin-left: 100px;
-}
-#kanedosGas {
-	margin-top: 325px;
-	margin-left: 50px;
-}
-#bitchSlap {
-	margin-top: 425px;
-	margin-left: 375px;
 }
 #miloInteraction {
 	font-family: "Share Tech Mono";
@@ -396,15 +203,6 @@ li {
 }
 .bucketList, .inventoryItem {
 	list-style-type: none;
-}
-#tyrianneMap {
-	display: none;
-}
-/*#kaprikaMap {
-	display: none;
-}*/
-#map {
-	display: none;
 }
 .quest, .inventoryItem {
 	background-color: white;
