@@ -22,7 +22,7 @@ $(document).ready(function() {
 // \\											    //
 //  \\											   //
 //   \\___________________________________________//
-	var status = 0;
+	var status = 1;
 	
 //    _____________________________________________
 //   //											  \\
@@ -266,7 +266,19 @@ $(document).ready(function() {
 //  \\											   //
 //   \\___________________________________________//
 
+	// Let's say MILO only has one thing to say, not a full conversation...
 
+	function quickMilo(text, audio, map, timeout) {
+		$('#miloResponse').hide();
+		$('#miloSays').writeText(text);
+		play(audio);
+		setTimeout(function() {
+			$('#miloSays').hide();
+			$(map).show();
+		}, timeout);
+	}
+
+	// But more often than not, there's much more to be said. 
 	// First, the function that will be used on all timed MILO events
 	function timedMilo(event, timer) {
 		var eventWait = setInterval(function() {
@@ -354,10 +366,18 @@ $(document).ready(function() {
 		}, 7000);
 	}
 
+	// another way to conclude the interaction is to ignore him.
+
+	function ignore(map) {
+		$('#miloResponse').hide();
+		$('#miloSays').hide();
+		$(map).show();
+	}
+
     // _________________________________________//
 	//											//
 	//											//
-	//		PLANETARY INTRODUCTIONS		//
+	//         PLANETARY  INTRODUCTIONS         //
 	//											//
 	//__________________________________________//
 
@@ -370,19 +390,46 @@ $(document).ready(function() {
 				var destination = $(this).attr('id');
 				$('#map').hide();
 				switch(destination) {
+
 					case 'Luneda':
-						$('#miloSays').text('Milo introduces Luneda');
-						concludeInteraction();
+						quickMilo(text.lunedaIntro, 'speech/lunedaIntro.mp3', '#lunedaMap', 28000);
 						break;
+
 					case 'Kanedos':
-						$('#miloSays').text('Milo introduces Kanedos');
+						var kanedosTimeline = 'kanedosIntro';
+						miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
+						$('#good').click(function() {
+							if(status >= 1) {
+								quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap', 4000);
+							}
+							else {
+								quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap', 7000);
+							}
+						});
+						$('#bad').click(function() {
+							if(status >= 0) {
+								quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3', '#kanedosMap', 12000); 
+							}
+							else if(status > -5) {
+								ignore('#kanedosMap');
+							}
+							else {
+								quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap', 12000);
+							}
+						});
+						$('#neut').click(function() {
+							ignore('#kanedosMap');
+						});
 						break;
+
 					case 'Tyrianne':
 						$('#miloSays').text('Milo introduces Tyrianne');
 						break;
+
 					case 'Kaprika':
 						$('#miloSays').text('Milo introduces Kaprika');
 						break;
+						
 					case 'AliNada':
 						$('#miloSays').text('Milo introduces AliNada');
 						break;

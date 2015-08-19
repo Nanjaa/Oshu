@@ -22,7 +22,7 @@ $(document).ready(function() {
 	$('.planet').click(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
 		if(($('#minutes').text() - minutesLost) <= 0) {
-			error.play();
+			play('soundEffects/error.wav')
 		}
 		else {
 			lifeEvent(minutesLost);
