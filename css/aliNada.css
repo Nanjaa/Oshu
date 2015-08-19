@@ -5,4 +5,38 @@
 	margin-top: 75px;
 }
 /*hide the planet*/
+#aliNadaMap {
+	display: none;
+}
 /*planet details*/
+
+#capitol {
+	color: #cccccc;
+	margin-left: 50px;
+	margin-top: 100px;
+}
+#stainedGlass {
+	color: #68c6ff;
+	margin-left: 113px;
+	margin-top: 145px;
+}
+#cemetery {
+	color: #009603;
+	margin-left: 300px;
+	margin-top: 25px;
+}
+#tombstones {
+	color: #838383;
+	margin-left: 336px;
+	margin-top: 55px;
+}
+#aliNadaMechanic {
+	color: #f2a32a;
+	margin-left: 350px;
+	margin-top: 300px;
+}
+#aliNadaGas {
+	color: #8fc78a;
+	margin-left: 45px;
+	margin-top: 400px;
+}
