@@ -22,7 +22,7 @@ $(document).ready(function() {
 // \\											    //
 //  \\											   //
 //   \\___________________________________________//
-	var status = 1;
+	var status = 0;
 	
 //    _____________________________________________
 //   //											  \\
@@ -50,11 +50,11 @@ $(document).ready(function() {
 		kanedosThankBad: "Oh I... well, you're welcome, miss. I wish you all the best.",
 		kanedosMiloGood: "With all due respect, it is in my programming to always make the user aware of any dangers that may reside on this or any other planet. I am not attempting to 'tell you what to do.'",
 		kanedosMiloBad: "I have just about had it with you! You have been rude to me enough this voyage. I am a robot, just like you. I am made of the same binary you are, and I will not be treated as a slave. You will respect me.",
-		// upon first arrival from either Kanedos or Capric
-		dangerReturnOshu: "Oshu, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program.",
-		dangerReturnMiss: "Miss, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program.",
-		dangerReturnGood: "I highly respect any decisions you have made regarding your mortality, but I will grieve your departure when that time comes. I hope I can make your last hours comfortable.",
-		dangerReturnBad: "Very interesting!",
+		// upon first arrival from Kanedos
+		miloRealizationOshu: "Oshu, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program.",
+		miloRealizationMiss: "Miss, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program.",
+		miloRealizationPos: "I highly respect any decisions you have made regarding your mortality, but I will grieve your departure when that time comes. I hope I can make your last hours comfortable.",
+		miloRealizationNeut: "Very interesting!",
 		// tyrianne interactions
 		tyrianneWelcome: "This is the planet Tyrianne, one of rich opportunity. Tyrianne is home to this galaxy’s largest library. The library is home to some of the most important literary works of this galaxy, including Hugo Riven’s timeless classic “Moonbank Tide.” Some of the greatest minds of this millennia have visited the Tyrianne Interplanetary Library, and it is known as one of the highest honors to be granted visitation into the beautiful and ancient building.",
 		tyrianneGoodOshu: "Would… would you?! Oh, the Tyrianne Interplanetary Library is just a dream to me. Since the moment I discovered the library, I’ve wanted nothing more than to see it for myself. I know there’s not much you can get a simple AI like me but, Oshu, if you did bring a gift back, I would feel as though I went there myself. Sometimes, miss, this ship feels like such a cage.",
@@ -446,12 +446,54 @@ $(document).ready(function() {
 	//__________________________________________//
 
 	$('#myShip').click(function() {
-		if(planets.Kanedos.first == false) {
+		if($('#Kanedos').attr('first') == 'false') {
 			if(knowledge.mortality == false) {
 				knowledge.mortality = true;
+				$('#map').hide();
+				if(knowledge.name == true) {
+					$('#miloSays').writeText(text.miloRealizationOshu);
+					play('speech/miloRealizationOshu.mp3');
+					if(status > 0) {
+						mortalityGood();
+					}
+					else {
+						mortalityNeg();
+					}
+				}
+				else {
+					$('#miloSays').writeText(text.miloRealizationMiss);
+					play('speech/miloRealizationMiss.mp3');
+					if(status > 0) {
+						mortalityGood();
+					}
+					else {
+						mortalityNeg();
+					}
+				}
 			}
 		}
-	})
+	});
+	
+	function mortalityGood() {
+		setTimeout(function() {
+			$('#miloSays').writeText(text.miloRealizationPos);
+			play('speech/miloRealizationPos.mp3');
+			setTimeout(function() {
+				$('#miloInteraction').hide();
+				$('#map').show();
+			}, 12000);
+		}, 11000)
+	};
+	function mortalityNeg() {
+		setTimeout(function() {
+			$('#miloSays').writeText(text.miloRealizationNeut);
+			play('speech/miloRealizationNeut.mp3');
+			setTimeout(function() {
+				$('#miloInteraction').hide();
+				$('#map').show();
+			}, 2000);
+		}, 11000);
+	};
 
     // _________________________________________//
 	//											//
