@@ -296,11 +296,11 @@ $(document).ready(function() {
 		presentOptions(responseOne, responseTwo, responseThree);
 		if(knowledge.name == false) {
 			$('#miloSays').writeText(missText);
-			missAudio.play();			
+			play(missAudio);			
 		}
 		else {
 			$('#miloSays').writeText(oshuText);
-			oshuAudio.play();			
+			play(oshuAudio);
 		}
 	}
 
@@ -308,7 +308,7 @@ $(document).ready(function() {
 
 	function miloResponse(miloText, miloAudio, responseOne, responseTwo, responseThree) {
 		$('#miloSays').writeText(miloText);
-		miloAudio.play();
+		play(miloAudio)
 		presentOptions(responseOne, responseTwo, responseThree);
 	}
 
@@ -402,62 +402,62 @@ $(document).ready(function() {
 
 	function fifty() {
 		$('#map').hide();
-		missVsOshu(text.novaIntroMiss, novaIntroMiss, text.novaIntroOshu, novaIntroOshu, response.novaGood, response.novaBad, response.novaNeut)
+		missVsOshu(text.novaIntroMiss, 'speech/novaIntroMiss', text.novaIntroOshu, 'speech/novaIntroOshu.mp3', response.novaGood, response.novaBad, response.novaNeut)
 		// What is it?
 		$('#good').click(function() {
 			if(fiftyTimeline == 'novaIntro') {
-				miloResponse(text.novaGood, novaGood, response.novaGoodGood, response.novaGoodBad, response.ignore);
+				miloResponse(text.novaGood, 'speech/novaGood.mp3', response.novaGoodGood, response.novaGoodBad, response.ignore);
 				fiftyTimeline = 'What is it';
 			}
 			else if(fiftyTimeline == 'What is it') {
-				missVsOshu(text.novaGoodGoodMiss, novaGoodGoodMiss, text.novaGoodGoodOshu, novaGoodGoodOshu, response.novaGoodGoodGood, response.novaGoodGoodBad, response.ignore);
+				missVsOshu(text.novaGoodGoodMiss, 'speech/novaGoodGoodMiss.mp3', text.novaGoodGoodOshu, 'speech/novaGoodGoodOshu.mp3', response.novaGoodGoodGood, response.novaGoodGoodBad, response.ignore);
 				fiftyTimeline = 'A what? Let me see.';
 			}
 			else if(fiftyTimeline == 'I dont have time for this') {
-				miloResponse(text.novaGood, novaGood, response.novaGoodGood, response.novaGoodBad, response.ignore);
+				miloResponse(text.novaGood, 'speech/novaGood.mp3', response.novaGoodGood, response.novaGoodBad, response.ignore);
 				fiftyTimeline = 'What is it';
 			}
 			else if(fiftyTimeline == 'Why would I care') {
 				if(knowledge.mortality == true) {
-					missVsOshu(text.novaBadGoodKnowsMiss, novaBadGoodKnowsOshu, text.novaBadGoodKnowsMiss, novaBadGoodKnowsMiss, '', '', '')
+					missVsOshu(text.novaBadGoodKnowsMiss, 'speech/novaBadGoodKnowsOshu.mp3', text.novaBadGoodKnowsMiss, 'novaBadGoodKnowsMiss.mp3', '', '', '')
 					concludeInteraction();
 				}
 				else {
-					miloResponse(text.novaBadGood, novaBadGood, '','','');
+					miloResponse(text.novaBadGood, 'speech/novaBadGood.mp3', '','','');
 					concludeInteraction();
 				}
 			}
 			else if('A what? Let me see.') {
 				$('#miloSays').writeText(text.novaGoodGoodGood); 
-				novaGoodGoodGood.play();
+				play('speech/novaGoodGoodGood.mp3');
 				concludeInteraction()
 			};
 		});
 		$('#bad').click(function() {
 			if(fiftyTimeline == 'novaIntro') {
-				miloResponse(text.novaBad, novaBad, response.novaBadGood, response.novaBadBad, response.ignore);
+				miloResponse(text.novaBad, 'speech/novaBad.mp3', response.novaBadGood, response.novaBadBad, response.ignore);
 				fiftyTimeline = 'Why would I care';
 			}
 			else if(fiftyTimeline == 'Why would I care') {
-				miloResponse(text.novaBadBad, novaBadBad, '','','');
+				miloResponse(text.novaBadBad, 'speech/novaBadBad.mp3', '','','');
 				concludeInteraction();	
 			}
 			else if(fiftyTimeline == 'What is it') {
-				miloResponse(text.novaGoodBad, novaGoodBad, '','','');
+				miloResponse(text.novaGoodBad, 'speech/novaGoodBad.mp3', '','','');
 				concludeInteraction();
 			}
 			else if(fiftyTimeline == 'A what? Let me see.') {
-				miloResponse(text.novaGoodGoodBad, novaGoodGoodBad, '','','');
+				miloResponse(text.novaGoodGoodBad, 'speech/novaGoodGoodBad.mp3', '','','');
 				concludeInteraction();
 			}
 			else if(fiftyTimeline == 'I dont have time for this') {
-				miloResponse(text.novaNeutBad, novaNeutBad, '','','');
+				miloResponse(text.novaNeutBad, 'speech/novaNeutBad.mp3', '','','');
 				concludeInteraction();
 			}
 		});
 		$('#neut').click(function() {
 			if(fiftyTimeline == 'novaIntro') {
-				missVsOshu(text.novaNeutMiss, novaNeutMiss, text.novaNeutOshu, novaNeutOshu, response.novaNeutGood, response.novaNeutBad, response.ignore);
+				missVsOshu(text.novaNeutMiss, 'speech/novaNeutMiss.mp3', text.novaNeutOshu, 'speech/novaNeutOshu.mp3', response.novaNeutGood, response.novaNeutBad, response.ignore);
 				fiftyTimeline = 'I dont have time for this';
 			}
 			else {
