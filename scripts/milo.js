@@ -357,6 +357,43 @@ $(document).ready(function() {
     // _________________________________________//
 	//											//
 	//											//
+	//		PLANETARY INTRODUCTIONS		//
+	//											//
+	//__________________________________________//
+
+	// lose time as you travel to another planet
+	$('.planet').click(function() {
+		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
+		if(($('#minutes').text() - minutesLost) > 0) {
+			if(planets.Luneda.first == true) {
+				planets.Luneda.first = false;
+				var destination = $(this).attr('id');
+				$('#map').hide();
+				switch(destination) {
+					case 'Luneda':
+						$('#miloSays').text('Milo introduces Luneda');
+						concludeInteraction();
+						break;
+					case 'Kanedos':
+						$('#miloSays').text('Milo introduces Kanedos');
+						break;
+					case 'Tyrianne':
+						$('#miloSays').text('Milo introduces Tyrianne');
+						break;
+					case 'Kaprika':
+						$('#miloSays').text('Milo introduces Kaprika');
+						break;
+					case 'AliNada':
+						$('#miloSays').text('Milo introduces AliNada');
+						break;
+				}
+			};
+		};
+	});
+
+    // _________________________________________//
+	//											//
+	//											//
 	//		FIFTY PERCENT -- THE NOVATACEA		//
 	//											//
 	//__________________________________________//

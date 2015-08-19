@@ -26,14 +26,14 @@ $(document).ready(function() {
 
 
 	// brings you to the planet from the system map
-	$('#Luneda').click(function() {
-		$('#map').hide();
-		$('#lunedaMap').show();
-		if(planets.Luneda.first == true) {
-			play('speech/lunedaIntro.mp3');
-			planets.Luneda.first = false;
-		};
-	});
+	// $('#Luneda').click(function() {
+	// 	$('#map').hide();
+	// 	$('#lunedaMap').show();
+	// 	if(planets.Luneda.first == true) {
+	// 		play('speech/lunedaIntro.mp3');
+	// 		planets.Luneda.first = false;
+	// 	};
+	// });
 
 	// brings up the common divs between all the city details
 	$('.lunedaCity').click(function() {

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	// anytime you click the spaceship, you return to the maps page
-	$('#returnToShip').click(function() {
+	$('#myShip').click(function() {
 		$('.visitPlanet').hide();
 		$('#map').show();
 		Oshu.onBoard = true;
@@ -28,13 +28,27 @@ $(document).ready(function() {
 			lifeEvent(minutesLost);
 			myLocation.current = $(this).attr('distance');
 			Oshu.onBoard = false;
-		};
-	});
-
-	$('.planet').click(function() {
-		for (var i = 0; i < planets.length; i++) {
-			// console.log(planets.i.color)
-			console.log('hello');
+			if(planets.Luneda.first !== true) {
+				var destination = $(this).attr('id');
+				$('#map').hide();
+				switch(destination) {
+					case 'Luneda':
+						$('#lunedaMap').show();
+						break;
+					case 'Kanedos':
+						$('#kanedosMap').show();
+						break;
+					case 'Tyrianne':
+						$('#tyrianneMap').show();
+						break;
+					case 'Kaprika':
+						$('#kaprikaMap').show();
+						break;
+					case 'AliNada':
+						$('#aliNadaMap').show();
+						break;
+				}
+			};
 		};
 	});
 
