@@ -62,39 +62,34 @@ var planets = {
 		selected: false,
 		distance: 1,
 		id: '#Luneda',
-		name: 'Luneda',
-		first: true
+		name: 'Luneda'
 	},
 	Kanedos: {
 		color: '#ff9a00',
 		selected: false,
 		distance: 3,
 		id: '#Kanedos',
-		name: 'Kanedos',
-		first: true
+		name: 'Kanedos'
 	},
 	Tyrianne: {
 		color: '#db1600',
 		selected: false,
 		distance: 7,
 		id: '#Tyrianne',
-		name: 'Tyrianne',
-		first: true
+		name: 'Tyrianne'
 	},
 	Kaprika: {
 		color: '#1c9600',
 		selected: false,
 		distance: 5,
 		id: '#Kaprika',
-		name: 'Kaprika',
-		first: true
+		name: 'Kaprika'
 	},
 	AliNada: {
 		color: '#969696',
 		selected: false,
 		distance: 9,
 		id: '#AliNada',
-		name: 'AliNada',
-		first: true
+		name: 'AliNada'
 	}
 };

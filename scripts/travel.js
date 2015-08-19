@@ -28,9 +28,9 @@ $(document).ready(function() {
 			lifeEvent(minutesLost);
 			myLocation.current = $(this).attr('distance');
 			Oshu.onBoard = false;
-			if(planets.Luneda.first !== true) {
-				var destination = $(this).attr('id');
+			if($(this).attr('first') == 'false') {
 				$('#map').hide();
+				var destination = $(this).attr('id');				
 				switch(destination) {
 					case 'Luneda':
 						$('#lunedaMap').show();
@@ -53,4 +53,4 @@ $(document).ready(function() {
 	});
 
 
-});
+});	

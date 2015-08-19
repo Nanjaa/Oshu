@@ -385,9 +385,9 @@ $(document).ready(function() {
 	$('.planet').click(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
 		if(($('#minutes').text() - minutesLost) > 0) {
-			if(planets.Luneda.first == true) {
-				planets.Luneda.first = false;
-				var destination = $(this).attr('id');
+			var destination = $(this).attr('id');	
+			if($(this).attr('first') == 'true') {
+				$(this).attr('first', 'false');
 				$('#map').hide();
 				switch(destination) {
 
@@ -429,7 +429,7 @@ $(document).ready(function() {
 					case 'Kaprika':
 						$('#miloSays').text('Milo introduces Kaprika');
 						break;
-						
+
 					case 'AliNada':
 						$('#miloSays').text('Milo introduces AliNada');
 						break;
@@ -437,6 +437,21 @@ $(document).ready(function() {
 			};
 		};
 	});
+
+    // _________________________________________//
+	//											//
+	//											//
+	//        MILO DISCOVERS YOUR SECRET        //
+	//											//
+	//__________________________________________//
+
+	$('#myShip').click(function() {
+		if(planets.Kanedos.first == false) {
+			if(knowledge.mortality == false) {
+				knowledge.mortality = true;
+			}
+		}
+	})
 
     // _________________________________________//
 	//											//
