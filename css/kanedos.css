@@ -9,23 +9,29 @@
 	display: none;
 }
 /*planet details*/
+
 #kanedome {
 	margin-top: 175px;
 	margin-left: 300px;
+	color: #ee0000;
 }
 #camelRental {
 	margin-top: 50px;
 	margin-left: 300px;
+	color: #f6be10;
 }
 #kanedosJewelry {
 	margin-top: 150px;
 	margin-left: 100px;
+	color: #f031a5;
 }
 #kanedosGas {
 	margin-top: 325px;
 	margin-left: 50px;
+	color: #60b259;
 }
 #bitchSlap {
 	margin-top: 425px;
 	margin-left: 375px;
+	color: #63a0d8;
 }
