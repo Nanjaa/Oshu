@@ -269,11 +269,12 @@ $(document).ready(function() {
 	// Let's say MILO only has one thing to say, not a full conversation...
 
 	function quickMilo(text, audio, map, timeout) {
+		$('#miloInteraction').show();
 		$('#miloResponse').hide();
 		$('#miloSays').writeText(text);
 		play(audio);
 		setTimeout(function() {
-			$('#miloSays').hide();
+			$('#miloInteraction').hide();
 			$(map).show();
 		}, timeout);
 	}
@@ -286,6 +287,7 @@ $(document).ready(function() {
 				clearInterval(eventWait);
 				// checks to see if Oshu is on board. If not, system will wait until she is
 				if(Oshu.onBoard == true) {
+					$('#miloInteraction').show();
 					event();
 				}
 				else {
@@ -293,6 +295,7 @@ $(document).ready(function() {
 					var oshuNotBoarded = setInterval(function() {
 						if(Oshu.onBoard == true) {
 							clearInterval(oshuNotBoarded);
+							$('#miloInteraction').show();
 							event();
 						}
 					}, 1);
@@ -307,10 +310,12 @@ $(document).ready(function() {
 	function missVsOshu(missText, missAudio, oshuText, oshuAudio, responseOne, responseTwo, responseThree) {
 		presentOptions(responseOne, responseTwo, responseThree);
 		if(knowledge.name == false) {
+			$('#miloInteraction').show();
 			$('#miloSays').writeText(missText);
 			play(missAudio);			
 		}
 		else {
+			$('#miloInteraction').show();
 			$('#miloSays').writeText(oshuText);
 			play(oshuAudio);
 		}
@@ -370,7 +375,7 @@ $(document).ready(function() {
 
 	function ignore(map) {
 		$('#miloResponse').hide();
-		$('#miloSays').hide();
+		$('#miloInteraction').hide();
 		$(map).show();
 	}
 
@@ -450,6 +455,7 @@ $(document).ready(function() {
 			if(knowledge.mortality == false) {
 				knowledge.mortality = true;
 				$('#map').hide();
+				$('#miloInteraction').show();
 				if(knowledge.name == true) {
 					$('#miloSays').writeText(text.miloRealizationOshu);
 					play('speech/miloRealizationOshu.mp3');
