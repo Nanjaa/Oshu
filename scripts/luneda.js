@@ -17,11 +17,11 @@ $(document).ready(function() {
 
 
 	// $(this).click(function() {
-	// 	$('.lunedaInteract').text('');
+	// 	$('.planetInteraction').text('');
 	// 	console.log('happy!');
 	// });
 
-	// resets the .lunedaInteract box
+	// resets the .planetInteraction box
 
 
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
 	$('.lunedaCity').click(function() {
 		$('.lunedaCity').hide();
 		$('.return').show();
-		$('.lunedaInteract').show();
+		$('.planetInteraction').show();
 	});
 
 	// takes you back to the city map from any city details
@@ -64,7 +64,7 @@ $(document).ready(function() {
 	// brings you to the sea city detail
 	$('.visitSea').click(function() {
 		$('#beach').show();
-		$('.lunedaInteract').writeText(beachText.welcome);
+		$('.planetInteraction').writeText(beachText.welcome);
 	});
 
 	//************************ interact with the equipment shack ************************
@@ -74,15 +74,15 @@ $(document).ready(function() {
 
 	function rentalActivate() {
 		if(beachText.inUse == true) {
-			$('.lunedaInteract').writeText(beachText.rentalInUse);
+			$('.planetInteraction').writeText(beachText.rentalInUse);
 		}
 		else {
 			// plays the sound effect of the man talking
-			if($('.lunedaInteract').text().length < beachText.rentalWelcome.length) {
+			if($('.planetInteraction').text().length < beachText.rentalWelcome.length) {
 				maleVoice();
 			}
 			var text1 = beachText.rentalWelcome;
-			$('.lunedaInteract').writeText(text1);
+			$('.planetInteraction').writeText(text1);
 			var text2 = beachText.rentalOptions;
 			var price = 50;
 			var yes = beachText.rentalComplete;
@@ -91,7 +91,7 @@ $(document).ready(function() {
 			displayOptions(text1, text2, price, yes, no, needMore);
 			var stop = false;
 			var boughtSuit = setInterval(function() {
-				if($('.lunedaInteract').text() == yes && stop == false) {
+				if($('.planetInteraction').text() == yes && stop == false) {
 				// adds item to inventory if not already there
 					$('#inventory').append('<div class="inventory"><p>ElectroSuit</p>');
 					Oshu.items.electroSuit = true;
@@ -100,7 +100,7 @@ $(document).ready(function() {
 			}, 1)
 		};
 	};
-// $('.lunedaInteract').writeText(beachText.rentalComplete);
+// $('.planetInteraction').writeText(beachText.rentalComplete);
 
 	//************************ interact with the drinks stand ************************
 
@@ -111,10 +111,10 @@ $(document).ready(function() {
 	$('#closerSeas').click(function() {
 		$('#beach').hide();
 		if(Oshu.items.electroSuit) {
-			$('.lunedaInteract').writeText(beachText.seaLife);
+			$('.planetInteraction').writeText(beachText.seaLife);
 		}
 		else {
-			$('.lunedaInteract').writeText(beachText.seaDeath);
+			$('.planetInteraction').writeText(beachText.seaDeath);
 		}
 	})
 
@@ -148,32 +148,32 @@ $(document).ready(function() {
 		$('.marketStands').hide();
 		$('.theMarkets').show();
 		$('.marketDetails').show();
-		$('.lunedaInteract').writeText(marketText.marketWelcome);
+		$('.planetInteraction').writeText(marketText.marketWelcome);
 	});
 
 	$('#fruitStand').click(function() {
 		$('.marketDetails').hide();
 		$('.fruitStand').show();
-		$('.lunedaInteract').writeText(marketText.fruitWelcome);
+		$('.planetInteraction').writeText(marketText.fruitWelcome);
 		maleVoice();
 	});
 
 	$('#clothesStand').click(function() {
 		$('.marketDetails').hide();
 		$('.clothesStand').show();
-		$('.lunedaInteract').writeText(marketText.clothesWelcome);
+		$('.planetInteraction').writeText(marketText.clothesWelcome);
 	});
 	$('#souvenirStand').click(function() {
 		$('.marketDetails').hide();
 		$('.souvenirStand').show();
-		$('.lunedaInteract').writeText(marketText.souvenirWelcome);
+		$('.planetInteraction').writeText(marketText.souvenirWelcome);
 	});
 
 	var yes = marketText.yes;
 	var no = marketText.no;
 
 	$('#electange').click(function() {
-		$('.lunedaInteract').writeText(marketText.electange);
+		$('.planetInteraction').writeText(marketText.electange);
 		text1 = marketText.electange;
 		text2 = marketText.electangeOptions;
 		var price = 25;
@@ -181,7 +181,7 @@ $(document).ready(function() {
 		displayOptions(text1, text2, price, yes, no, needMore);
 		var stop = false;
 		var boughtElectange = setInterval(function() {
-			if($('.lunedaInteract').text() == yes && stop == false) {
+			if($('.planetInteraction').text() == yes && stop == false) {
 				// adds item to inventory if not already there
 				if(Oshu.items.electange == 0) {
 					$('#inventory').append('<div class="inventory"><p>Electange: <span class="electangeAmt"></span></p>');
@@ -198,7 +198,7 @@ $(document).ready(function() {
 
 
 	$('#ganifruit').click(function() {
-		$('.lunedaInteract').writeText(marketText.ganifruit);
+		$('.planetInteraction').writeText(marketText.ganifruit);
 		var text1 = marketText.ganifruit;
 		var text2 = marketText.ganifruitOptions;
 		var price = 10;
@@ -206,7 +206,7 @@ $(document).ready(function() {
 		displayOptions(text1, text2, price, yes, no, needMore);
 		var stop = false;
 		var boughtGanifruit = setInterval(function() {
-			if($('.lunedaInteract').text() == yes && stop == false) {
+			if($('.planetInteraction').text() == yes && stop == false) {
 				// adds item to inventory if not already there
 				if(Oshu.items.ganifruit == 0) {
 					$('#inventory').append('<div class="inventory"><p>Ganifruit: <span class="ganifruitAmt"></span></p>');
