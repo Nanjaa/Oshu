@@ -142,3 +142,34 @@ function maleVoice() {
 function femVoice() {
 	play('soundEffects/femVoice.wav');
 }
+
+// ------------------------------------------------------
+// 	CHANGE THE COLOR OF THE INTERACTION BASED ON LOCATION
+// ------------------------------------------------------
+
+$('.planet').click(function() {
+	var destination = $(this).attr('id');
+	switch(destination) {
+		case 'Luneda':
+			$('.planetInteraction').css('color', '#00bece');
+			$('.planetInteraction').css('border', '1px solid #00bece');
+			break;
+		case 'Kanedos':
+			$('.planetInteraction').css('color', '#ff4d00');
+			$('.planetInteraction').css('border', '1px solid #ff4d00');
+			break;
+		case 'Tyrianne':
+			$('.planetInteraction').css('color', '#8f46dd');
+			$('.planetInteraction').css('border', '1px solid #8f46dd');
+			break;
+		case 'Kaprika':
+			$('.planetInteraction').css('color', '#00b844');
+			$('.planetInteraction').css('border', '1px solid #00b844');
+			break;
+		case 'AliNada':
+			$('.planetInteraction').css('color', '#e32f2f');
+			$('.planetInteraction').css('border', '1px solid #e32f2f');
+			break;
+		// case 'Kanedos':
+	}
+})

@@ -227,11 +227,9 @@ h1 {
 .planetInteraction {
 	position: absolute;
 	width: 540px;
-	border: 1px solid #c1e3da;
 	padding: 5px;
 	height: 100px;
 	margin-top: 390px;
 	margin-left: 25px;
 	font-family: 'Share Tech Mono';
-	color: #c1e3da;
 }

@@ -387,75 +387,75 @@ $(document).ready(function() {
 	//__________________________________________//
 
 	// lose time as you travel to another planet
-	$('.planet').click(function() {
-		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
-		if(($('#minutes').text() - minutesLost) > 0) {
-			var destination = $(this).attr('id');	
-			if($(this).attr('first') == 'true') {
-				$(this).attr('first', 'false');
-				$('#map').hide();
-				switch(destination) {
+	// $('.planet').click(function() {
+	// 	var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
+	// 	if(($('#minutes').text() - minutesLost) > 0) {
+	// 		var destination = $(this).attr('id');	
+	// 		if($(this).attr('first') == 'true') {
+	// 			$(this).attr('first', 'false');
+	// 			$('#map').hide();
+	// 			switch(destination) {
 
-					case 'Luneda':
-						quickMilo(text.lunedaIntro, 'speech/lunedaIntro.mp3', '#lunedaMap', 28000);
-						break;
+	// 				case 'Luneda':
+	// 					quickMilo(text.lunedaIntro, 'speech/lunedaIntro.mp3', '#lunedaMap', 28000);
+	// 					break;
 
-					case 'Kanedos':
-						miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
-						$('#good').click(function() {
-							if(status >= 1) {
-								quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap', 4000);
-							}
-							else {
-								quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap', 7000);
-							}
-						});
-						$('#bad').click(function() {
-							if(status >= 0) {
-								quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3', '#kanedosMap', 12000); 
-							}
-							else if(status > -5) {
-								ignore('#kanedosMap');
-							}
-							else {
-								quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap', 12000);
-							}
-						});
-						$('#neut').click(function() {
-							ignore('#kanedosMap');
-						});
-						break;
+	// 				case 'Kanedos':
+	// 					miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
+	// 					$('#good').click(function() {
+	// 						if(status >= 1) {
+	// 							quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap', 4000);
+	// 						}
+	// 						else {
+	// 							quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap', 7000);
+	// 						}
+	// 					});
+	// 					$('#bad').click(function() {
+	// 						if(status >= 0) {
+	// 							quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3', '#kanedosMap', 12000); 
+	// 						}
+	// 						else if(status > -5) {
+	// 							ignore('#kanedosMap');
+	// 						}
+	// 						else {
+	// 							quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap', 12000);
+	// 						}
+	// 					});
+	// 					$('#neut').click(function() {
+	// 						ignore('#kanedosMap');
+	// 					});
+	// 					break;
 
-					case 'Tyrianne':
-						miloResponse(text.tyrianneIntro, 'speech/tyrianneIntro.mp3', response.tyrianneGood, response.tyrianneBad, response.ignore);
-						var tyrianneTimeline = 'tyrianneIntro';
-						$('#good').click(function() {
-							if(tyrianneTimeline == 'tyrianneIntro') {
-								missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
-								concludeInteraction();
-							}
-						})
-						$('#bad').click(function() {
-							miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneNeut, response.ignore);
-						})
-						$('#neut').click(function() {
-							if(tyrianneTimeline == 'tyrianneIntro') {
-								ignore('#tyrianneMap');
-							}
-						})
-						break;
+	// 				case 'Tyrianne':
+	// 					miloResponse(text.tyrianneIntro, 'speech/tyrianneIntro.mp3', response.tyrianneGood, response.tyrianneBad, response.ignore);
+	// 					var tyrianneTimeline = 'tyrianneIntro';
+	// 					$('#good').click(function() {
+	// 						if(tyrianneTimeline == 'tyrianneIntro') {
+	// 							missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
+	// 							concludeInteraction();
+	// 						}
+	// 					})
+	// 					$('#bad').click(function() {
+	// 						miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneNeut, response.ignore);
+	// 					})
+	// 					$('#neut').click(function() {
+	// 						if(tyrianneTimeline == 'tyrianneIntro') {
+	// 							ignore('#tyrianneMap');
+	// 						}
+	// 					})
+	// 					break;
 
-					case 'Kaprika':
-						$('#miloSays').text('Milo introduces Kaprika');
-						break;
+	// 				case 'Kaprika':
+	// 					$('#miloSays').text('Milo introduces Kaprika');
+	// 					break;
 
-					case 'AliNada':
-						$('#miloSays').text('Milo introduces AliNada');
-						break;
-				}
-			};
-		};
-	});
+	// 				case 'AliNada':
+	// 					$('#miloSays').text('Milo introduces AliNada');
+	// 					break;
+	// 			}
+	// 		};
+	// 	};
+	// });
 
     // _________________________________________//
 	//											//
