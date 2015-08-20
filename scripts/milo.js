@@ -56,13 +56,12 @@ $(document).ready(function() {
 		miloRealizationPos: "I highly respect any decisions you have made regarding your mortality, but I will grieve your departure when that time comes. I hope I can make your last hours comfortable.",
 		miloRealizationNeut: "Very interesting!",
 		// tyrianne interactions
-		tyrianneWelcome: "This is the planet Tyrianne, one of rich opportunity. Tyrianne is home to this galaxy’s largest library. The library is home to some of the most important literary works of this galaxy, including Hugo Riven’s timeless classic “Moonbank Tide.” Some of the greatest minds of this millennia have visited the Tyrianne Interplanetary Library, and it is known as one of the highest honors to be granted visitation into the beautiful and ancient building.",
+		tyrianneIntro: "This is the planet Tyrianne, one of rich opportunity. Tyrianne is home to this galaxy’s largest library. The library is home to some of the most important literary works of this galaxy, including Hugo Riven’s timeless classic “Moonbank Tide.” Some of the greatest minds of this millennia have visited the Tyrianne Interplanetary Library, and it is known as one of the highest honors to be granted visitation into the beautiful and ancient building.",
 		tyrianneGoodOshu: "Would… would you?! Oh, the Tyrianne Interplanetary Library is just a dream to me. Since the moment I discovered the library, I’ve wanted nothing more than to see it for myself. I know there’s not much you can get a simple AI like me but, Oshu, if you did bring a gift back, I would feel as though I went there myself. Sometimes, miss, this ship feels like such a cage.",
 		tyrianneGoodMiss: "Would… would you?! Oh, the Tyrianne Interplanetary Library is just a dream to me. Since the moment I discovered the library, I’ve wanted nothing more than to see it for myself. I know there’s not much you can get a simple AI like me but, Miss, if you did bring a gift back, I would feel as though I went there myself. Sometimes, miss, this ship feels like such a cage.",
-		tyrianneNeutGood: "I am, miss. Oh, the Tyrianne Interplanetary Library is just a dream to me. Since the moment I discovered the library, I’ve wanted nothing more than to see it for myself. I would just give anything to be able to walk through the library myself. Sometimes, miss, this ship feels like such a cage.",
-		tyrianneNeutBad: "I am. Since the moment I discovered the library, I’ve wanted nothing more than to see it for myself. Sometimes, miss, this ship feels like such a cage.",
-		tyrianneNeutGoodGoodOshu: "Would… would you?! I know there’s not much you can get a simple AI like me but, Oshu, if you did bring a gift back, I would feel as though I went there myself.",
-		tyrianneNeutGoodGoodMiss: "Would… would you?! I know there’s not much you can get a simple AI like me but, Miss, if you did bring a gift back, I would feel as though I went there myself.",
+		tyrianneBad: "I am, miss. Oh, the Tyrianne Interplanetary Library is just a dream to me. Since the moment I discovered the library, I’ve wanted nothing more than to see it for myself. I would just give anything to be able to walk through the library myself. Sometimes, miss, this ship feels like such a cage.",
+		tyrianneBadGoodOshu: "Would… would you?! I know there’s not much you can get a simple AI like me but, Oshu, if you did bring a gift back, I would feel as though I went there myself.",
+		tyrianneBadGoodMiss: "Would… would you?! I know there’s not much you can get a simple AI like me but, Miss, if you did bring a gift back, I would feel as though I went there myself.",
 		bookmarkOshu: "Oh, Oshu! You really did it! You really brought me a gift! And what is it? A bookmark!",
 		bookmarkMiss: "Oh, miss! You really did it! You really brought me a gift! And what is it? A bookmark!",
 		bobbleheadOshu: "Oh, Oshu! You really did it! You really brought me a gift! And what is it? A bobblehead!",
@@ -180,7 +179,8 @@ $(document).ready(function() {
 		kanedosBad: "MILO, you will never tell me what to do again.",
 		// tyrianne
 		tyrianneGood: "Would you like me to bring you back a souvenir?",
-		tyrianneNeut: "You're jealous, aren't you?",
+		tyrianneBad: "You're jealous, aren't you?",
+		tyrianneBadNeut: "Goodbye, MILO. I'll be back soon.",
 		// tyrianne return confrontation
 		confrontationGood: "I'll consider it, MILO.",
 		confrontationNeut: "I'm sorry, MILO. It was important to me that I lived as human as possible. It makes me feel closer to my family.",
@@ -401,7 +401,6 @@ $(document).ready(function() {
 						break;
 
 					case 'Kanedos':
-						var kanedosTimeline = 'kanedosIntro';
 						miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
 						$('#good').click(function() {
 							if(status >= 1) {
@@ -428,7 +427,22 @@ $(document).ready(function() {
 						break;
 
 					case 'Tyrianne':
-						$('#miloSays').text('Milo introduces Tyrianne');
+						miloResponse(text.tyrianneIntro, 'speech/tyrianneIntro.mp3', response.tyrianneGood, response.tyrianneBad, response.ignore);
+						var tyrianneTimeline = 'tyrianneIntro';
+						$('#good').click(function() {
+							if(tyrianneTimeline == 'tyrianneIntro') {
+								missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
+								concludeInteraction();
+							}
+						})
+						$('#bad').click(function() {
+							miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneNeut, response.ignore);
+						})
+						$('#neut').click(function() {
+							if(tyrianneTimeline == 'tyrianneIntro') {
+								ignore('#tyrianneMap');
+							}
+						})
 						break;
 
 					case 'Kaprika':
