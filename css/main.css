@@ -233,3 +233,13 @@ h1 {
 	margin-left: 25px;
 	font-family: 'Share Tech Mono';
 }
+#skip {
+	display: none;
+	font-family: 'Audiowide', cursive;
+	font-size: 30px;
+	text-align: right;
+	margin-right: 10px;
+}
+#skipButton {
+	cursor: pointer;
+}
