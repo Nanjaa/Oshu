@@ -449,16 +449,43 @@ $(document).ready(function() {
 						break;
 
 					case 'Tyrianne':
-						miloResponse(text.tyrianneIntro, 'speech/tyrianneIntro.mp3', response.tyrianneGood, response.tyrianneBad, response.ignore);
+						$('#miloInteraction').show();
+						$('#miloSays').writeText(text.tyrianneIntro);
+						var test = setInterval(function() {
+							if($('#miloSays').text() == text.tyrianneIntro) {
+								clearInterval(test);
+								setTimeout(function() {
+									$('#miloSays').text('');
+									$('#miloResponse').show();
+									$('#good').writeText(response.tyrianneGood);
+									$('#bad').writeText(response.tyrianneBad);
+									$('#neut').writeText(response.ignore);
+								}, 1000);
+							}
+						}, 1);
+
 						var tyrianneTimeline = 'tyrianneIntro';
 						$('#good').click(function() {
 							if(tyrianneTimeline == 'tyrianneIntro') {
 								missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
 								concludeInteraction();
+								tyrianneTimeline = 'Would you like';
+							}
+							else {
+								missVsOshu(text.tyrianneBadGoodMiss, 'speech/tyrianneBadGoodMiss', text.tyrianneBadGoodOshu, 'speech/tyrianneBadGoodOshu', '','','');
+								concludeInteraction();
 							}
 						})
 						$('#bad').click(function() {
-							miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneNeut, response.ignore);
+							if(tyrianneTimeline == 'tyrianneIntro') {
+								miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneBadNeut, response.ignore);
+								tyrianneTimeline = 'I am, miss';
+							}
+							else {
+								ignore('#tyrianneMap');
+								status = status + 1;
+								console.log(status);
+							}
 						})
 						$('#neut').click(function() {
 							if(tyrianneTimeline == 'tyrianneIntro') {
