@@ -8,7 +8,8 @@ var Oshu = {
 		ganifruit: 0,
 		electange: 0,
 		sunstone: 0,
-		electroSuit: false
+		electroSuit: false, 
+		clothes: true
 	},
 	
 	quests: [

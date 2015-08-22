@@ -140,5 +140,16 @@
 	color: #FFE7B9;
 }
 #clothesGirl {
-	color: #fb7162;
+	color: #d81500;
+}
+.danceHall, .noDancing, .danceDetails {
+	display: none;
+}
+#doorman {
+	color: #ff9e26;
+	margin-top: 100px;
+	margin-left: 75px;
+}
+#danceSign {
+	margin-left: 300px;
 }

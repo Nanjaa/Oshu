@@ -221,8 +221,34 @@ $(document).ready(function() {
 		}, 1);
 	});
 
+	// ________________________________________________________________
+	// | ==============================================================|
+	// |															   |
+	// |						THE   DANCE HALL						   |
+	// |															   |
+	// |===============================================================|
+	// |_______________________________________________________________|
 
+	var danceText = {
+		doorman: "A muscular doorman blocks the entrance to the Dance Hall. 'You can't get in without proper attire,' he says.",
+		danceIntro: "You step onto the busy dance floor. The music is happy and light, and everyone twirls around you.",
+		danceSight: "You see a man across the way that looks just like the picture. You take it out to double-check. It's definitely him!",
+		danceSpeak: "'What's this? Ah, I was told"
+	}
 
+	$('#danceHall').click(function() {
+		$('.danceHall').show();
+		$('.lunedaCity').hide();
+		if(Oshu.items.clothes == false) {
+			console.log(danceText.doorman);
+			$('.noDancing').show();
+			$('.planetInteraction').writeText(danceText.doorman);
+		}
+		else {
+			$('.danceDetails').show();
+			$('.planetInteraction').writeText(danceText.danceIntro);
+		}
+	});
 
 
 
