@@ -5,7 +5,7 @@ $(document).ready(function() {
 		welcome: "You have arrived on the beaches of the Electric Sea. There is a buzzing sound that mixes gently with the sound of the waves crashing.",
 		rentalWelcome: "Hello there young lady! I have everything you'll need to swim in the seas without getting yourself killed. What do you say? 50 coins covers it all!",
 		rentalNoCoins: "That's not enough money! 50 coins or no deal. I don't bargain.",
-		rentalComplete: "Fantastic! Here's your ElectroSuit. And because you seem like a nice gal, here's a camera for you to take pictures underwater with. You have an hour to swim, then I'll need the equipment back. Have a great day!",
+		rentalComplete: "Fantastic! Here's your ElectroSuit. You have an hour to swim, then I'll need the equipment back. Have a great day!",
 		rentalOptions: "Do you want to rent an ElectroSuit?",
 		rentalInUse: "Go have fun with your equipment! But remember to bring it back...",
 		rentalNo: "That's alright! Don't try to swim, though. Unless, of course, you want to be fish food!",
@@ -14,26 +14,6 @@ $(document).ready(function() {
 		seaLife: "You step into the sea, and submerge yourself. There are fish everywhere. You try to take as many pictures as you can before you have to return the suit!",
 		seaDeath: "You step into the sea without protection. The electricity swallows you up, and you feel yourself losing control. Slowly, everything fades..."	
 	};
-
-
-	// $(this).click(function() {
-	// 	$('.planetInteraction').text('');
-	// 	console.log('happy!');
-	// });
-
-	// resets the .planetInteraction box
-
-
-
-	// brings you to the planet from the system map
-	// $('#Luneda').click(function() {
-	// 	$('#map').hide();
-	// 	$('#lunedaMap').show();
-	// 	if(planets.Luneda.first == true) {
-	// 		play('speech/lunedaIntro.mp3');
-	// 		planets.Luneda.first = false;
-	// 	};
-	// });
 
 	// brings up the common divs between all the city details
 	$('.lunedaCity').click(function() {
@@ -81,26 +61,18 @@ $(document).ready(function() {
 			if($('.planetInteraction').text().length < beachText.rentalWelcome.length) {
 				maleVoice();
 			}
-			var text1 = beachText.rentalWelcome;
-			$('.planetInteraction').writeText(text1);
-			var text2 = beachText.rentalOptions;
-			var price = 50;
-			var yes = beachText.rentalComplete;
-			var no = beachText.rentalNo;
-			var needMore = beachText.rentalNoCoins;
-			displayOptions(text1, text2, price, yes, no, needMore);
-			var stop = false;
+			$('.planetInteraction').writeText(beachText.rentalWelcome);
+			displayOptions(beachText.rentalWelcome, beachText.rentalOptions, 50, beachText.rentalComplete, beachText.rentalNo, beachText.rentalNoCoins);
 			var boughtSuit = setInterval(function() {
-				if($('.planetInteraction').text() == yes && stop == false) {
+				if($('.planetInteraction').text() == beachText.rentalComplete) {
 				// adds item to inventory if not already there
-					$('#inventory').append('<div class="inventory"><p>ElectroSuit</p>');
+					$('.inventoryList').append('<li class="inventoryItem">ElectroSuit</li>');
 					Oshu.items.electroSuit = true;
-					stop = true;
+					clearInterval(boughtSuit);
 				}
 			}, 1)
 		};
 	};
-// $('.planetInteraction').writeText(beachText.rentalComplete);
 
 	//************************ interact with the drinks stand ************************
 
@@ -111,7 +83,11 @@ $(document).ready(function() {
 	$('#closerSeas').click(function() {
 		$('#beach').hide();
 		if(Oshu.items.electroSuit) {
-			$('.planetInteraction').writeText(beachText.seaLife);
+			$('.visitPlanet').hide();
+			$('.miloInteraction').show();
+			$('#miloSays').writeText('');
+			$('#miloSays').writeText('Oshu reflects upon this moment');
+			completeItem('Swim the electric seas of Luneda')
 		}
 		else {
 			$('.planetInteraction').writeText(beachText.seaDeath);

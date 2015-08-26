@@ -14,7 +14,6 @@ function randomizeQuests() {
 		}
 		else if(listNumber < 0.66) {
 			$('.bucketList').append('<li class="quest">' + Oshu.quests[i][1][1] + '</li>')
-
 		}
 		else {
 			$('.bucketList').append('<li class="quest">' + Oshu.quests[i][1][2] + '</li>')
@@ -92,10 +91,10 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 		showOptions(text1);
 	}, 1000);
 	function showOptions(text1) {
-		if($('.lunedaInteract').text() == text1) {
+		if($('.planetInteraction').text() == text1) {
 			clearInterval(displayOptions);
 			setTimeout(function() {
-				$('.lunedaInteract').writeText(text2);
+				$('.planetInteraction').writeText(text2);
 			}, 2000);
 		};				
 	};
@@ -104,25 +103,25 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 		showYesNo(text2, price, yes, no, needMore)
 	}, 1000);	
 	function showYesNo(text2, price, yes, no, needMore) {
-		if($('.lunedaInteract').text() == text2) {
+		if($('.planetInteraction').text() == text2) {
 			clearInterval(displayYesNo);
 			function yesNo(price) {
-				$('.lunedaInteract').append('<ul><li class="options yes">Yes</li><li class="options no">No</li></ul>')
+				$('.planetInteraction').append('<ul><li class="options yes">Yes</li><li class="options no">No</li></ul>')
 			};
 			setTimeout(yesNo(), 1000);
 		};
 		$('.yes').click(function() {
 			var coins = Oshu.coins;
 			if(coins >= price) {
-	 			$('.lunedaInteract').writeText(yes);	
+	 			$('.planetInteraction').writeText(yes);	
 	 			payMoney(price);			
 			}
 			else {
-				$('.lunedaInteract').writeText(needMore);
+				$('.planetInteraction').writeText(needMore);
 			}
 		});
 		$('.no').click(function() {
-			$('.lunedaInteract').writeText(no);
+			$('.planetInteraction').writeText(no);
 		})
 	}
 };
@@ -170,6 +169,16 @@ $('.planet').click(function() {
 			$('.planetInteraction').css('color', '#e32f2f');
 			$('.planetInteraction').css('border', '1px solid #e32f2f');
 			break;
-		// case 'Kanedos':
 	}
-})
+});
+
+// ------------------------------------------------------
+// 				COMPLETE LIST ITEM
+// ------------------------------------------------------
+function completeItem(quest) {
+	$('.quest').each(function() {
+		if($(this).text() == quest) {
+			$(this).css('text-decoration', 'line-through');	
+		}
+	});	
+}

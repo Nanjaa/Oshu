@@ -451,6 +451,7 @@ $(document).ready(function() {
 					case 'Tyrianne':
 						$('#miloInteraction').show();
 						$('#miloSays').writeText(text.tyrianneIntro);
+						play('speech/tyrianneIntro.mp3');
 						var test = setInterval(function() {
 							if($('#miloSays').text() == text.tyrianneIntro) {
 								clearInterval(test);
@@ -472,7 +473,7 @@ $(document).ready(function() {
 								tyrianneTimeline = 'Would you like';
 							}
 							else {
-								missVsOshu(text.tyrianneBadGoodMiss, 'speech/tyrianneBadGoodMiss', text.tyrianneBadGoodOshu, 'speech/tyrianneBadGoodOshu', '','','');
+								missVsOshu(text.tyrianneBadGoodMiss, 'speech/tyrianneBadGoodMiss.mp3', text.tyrianneBadGoodOshu, 'speech/tyrianneBadGoodOshu.mp3', '','','');
 								concludeInteraction();
 							}
 						})
@@ -495,11 +496,33 @@ $(document).ready(function() {
 						break;
 
 					case 'Kaprika':
-						$('#miloSays').text('Milo introduces Kaprika');
+						$('#skip').show();
+						quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.mp3', '#kaprikaMap', 19000);
+						$('#skip').click(function() {
+							ignore('#kaprikaMap');
+						})
 						break;
 
 					case 'AliNada':
-						$('#miloSays').text('Milo introduces AliNada');
+						miloResponse(text.aliNadaIntro, 'speech/aliNadaIntro.mp3', response.aliNadaGoodOrBad, '', response.ignore);
+						$('#bad').hide();
+						var aliTimeline = 'aliIntro';
+						$('#good').click(function() {
+							if(aliTimeline == 'aliIntro') {
+								if(status >= 0) {
+
+								}
+								else {
+									
+								}
+							}
+						});
+						$('#bad').click(function() {
+
+						});
+						$('#neut').click(function() {
+
+						})
 						break;
 				}
 			};
