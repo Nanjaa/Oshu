@@ -40,8 +40,40 @@ $(document).ready(function() {
 	// |===============================================================|
 	// |_______________________________________________________________|
 
-	$(pre).click(function() {
-		console.log('hello');
+	$('pre').click(function() {
+		var location = $(this).attr('id');
+		switch(location) {
+			case 'electricSeas': 
+				changeLocation('#beach');
+				break;
+			case 'sand':
+				changeLocation('#beach');
+				break;
+			case 'danceHall':
+				changeLocation('.danceHall');
+				break;
+			case 'weather':
+
+				break;
+			case 'markets':
+				changeLocation('.theMarkets');
+				break;
+			case 'marketCentre':
+				changeLocation('.theMarkets');
+				break;
+			case 'lunedaMechanic':
+
+				break;
+			case 'fruitStand':
+				changeLocation('.fruitStand');
+				break;
+			case 'souvenirStand':
+				changeLocation('.souvenirStand');
+				break;
+			case 'clothesStand':
+				changeLocation('.clothesStand');
+				break;
+		}
 	})
 
 	// ________________________________________________________________
