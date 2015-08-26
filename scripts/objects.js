@@ -12,12 +12,14 @@ var Oshu = {
 		clothes: true
 	},
 
-	// description: {
-	// 	electroSuit: "It looks like a diver's suit. The ElectroSuit is extremely heavy and gives off a faint buzz. Made to handle the electricity in the Lunedian Seas.",
-	// 	electange: "One of the famous electric fruits of Luneda, this brightly colored fruit is blue with yellow spots.",
-	// 	ganifruit: "A soft, purple fruit from Luneda. This fruit is not considered an electric fruit. Instead, it is famous for its sweet taste and use in gourmet delicacies.",
-	// 	sunstone: "The sunstone is small and orange, and gives off a calming warmth."
-	// },
+	description: {
+		coins: "Criticized for its generic name, Coins are the galaxy-wide currency.",
+		electroSuit: "It looks like a diver's suit. The ElectroSuit is extremely heavy and gives off a faint buzz.",
+		electange: "One of the famous electric fruits of Luneda, this brightly colored fruit is blue with yellow spots.",
+		ganifruitEat: "You take a bite from the soft, purple fruit. It's got a bittersweet taste.",
+		ganifruit: "A soft, purple fruit, not considered electric. Known for its bittersweet taste.",
+		sunstone: "The sunstone is small and orange, and gives off a calming warmth."
+	},
 	
 	quests: [
 		['Luneda',

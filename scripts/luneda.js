@@ -66,9 +66,15 @@ $(document).ready(function() {
 			var boughtSuit = setInterval(function() {
 				if($('.planetInteraction').text() == beachText.rentalComplete) {
 				// adds item to inventory if not already there
-					$('.inventoryList').append('<li class="inventoryItem">ElectroSuit</li>');
+					$('.inventoryList').append('<li class="inventoryItem" id="electroSuit">ElectroSuit</li>');
 					Oshu.items.electroSuit = true;
 					clearInterval(boughtSuit);
+
+					// now you can click the electroSuit
+					$('#electroSuit').click(function() {
+						inventoryDescription('#electroSuit', 'electroSuit', Oshu.description.electroSuit);
+					});
+
 				}
 			}, 1)
 		};
@@ -157,6 +163,11 @@ $(document).ready(function() {
 				// adds item to inventory if not already there
 				if(Oshu.items.electange == 0) {
 					$('.inventoryList').append('<li class="inventoryItem" id="myElectange">Electange: <span class="electangeAmt"></span></li>');				
+				
+					// hovering over the amount will make it bold, encouraging you to eat it. If you just click the word "electange" it'll show a desc.
+					$('.electangeAmt').hover(function() {
+						console.log('hello');
+					})
 				}
 				// then adds quantity amt
 				var electange = Oshu.items.electange + 1;
@@ -177,7 +188,12 @@ $(document).ready(function() {
 			if($('.planetInteraction').text() == yes) {
 				// adds item to inventory if not already there
 				if(Oshu.items.ganifruit == 0) {
-					$('.inventoryList').append('<li class="inventoryItem" id="myGanifruit">Ganifruit: <span class="ganifruitAmt"></span></li>');
+					$('.inventoryList').append('<li class="inventoryItem"><span id="myGanifruit">Ganifruit: <span class="ganifruitAmt"></span></span><span id="ganiDesc"></span></li>');
+		
+					// now you can click the ganiFruit
+					$('#myGanifruit').click(function() {
+						complexDescription("#myGanifruit", "#ganiDesc", Oshu.description.ganifruit);
+					});
 				}
 				// then adds quantity amt
 				var ganifruit = Oshu.items.ganifruit + 1;

@@ -186,16 +186,27 @@ function completeItem(quest) {
 // 				USE INVENTORY
 // ------------------------------------------------------
 
-$('.inventoryItem').click(function() {
-	console.log('ugh this sux');
-	console.log($(this).text());
-	// if($(this).attr('id') == 'myGanifruit') {
-	// 	console.log('myGanifruit');
-	// }
-	// else if($(this).attr('id') == 'myElectange') {
-	// 	console.log('myElectange');
-	// }
-	// else {
-	// 	console.log('myMistake');
-	// }
+function inventoryDescription(div, item, desc) {
+	$(div).text(' - ');
+	$(div).writeText(desc);
+	var inventoryWait = setInterval(function() {
+		$(div).text('');
+		$(div).text(item);
+		clearInterval(inventoryWait);
+	}, 7000);
+};
+
+function complexDescription(itemSpan, descSpan, desc) {
+	$(itemSpan).hide();
+	$(descSpan).text(' - ');
+	$(descSpan).writeText(desc);
+	var inventoryWait = setInterval(function() {
+		$(descSpan).text('');
+		$(itemSpan).show();
+	}, 7000)
+}
+
+// since coins is the only item already in the inventory, here is the function for it
+$('#coins').click(function() {
+	complexDescription('#coins', '#coinsDesc', Oshu.description.coins);
 })
