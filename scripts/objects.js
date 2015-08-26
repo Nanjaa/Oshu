@@ -1,12 +1,16 @@
 var Oshu = {
 	onBoard: true,
 	remainingLife: 3600,
-	coins: 50,
+	coins: 500,
 	currentLocation: '#lunedaMap',
 	itemFirst: {
 		ganifruit: true,
 		electange: true,
-		electroSuit: true
+		electroSuit: true,
+		clothes: true,
+		lunedaSnowglobe: true,
+		lunedaBobblehead: true,
+		lunedaPostcard: true
 	},
 	
 	items: {
@@ -14,7 +18,10 @@ var Oshu = {
 		electange: 0,
 		sunstone: 0,
 		electroSuit: false, 
-		clothes: true
+		clothes: false,
+		lunedaSnowglobe: false,
+		lunedaBobblehead: false,
+		lunedaPostcard: false
 	},
 
 	description: {
@@ -23,6 +30,10 @@ var Oshu = {
 		electange: "One of the famous electric fruits of Luneda, this brightly colored fruit is blue with yellow spots.",
 		ganifruitEat: "You take a bite from the soft, purple fruit. It's got a bittersweet taste.",
 		// ganifruit: "A soft, purple fruit, not considered electric. Known for its bittersweet taste.",
+		clothes: "The dress is a deep emerald color, with lots of intricate embroidery.",
+		lunedaSnowglobe: "The snowglobe has a bikini girl standing on the beach.",
+		lunedaBobblehead: "A cute bobblehead version of a storm chaser with binoculars.",
+		lunedaPostcard: "A simple postcard with a map of the capitol of Luneda",
 		sunstone: "The sunstone is small and orange, and gives off a calming warmth."
 	},
 	

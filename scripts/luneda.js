@@ -163,7 +163,23 @@ $(document).ready(function() {
 		no: "That's fine. If you ever get a craving for some unbelievably amazing fruit, you know where I am!",
 		needMore: "Sorry little lady! You don't have enough coins to buy this fruit! Come back another time.",
 		clothesWelcome: "You step into the clothes stand. Inside is a rainbow of fabrics. The stand contains authentic Lunedian clothing.",
-		souvenirWelcome: "A kitchy souvenir shop stands before you. You see cheap novelties such as bobbleheads and snowglobes, as well as postcards of all kinds."
+		clothes: "Welcome to Katie's World of Clothes! I see you're admiring our many authentic Lunedian dresses! I bet green would look excellent on you. The dresses are 25 coins each.",
+		clothesOptions: "Would you like to buy a dress?",
+		clothesYes: "Thank you so much! Here's your dress. I wish I could see it on! I bet you'd look lovely.",
+		clothesNo: "If you're ever in need of something for a special occasion, or just want to feel fancy, you know where to go!",
+		clothesNeedMore: "I'm sorry, but you just don't have the coins to buy these garments. Come back when you do.",
+		clothesReturn: "Don't you just love that dress? I think it's stunning!",
+		souvenirWelcome: "A kitchy souvenir shop stands before you. You see cheap novelties such as bobbleheads and snowglobes, as well as postcards of all kinds.",
+		snowglobes: "Ah, a snowglobe! Can't go wrong there! 10 coins.",
+		bobbleheads: "We have a great selection of bobbleheads available. All of them are 15 coins each.",
+		postcards: "If you ever need a postcard, we're your store. Postcards are only 1 coin each! Quite a deal, don't you think?",
+		snowglobeOptions: "Would you like to purchase a snowglobe?",
+		bobbleheadOptions: "Would you like to purchase a bobblehead?",
+		postcardOptions: "Would you like to purchase a postcard?",
+		souvenirYes: "Here's your souvenir so you never forget your time on Luneda. Come back soon!",
+		souvenirNo: "Well, I suppose I understand. Some people don't like souvenirs. But if you ever need one, buy them here, okay?",
+		souvenirNeedMore: "Sorry, but that's not enough! These are quality souvenirs, ma'am.",
+		souvenirReturn: "I hope you enjoy your souvenirs! Add it to your collection!"
 	};
 
 	$('.markets').click(function() {
@@ -257,6 +273,116 @@ $(document).ready(function() {
 		}, 1);
 	});
 
+	$('#dresses').click(function() {
+		if(Oshu.items.clothes == false) {
+			$('.planetInteraction').writeText(marketText.clothes);
+			displayOptions(marketText.clothes, marketText.clothesOptions, 25, marketText.clothesYes, marketText.clothesNo, marketText.clothesNeedMore);
+			var boughtClothes = setInterval(function() {
+				if($('.planetInteraction').text() == marketText.clothesYes) {
+					// adds item to inventory if not already there
+					if(Oshu.itemFirst.clothes == true) {
+						Oshu.itemFirst.clothes = false;
+						$('.inventoryList').append('<li class="inventoryItem"><span id="myClothes">Lunedian Dress</span></li>');
+			
+						// now you can select the clothes
+						$('#myClothes').click(function() {
+							inventoryDescription('#myClothes', 'Lunedian Dress', Oshu.description.clothes);
+						});
+					}
+					clearInterval(boughtClothes);
+				};
+			}, 1);			
+		}
+		else {
+			$('.planetInteraction').writeText(marketText.clothesReturn);
+		}
+
+	});
+
+	$('#snowglobes').click(function() {
+		console.log(Oshu.items.lunedaSnowglobe);
+		console.log(Oshu.items.lunedaBobblehead);
+		console.log(Oshu.items.lunedaPostcard);
+
+		if(Oshu.items.lunedaSnowglobe == false) {
+			$('.planetInteraction').writeText(marketText.snowglobes);
+			displayOptions(marketText.snowglobes, marketText.snowglobeOptions, 10, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
+			var boughtSnowglobe = setInterval(function() {
+				if($('.planetInteraction').text() == marketText.souvenirYes) {
+					// adds item to inventory if not already there
+					if(Oshu.itemFirst.lunedaSnowglobe == true) {
+						Oshu.items.lunedaSnowglobe = true;
+						Oshu.itemFirst.lunedaSnowglobe = false;
+						$('.inventoryList').append('<li class="inventoryItem"><span id="lunedaSnowglobe">Beach Snowglobe</span></li>');
+			
+						// now you can select the snowglobe
+						$('#lunedaSnowglobe').click(function() {
+							inventoryDescription('#lunedaSnowglobe', 'Beach Snowglobe', Oshu.description.lunedaSnowglobe);
+						});
+					}
+					clearInterval(boughtSnowglobe);
+				};
+			}, 1);
+		}
+		else {
+			$('.planetInteraction').writeText(marketText.souvenirReturn);
+		}
+
+	});
+
+	$('#bobbleheads').click(function() {
+		if(Oshu.items.lunedaBobblehead == false) {
+			$('.planetInteraction').writeText(marketText.bobbleheads);
+			displayOptions(marketText.bobbleheads, marketText.bobbleheadOptions, 15, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
+			var boughtBobbleheads = setInterval(function() {
+				if($('.planetInteraction').text() == marketText.souvenirYes) {
+					// adds item to inventory if not already there
+					if(Oshu.itemFirst.lunedaBobblehead == true) {
+						Oshu.items.lunedaBobblehead = true;
+						Oshu.itemFirst.lunedaBobblehead = false;
+						$('.inventoryList').append('<li class="inventoryItem"><span id="lunedaBobblehead">Stormchaser Bobblehead</span></li>');
+			
+						// now you can select the clothes
+						$('#lunedaBobblehead').click(function() {
+							inventoryDescription('#lunedaBobblehead', 'Stormchaser Bobblehead', Oshu.description.lunedaBobblehead);
+						});
+					}
+					clearInterval(boughtBobbleheads);
+				};
+			}, 1);
+		}
+		else {
+			$('.planetInteraction').writeText(marketText.souvenirReturn);
+		}
+
+	});
+
+	$('#postcards').click(function() {
+		if(Oshu.items.lunedaPostcard == false) {
+			$('.planetInteraction').writeText(marketText.postcards);
+			displayOptions(marketText.postcards, marketText.postcardOptions, 1, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
+			var boughtPostcards = setInterval(function() {
+				if($('.planetInteraction').text() == marketText.souvenirYes) {
+					// adds item to inventory if not already there
+					if(Oshu.itemFirst.lunedaPostcard == true) {
+						Oshu.items.lunedaPostcard = true;
+						Oshu.itemFirst.lunedaPostcard = false;
+						$('.inventoryList').append('<li class="inventoryItem"><span id="lunedaPostcard">Luneda Postcard</span></li>');
+
+						// now you can select the clothes
+						$('#lunedaPostcard').click(function() {
+							inventoryDescription('#lunedaPostcard', 'Luneda Postcard', Oshu.description.lunedaPostcard);
+						});
+					}
+					clearInterval(boughtPostcards);
+				};
+			}, 1);
+		}
+		else {
+			$('.planetInteraction').writeText(marketText.souvenirReturn);
+		}
+
+	});
 	// ________________________________________________________________
 	// | ==============================================================|
 	// |															   |
