@@ -281,6 +281,7 @@ $(document).ready(function() {
 				if($('.planetInteraction').text() == marketText.clothesYes) {
 					// adds item to inventory if not already there
 					if(Oshu.itemFirst.clothes == true) {
+						Oshu.items.clothes = true;
 						Oshu.itemFirst.clothes = false;
 						$('.inventoryList').append('<li class="inventoryItem"><span id="myClothes">Lunedian Dress</span></li>');
 			

@@ -156,3 +156,27 @@
 #danceSign {
 	margin-left: 300px;
 }
+#dancer1 {
+	margin-left: 40px;
+	margin-top: 200px;
+	color: #ed83ee;
+}
+#dancer2 {
+	margin-left: 350px;
+	margin-top: 215px;
+	color: #ff9a00;
+}
+#dancer3 {
+	margin-left: 150px;
+	margin-top: 177px;
+	color: #83aaee;
+}
+#dancer4 {
+	margin-left: 450px;
+	margin-top: 177px;
+	color: #ff0d00;
+}
+#chandeliers {
+	margin-left: 75px;
+	color: #ffc14a;
+}
