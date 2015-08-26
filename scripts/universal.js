@@ -210,3 +210,11 @@ function complexDescription(itemSpan, descSpan, desc) {
 $('#coins').click(function() {
 	complexDescription('#coins', '#coinsDesc', Oshu.description.coins);
 })
+
+function useItem(item, div) {
+	if(item > 0) {
+		var amount = item - 1;
+		item = amount;
+		$(div).text(amount);
+	} 
+}

@@ -161,18 +161,22 @@ $(document).ready(function() {
 		var boughtElectange = setInterval(function() {
 			if($('.planetInteraction').text() == yes) {
 				// adds item to inventory if not already there
-				if(Oshu.items.electange == 0) {
-					$('.inventoryList').append('<li class="inventoryItem" id="myElectange">Electange: <span class="electangeAmt"></span></li>');				
+				if(Oshu.itemFirst.electange == true) {
+					Oshu.itemFirst.electange = false;
+					$('.inventoryList').append('<li class="inventoryItem" id="myElectange">Electange: <span id="electangeAmt"></span></li>');				
 				
-					// hovering over the amount will make it bold, encouraging you to eat it. If you just click the word "electange" it'll show a desc.
-					$('.electangeAmt').hover(function() {
-						console.log('hello');
-					})
+					// now you can eat the electange
+					$('#myElectange').click(function() {
+						useItem(Oshu.items.electange, '#electangeAmt')
+						if(Oshu.items.electange > 0) {
+							Oshu.items.electange = Oshu.items.electange - 1;
+						}
+					});
 				}
 				// then adds quantity amt
 				var electange = Oshu.items.electange + 1;
 				Oshu.items.electange = electange;
-				$('.electangeAmt').text(electange);
+				$('#electangeAmt').text(electange);
 
 				clearInterval(boughtElectange);
 			};
@@ -187,19 +191,22 @@ $(document).ready(function() {
 		var boughtGanifruit = setInterval(function() {
 			if($('.planetInteraction').text() == yes) {
 				// adds item to inventory if not already there
-				if(Oshu.items.ganifruit == 0) {
-					$('.inventoryList').append('<li class="inventoryItem"><span id="myGanifruit">Ganifruit: <span class="ganifruitAmt"></span></span><span id="ganiDesc"></span></li>');
+				if(Oshu.itemFirst.ganifruit == true) {
+					Oshu.itemFirst.ganifruit = false;
+					$('.inventoryList').append('<li class="inventoryItem"><span id="myGanifruit">Ganifruit: <span id="ganifruitAmt"></span></span><span id="ganiDesc"></span></li>');
 		
-					// now you can click the ganiFruit
+					// now you can eat the ganifruit
 					$('#myGanifruit').click(function() {
-						complexDescription("#myGanifruit", "#ganiDesc", Oshu.description.ganifruit);
+						useItem(Oshu.items.ganifruit, '#ganifruitAmt')
+						if(Oshu.items.ganifruit > 0) {
+							Oshu.items.ganifruit = Oshu.items.ganifruit - 1;
+						}
 					});
 				}
-				// then adds quantity amt
+				// adds quantity amt after adding item to inventory
 				var ganifruit = Oshu.items.ganifruit + 1;
-				console.log(ganifruit);
 				Oshu.items.ganifruit = ganifruit;
-				$('.ganifruitAmt').text(ganifruit);
+				$('#ganifruitAmt').text(ganifruit);
 				
 				clearInterval(boughtGanifruit);
 			};

@@ -4,6 +4,12 @@ var Oshu = {
 	coins: 50,
 	crystals: 0,
 	milo: 0,
+	itemFirst: {
+		ganifruit: true,
+		electange: true,
+		electroSuit: true
+	},
+	
 	items: {
 		ganifruit: 0,
 		electange: 0,
@@ -17,7 +23,7 @@ var Oshu = {
 		electroSuit: "It looks like a diver's suit. The ElectroSuit is extremely heavy and gives off a faint buzz.",
 		electange: "One of the famous electric fruits of Luneda, this brightly colored fruit is blue with yellow spots.",
 		ganifruitEat: "You take a bite from the soft, purple fruit. It's got a bittersweet taste.",
-		ganifruit: "A soft, purple fruit, not considered electric. Known for its bittersweet taste.",
+		// ganifruit: "A soft, purple fruit, not considered electric. Known for its bittersweet taste.",
 		sunstone: "The sunstone is small and orange, and gives off a calming warmth."
 	},
 	
