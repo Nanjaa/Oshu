@@ -218,3 +218,15 @@ function useItem(item, div) {
 		$(div).text(amount);
 	} 
 }
+
+// ------------------------------------------------------
+// 				PROVIDE CURRENT LOCATION
+// ------------------------------------------------------
+
+function changeLocation(newLocation) {
+	Oshu.currentLocation = newLocation;
+	console.log(Oshu.currentLocation);
+}
+$('#myShip').click(function() {
+	changeLocation('#map');
+})

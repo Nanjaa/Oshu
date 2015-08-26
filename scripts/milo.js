@@ -402,6 +402,7 @@ $(document).ready(function() {
 				switch(destination) {
 
 					case 'Luneda':
+						changeLocation('#lunedaMap');
 						quickMilo(text.lunedaIntro, 'speech/lunedaIntro.mp3', '#lunedaMap', 28000);
 						$('#skip').show();
 						$('#skipButton').click(function() {
@@ -410,6 +411,7 @@ $(document).ready(function() {
 						break;
 
 					case 'Kanedos':
+						changeLocation('#kanedosMap');
 						miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
 						$('#good').click(function() {
 							if(status >= 1) {
@@ -449,6 +451,7 @@ $(document).ready(function() {
 						break;
 
 					case 'Tyrianne':
+						changeLocation('#tyrianneMap');
 						$('#miloInteraction').show();
 						$('#miloSays').writeText(text.tyrianneIntro);
 						play('speech/tyrianneIntro.mp3');
@@ -496,6 +499,7 @@ $(document).ready(function() {
 						break;
 
 					case 'Kaprika':
+						changeLocation('#kaprikaMap');
 						$('#skip').show();
 						quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.mp3', '#kaprikaMap', 19000);
 						$('#skip').click(function() {
@@ -504,6 +508,7 @@ $(document).ready(function() {
 						break;
 
 					case 'AliNada':
+						changeLocation('#aliNadaMap');
 						miloResponse(text.aliNadaIntro, 'speech/aliNadaIntro.mp3', response.aliNadaGoodOrBad, '', response.ignore);
 						$('#bad').hide();
 						var aliTimeline = 'aliIntro';

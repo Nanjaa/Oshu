@@ -2,8 +2,7 @@ var Oshu = {
 	onBoard: true,
 	remainingLife: 3600,
 	coins: 50,
-	crystals: 0,
-	milo: 0,
+	currentLocation: '#map',
 	itemFirst: {
 		ganifruit: true,
 		electange: true,
