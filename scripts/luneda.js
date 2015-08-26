@@ -133,11 +133,8 @@ $(document).ready(function() {
 	$('#closerSeas').click(function() {
 		$('#beach').hide();
 		if(Oshu.items.electroSuit) {
-			$('.visitPlanet').hide();
-			$('.miloInteraction').show();
-			$('#miloSays').writeText('');
-			$('#miloSays').writeText('Oshu reflects upon this moment');
-			completeItem('Swim the electric seas of Luneda')
+			questSpeech(Oshu.questSpeech.luneda1)
+			completeItem('Swim the electric seas of Luneda');
 		}
 		else {
 			$('.planetInteraction').writeText(beachText.seaDeath);
@@ -214,6 +211,9 @@ $(document).ready(function() {
 						useItem(Oshu.items.electange, '#electangeAmt')
 						if(Oshu.items.electange > 0) {
 							Oshu.items.electange = Oshu.items.electange - 1;
+							questSpeech(Oshu.questSpeech.luneda2)
+							completeItem('Taste the electric fruit of Luneda');
+
 						}
 					});
 				}

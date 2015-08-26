@@ -72,6 +72,18 @@ function lifeEvent(minutesLost) {
 	};
 }) (jQuery);
 
+// ------------------------------------------------------
+// 					IGNORE OR SKIP TEXT
+// ------------------------------------------------------
+
+function ignore(map) {
+	$('#miloResponse').hide();
+	$('#miloInteraction').hide();
+	$(map).show();
+	audio.pause();
+	$('#skip').hide();
+}
+
 
 // ------------------------------------------------------
 // 					PAY MONEY
@@ -180,6 +192,19 @@ function completeItem(quest) {
 			$(this).css('text-decoration', 'line-through');	
 		}
 	});	
+}
+
+// ------------------------------------------------------
+// 				GIVE LIST COMPLETION SPEECH
+// ------------------------------------------------------
+function questSpeech(speech) {
+	$(Oshu.currentLocation).hide();
+	$('#miloInteraction').show();
+	$('#skip').show();
+	$('#miloSays').writeText(speech)
+	$('#skip').click(function() {
+		ignore(Oshu.currentLocation);
+	})
 }
 
 // ------------------------------------------------------

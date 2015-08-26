@@ -373,16 +373,6 @@ $(document).ready(function() {
 		}, 7000);
 	}
 
-	// another way to conclude the interaction is to ignore him.
-
-	function ignore(map) {
-		$('#miloResponse').hide();
-		$('#miloInteraction').hide();
-		$(map).show();
-		audio.pause();
-		$('#skip').hide();
-	}
-
 
     // _________________________________________//
 	//											//
