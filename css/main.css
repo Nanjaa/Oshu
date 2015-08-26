@@ -207,6 +207,9 @@ li {
 .quest, .inventoryItem {
 	background-color: white;
 }
+.inventoryItem {
+	cursor: pointer;
+}
 h1 {
 	color: white;
 	font-family: 'Orbitron', sans-serif;

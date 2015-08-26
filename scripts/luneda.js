@@ -150,23 +150,20 @@ $(document).ready(function() {
 
 	$('#electange').click(function() {
 		$('.planetInteraction').writeText(marketText.electange);
-		text1 = marketText.electange;
-		text2 = marketText.electangeOptions;
-		var price = 25;
-		var needMore = marketText.needMore;
-		displayOptions(text1, text2, price, yes, no, needMore);
+		displayOptions(marketText.electange, marketText.electangeOptions, 25, yes, no, marketText.needMore);
 		var stop = false;
 		var boughtElectange = setInterval(function() {
-			if($('.planetInteraction').text() == yes && stop == false) {
+			if($('.planetInteraction').text() == yes) {
 				// adds item to inventory if not already there
 				if(Oshu.items.electange == 0) {
-					$('#inventory').append('<div class="inventory"><p>Electange: <span class="electangeAmt"></span></p>');
+					$('.inventoryList').append('<li class="inventoryItem" id="myElectange">Electange: <span class="electangeAmt"></span></li>');				
 				}
 				// then adds quantity amt
 				var electange = Oshu.items.electange + 1;
 				Oshu.items.electange = electange;
 				$('.electangeAmt').text(electange);
-				stop = true;
+
+				clearInterval(boughtElectange);
 			};
 		}, 1);		
 	});
@@ -175,24 +172,20 @@ $(document).ready(function() {
 
 	$('#ganifruit').click(function() {
 		$('.planetInteraction').writeText(marketText.ganifruit);
-		var text1 = marketText.ganifruit;
-		var text2 = marketText.ganifruitOptions;
-		var price = 10;
-		var needMore = marketText.needMore;
-		displayOptions(text1, text2, price, yes, no, needMore);
-		var stop = false;
+		displayOptions(marketText.ganifruit, marketText.ganifruitOptions, 10, yes, no, marketText.needMore);
 		var boughtGanifruit = setInterval(function() {
-			if($('.planetInteraction').text() == yes && stop == false) {
+			if($('.planetInteraction').text() == yes) {
 				// adds item to inventory if not already there
 				if(Oshu.items.ganifruit == 0) {
-					$('#inventory').append('<div class="inventory"><p>Ganifruit: <span class="ganifruitAmt"></span></p>');
+					$('.inventoryList').append('<li class="inventoryItem" id="myGanifruit">Ganifruit: <span class="ganifruitAmt"></span></li>');
 				}
 				// then adds quantity amt
 				var ganifruit = Oshu.items.ganifruit + 1;
 				console.log(ganifruit);
 				Oshu.items.ganifruit = ganifruit;
 				$('.ganifruitAmt').text(ganifruit);
-				stop = true;
+				
+				clearInterval(boughtGanifruit);
 			};
 		}, 1);
 	});

@@ -7,7 +7,6 @@ function randomizeQuests() {
 		var listNumber = Math.random();
 		if(Oshu.quests[i] == Oshu.quests[4]) {
 			$('.bucketList').append('<li class="quest">' + Oshu.quests[i][1][0] + '</li>')
-
 		}
 		else if(listNumber < 0.33) {
 			$('.bucketList').append('<li class="quest">' + Oshu.quests[i][1][0] + '</li>')
@@ -182,3 +181,21 @@ function completeItem(quest) {
 		}
 	});	
 }
+
+// ------------------------------------------------------
+// 				USE INVENTORY
+// ------------------------------------------------------
+
+$('.inventoryItem').click(function() {
+	console.log('ugh this sux');
+	console.log($(this).text());
+	// if($(this).attr('id') == 'myGanifruit') {
+	// 	console.log('myGanifruit');
+	// }
+	// else if($(this).attr('id') == 'myElectange') {
+	// 	console.log('myElectange');
+	// }
+	// else {
+	// 	console.log('myMistake');
+	// }
+})

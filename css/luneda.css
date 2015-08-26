@@ -1,5 +1,8 @@
 /* hide the whole planet */
-#lunedaMap {
+/*#lunedaMap {
+	display: none;
+}*/
+#map {
 	display: none;
 }
 

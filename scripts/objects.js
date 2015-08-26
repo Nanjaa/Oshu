@@ -11,6 +11,13 @@ var Oshu = {
 		electroSuit: false, 
 		clothes: true
 	},
+
+	// description: {
+	// 	electroSuit: "It looks like a diver's suit. The ElectroSuit is extremely heavy and gives off a faint buzz. Made to handle the electricity in the Lunedian Seas.",
+	// 	electange: "One of the famous electric fruits of Luneda, this brightly colored fruit is blue with yellow spots.",
+	// 	ganifruit: "A soft, purple fruit from Luneda. This fruit is not considered an electric fruit. Instead, it is famous for its sweet taste and use in gourmet delicacies.",
+	// 	sunstone: "The sunstone is small and orange, and gives off a calming warmth."
+	// },
 	
 	quests: [
 		['Luneda',
