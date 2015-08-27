@@ -5,7 +5,10 @@
 	margin-top: 300px;
 }
 /*hide the planet*/
-#kanedosMap {
+/*#kanedosMap {
+	display: none;
+}*/
+#map {
 	display: none;
 }
 /*planet details*/
@@ -30,8 +33,53 @@
 	margin-left: 50px;
 	color: #60b259;
 }
-#bitchSlap {
+#suckerPunch {
 	margin-top: 425px;
 	margin-left: 375px;
 	color: #63a0d8;
+}
+#sign {
+	color: pink;
+	margin-left: 300px;
+	margin-top: 25px;
+}
+#camelGuy {
+	color: purple;
+	margin-left: 50px;
+	margin-top: 200px;
+}
+#ticketStand {
+	color: orange;
+	margin-left: 150px;
+	margin-top: 200px;
+}
+#ticketGuy {
+	color: blue;
+	margin-left: 225px;
+	margin-top: 50px;
+}
+#brawler {
+	color: red;
+	margin-left: 350px;
+	margin-top: 225px;
+}
+#apprentice {
+	color: orange;
+	margin-left: 50px;
+	margin-top: 225px;
+}
+#suckerBartender {
+	color: yellow;
+	margin-left: 200px;
+	margin-top: 50px;
+}
+#kanedosJewelryLady {
+	color: indigo;
+	margin-left: 250px;
+	margin-top: 200px;
+}
+#kanedosJewelryDisplay {
+	color: green;
+	margin-left: 50px;
+	margin-top: 50px;
 }

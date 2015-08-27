@@ -21,7 +21,8 @@ var Oshu = {
 		clothes: false,
 		lunedaSnowglobe: false,
 		lunedaBobblehead: false,
-		lunedaPostcard: false
+		lunedaPostcard: false,
+		ticket: false
 	},
 
 	description: {
