@@ -22,7 +22,8 @@ var Oshu = {
 		lunedaSnowglobe: false,
 		lunedaBobblehead: false,
 		lunedaPostcard: false,
-		ticket: false
+		ticket: false,
+		jewelry: false
 	},
 
 	description: {

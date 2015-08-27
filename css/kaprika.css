@@ -4,7 +4,10 @@
 	margin-top: 250px;
 }
 /*hide the planet*/
-#kaprikaMap {
+/*#kaprikaMap {
+	display: none;
+}*/
+#map {
 	display: none;
 }
 /*planet details*/
@@ -21,4 +24,40 @@
 	color: brown;
 	margin-left: 50px;
 	margin-top: 350px;
+}
+#groveClose {
+	color: green;
+	margin-left: 115px;
+	margin-top: 100px;
+}
+#fairies {
+	color: yellow;
+	margin-left: 150px;
+	margin-top: 150px;
+}
+#treeGoons {
+	color: red;
+	margin-left: 50px;
+	margin-top: 225px;
+}
+#treeClose {
+	color: brown;
+	margin-left: 350px;
+	margin-top: 50px;
+}
+#hangingSkulls {
+	color: gray;
+	padding: 10px;
+	margin-left: 235px;
+	margin-top: 10px;
+}
+#fortuneTeller {
+	color: purple;
+	margin-left: 190px;
+	margin-top: 75px;
+}
+#crystalBall {
+	color: indigo;
+	margin-left: 200px;
+	margin-top: 225px;
 }
