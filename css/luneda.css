@@ -1,8 +1,5 @@
 /* hide the whole planet */
-/*#lunedaMap {
-	display: none;
-}*/
-#map {
+#lunedaMap {
 	display: none;
 }
 
@@ -179,4 +176,33 @@
 #chandeliers {
 	margin-left: 75px;
 	color: #ffc14a;
+}
+.drinkStand {
+	display: none;
+}
+#mysteriousMan {
+	color: pink;
+	height: 200px;
+	margin-left: 450px;
+	margin-top: 110px;
+	padding: 10px;
+}
+#bar {
+	color: brown;
+	margin-left: 50px;
+	margin-top: 200px;
+}
+#computerDesk {
+	color: gray;
+	margin-left: 300px;
+	margin-top: 100px;
+}
+#weatherman {
+	color: blue;
+	margin-left: 50px;
+	margin-top: 200px;
+}
+#lunedaMechanicMenu {
+	margin-left: 125px;
+	margin-top: 100px;
 }

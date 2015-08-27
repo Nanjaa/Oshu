@@ -30,6 +30,7 @@ $(document).ready(function() {
 	}
 	$('.return').click(function() {
 		lunedaReturn();
+		changeLocation('#lunedaMap');
 	});
 
 	// ________________________________________________________________
@@ -44,33 +45,66 @@ $(document).ready(function() {
 		var location = $(this).attr('id');
 		switch(location) {
 			case 'electricSeas': 
+				$('#beach').show();
+				$('.beachDetails').show();
+				$('.planetInteraction').writeText(beachText.welcome);
 				changeLocation('#beach');
 				break;
 			case 'sand':
+				$('#beach').show();
+				$('.beachDetails').show();
+				$('.planetInteraction').writeText(beachText.welcome);
 				changeLocation('#beach');
+				break;
+			case 'tikiHut': 
+				$('.beachDetails').hide();
+				$('.drinkStand').show();
 				break;
 			case 'danceHall':
 				changeLocation('.danceHall');
 				break;
 			case 'weather':
-
+				$('.lunedaCity').hide();
+				$('.weather').show();
+				changeLocation('.weather');
 				break;
-			case 'markets':
+			case 'marketCircle':
+				$('.lunedaCity').hide();
+				$('.marketStands').hide();
+				$('.theMarkets').show();
+				$('.marketDetails').show();
+				$('.planetInteraction').writeText(marketText.marketWelcome);
 				changeLocation('.theMarkets');
 				break;
 			case 'marketCentre':
+				$('.lunedaCity').hide();
+				$('.marketStands').hide();
+				$('.theMarkets').show();
+				$('.marketDetails').show();
+				$('.planetInteraction').writeText(marketText.marketWelcome);
 				changeLocation('.theMarkets');
 				break;
 			case 'lunedaMechanic':
-
+				$('.lunedaCity').hide();
+				$('.lunedaMechanic').show();
 				break;
 			case 'fruitStand':
+				$('.marketDetails').hide();
+				$('.fruitStand').show();
+				$('.planetInteraction').writeText(marketText.fruitWelcome);
+				maleVoice();
 				changeLocation('.fruitStand');
 				break;
 			case 'souvenirStand':
+				$('.marketDetails').hide();
+				$('.souvenirStand').show();
+				$('.planetInteraction').writeText(marketText.souvenirWelcome);
 				changeLocation('.souvenirStand');
 				break;
 			case 'clothesStand':
+				$('.marketDetails').hide();
+				$('.clothesStand').show();
+				$('.planetInteraction').writeText(marketText.clothesWelcome);
 				changeLocation('.clothesStand');
 				break;
 		}
@@ -83,13 +117,6 @@ $(document).ready(function() {
 	// |															   |
 	// |===============================================================|
 	// |_______________________________________________________________|
-
-
-	// brings you to the sea city detail
-	$('.visitSea').click(function() {
-		$('#beach').show();
-		$('.planetInteraction').writeText(beachText.welcome);
-	});
 
 	//************************ interact with the equipment shack ************************
 	$('#equipment').click(function() {
@@ -181,32 +208,6 @@ $(document).ready(function() {
 		souvenirNeedMore: "Sorry, but that's not enough! These are quality souvenirs, ma'am.",
 		souvenirReturn: "I hope you enjoy your souvenirs! Add it to your collection!"
 	};
-
-	$('.markets').click(function() {
-		$('.lunedaCity').hide();
-		$('.marketStands').hide();
-		$('.theMarkets').show();
-		$('.marketDetails').show();
-		$('.planetInteraction').writeText(marketText.marketWelcome);
-	});
-
-	$('#fruitStand').click(function() {
-		$('.marketDetails').hide();
-		$('.fruitStand').show();
-		$('.planetInteraction').writeText(marketText.fruitWelcome);
-		maleVoice();
-	});
-
-	$('#clothesStand').click(function() {
-		$('.marketDetails').hide();
-		$('.clothesStand').show();
-		$('.planetInteraction').writeText(marketText.clothesWelcome);
-	});
-	$('#souvenirStand').click(function() {
-		$('.marketDetails').hide();
-		$('.souvenirStand').show();
-		$('.planetInteraction').writeText(marketText.souvenirWelcome);
-	});
 
 	var yes = marketText.yes;
 	var no = marketText.no;
