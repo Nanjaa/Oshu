@@ -5,7 +5,10 @@
 	margin-top: 150px;
 }
 /*hide the planet*/
-#tyrianneMap {
+/*#tyrianneMap {
+	display: none;
+}*/
+#map {
 	display: none;
 }
 /*planet details*/
@@ -33,4 +36,42 @@
 #tyrianneJewelry {
 	color: #f4b234;
 	margin-left: 325px;
+}
+#poorManClose {
+	color: tan;
+	margin-left: 50px;
+	margin-top: 100px;
+}
+#fuzzbuttDoorman {
+	color: orange;
+	margin-left: 165px;
+	margin-top: 75px;
+}
+#sunstoneStand {
+	color: brown;
+	margin-left: 80px;
+	margin-top: 200px;
+}
+#sunstoneSign {
+	color: blue;
+	margin-left: 350px;
+	margin-top: 25px;
+}
+#tyrianneMenu {
+	margin-left: 125px;
+	margin-top: 100px;
+}
+#tyrianneJewelryLady {
+	color: yellow;
+	margin-left: 165px;
+	margin-top: 200px;
+}
+#tyrianneJewelryDisplay {
+	color: purple;
+	margin-left: 150px;
+	margin-top: 25px;
+}
+#libraryDoors {
+	margin-left: 85px;
+	margin-top: 150px;
 }
