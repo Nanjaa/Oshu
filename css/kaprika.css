@@ -4,12 +4,10 @@
 	margin-top: 250px;
 }
 /*hide the planet*/
-/*#kaprikaMap {
-	display: none;
-}*/
-#map {
+#kaprikaMap {
 	display: none;
 }
+
 /*planet details*/
 #theTree {
 	color: green;
