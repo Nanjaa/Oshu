@@ -246,3 +246,7 @@ h1 {
 #skipButton {
 	cursor: pointer;
 }
+.placeholder {
+	padding: 50px;
+	border: 1px solid white;
+}
