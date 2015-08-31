@@ -18,12 +18,13 @@ var Oshu = {
 		electange: 0,
 		sunstone: 0,
 		electroSuit: false, 
-		clothes: false,
+		clothes: true,
 		lunedaSnowglobe: false,
 		lunedaBobblehead: false,
 		lunedaPostcard: false,
 		ticket: false,
-		jewelry: false
+		jewelry: false,
+		libraryPass: false
 	},
 
 	description: {
@@ -36,6 +37,7 @@ var Oshu = {
 		lunedaSnowglobe: "The snowglobe has a bikini girl standing on the beach.",
 		lunedaBobblehead: "A cute bobblehead version of a storm chaser with binoculars.",
 		lunedaPostcard: "A simple postcard with a map of the capitol of Luneda",
+		libraryPass: "A small, laminated card that grants access to the Intergalactic Library",
 		sunstone: "The sunstone is small and orange, and gives off a calming warmth."
 	},
 	

@@ -133,7 +133,7 @@ $(document).ready(function() {
 		familyGoodNeut: "Oh my goodness, you’re right. I was being ignorant.",
 		// if they choose the above option, transfer player to familygoodgood!
 		familyNeut: "Do you feel your life is meaningless without your family?",
-		familyNeutKnows: "Is that why you decided to make use of the Termination program? Without your family, do you really feel like your life is meaningless?",
+		familyNeutKnows: "Is that why you decided to make use of the termination program? Without your family, do you really feel like your life is meaningless?",
 		familyNeutGood: "I see.",
 		familyNeutNeutMiss: "Forgive my intrusion, but why would you feel that way? The entirety that I have known you, miss, you have shown me that an android can be as complex and fascinating as any other being alive. All that time, you were alone. I feel that you are letting your family define you too much, and that you need to realize the personality and greatness that is you. No offense intended towards your family.",
 		familyNeutNeutOshu: "Forgive my intrusion, but why would you feel that way? The entirety that I have known you, Oshu, you have shown me that an android can be as complex and fascinating as any other being alive. All that time, you were alone. I feel that you are letting your family define you too much, and that you need to realize the personality and greatness that is you. No offense intended towards your family.",

@@ -397,7 +397,17 @@ $(document).ready(function() {
 		doorman: "A muscular doorman blocks the entrance to the Dance Hall. 'You can't get in without proper attire,' he says.",
 		danceIntro: "You step onto the busy dance floor. The music is happy and light, and everyone twirls around you.",
 		danceSight: "You see a man across the way that looks just like the picture. You take it out to double-check. It's definitely him!",
-		danceSpeak: "'What's this? Ah, I was told"
+		danceSpeak: "'What's this? Ah, I was told",
+		advice1: "I read you can attract fairies with shiny objects. How interesting!",
+		advice2: "Fuzzbutt factory is always running, but when was the last time you saw a Fuzzbutt toy? I think there's something fishy going on...",
+		advice3: "I heard the only way to turn off the Lifecycle Program on an android was to have a mechanic do it. Is that true?",
+		barryAdvice: "Barry used to work at the Intergalactic Library. He's told us tons of stories about it. He's the one wearing red.",
+		barryIntro: "Oh, the Intergalactic Library? I loved working there. It was one of my favorite jobs.",
+		barryOffer: "Only if you can answer my riddle!",
+		barryRiddle: "It runs and runs but can never flee. It is often watched but never sees. When long, it brings boredom, and when short, it brings fear. What is it?",
+		barryWrong: "Incorrect! It's TIME! That was fun, wasn't it? But I feel guilty, I shouldn't not let you come because you couldn't guess it... Here, just take this library pass.",
+		barryRight: "DING DING DING! You are correct! That was fun, wasn't it? Alright, you answered correctly, here's your library pass.",
+		barryGoodbye: "Go use your library pass! You won't believe how amazing it is there!"
 	}
 
 	$('#danceHall').click(function() {
@@ -409,10 +419,91 @@ $(document).ready(function() {
 			$('.planetInteraction').writeText(danceText.doorman);
 		}
 		else {
+			$('.noDancing').hide();
 			$('.danceDetails').show();
 			$('.planetInteraction').writeText(danceText.danceIntro);
 		}
 	});
+
+	var dancerSpeech = 1;
+	$('.dancer').click(function() {
+		switch(dancerSpeech) {
+			case 1: 
+				$('.planetInteraction').writeText(danceText.barryAdvice);
+				dancerSpeech = 2;
+				break;
+			case 2: 
+				$('.planetInteraction').writeText(danceText.advice1);
+				dancerSpeech = 3;
+				break;
+			case 3: 
+				$('.planetInteraction').writeText(danceText.advice2);
+				dancerSpeech = 4;
+				break;
+			case 4:
+				$('.planetInteraction').writeText(danceText.advice3);
+				dancerSpeech = 1;
+				break;
+		}
+	})
+
+	$('#dancer4').click(function() {
+		if(Oshu.items.libraryPass) {
+			$('.planetInteraction').writeText(danceText.barryGoodbye);
+		}
+		else {
+			$('.planetInteraction').writeText(danceText.barryIntro);
+			var barry1 = setInterval(function() {
+				if($('.planetInteraction').text() == danceText.barryIntro) {
+					$('.planetInteraction').append('<ul><li class="clickHere">Is there a way you could get me into the library?</li></ul>');
+					clearInterval(barry1);
+					$('.clickHere').click(function() {
+						$('.planetInteraction').text('');
+						$('.planetInteraction').writeText(danceText.barryOffer);
+						var barry2 = setInterval(function() {
+							if($('.planetInteraction').text() == danceText.barryOffer) {
+								$('.planetInteraction').append('<ul><li class="clickHere">Alright</li></ul>');
+								clearInterval(barry2);
+								$('.clickHere').click(function() {
+									$('.planetInteraction').text('')
+									$('.planetInteraction').writeText(danceText.barryRiddle);
+									var barry3 = setInterval(function() {
+										if($('.planetInteraction').text() == danceText.barryRiddle) {
+											clearInterval(barry3);
+											var barry4 = setTimeout(function() {
+												$('.planetInteraction').text('');
+												$('.planetInteraction').append('<ul><li class="clickHere shadow">Your shadow?</li><li class="clickHere time">Time?</li>');
+												$('.shadow').click(function() {
+													$('.planetInteraction').text('');
+													$('.planetInteraction').writeText(danceText.barryWrong);
+													$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
+													// now you can select the library pass
+													$('#libraryPass').click(function() {
+														inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
+													});
+												})
+
+												$('.time').click(function() {
+													$('.planetInteraction').text('');
+													$('.planetInteraction').writeText(danceText.barryRight);
+													$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
+													// now you can select the library pass
+													$('#libraryPass').click(function() {
+														inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
+													});
+												});
+											}, 3000);
+										};
+									}, 1);									
+								})
+
+							}
+						}, 1)
+					})
+				};
+			}, 1);			
+		}
+	})
 
 
 

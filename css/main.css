@@ -253,3 +253,6 @@ h1 {
 .planetInteraction {
 	border: 1px solid white;
 }
+.clickHere {
+	cursor: pointer;
+}
