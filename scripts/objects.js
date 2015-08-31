@@ -18,14 +18,15 @@ var Oshu = {
 		electange: 0,
 		sunstone: 0,
 		electroSuit: false, 
-		clothes: true,
+		clothes: false,
 		lunedaSnowglobe: false,
 		lunedaBobblehead: false,
 		lunedaPostcard: false,
 		ticket: false,
 		jewelry: false,
 		libraryPass: false, 
-		weatherSpecimen: false
+		weatherSpecimen: false,
+		kanedosJewelry: false
 	},
 
 	description: {
@@ -40,6 +41,7 @@ var Oshu = {
 		lunedaPostcard: "A simple postcard with a map of the capitol of Luneda",
 		libraryPass: "A small, laminated card that grants access to the Intergalactic Library",
 		weatherSpecimen: "A vial of rain water that needs to be delivered to AliNada",
+		kanedosJewelry: "A silver necklace with bright red stones along the length of the chain",
 		sunstone: "The sunstone is small and orange, and gives off a calming warmth."
 	},
 	
