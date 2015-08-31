@@ -24,7 +24,8 @@ var Oshu = {
 		lunedaPostcard: false,
 		ticket: false,
 		jewelry: false,
-		libraryPass: false
+		libraryPass: false, 
+		weatherSpecimen: false
 	},
 
 	description: {
@@ -38,6 +39,7 @@ var Oshu = {
 		lunedaBobblehead: "A cute bobblehead version of a storm chaser with binoculars.",
 		lunedaPostcard: "A simple postcard with a map of the capitol of Luneda",
 		libraryPass: "A small, laminated card that grants access to the Intergalactic Library",
+		weatherSpecimen: "A vial of rain water that needs to be delivered to AliNada",
 		sunstone: "The sunstone is small and orange, and gives off a calming warmth."
 	},
 	

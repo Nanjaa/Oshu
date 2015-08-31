@@ -506,11 +506,68 @@ $(document).ready(function() {
 	})
 
 
+	// ________________________________________________________________
+	// | ==============================================================|
+	// |															   |
+	// |					THE WEATHER BUREAU 						   |
+	// |															   |
+	// |===============================================================|
+	// |_______________________________________________________________|
 
+	var weatherText = {
+		intro: "You step into a weather monitoring facility. There are computers everywhere, and a few employees. They look hard at work. One in particular stands out.",
+		weathermanIntro: "You want to join us on a storm chase, huh? Well, I mean, it's possible, but I'm going to need 1,000 coins...",
+		noCoinsLie: "You liar! You don't have that much money! Tell you what. If you deliver this specimen to the weather department on AliNada, I'll let you go on a chase.",
+		noCoinsTruth: "Oh, okay. Well, I guess if you do something for me, I can let you join us on a chase. Go deliver this specimen to the weather department on AliNada.",
+		coins: "Fantastic! Follow me!",
+		Return: "Did you drop off the specimen?",
+		noSpecimen: "Oh. Well, go drop it off! The sooner you do that, the sooner you can see the storms.",
+		specimen: "Great! Thank you so much. Follow me, let's go chase some storms!"
+	}
 
+	var specimenInventory = false;
 
+	// write the description of the weather monitoring facility
+	$('#weather').click(function() {
+			$('.planetInteraction').writeText(weatherText.intro);
+	});
 
-
+	// speak to the weatherman
+	$('#weatherman').click(function() {
+		if(specimenInventory == false) {
+			$('.planetInteraction').writeText(weatherText.weathermanIntro);
+			var wait = setInterval(function() {
+				if($('.planetInteraction').text() == weatherText.weathermanIntro) {
+					clearInterval(wait);
+					$('.planetInteraction').append("<ul><li class='clickHere weatherCoins'>Here you go</li><li class='clickHere weatherNoCoins'>I don't have that kind of money!</li></ul>")
+					$('.weatherCoins').click(function() {
+						if(Oshu.coins >= 1000) {
+							$('.planetInteraction').writeText(weatherText.coins);
+						}
+						else {
+							$('.planetInteraction').writeText(weatherText.noCoinsLie);
+							$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
+							// now you can select the library pass
+							$('#weatherSpecimen').click(function() {
+								inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+							});
+						}
+					});
+					$('.weatherNoCoins').click(function() {
+						$('.planetInteraction').writeText(weatherText.noCoinsTruth);
+						$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
+						// now you can select the library pass
+						$('#weatherSpecimen').click(function() {
+							inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+						});
+					});
+				};
+			}, 1);
+		}
+		else {
+			$('.planetInteraction').writeText(weatherText.Return);
+		}
+	});
 
 
 
