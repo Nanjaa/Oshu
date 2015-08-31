@@ -569,6 +569,25 @@ $(document).ready(function() {
 		}
 	});
 
+	// ________________________________________________________________
+	// | ==============================================================|
+	// |															   |
+	// |						MECHANIC 							   |
+	// |															   |
+	// |===============================================================|
+	// |_______________________________________________________________|
+
+	var mechanicText = {
+		intro: "You walk into the mechanic's shop, and see a menu with his options and prices."
+	}
+
+	$('#lunedaMechanic').click(function() {
+		$('.planetInteraction').writeText(mechanicText.intro);
+	})
+
+	$('#lunedaLifecycleAdd').click(function() {
+		lifeEvent(-15);
+	});
 
 
 

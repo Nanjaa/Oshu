@@ -203,6 +203,24 @@
 	margin-top: 200px;
 }
 #lunedaMechanicMenu {
-	margin-left: 125px;
+	margin-left: 50px;
 	margin-top: 100px;
+	border: 1px solid white;
+	height: 200px;
+	width: 500px;
+	padding-left: 15px;
+}
+#lunedaLifecycleShutoff {
+	margin-top: 50px;
+}
+#lunedaGeneralRobot {
+	margin-top: 80px;
+}
+#lunedaLifecycleAdd {
+	margin-top: 110px;
+}
+#lunedaMenuTitle {
+	font-size: 20px;
+	margin-left: 150px;
+	padding: 10px;
 }
