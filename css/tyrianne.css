@@ -5,7 +5,7 @@
 	margin-top: 150px;
 }
 /*hide the planet*/
-#tyrianneMap {
+#map {
 	display: none;
 }
 
@@ -46,14 +46,18 @@
 	margin-top: 75px;
 }
 #sunstoneStand {
-	color: brown;
-	margin-left: 80px;
-	margin-top: 200px;
+	color: #3a3b63;
+	margin-left: 70px;
+	margin-top: 50px;
 }
 #sunstoneSign {
-	color: blue;
-	margin-left: 350px;
-	margin-top: 25px;
+	margin-left: 150px;
+	margin-top: 265px;
+}
+#sunstoneDisplay {
+	color: #ffe237;
+	margin-left: 315px;
+	margin-top: 150px;
 }
 #tyrianneMenu {
 	margin-left: 125px;
