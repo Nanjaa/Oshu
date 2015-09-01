@@ -47,9 +47,15 @@ function lifeEvent(minutesLost) {
 // 					WRITE TEXT
 // ------------------------------------------------------
 
+function resetText() {
+	$(this).text('');
+	$('.planetInteraction').text('');
+}
+
 (function($) {
+	resetText();
 	$.fn.writeText = function(content) {
-		$('.gameText').text('');
+		resetText();
 		var contentArray = content.split(""),
 			current = 0,
 			click = false,
@@ -255,3 +261,20 @@ function changeLocation(newLocation) {
 $('#myShip').click(function() {
 	changeLocation('#map');
 })
+
+// ------------------------------------------------------
+// 				TEST CONVERSATION FUNCTION
+// ------------------------------------------------------
+
+	// function test(text1, response1, response2, response3) {
+	// 	$('.planetInteraction').writeText(text1);
+	// 	var test1 = setInterval(function() {
+	// 		if($('.planetInteraction').text() == text1) {
+	// 			clearInterval(test1);
+	// 			$('.planetInteraction').append('<ul class="test2">' + response1);
+	// 			$('.test2').click(function() {
+	// 				console.log('hello2');
+	// 			})
+	// 		}
+	// 	}, 1)
+	// }

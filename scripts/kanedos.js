@@ -81,7 +81,7 @@ $(document).ready(function() {
 	// ________________________________________________________________
 	// | ==============================================================|
 	// |															   |
-	// |						CAMEL 	 RENTAL 	 				   |
+	// |						JEWELRY STORE	 	 				   |
 	// |															   |
 	// |===============================================================|
 	// |_______________________________________________________________|
@@ -148,8 +148,96 @@ $(document).ready(function() {
 	
 	})
 
+	// ________________________________________________________________
+	// | ==============================================================|
+	// |															   |
+	// |						SUCKER PUNCH 	 	 				   |
+	// |															   |
+	// |===============================================================|
+	// |_______________________________________________________________|
 
+	var barText = {
+		intro: "You walk into a bar called Sucker Punch. There's a rough-looking crowd inside. You walk up to the bar.",
+		bartenderIntro: "Welcome to Sucker Punch! What can I get you today?",
+		kanedome: "You're a cheapskate, huh? Well, I've heard talking to current or retired fighters works well. That guy over there is a fan, why don't you ask him?",
+		classes: "I'm not going to beat around the bush, real classes here are hard to get into if you're not a native. There are lots of tourist classes you can take, though. I know one of my customers studies at one of the dojos nearby.",
+		apprenticeIntro: "I'm just taking a break in between classes. Fighting is thirsty work...",
+		apprentice2: "And why should I help you?",
+		apprenticeSympathy: "If you're sick, why would you want to strain your body in the dojo?",
+		apprenticeThreaten: "I'm going to pretend that was a joke.",
+		brawlerIntro: "Man, I love seeing the fights at the Kanedome. It's the greatest!"
+	}
 
+	$('#suckerPunch').click(function() {
+		$('.planetInteraction').writeText(barText.intro);
+	})
+
+	$('#suckerBartender').click(function() {
+		$('.planetInteraction').writeText(barText.bartenderIntro);
+		var bar1 = setInterval(function() {
+			if($('.planetInteraction').text() == barText.bartenderIntro) {
+				clearInterval(bar1);
+				// $('.planetInteraction').text('');
+				$('.planetInteraction').append("<ul><li class='clickHere' id='kanedomeQuestion'>Can I get into the Kanedome without paying?</li><li class='clickHere' id='classesQuestion'>How do I get access to martial arts classes?</li></ul>");
+				$('#kanedomeQuestion').click(function() {
+					$('.planetInteraction').writeText(barText.kanedome);
+				});
+				$('#classesQuestion').click(function() {
+					$('.planetInteraction').writeText(barText.classes);
+				});
+			} 
+		}, 1)
+	})
+
+	// ************************ THE APPRENTICE ************************
+
+	$('#apprentice').click(function() {
+		$('.planetInteraction').writeText(barText.apprenticeIntro);
+		askApprentice();
+
+	});
+
+	function askApprentice() {
+		var bar2 = setInterval(function() {
+			if($('.planetInteraction').text() == barText.apprenticeIntro) {
+				clearInterval(bar2);
+				$('.planetInteraction').append("<ul><li class='clickHere'>Can you help me get into a martial arts class?</li></ul>");
+				$('.clickHere').click(function() {
+					$('.planetInteraction').text('');
+					$('.planetInteraction').writeText(barText.apprentice2);
+					convinceApprentice1();
+				})
+			}
+		}, 1)
+	};
+
+	function convinceApprentice1() {
+		var bar3 = setInterval(function() {
+			if($('.planetInteraction').text == barText.apprentice2) {
+				clearInterval(bar3);
+				$('.planetInteraction').append("<ul><li class='clickHere' id='sympathy'>I'm dying, and it's on my bucket list.</li><li class='clickHere' id='threaten'>You don't want to find out what'll happen if you say no...</li></ul>");
+				$('#sympathy').click(function() {
+					sympathyApprentice();
+				})
+				$('#threaten').click(function() {
+					threatenApprentice();
+				})
+			}
+		}, 1)
+	};
+
+	function sympathyApprentice() {
+		$('.planetInteraction').writeText(barText.apprenticeSympathy);
+		var bar4 = setInterval(function() {
+			if($('.planetInteraction').text() == barText.apprenticeSympathy) {
+				$('.planetInteraction').append("<ul><li class='clickHere' id='android'>I'm not sick, I'm an android. I'm using the Lifecycle Program.</li>")
+			}		
+		}, 1); 
+	};
+
+	function threatenApprentice() {
+		$('.planetInteraction').writeText(barText.apprenticeThreaten);
+	}
 
 
 
