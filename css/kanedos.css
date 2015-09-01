@@ -35,48 +35,52 @@
 	margin-left: 375px;
 	color: #63a0d8;
 }
-#sign {
-	color: pink;
-	margin-left: 300px;
+#camelSign {
+	margin-left: 350px;
 	margin-top: 25px;
 }
 #camelGuy {
-	color: purple;
-	margin-left: 50px;
-	margin-top: 200px;
+	color: #eecb5f;
+	margin-left: 150px;
+	margin-top: 100px;
 }
 #ticketStand {
-	color: orange;
-	margin-left: 150px;
-	margin-top: 200px;
+	color: #fff4b3;
+	margin-left: 175px;
+	margin-top: 15px;
 }
 #ticketGuy {
-	color: blue;
-	margin-left: 225px;
-	margin-top: 50px;
+	color: #ff7428;
+	margin-left: 229px;
+	margin-top: 90px;
 }
 #brawler {
 	color: red;
-	margin-left: 350px;
-	margin-top: 225px;
+	margin-left: 475px;
+	margin-top: 125px;
 }
 #apprentice {
 	color: orange;
-	margin-left: 50px;
-	margin-top: 225px;
+	margin-left: 15px;
+	margin-top: 125px;
 }
 #suckerBartender {
-	color: yellow;
-	margin-left: 200px;
-	margin-top: 50px;
+	color: #e14b30;
+	margin-left: 115px;
+	margin-top: 10px;
 }
 #kanedosJewelryLady {
-	color: indigo;
-	margin-left: 250px;
-	margin-top: 200px;
+	color: #f01340;
+	margin-left: 350px;
+	margin-top: 100px;
 }
 #kanedosJewelryDisplay {
-	color: green;
+	color: #ffb9eb;
 	margin-left: 50px;
 	margin-top: 50px;
+}
+#kanedosJewelryPieces {
+	color: gold;
+	margin-left: 60px;
+	margin-top: 72px;
 }

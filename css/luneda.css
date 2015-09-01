@@ -181,26 +181,29 @@
 	display: none;
 }
 #mysteriousMan {
-	color: pink;
-	height: 200px;
+	color: #687a8b;
 	margin-left: 450px;
-	margin-top: 110px;
-	padding: 10px;
+	margin-top: 90px;
 }
 #bar {
-	color: brown;
+	color: #ce761d;
 	margin-left: 50px;
-	margin-top: 200px;
-}
-#computerDesk {
-	color: gray;
-	margin-left: 300px;
 	margin-top: 100px;
 }
+#computerDesk1 {
+	color: gray;
+	margin-left: 100px;
+	margin-top: 15px;
+}
+#computerDesk2 {
+	color: gray;
+	margin-left: 325px;
+	margin-top: 150px;
+}
 #weatherman {
-	color: blue;
-	margin-left: 50px;
-	margin-top: 200px;
+	color: #ffa700;
+	margin-left: 175px;
+	margin-top: 175px;
 }
 #lunedaMechanicMenu {
 	margin-left: 50px;
