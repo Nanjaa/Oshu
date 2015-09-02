@@ -49,7 +49,7 @@ function lifeEvent(minutesLost) {
 
 function resetText() {
 	$(this).text('');
-	$('.planetInteraction').text('');
+	$('#interactionText').text('');
 }
 
 (function($) {
@@ -108,10 +108,10 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 		showOptions(text1);
 	}, 1000);
 	function showOptions(text1) {
-		if($('.planetInteraction').text() == text1) {
+		if($('#interactionText').text() == text1) {
 			clearInterval(displayOptions);
 			setTimeout(function() {
-				$('.planetInteraction').writeText(text2);
+				$('#interactionText').writeText(text2);
 			}, 2000);
 		};				
 	};
@@ -120,25 +120,25 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 		showYesNo(text2, price, yes, no, needMore)
 	}, 1000);	
 	function showYesNo(text2, price, yes, no, needMore) {
-		if($('.planetInteraction').text() == text2) {
+		if($('#interactionText').text() == text2) {
 			clearInterval(displayYesNo);
 			function yesNo(price) {
-				$('.planetInteraction').append('<ul><li class="options yes">Yes</li><li class="options no">No</li></ul>')
+				$('#interactionText').append('<ul><li class="options yes">Yes</li><li class="options no">No</li></ul>')
 			};
 			setTimeout(yesNo(), 1000);
 		};
 		$('.yes').click(function() {
 			var coins = Oshu.coins;
 			if(coins >= price) {
-	 			$('.planetInteraction').writeText(yes);	
+	 			$('#interactionText').writeText(yes);	
 	 			payMoney(price);			
 			}
 			else {
-				$('.planetInteraction').writeText(needMore);
+				$('#interactionText').writeText(needMore);
 			}
 		});
 		$('.no').click(function() {
-			$('.planetInteraction').writeText(no);
+			$('#interactionText').writeText(no);
 		})
 	}
 };
@@ -167,24 +167,24 @@ $('.planet').click(function() {
 	var destination = $(this).attr('id');
 	switch(destination) {
 		case 'Luneda':
-			$('.planetInteraction').css('color', '#00bece');
-			$('.planetInteraction').css('border', '1px solid #00bece');
+			$('#interactionText').css('color', '#00bece');
+			$('#interactionText').css('border', '1px solid #00bece');
 			break;
 		case 'Kanedos':
-			$('.planetInteraction').css('color', '#ff4d00');
-			$('.planetInteraction').css('border', '1px solid #ff4d00');
+			$('#interactionText').css('color', '#ff4d00');
+			$('#interactionText').css('border', '1px solid #ff4d00');
 			break;
 		case 'Tyrianne':
-			$('.planetInteraction').css('color', '#8f46dd');
-			$('.planetInteraction').css('border', '1px solid #8f46dd');
+			$('#interactionText').css('color', '#8f46dd');
+			$('#interactionText').css('border', '1px solid #8f46dd');
 			break;
 		case 'Kaprika':
-			$('.planetInteraction').css('color', '#00b844');
-			$('.planetInteraction').css('border', '1px solid #00b844');
+			$('#interactionText').css('color', '#00b844');
+			$('#interactionText').css('border', '1px solid #00b844');
 			break;
 		case 'AliNada':
-			$('.planetInteraction').css('color', '#e32f2f');
-			$('.planetInteraction').css('border', '1px solid #e32f2f');
+			$('#interactionText').css('color', '#e32f2f');
+			$('#interactionText').css('border', '1px solid #e32f2f');
 			break;
 	}
 });
@@ -266,15 +266,36 @@ $('#myShip').click(function() {
 // 				TEST CONVERSATION FUNCTION
 // ------------------------------------------------------
 
-	// function test(text1, response1, response2, response3) {
-	// 	$('.planetInteraction').writeText(text1);
-	// 	var test1 = setInterval(function() {
-	// 		if($('.planetInteraction').text() == text1) {
-	// 			clearInterval(test1);
-	// 			$('.planetInteraction').append('<ul class="test2">' + response1);
-	// 			$('.test2').click(function() {
-	// 				console.log('hello2');
-	// 			})
-	// 		}
-	// 	}, 1)
-	// }
+function optionOne(referenceText, option) {
+	var option1 = setInterval(function() {
+		if($('#interactionText').text() == referenceText) {
+			clearInterval(option1);
+			$('#optionOne').show();
+			$('#optionOne').text(option);
+		}
+	}, 1)
+}
+function optionTwo(referenceText, option) {
+	var option2 = setInterval(function() {
+		if($('#interactionText').text() == referenceText) {
+			clearInterval(option2);
+			$('#optionTwo').show();
+			$('#optionTwo').text(option);
+		}
+	}, 1)
+}
+function optionThree(referenceText, option) {
+	var option3 = setInterval(function() {
+		if($('#interactionText').text() == referenceText) {
+			clearInterval(option3);
+			$('#optionThree').show();
+			$('#optionThree').text(option);
+		}
+	}, 1)
+}
+
+$('.option').click(function() {
+	$('#optionOne').hide();
+	$('#optionTwo').hide();
+	$('#optionThree').hide();
+})

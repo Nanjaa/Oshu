@@ -227,7 +227,8 @@ h1 {
 #miloInteraction {
 	display: none;
 }
-.planetInteraction {
+#planetInteraction {
+	border: 1px solid white;
 	position: absolute;
 	width: 540px;
 	padding: 5px;
@@ -250,9 +251,9 @@ h1 {
 	padding: 50px;
 	border: 1px solid white;
 }
-.planetInteraction {
-	border: 1px solid white;
-}
 .clickHere {
 	cursor: pointer;
+}
+#optionOne, #optionTwo, #optionThree {
+	display: none;
 }

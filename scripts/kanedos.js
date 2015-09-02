@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('.kanedosCity').click(function() {
 		$('.kanedosCity').hide();
 		$('.return').show();
-		$('.planetInteraction').show();
+		$('#planetInteraction').show();
 	})
 
 	// takes you back to the city map from any city details
@@ -69,11 +69,11 @@ $(document).ready(function() {
 	};
 
 	$('#camelRental').click(function() {
-		$('.planetInteraction').writeText(camelText.intro);
+		$('#interactionText').writeText(camelText.intro);
 	});
 
 	$('#camelGuy').click(function() {
-		$('.planetInteraction').writeText(camelText.guyIntro);
+		$('#interactionText').writeText(camelText.guyIntro);
 		displayOptions(camelText.guyIntro, camelText.options, 25, camelText.yes, camelText.no, camelText.noCoins);
 	});
 
@@ -104,21 +104,21 @@ $(document).ready(function() {
 
 	$('#kanedosJewelry').click(function() {
 		jewelryStatus = 1;
-		$('.planetInteraction').writeText(jewelryText.intro);
+		$('#interactionText').writeText(jewelryText.intro);
 	});
 
 	$('#kanedosJewelryLady').click(function() {
 		switch(jewelryStatus) {
 			case 1:
-				$('.planetInteraction').writeText(jewelryText.ladyIntro);
+				$('#interactionText').writeText(jewelryText.ladyIntro);
 				jewelryStatus = 2;
 				break;
 			case 2:
-				$('.planetInteraction').writeText(jewelryText.advice1);
+				$('#interactionText').writeText(jewelryText.advice1);
 				jewelryStatus = 3;
 				break;
 			case 3: 
-				$('.planetInteraction').writeText(jewelryText.advice2);
+				$('#interactionText').writeText(jewelryText.advice2);
 				jewelryStatus = 2;
 				break;
 		}
@@ -126,13 +126,13 @@ $(document).ready(function() {
 
 	$('#kanedosJewelryDisplay').click(function() {
 		if(Oshu.items.kanedosJewelry) {
-			$('.planetInteraction').writeText(jewelryText.jewelryGoodbye);
+			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
 		}
 		else {
-			$('.planetInteraction').writeText(jewelryText.purchase);
+			$('#interactionText').writeText(jewelryText.purchase);
 			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
 			var buyJewelry = setInterval(function() {
-				if($('.planetInteraction').text() == jewelryText.yes) {
+				if($('#planetInteraction').text() == jewelryText.yes) {
 					// adds item to inventory if not already there
 					$('.inventoryList').append('<li class="inventoryItem"><span id="kanedosNecklace">Necklace from Kanedos</span></li>');
 					Oshu.items.kanedosJewelry = true;
@@ -168,22 +168,22 @@ $(document).ready(function() {
 		brawlerIntro: "Man, I love seeing the fights at the Kanedome. It's the greatest!"
 	}
 
-	$('#suckerPunch').click(function() {
-		$('.planetInteraction').writeText(barText.intro);
-	})
+	// $('#suckerPunch').click(function() {
+	// 	$('#interactionText').writeText(barText.intro);
+	// })
 
 	$('#suckerBartender').click(function() {
-		$('.planetInteraction').writeText(barText.bartenderIntro);
+		$('#interactionText').writeText(barText.bartenderIntro);
 		var bar1 = setInterval(function() {
-			if($('.planetInteraction').text() == barText.bartenderIntro) {
+			if($('#planetInteraction').text() == barText.bartenderIntro) {
 				clearInterval(bar1);
-				// $('.planetInteraction').text('');
-				$('.planetInteraction').append("<ul><li class='clickHere' id='kanedomeQuestion'>Can I get into the Kanedome without paying?</li><li class='clickHere' id='classesQuestion'>How do I get access to martial arts classes?</li></ul>");
+				// $('#planetInteraction').text('');
+				$('#planetInteraction').append("<ul><li class='clickHere' id='kanedomeQuestion'>Can I get into the Kanedome without paying?</li><li class='clickHere' id='classesQuestion'>How do I get access to martial arts classes?</li></ul>");
 				$('#kanedomeQuestion').click(function() {
-					$('.planetInteraction').writeText(barText.kanedome);
+					$('#interactionText').writeText(barText.kanedome);
 				});
 				$('#classesQuestion').click(function() {
-					$('.planetInteraction').writeText(barText.classes);
+					$('#interactionText').writeText(barText.classes);
 				});
 			} 
 		}, 1)
@@ -192,19 +192,19 @@ $(document).ready(function() {
 	// ************************ THE APPRENTICE ************************
 
 	$('#apprentice').click(function() {
-		$('.planetInteraction').writeText(barText.apprenticeIntro);
+		$('#interactionText').writeText(barText.apprenticeIntro);
 		askApprentice();
 
 	});
 
 	function askApprentice() {
 		var bar2 = setInterval(function() {
-			if($('.planetInteraction').text() == barText.apprenticeIntro) {
+			if($('#planetInteraction').text() == barText.apprenticeIntro) {
 				clearInterval(bar2);
-				$('.planetInteraction').append("<ul><li class='clickHere'>Can you help me get into a martial arts class?</li></ul>");
+				$('#planetInteraction').append("<ul><li class='clickHere'>Can you help me get into a martial arts class?</li></ul>");
 				$('.clickHere').click(function() {
-					$('.planetInteraction').text('');
-					$('.planetInteraction').writeText(barText.apprentice2);
+					$('#planetInteraction').text('');
+					$('#interactionText').writeText(barText.apprentice2);
 					convinceApprentice1();
 				})
 			}
@@ -213,9 +213,9 @@ $(document).ready(function() {
 
 	function convinceApprentice1() {
 		var bar3 = setInterval(function() {
-			if($('.planetInteraction').text == barText.apprentice2) {
+			if($('#planetInteraction').text == barText.apprentice2) {
 				clearInterval(bar3);
-				$('.planetInteraction').append("<ul><li class='clickHere' id='sympathy'>I'm dying, and it's on my bucket list.</li><li class='clickHere' id='threaten'>You don't want to find out what'll happen if you say no...</li></ul>");
+				$('#planetInteraction').append("<ul><li class='clickHere' id='sympathy'>I'm dying, and it's on my bucket list.</li><li class='clickHere' id='threaten'>You don't want to find out what'll happen if you say no...</li></ul>");
 				$('#sympathy').click(function() {
 					sympathyApprentice();
 				})
@@ -227,17 +227,29 @@ $(document).ready(function() {
 	};
 
 	function sympathyApprentice() {
-		$('.planetInteraction').writeText(barText.apprenticeSympathy);
+		$('#interactionText').writeText(barText.apprenticeSympathy);
 		var bar4 = setInterval(function() {
-			if($('.planetInteraction').text() == barText.apprenticeSympathy) {
-				$('.planetInteraction').append("<ul><li class='clickHere' id='android'>I'm not sick, I'm an android. I'm using the Lifecycle Program.</li>")
+			if($('#planetInteraction').text() == barText.apprenticeSympathy) {
+				$('#planetInteraction').append("<ul><li class='clickHere' id='android'>I'm not sick, I'm an android. I'm using the Lifecycle Program.</li>")
 			}		
 		}, 1); 
 	};
 
 	function threatenApprentice() {
-		$('.planetInteraction').writeText(barText.apprenticeThreaten);
+		$('#interactionText').writeText(barText.apprenticeThreaten);
 	}
+
+
+	$('#brawler').click(function() {
+		$('#interactionText').writeText(barText.apprenticeThreaten);
+		optionOne(barText.intro, barText.apprenticeIntro);
+		optionTwo(barText.intro, barText.apprentice2);
+		$('#optionOne').click(function() {
+			$('#interactionText').writeText('hello');
+			optionOne('hello', 'it worked');
+			optionTwo('hello', 'you rock');
+		})
+	})
 
 
 
