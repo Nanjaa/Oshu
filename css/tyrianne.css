@@ -5,7 +5,7 @@
 	margin-top: 150px;
 }
 /*hide the planet*/
-#map {
+#tyrianneMap {
 	display: none;
 }
 
@@ -64,16 +64,49 @@
 	margin-top: 100px;
 }
 #tyrianneJewelryLady {
-	color: yellow;
-	margin-left: 165px;
-	margin-top: 200px;
+	color: #f46a2e;
+	margin-left: 250px;
+	margin-top: 125px;
 }
 #tyrianneJewelryDisplay {
-	color: purple;
-	margin-left: 150px;
-	margin-top: 25px;
+	color: #782020;
+	margin-left: 185px;
+	margin-top: 15px;
+}
+#tyrianneJewelryPieces {
+	color: silver;
+	margin-left: 195px;
+	margin-top: 37px;
 }
 #libraryDoors {
-	margin-left: 85px;
-	margin-top: 150px;
+	color: #7be8ff;
+	margin-left: 200px;
+	margin-top: 75px;
+}
+#libraryGuard {
+	color: #7b84ff;
+	margin-left: 425px;
+	margin-top: 287px;
+}
+#tyrianneMechanicMenu {
+	margin-left: 50px;
+	margin-top: 100px;
+	border: 1px solid white;
+	height: 200px;
+	width: 500px;
+	padding-left: 15px;
+}
+#tyrianneLifecycleShutoff {
+	margin-top: 50px;
+}
+#tyrianneGeneralRobot {
+	margin-top: 80px;
+}
+#tyrianneLifecycleAdd {
+	margin-top: 110px;
+}
+#tyrianneMenuTitle {
+	font-size: 20px;
+	margin-left: 150px;
+	padding: 10px;
 }
