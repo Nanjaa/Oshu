@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('.aliNadaCity').click(function() {
 		$('.aliNadaCity').hide();
 		$('.return').show();
-		$('.planetInteraction').show();
+		$('#interactionText').show();
 	})
 
 	// takes you back to the city map from any city details

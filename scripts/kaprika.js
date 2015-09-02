@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('.kaprikaCity').click(function() {
 		$('.kaprikaCity').hide();
 		$('.return').show();
-		$('.planetInteraction').show();
+		$('#interactionText').show();
 	})
 
 	// takes you back to the city map from any city details

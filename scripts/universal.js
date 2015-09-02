@@ -167,24 +167,24 @@ $('.planet').click(function() {
 	var destination = $(this).attr('id');
 	switch(destination) {
 		case 'Luneda':
-			$('#interactionText').css('color', '#00bece');
-			$('#interactionText').css('border', '1px solid #00bece');
+			$('.planetInteraction').css('color', '#00bece');
+			$('.planetInteraction').css('border', '1px solid #00bece');
 			break;
 		case 'Kanedos':
-			$('#interactionText').css('color', '#ff4d00');
-			$('#interactionText').css('border', '1px solid #ff4d00');
+			$('.planetInteraction').css('color', '#ff4d00');
+			$('.planetInteraction').css('border', '1px solid #ff4d00');
 			break;
 		case 'Tyrianne':
-			$('#interactionText').css('color', '#8f46dd');
-			$('#interactionText').css('border', '1px solid #8f46dd');
+			$('.planetInteraction').css('color', '#8f46dd');
+			$('.planetInteraction').css('border', '1px solid #8f46dd');
 			break;
 		case 'Kaprika':
-			$('#interactionText').css('color', '#00b844');
-			$('#interactionText').css('border', '1px solid #00b844');
+			$('.planetInteraction').css('color', '#00b844');
+			$('.planetInteraction').css('border', '1px solid #00b844');
 			break;
 		case 'AliNada':
-			$('#interactionText').css('color', '#e32f2f');
-			$('#interactionText').css('border', '1px solid #e32f2f');
+			$('.planetInteraction').css('color', '#e32f2f');
+			$('.planetInteraction').css('border', '1px solid #e32f2f');
 			break;
 	}
 });

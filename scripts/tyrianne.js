@@ -4,7 +4,7 @@ $(document).ready(function() {
 	$('.tyrianneCity').click(function() {
 		$('.tyrianneCity').hide();
 		$('.return').show();
-		$('.planetInteraction').show();
+		$('#interactionText').show();
 	})
 
 	// takes you back to the city map from any city details

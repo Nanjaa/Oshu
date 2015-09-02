@@ -19,7 +19,7 @@ $(document).ready(function() {
 	$('.lunedaCity').click(function() {
 		$('.lunedaCity').hide();
 		$('.return').show();
-		$('.planetInteraction').show();
+		$('#interactionText').show();
 	});
 
 	// takes you back to the city map from any city details
@@ -47,13 +47,13 @@ $(document).ready(function() {
 			case 'electricSeas': 
 				$('#beach').show();
 				$('.beachDetails').show();
-				$('.planetInteraction').writeText(beachText.welcome);
+				$('#interactionText').writeText(beachText.welcome);
 				changeLocation('#beach');
 				break;
 			case 'sand':
 				$('#beach').show();
 				$('.beachDetails').show();
-				$('.planetInteraction').writeText(beachText.welcome);
+				$('#interactionText').writeText(beachText.welcome);
 				changeLocation('#beach');
 				break;
 			case 'tikiHut': 
@@ -73,7 +73,7 @@ $(document).ready(function() {
 				$('.marketStands').hide();
 				$('.theMarkets').show();
 				$('.marketDetails').show();
-				$('.planetInteraction').writeText(marketText.marketWelcome);
+				$('#interactionText').writeText(marketText.marketWelcome);
 				changeLocation('.theMarkets');
 				break;
 			case 'marketCentre':
@@ -81,7 +81,7 @@ $(document).ready(function() {
 				$('.marketStands').hide();
 				$('.theMarkets').show();
 				$('.marketDetails').show();
-				$('.planetInteraction').writeText(marketText.marketWelcome);
+				$('#interactionText').writeText(marketText.marketWelcome);
 				changeLocation('.theMarkets');
 				break;
 			case 'lunedaMechanic':
@@ -91,20 +91,20 @@ $(document).ready(function() {
 			case 'fruitStand':
 				$('.marketDetails').hide();
 				$('.fruitStand').show();
-				$('.planetInteraction').writeText(marketText.fruitWelcome);
+				$('#interactionText').writeText(marketText.fruitWelcome);
 				maleVoice();
 				changeLocation('.fruitStand');
 				break;
 			case 'souvenirStand':
 				$('.marketDetails').hide();
 				$('.souvenirStand').show();
-				$('.planetInteraction').writeText(marketText.souvenirWelcome);
+				$('#interactionText').writeText(marketText.souvenirWelcome);
 				changeLocation('.souvenirStand');
 				break;
 			case 'clothesStand':
 				$('.marketDetails').hide();
 				$('.clothesStand').show();
-				$('.planetInteraction').writeText(marketText.clothesWelcome);
+				$('#interactionText').writeText(marketText.clothesWelcome);
 				changeLocation('.clothesStand');
 				break;
 		}
@@ -125,17 +125,17 @@ $(document).ready(function() {
 
 	function rentalActivate() {
 		if(beachText.inUse == true) {
-			$('.planetInteraction').writeText(beachText.rentalInUse);
+			$('#interactionText').writeText(beachText.rentalInUse);
 		}
 		else {
 			// plays the sound effect of the man talking
-			if($('.planetInteraction').text().length < beachText.rentalWelcome.length) {
+			if($('#interactionText').text().length < beachText.rentalWelcome.length) {
 				maleVoice();
 			}
-			$('.planetInteraction').writeText(beachText.rentalWelcome);
+			$('#interactionText').writeText(beachText.rentalWelcome);
 			displayOptions(beachText.rentalWelcome, beachText.rentalOptions, 50, beachText.rentalComplete, beachText.rentalNo, beachText.rentalNoCoins);
 			var boughtSuit = setInterval(function() {
-				if($('.planetInteraction').text() == beachText.rentalComplete) {
+				if($('#interactionText').text() == beachText.rentalComplete) {
 				// adds item to inventory if not already there
 					$('.inventoryList').append('<li class="inventoryItem" id="electroSuit">ElectroSuit</li>');
 					Oshu.items.electroSuit = true;
@@ -164,7 +164,7 @@ $(document).ready(function() {
 			completeItem('Swim the electric seas of Luneda');
 		}
 		else {
-			$('.planetInteraction').writeText(beachText.seaDeath);
+			$('#interactionText').writeText(beachText.seaDeath);
 		}
 	})
 
@@ -213,11 +213,11 @@ $(document).ready(function() {
 	var no = marketText.no;
 
 	$('#electange').click(function() {
-		$('.planetInteraction').writeText(marketText.electange);
+		$('#interactionText').writeText(marketText.electange);
 		displayOptions(marketText.electange, marketText.electangeOptions, 25, yes, no, marketText.needMore);
 		var stop = false;
 		var boughtElectange = setInterval(function() {
-			if($('.planetInteraction').text() == yes) {
+			if($('#interactionText').text() == yes) {
 				// adds item to inventory if not already there
 				if(Oshu.itemFirst.electange == true) {
 					Oshu.itemFirst.electange = false;
@@ -247,10 +247,10 @@ $(document).ready(function() {
 
 
 	$('#ganifruit').click(function() {
-		$('.planetInteraction').writeText(marketText.ganifruit);
+		$('#interactionText').writeText(marketText.ganifruit);
 		displayOptions(marketText.ganifruit, marketText.ganifruitOptions, 10, yes, no, marketText.needMore);
 		var boughtGanifruit = setInterval(function() {
-			if($('.planetInteraction').text() == yes) {
+			if($('#interactionText').text() == yes) {
 				// adds item to inventory if not already there
 				if(Oshu.itemFirst.ganifruit == true) {
 					Oshu.itemFirst.ganifruit = false;
@@ -276,10 +276,10 @@ $(document).ready(function() {
 
 	$('#dresses').click(function() {
 		if(Oshu.items.clothes == false) {
-			$('.planetInteraction').writeText(marketText.clothes);
+			$('#interactionText').writeText(marketText.clothes);
 			displayOptions(marketText.clothes, marketText.clothesOptions, 25, marketText.clothesYes, marketText.clothesNo, marketText.clothesNeedMore);
 			var boughtClothes = setInterval(function() {
-				if($('.planetInteraction').text() == marketText.clothesYes) {
+				if($('#interactionText').text() == marketText.clothesYes) {
 					// adds item to inventory if not already there
 					if(Oshu.itemFirst.clothes == true) {
 						Oshu.items.clothes = true;
@@ -296,7 +296,7 @@ $(document).ready(function() {
 			}, 1);			
 		}
 		else {
-			$('.planetInteraction').writeText(marketText.clothesReturn);
+			$('#interactionText').writeText(marketText.clothesReturn);
 		}
 
 	});
@@ -307,10 +307,10 @@ $(document).ready(function() {
 		console.log(Oshu.items.lunedaPostcard);
 
 		if(Oshu.items.lunedaSnowglobe == false) {
-			$('.planetInteraction').writeText(marketText.snowglobes);
+			$('#interactionText').writeText(marketText.snowglobes);
 			displayOptions(marketText.snowglobes, marketText.snowglobeOptions, 10, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
 			var boughtSnowglobe = setInterval(function() {
-				if($('.planetInteraction').text() == marketText.souvenirYes) {
+				if($('#interactionText').text() == marketText.souvenirYes) {
 					// adds item to inventory if not already there
 					if(Oshu.itemFirst.lunedaSnowglobe == true) {
 						Oshu.items.lunedaSnowglobe = true;
@@ -327,17 +327,17 @@ $(document).ready(function() {
 			}, 1);
 		}
 		else {
-			$('.planetInteraction').writeText(marketText.souvenirReturn);
+			$('#interactionText').writeText(marketText.souvenirReturn);
 		}
 
 	});
 
 	$('#bobbleheads').click(function() {
 		if(Oshu.items.lunedaBobblehead == false) {
-			$('.planetInteraction').writeText(marketText.bobbleheads);
+			$('#interactionText').writeText(marketText.bobbleheads);
 			displayOptions(marketText.bobbleheads, marketText.bobbleheadOptions, 15, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
 			var boughtBobbleheads = setInterval(function() {
-				if($('.planetInteraction').text() == marketText.souvenirYes) {
+				if($('#interactionText').text() == marketText.souvenirYes) {
 					// adds item to inventory if not already there
 					if(Oshu.itemFirst.lunedaBobblehead == true) {
 						Oshu.items.lunedaBobblehead = true;
@@ -354,17 +354,17 @@ $(document).ready(function() {
 			}, 1);
 		}
 		else {
-			$('.planetInteraction').writeText(marketText.souvenirReturn);
+			$('#interactionText').writeText(marketText.souvenirReturn);
 		}
 
 	});
 
 	$('#postcards').click(function() {
 		if(Oshu.items.lunedaPostcard == false) {
-			$('.planetInteraction').writeText(marketText.postcards);
+			$('#interactionText').writeText(marketText.postcards);
 			displayOptions(marketText.postcards, marketText.postcardOptions, 1, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
 			var boughtPostcards = setInterval(function() {
-				if($('.planetInteraction').text() == marketText.souvenirYes) {
+				if($('#interactionText').text() == marketText.souvenirYes) {
 					// adds item to inventory if not already there
 					if(Oshu.itemFirst.lunedaPostcard == true) {
 						Oshu.items.lunedaPostcard = true;
@@ -381,7 +381,7 @@ $(document).ready(function() {
 			}, 1);
 		}
 		else {
-			$('.planetInteraction').writeText(marketText.souvenirReturn);
+			$('#interactionText').writeText(marketText.souvenirReturn);
 		}
 
 	});
@@ -416,12 +416,12 @@ $(document).ready(function() {
 		if(Oshu.items.clothes == false) {
 			console.log(danceText.doorman);
 			$('.noDancing').show();
-			$('.planetInteraction').writeText(danceText.doorman);
+			$('#interactionText').writeText(danceText.doorman);
 		}
 		else {
 			$('.noDancing').hide();
 			$('.danceDetails').show();
-			$('.planetInteraction').writeText(danceText.danceIntro);
+			$('#interactionText').writeText(danceText.danceIntro);
 		}
 	});
 
@@ -429,19 +429,19 @@ $(document).ready(function() {
 	$('.dancer').click(function() {
 		switch(dancerSpeech) {
 			case 1: 
-				$('.planetInteraction').writeText(danceText.barryAdvice);
+				$('#interactionText').writeText(danceText.barryAdvice);
 				dancerSpeech = 2;
 				break;
 			case 2: 
-				$('.planetInteraction').writeText(danceText.advice1);
+				$('#interactionText').writeText(danceText.advice1);
 				dancerSpeech = 3;
 				break;
 			case 3: 
-				$('.planetInteraction').writeText(danceText.advice2);
+				$('#interactionText').writeText(danceText.advice2);
 				dancerSpeech = 4;
 				break;
 			case 4:
-				$('.planetInteraction').writeText(danceText.advice3);
+				$('#interactionText').writeText(danceText.advice3);
 				dancerSpeech = 1;
 				break;
 		}
@@ -449,33 +449,33 @@ $(document).ready(function() {
 
 	$('#dancer4').click(function() {
 		if(Oshu.items.libraryPass) {
-			$('.planetInteraction').writeText(danceText.barryGoodbye);
+			$('#interactionText').writeText(danceText.barryGoodbye);
 		}
 		else {
-			$('.planetInteraction').writeText(danceText.barryIntro);
+			$('#interactionText').writeText(danceText.barryIntro);
 			var barry1 = setInterval(function() {
-				if($('.planetInteraction').text() == danceText.barryIntro) {
-					$('.planetInteraction').append('<ul><li class="clickHere">Is there a way you could get me into the library?</li></ul>');
+				if($('#interactionText').text() == danceText.barryIntro) {
+					$('#interactionText').append('<ul><li class="clickHere">Is there a way you could get me into the library?</li></ul>');
 					clearInterval(barry1);
 					$('.clickHere').click(function() {
-						$('.planetInteraction').text('');
-						$('.planetInteraction').writeText(danceText.barryOffer);
+						$('#interactionText').text('');
+						$('#interactionText').writeText(danceText.barryOffer);
 						var barry2 = setInterval(function() {
-							if($('.planetInteraction').text() == danceText.barryOffer) {
-								$('.planetInteraction').append('<ul><li class="clickHere">Alright</li></ul>');
+							if($('#interactionText').text() == danceText.barryOffer) {
+								$('#interactionText').append('<ul><li class="clickHere">Alright</li></ul>');
 								clearInterval(barry2);
 								$('.clickHere').click(function() {
-									$('.planetInteraction').text('')
-									$('.planetInteraction').writeText(danceText.barryRiddle);
+									$('#interactionText').text('')
+									$('#interactionText').writeText(danceText.barryRiddle);
 									var barry3 = setInterval(function() {
-										if($('.planetInteraction').text() == danceText.barryRiddle) {
+										if($('#interactionText').text() == danceText.barryRiddle) {
 											clearInterval(barry3);
 											var barry4 = setTimeout(function() {
-												$('.planetInteraction').text('');
-												$('.planetInteraction').append('<ul><li class="clickHere shadow">Your shadow?</li><li class="clickHere time">Time?</li>');
+												$('#interactionText').text('');
+												$('#interactionText').append('<ul><li class="clickHere shadow">Your shadow?</li><li class="clickHere time">Time?</li>');
 												$('.shadow').click(function() {
-													$('.planetInteraction').text('');
-													$('.planetInteraction').writeText(danceText.barryWrong);
+													$('#interactionText').text('');
+													$('#interactionText').writeText(danceText.barryWrong);
 													$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
 													// now you can select the library pass
 													$('#libraryPass').click(function() {
@@ -484,8 +484,8 @@ $(document).ready(function() {
 												})
 
 												$('.time').click(function() {
-													$('.planetInteraction').text('');
-													$('.planetInteraction').writeText(danceText.barryRight);
+													$('#interactionText').text('');
+													$('#interactionText').writeText(danceText.barryRight);
 													$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
 													// now you can select the library pass
 													$('#libraryPass').click(function() {
@@ -529,23 +529,23 @@ $(document).ready(function() {
 
 	// write the description of the weather monitoring facility
 	$('#weather').click(function() {
-			$('.planetInteraction').writeText(weatherText.intro);
+			$('#interactionText').writeText(weatherText.intro);
 	});
 
 	// speak to the weatherman
 	$('#weatherman').click(function() {
 		if(specimenInventory == false) {
-			$('.planetInteraction').writeText(weatherText.weathermanIntro);
+			$('#interactionText').writeText(weatherText.weathermanIntro);
 			var wait = setInterval(function() {
-				if($('.planetInteraction').text() == weatherText.weathermanIntro) {
+				if($('#interactionText').text() == weatherText.weathermanIntro) {
 					clearInterval(wait);
-					$('.planetInteraction').append("<ul><li class='clickHere weatherCoins'>Here you go</li><li class='clickHere weatherNoCoins'>I don't have that kind of money!</li></ul>")
+					$('#interactionText').append("<ul><li class='clickHere weatherCoins'>Here you go</li><li class='clickHere weatherNoCoins'>I don't have that kind of money!</li></ul>")
 					$('.weatherCoins').click(function() {
 						if(Oshu.coins >= 1000) {
-							$('.planetInteraction').writeText(weatherText.coins);
+							$('#interactionText').writeText(weatherText.coins);
 						}
 						else {
-							$('.planetInteraction').writeText(weatherText.noCoinsLie);
+							$('#interactionText').writeText(weatherText.noCoinsLie);
 							$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
 							// now you can select the library pass
 							$('#weatherSpecimen').click(function() {
@@ -554,7 +554,7 @@ $(document).ready(function() {
 						}
 					});
 					$('.weatherNoCoins').click(function() {
-						$('.planetInteraction').writeText(weatherText.noCoinsTruth);
+						$('#interactionText').writeText(weatherText.noCoinsTruth);
 						$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
 						// now you can select the library pass
 						$('#weatherSpecimen').click(function() {
@@ -565,7 +565,7 @@ $(document).ready(function() {
 			}, 1);
 		}
 		else {
-			$('.planetInteraction').writeText(weatherText.Return);
+			$('#interactionText').writeText(weatherText.Return);
 		}
 	});
 
@@ -582,7 +582,7 @@ $(document).ready(function() {
 	}
 
 	$('#lunedaMechanic').click(function() {
-		$('.planetInteraction').writeText(mechanicText.intro);
+		$('#interactionText').writeText(mechanicText.intro);
 	})
 
 	$('#lunedaLifecycleAdd').click(function() {
