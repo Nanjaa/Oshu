@@ -33,29 +33,37 @@
 	margin-left: 65px;
 	margin-top: 100px;
 }
-#treeGoons {
-	color: red;
-	margin-left: 50px;
+#treeGoon1 {
+	color: #ce1212;
+	margin-left: 275px;
 	margin-top: 225px;
 }
+#treeGoon2 {
+	color: #fb9a05;
+	margin-left: 175px;
+	margin-top: 265px;
+}
+#treeGoon3 {
+	color: #ff5b84;
+	margin-left: 375px;
+	margin-top: 265px;
+}
 #treeClose {
-	color: brown;
-	margin-left: 350px;
+	color: #7e3a15;
+	margin-left: 25px;
 	margin-top: 50px;
 }
 #hangingSkulls {
-	color: gray;
-	padding: 10px;
-	margin-left: 235px;
-	margin-top: 10px;
+	color: #f2e2bc;
+	margin-left: 100px;
 }
 #fortuneTeller {
-	color: purple;
-	margin-left: 190px;
+	color: #b81d9a;
+	margin-left: 125px;
 	margin-top: 75px;
 }
 #crystalBall {
-	color: indigo;
-	margin-left: 200px;
-	margin-top: 225px;
+	color: #6739ff;
+	margin-left: 300px;
+	margin-top: 250px;
 }
