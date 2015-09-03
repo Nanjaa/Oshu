@@ -62,17 +62,19 @@ function resetText() {
 			clicked = false,
 			elem = this;
 
-	setInterval(function() {
+		setInterval(function() {
 			$(this).click(function() {
 				click = true;
 			});
-			if(current < contentArray.length && click == false && contentArray.length != $('.gameText').text().length) {
-				elem.text(elem.text() + contentArray[current++]);
+			if((current < contentArray.length) && click == false && (contentArray.length != $(elem).text().length)) {
+				elem.text(elem.text() + contentArray[current]);
+				current = current+1;
 			}
 			else if(click == true && clicked == false) {
 				elem.text('');
 				elem.text(elem.text() + content);
 				clicked = true;
+				console.log('test');
 			}
 		}, 30);
 	};
