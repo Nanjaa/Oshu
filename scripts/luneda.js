@@ -126,13 +126,9 @@ $(document).ready(function() {
 
 	function rentalActivate() {
 		if(beachText.inUse == true) {
-			$('#interactionText').text('');
-			resetText();
 			$('#interactionText').writeText(beachText.rentalInUse);
 		}
 		else {
-			$('#interactionText').text('');
-			resetText();
 			// plays the sound effect of the man talking
 			if($('#interactionText').text().length < beachText.rentalWelcome.length) {
 				maleVoice();
@@ -588,58 +584,54 @@ $(document).ready(function() {
 			$('#interactionText').writeText(danceText.barryGoodbye);
 		}
 		else {
-			$('#interactionText').writeText(danceText.barryIntro);
-			var barry1 = setInterval(function() {
-				if($('#interactionText').text() == danceText.barryIntro) {
-					$('#interactionText').append('<ul><li class="clickHere">Is there a way you could get me into the library?</li></ul>');
-					clearInterval(barry1);
-					$('.clickHere').click(function() {
-						$('#interactionText').text('');
-						$('#interactionText').writeText(danceText.barryOffer);
-						var barry2 = setInterval(function() {
-							if($('#interactionText').text() == danceText.barryOffer) {
-								$('#interactionText').append('<ul><li class="clickHere">Alright</li></ul>');
-								clearInterval(barry2);
-								$('.clickHere').click(function() {
-									$('#interactionText').text('')
-									$('#interactionText').writeText(danceText.barryRiddle);
-									var barry3 = setInterval(function() {
-										if($('#interactionText').text() == danceText.barryRiddle) {
-											clearInterval(barry3);
-											var barry4 = setTimeout(function() {
-												$('#interactionText').text('');
-												$('#interactionText').append('<ul><li class="clickHere shadow">Your shadow?</li><li class="clickHere time">Time?</li>');
-												$('.shadow').click(function() {
-													$('#interactionText').text('');
-													$('#interactionText').writeText(danceText.barryWrong);
-													$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
-													// now you can select the library pass
-													$('#libraryPass').click(function() {
-														inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
-													});
-												})
+			oneOption(danceText.barryIntro, 'Is there a way you could get me into the library?');
+			var dancerStatus = 'intro';
+			$('#optionOne').click(function() {
+				switch(dancerStatus) {
+					case 'intro': 
+						oneOption(danceText.barryOffer, 'Alright.');
+						dancerStatus = 'alright';
+					break;
+					case 'alright':
+						dancerStatus = 'riddle';
+						$('#interactionText').writeText(danceText.barryRiddle);
+						var wait = setInterval(function() {
+							if($('#interactionText').text() == danceText.barryRiddle) {
+								clearInterval(wait);
+								var hold = setTimeout(function() {
+									$('#interactionText').text('');
+									$('#optionOne').show();
+									$('#optionTwo').show();
+									$('#optionOne').text('Your shadow?');
+									$('#optionTwo').text('Time?');
 
-												$('.time').click(function() {
-													$('#interactionText').text('');
-													$('#interactionText').writeText(danceText.barryRight);
-													$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
-													// now you can select the library pass
-													$('#libraryPass').click(function() {
-														inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
-													});
-												});
-											}, 3000);
-										};
-									}, 1);									
-								})
-
+								}, 3000)
 							}
-						}, 1)
-					})
-				};
-			}, 1);			
-		}
-	})
+						}, 1);
+					break;
+					case 'riddle':
+						$('.option').hide();
+						$('#interactionText').writeText(danceText.barryWrong)
+						$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
+						// now you can select the library pass
+						$('#libraryPass').click(function() {
+							inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
+						});
+					break;
+				}
+			
+			});
+			
+			$('#optionTwo').click(function() {
+				$('#interactionText').writeText(danceText.barryRight);
+				$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
+				// now you can select the library pass
+				$('#libraryPass').click(function() {
+					inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
+				});				
+			});
+		};
+	});
 
 
 	// ________________________________________________________________
@@ -671,34 +663,31 @@ $(document).ready(function() {
 	// speak to the weatherman
 	$('#weatherman').click(function() {
 		if(specimenInventory == false) {
-			$('#interactionText').writeText(weatherText.weathermanIntro);
-			var wait = setInterval(function() {
-				if($('#interactionText').text() == weatherText.weathermanIntro) {
-					clearInterval(wait);
-					$('#interactionText').append("<ul><li class='clickHere weatherCoins'>Here you go</li><li class='clickHere weatherNoCoins'>I don't have that kind of money!</li></ul>")
-					$('.weatherCoins').click(function() {
-						if(Oshu.coins >= 1000) {
-							$('#interactionText').writeText(weatherText.coins);
-						}
-						else {
-							$('#interactionText').writeText(weatherText.noCoinsLie);
-							$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
-							// now you can select the library pass
-							$('#weatherSpecimen').click(function() {
-								inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
-							});
-						}
+			twoOptions(weatherText.weathermanIntro, "Here you go", "I don't have that kind of money!")
+			$('#optionOne').click(function() {
+				$('.option').hide();
+				if(Oshu.coins >= 1000) {
+					$('#interactionText').writeText(weatherText.coins);
+					payMoney(1000);
+				}
+				else {
+					$('#interactionText').writeText(weatherText.noCoinsLie);
+					$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
+					// now you can select the library pass
+					$('#weatherSpecimen').click(function() {
+						inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
 					});
-					$('.weatherNoCoins').click(function() {
-						$('#interactionText').writeText(weatherText.noCoinsTruth);
-						$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
-						// now you can select the library pass
-						$('#weatherSpecimen').click(function() {
-							inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
-						});
-					});
-				};
-			}, 1);
+				}
+			})
+			$('#optionTwo').click(function() {
+				$('.option').hide();
+				$('#interactionText').writeText(weatherText.noCoinsTruth);
+				$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
+				// now you can select the library pass
+				$('#weatherSpecimen').click(function() {
+					inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+				});
+			});
 		}
 		else {
 			$('#interactionText').writeText(weatherText.Return);

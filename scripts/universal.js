@@ -260,7 +260,6 @@ function useItem(item, div) {
 
 function changeLocation(newLocation) {
 	Oshu.currentLocation = newLocation;
-	console.log(Oshu.currentLocation);
 }
 $('#myShip').click(function() {
 	changeLocation('#map');
@@ -282,7 +281,6 @@ function oneOption(referenceText, option) {
 }
 function twoOptions(referenceText, option1, option2) {
 	$('#interactionText').writeText(referenceText);
-	console.log(option2);
 	var wait = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
 			clearInterval(wait);
