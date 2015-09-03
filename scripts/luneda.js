@@ -248,8 +248,7 @@ $(document).ready(function() {
 				manStatus = 'inquiry';
 				break;
 			case 'inquiry': 
-				$('.option').hide();
-				$('#interactionText').writeText(tikiText.questYes);
+				endConversation(tikiText.questYes);
 				// adds broken robot
 				Oshu.items.brokenRobot = true;
 				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
@@ -260,8 +259,7 @@ $(document).ready(function() {
 				manStatus = 'accepted';
 				break;
 			case 'rejected': 
-				$('.option').hide();
-				$('#interactionText').writeText(tikiText.questYes);
+				endConversation(tikiText.questYes);
 				// adds broken robot
 				Oshu.items.brokenRobot = true;
 				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
@@ -278,12 +276,10 @@ $(document).ready(function() {
 		switch(manStatus) {
 			case 'inquiry':
 				manStatus = 'rejected';
-				$('.option').hide();
-				$('#interactionText').writeText(tikiText.questNo);
+				endConversation(tikiText.questNo);
 				break;
 			case 'rejected':
-				$('.option').hide();
-				$('#interactionText').writeText(tikiText.questNo);
+				endConversation(tikiText.questNo);
 				break;
 		}
 	})
@@ -610,8 +606,7 @@ $(document).ready(function() {
 						}, 1);
 					break;
 					case 'riddle':
-						$('.option').hide();
-						$('#interactionText').writeText(danceText.barryWrong)
+						endConversation(danceText.barryWrong);
 						$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
 						// now you can select the library pass
 						$('#libraryPass').click(function() {
@@ -680,8 +675,7 @@ $(document).ready(function() {
 				}
 			})
 			$('#optionTwo').click(function() {
-				$('.option').hide();
-				$('#interactionText').writeText(weatherText.noCoinsTruth);
+				endConversation(weatherText.noCoinsTruth);
 				$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
 				// now you can select the library pass
 				$('#weatherSpecimen').click(function() {

@@ -143,7 +143,6 @@ $(document).ready(function() {
 				};
 			}, 1);			
 		}
-	
 	})
 
 	// ________________________________________________________________
@@ -167,9 +166,7 @@ $(document).ready(function() {
 		Threaten2: "Come back already? What are you going to do, threathen me again? Pitiful...",
 		Threaten3: "You know what, sure. I'll show to you to the dojo and talk to the sensei. We're learning about forgiveness and mercy anyway, it'll fit.",
 		threaten4: "Alright.",
-		apprenticeEnd: "You did great in class! I'm really glad I was able to get you in.",
-		brawlerIntro: "Man, I love seeing the fights at the Kanedome. It's the greatest!",
-
+		apprenticeEnd: "You did great in class! I'm really glad I was able to get you in."
 	}
 
 	$('#suckerBartender').click(function() {
@@ -229,12 +226,50 @@ $(document).ready(function() {
 					$('#interactionText').writeText(barText.apprenticeThreaten);
 					apprenticeStatus = 'threaten';					
 				}
-
 			});			
 		};
 	});
 
+	// ************************ THE BRAWLER ************************
+	var brawlerText = {
+		intro: "Man, I love seeing the fights at the Kanedome. It's the greatest!",
+		kanedome: "Are you serious? And how would I go about doing that?",
+		ticket: "Well... I do, actually... But why should I give them to you?",
+		sellTicket: "Fine. 100 coins.",
+		ticketSold: "You sucker! They aren't even sold out at the box office yet! And they sell them there for 75! Thanks for the easy money!",
+		ticketReturn: "NO REFUNDS!",
+	}
+	var brawlerStatus = 'intro';
 
+	$('#brawler').click(function() {
+		if(brawlerStatus == 'intro') {
+			oneOption(brawlerText.intro, 'Can you get me into the Kanedome?');
+			$('#optionOne').click(function() {
+				switch(brawlerStatus) {
+					case 'intro':
+						threeOptions(brawlerText.kanedome, "Do you have any extra tickets?", "Do you know anyone that works there?", "I'll arm wrestle you!");
+						brawlerStatus = 'how';
+					break;
+					case 'how':
+						threeOptions(brawlerText.ticket, "I'll buy them from you.", "Do you need any odd jobs done?", "I may die and never see the Kanedome...");
+						brawlerStatus = 'why';
+					break;
+					case 'why':
+						twoOptions(brawlerText.sellTicket, "Deal!", "No way!");
+						brawlerStatus = 'sell';
+					break;
+					case 'sell':
+						endConversation(brawlerText.ticketSold);
+						brawlerStatus = 'sold';
+					break;
+				};
+
+			});		
+		}
+		else if(brawlerStatus == 'sold') {
+			$('#interactionText').writeText(brawlerText.ticketReturn);
+		};
+	});
 
 
 });

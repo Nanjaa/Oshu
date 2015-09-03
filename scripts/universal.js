@@ -251,8 +251,8 @@ function useItem(item, div) {
 		var amount = item - 1;
 		item = amount;
 		$(div).text(amount);
-	} 
-}
+	};
+};
 
 // ------------------------------------------------------
 // 				PROVIDE CURRENT LOCATION
@@ -260,13 +260,13 @@ function useItem(item, div) {
 
 function changeLocation(newLocation) {
 	Oshu.currentLocation = newLocation;
-}
+};
 $('#myShip').click(function() {
 	changeLocation('#map');
-})
+});
 
 // ------------------------------------------------------
-// 				TEST CONVERSATION FUNCTION
+// 				CONVERSATION FUNCTIONS
 // ------------------------------------------------------
 
 function oneOption(referenceText, option) {
@@ -278,9 +278,9 @@ function oneOption(referenceText, option) {
 			clearInterval(option1);
 			$('#optionOne').show();
 			$('#optionOne').text(option);
-		}
-	}, 1)
-}
+		};
+	}, 1);
+};
 function twoOptions(referenceText, option1, option2) {
 	$('#optionThree').hide();
 	$('#interactionText').writeText(referenceText);
@@ -291,26 +291,35 @@ function twoOptions(referenceText, option1, option2) {
 			$('#optionTwo').show();
 			$('#optionOne').text(option1);
 			$('#optionTwo').text(option2);
-		}
-	}, 1)
-}
+		};
+	}, 1);
+};
 function threeOptions(referenceText, option1, option2, option3) {
 	$('#interactionText').writeText(referenceText);
 	var wait = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
 			clearInterval(wait);
-			$('#optionOne').show();
-			$('#optionTwo').show();
-			$('#optionThree').show();
-			$('#optionOne').text(option1);
-			$('#optionTwo').text(option2);
-			$('#optionThree').text(option3);
-		}
-	}, 1)
-}
+			var timeout = setTimeout(function() {
+				$('#interactionText').text('');
+				$('#optionOne').show();
+				$('#optionTwo').show();
+				$('#optionThree').show();
+				$('#optionOne').text(option1);
+				$('#optionTwo').text(option2);
+				$('#optionThree').text(option3);				
+			}, 3000)
+
+		};
+	}, 1);
+};
 
 $('.option').click(function() {
 	$('#optionOne').hide();
 	$('#optionTwo').hide();
 	$('#optionThree').hide();
-})
+});
+
+function endConversation(referenceText) {
+	$('.option').hide();
+	$('#interactionText').writeText(referenceText);
+};
