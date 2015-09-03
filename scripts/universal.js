@@ -213,6 +213,7 @@ function completeItem(quest, speech) {
 			$('.return').show();
 			$('#planetInteraction').show();
 			ignore(Oshu.currentLocation);
+			console.log(Oshu.currentLocation);
 		})
 	}, 500);
 };
