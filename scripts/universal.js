@@ -66,7 +66,10 @@ function resetText() {
 			$(this).click(function() {
 				click = true;
 			});
-			if((current < contentArray.length) && click == false && (contentArray.length != $(elem).text().length)) {
+			if(current == contentArray.length-1 && click == false) {
+				click = true;
+			}
+			else if((current < contentArray.length) && click == false && (contentArray.length != $(elem).text().length)) {
 				elem.text(elem.text() + contentArray[current]);
 				current = current+1;
 			}
@@ -74,7 +77,6 @@ function resetText() {
 				elem.text('');
 				elem.text(elem.text() + content);
 				clicked = true;
-				console.log('test');
 			}
 		}, 30);
 	};
