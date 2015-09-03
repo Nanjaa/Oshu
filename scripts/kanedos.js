@@ -31,7 +31,7 @@ $(document).ready(function() {
 		switch(location) {
 			case 'kanedome': 
 				changeLocation('.theKanedome');
-				if(Oshu.items.ticket == false) {
+				if(Oshu.items.kanedomeTicket == false) {
 					$('.theKanedome').show();
 				}
 				break;
@@ -215,15 +215,13 @@ $(document).ready(function() {
 					apprenticeStatus = 'android';
 				}
 				else if(apprenticeStatus == 'android') {
-					$('.option').hide();
-					$('#interactionText').writeText(barText.sympathyConvince);
+					endConversation(barText.sympathyConvince);
 					apprenticeStatus = 'finished';				
 				};
 			});
 			$('#optionTwo').click(function() {
 				if(apprenticeStatus == 'why') {
-					$('.option').hide();
-					$('#interactionText').writeText(barText.apprenticeThreaten);
+					endConversation(barText.apprenticeThreaten);
 					apprenticeStatus = 'threaten';					
 				}
 			});			
@@ -237,7 +235,21 @@ $(document).ready(function() {
 		ticket: "Well... I do, actually... But why should I give them to you?",
 		sellTicket: "Fine. 100 coins.",
 		ticketSold: "You sucker! They aren't even sold out at the box office yet! And they sell them there for 75! Thanks for the easy money!",
+		needMore: "Oh man, are you serious? You're trying to trick me? Go get some more money.",
 		ticketReturn: "NO REFUNDS!",
+		worker: "Yeah, I do. But how is that going to help you? You think I can get you in?",
+		smuggleRejected: "No way, I could lose my job. Now, leave me alone.",
+		smuggleReturn: "I said leave me alone, punk!",
+		smuggleFee: "I won't lie, I'll take it. 50 coins and I'll sneak you in.",
+		smuggleDeal: "Alright. Meet me behind the Kanedome... I'll show you in.",
+		smuggleNoDeal: "Haha, what are you, scared? Chicken! Bawk-bawk-bawk-bawk!",
+		smuggleNeedMore: "Hey, man, that's not 50!",
+		smuggleEnd: "Meet me behind the Kanedome. I'll show you in.", 
+		wrestle: "As much fun as humiliating you would be, I don't have time for that. Go away, you're being annoying.",
+		wrestleEnd: "I said leave me alone, dude!",
+		jobs: "Honestly, there's nothing I need done that you could do.",
+		die: "Yeah? and how many millions of other people from all the other planets in this galaxy are in the same situation? You're not special, you're a brat. Leave me alone.",
+		dieEnd: "Don't try my patience, or you'll die earlier than you were expecting..."
 	}
 	var brawlerStatus = 'intro';
 
@@ -259,18 +271,103 @@ $(document).ready(function() {
 						brawlerStatus = 'sell';
 					break;
 					case 'sell':
-						endConversation(brawlerText.ticketSold);
-						brawlerStatus = 'sold';
+						if(Oshu.coins >= 100) {
+							endConversation(brawlerText.ticketSold);
+							payMoney(100);
+							// add ticket to inventory
+							$('.inventoryList').append('<li class="inventoryItem"><span id="kanedomeTicket">Kanedome Ticket</span></li>');
+							Oshu.items.kanedomeTicket = true;
+
+							// now you can select the ticket
+							$('#kanedomeTicket').click(function() {
+								inventoryDescription('#kanedomeTicket', 'Kanedome Ticket', Oshu.description.kanedomeTicket);
+							});
+							brawlerStatus = 'sold';
+						}
+						else {
+							endConversation(brawlerText.needMore);
+							brawlerStatus = 'intro';
+						}
+					break;
+					case 'worker':
+						endConversation(brawlerText.smuggleRejected);
+						brawlerStatus = 'noSmuggle';
+					break;
+					case 'smuggle':
+						if(Oshu.coins >= 50) {
+							endConversation(brawlerText.smuggleDeal);
+							payMoney(50);
+							brawlerStatus = 'smuggleEnd';
+						}
+						else {
+							endConversation(brawlerText.smuggleNeedMore);
+							brawlerStatus = 'intro';
+						}
 					break;
 				};
+			});	
+			$('#optionTwo').click(function() {
+				switch(brawlerStatus) {
+					case 'how':
+						twoOptions(brawlerText.worker, "Can't you sneak me in?", "Can I bribe you to sneak me in?");
+						brawlerStatus = 'worker';
+					break;
+					case 'worker':
+						twoOptions(brawlerText.smuggleFee, "You've got a deal", "No, thanks");
+						brawlerStatus = 'smuggle';
+					break;
+					case 'smuggle':
+						endConversation(brawlerText.smuggleNoDeal);
+						brawlerStatus = 'intro';
+					break;
+					case 'why':
+						endConversation(brawlerText.jobs);
+						brawlerStatus = 'intro';
+					break;
 
-			});		
+				};
+			});
+			$('#optionThree').click(function() {
+				if(brawlerStatus == 'how') {
+					endConversation(brawlerText.wrestle);
+					brawlerStatus = 'wrestleEnd';
+				}
+				else if(brawlerStatus == 'why') {
+					endConversation(brawlerText.die);
+					brawlerStatus = 'dieEnd';
+				}
+			})
 		}
 		else if(brawlerStatus == 'sold') {
 			$('#interactionText').writeText(brawlerText.ticketReturn);
-		};
+		}
+		else if(brawlerStatus == 'noSmuggle') {
+			$('#interactionText').writeText(brawlerText.smuggleReturn);
+		}
+		else if(brawlerStatus == 'smuggleEnd') {
+			$('#interactionText').writeText(brawlerText.smuggleEnd);
+		}
+		else if(brawlerStatus == 'wrestleEnd') {
+			$('#interactionText').writeText(brawlerText.wrestleEnd);
+		}
+		else if(brawlerStatus == 'dieEnd') {
+			$('#interactionText').writeText(brawlerText.dieEnd);
+		}
 	});
 
+	// ________________________________________________________________
+	// | ==============================================================|
+	// |															   |
+	// |						SUCKER PUNCH 	 	 				   |
+	// |															   |
+	// |===============================================================|
+	// |_______________________________________________________________|
+
+
+
+
+
+	
 
 });
 

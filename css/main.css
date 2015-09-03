@@ -260,3 +260,11 @@ h1 {
 .option {
 	cursor: pointer;
 }
+#oshuInteraction {
+	display: none;
+	font-family: "Share Tech Mono";
+	font-size: 20px;
+	color: white;
+	padding: 25px;
+	padding-top: 0px;
+}

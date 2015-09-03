@@ -25,11 +25,11 @@ var Oshu = {
 		lunedaSnowglobe: false,
 		lunedaBobblehead: false,
 		lunedaPostcard: false,
-		ticket: false,
 		jewelry: false,
 		libraryPass: false, 
 		weatherSpecimen: false,
-		kanedosJewelry: false
+		kanedosJewelry: false,
+		kanedomeTicket: false
 	},
 
 	description: {
@@ -46,6 +46,7 @@ var Oshu = {
 		libraryPass: "A small, laminated card that grants access to the Intergalactic Library",
 		weatherSpecimen: "A vial of rain water that needs to be delivered to AliNada",
 		kanedosJewelry: "A silver necklace with bright red stones along the length of the chain",
+		kanedomeTicket: "A ticket stub allowing access to a fight at the Kanedome.",
 		sunstone: "The sunstone is small and orange, and gives off a calming warmth."
 	},
 	

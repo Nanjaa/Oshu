@@ -69,7 +69,7 @@ function resetText() {
 			if(current == contentArray.length-1 && click == false) {
 				click = true;
 			}
-			else if((current < contentArray.length) && click == false && (contentArray.length != $(elem).text().length)) {
+			else if((current < contentArray.length) && click == false) {
 				elem.text(elem.text() + contentArray[current]);
 				current = current+1;
 			}
@@ -196,26 +196,26 @@ $('.planet').click(function() {
 // ------------------------------------------------------
 // 				COMPLETE LIST ITEM
 // ------------------------------------------------------
-function completeItem(quest) {
+function completeItem(quest, speech) {
 	$('.quest').each(function() {
 		if($(this).text() == quest) {
 			$(this).css('text-decoration', 'line-through');	
 		}
-	});	
-}
-
-// ------------------------------------------------------
-// 				GIVE LIST COMPLETION SPEECH
-// ------------------------------------------------------
-function questSpeech(speech) {
-	$(Oshu.currentLocation).hide();
-	$('#miloInteraction').show();
-	$('#skip').show();
-	$('#miloSays').writeText(speech)
-	$('#skip').click(function() {
-		ignore(Oshu.currentLocation);
-	})
-}
+	});
+	$(Oshu.currentLocation).fadeOut();
+	$('.cityDetails').fadeOut();
+	var timeout = setTimeout(function() {
+		$('#oshuInteraction').show();
+		$('#skip').show();
+		$('#oshuInteraction').writeText(speech);
+		$('#skip').click(function() {
+			$('#oshuInteraction').hide();
+			$('.return').show();
+			$('#planetInteraction').show();
+			ignore(Oshu.currentLocation);
+		})
+	}, 500);
+};
 
 // ------------------------------------------------------
 // 				USE INVENTORY
