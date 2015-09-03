@@ -266,7 +266,8 @@ $('#myShip').click(function() {
 // 				TEST CONVERSATION FUNCTION
 // ------------------------------------------------------
 
-function optionOne(referenceText, option) {
+function oneOption(referenceText, option) {
+	$('#interactionText').writeText(referenceText);
 	var option1 = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
 			clearInterval(option1);
@@ -275,21 +276,30 @@ function optionOne(referenceText, option) {
 		}
 	}, 1)
 }
-function optionTwo(referenceText, option) {
-	var option2 = setInterval(function() {
+function twoOptions(referenceText, option1, option2) {
+	$('#interactionText').writeText(referenceText);
+	console.log(option2);
+	var wait = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
-			clearInterval(option2);
+			clearInterval(wait);
+			$('#optionOne').show();
 			$('#optionTwo').show();
-			$('#optionTwo').text(option);
+			$('#optionOne').text(option1);
+			$('#optionTwo').text(option2);
 		}
 	}, 1)
 }
-function optionThree(referenceText, option) {
-	var option3 = setInterval(function() {
+function threeOptions(referenceText, option1, option2, option3) {
+	$('#interactionText').writeText(referenceText);
+	var wait = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
-			clearInterval(option3);
+			clearInterval(wait);
+			$('#optionOne').show();
+			$('#optionTwo').show();
 			$('#optionThree').show();
-			$('#optionThree').text(option);
+			$('#optionOne').text(option1);
+			$('#optionTwo').text(option2);
+			$('#optionThree').text(option3);
 		}
 	}, 1)
 }

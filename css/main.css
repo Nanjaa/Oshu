@@ -257,3 +257,6 @@ h1 {
 #optionOne, #optionTwo, #optionThree {
 	display: none;
 }
+.option {
+	cursor: pointer;
+}

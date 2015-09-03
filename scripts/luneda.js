@@ -19,7 +19,7 @@ $(document).ready(function() {
 	$('.lunedaCity').click(function() {
 		$('.lunedaCity').hide();
 		$('.return').show();
-		$('#interactionText').show();
+		$('#planetInteraction').show();
 	});
 
 	// takes you back to the city map from any city details
@@ -59,6 +59,7 @@ $(document).ready(function() {
 			case 'tikiHut': 
 				$('.beachDetails').hide();
 				$('.drinkStand').show();
+				$('#interactionText').writeText(tikiText.intro);
 				break;
 			case 'danceHall':
 				changeLocation('.danceHall');
@@ -125,9 +126,13 @@ $(document).ready(function() {
 
 	function rentalActivate() {
 		if(beachText.inUse == true) {
+			$('#interactionText').text('');
+			resetText();
 			$('#interactionText').writeText(beachText.rentalInUse);
 		}
 		else {
+			$('#interactionText').text('');
+			resetText();
 			// plays the sound effect of the man talking
 			if($('#interactionText').text().length < beachText.rentalWelcome.length) {
 				maleVoice();
@@ -153,7 +158,139 @@ $(document).ready(function() {
 
 	//************************ interact with the drinks stand ************************
 
+	var tikiText = {
+		intro: "You talk into the tiki hut, which is softly playing tropical music.",
+		bartenerIntro: "Hi there. Is there anything I can help you with?",
+		advice1: "If you want to go to the electric seas, make sure you wear an ElectroSuit. You'll die otherwise!",
+		advice2: "They have a strict dress code at the Dance Hall. You absolutely have to wear formal clothes!",
+		advice3: "The best place to buy electric fruit is at the marketplace.",
+		manIntro: "Hey, stranger. I'll tell you a secret if you do me a good turn...",
+		questIntro: "I'm 500 years old. I'll tell you the secret to getting into the Life Pools if you help me fix this.",
+		robotDescription: "He hands you a small, broken robot.",
+		questDescription: "I got into a fight with the mechanic years ago. If you have him fix the robot for me, I'll tell you how to get in.",
+		questInquiry: "What do you say?",
+		questYes: "Alright. Come back when he's all good and repaired.",
+		questNo: "You'll come back soon enough. The Life Pools are too tempting... And when you do, you're free to accept the quest.",
+		questReturnIncomplete: "Come back when the robot's fixed. I won't tell you the secret without him.",
+		questReturnComplete: "You really did it! Alright, here's the scoop: Go visit the fortune teller and tell her the password 'Phoenix.' She'll help you from there.",
+		questReturnAccept: "I knew you'd come back! So now what do you say? You in?"
+	}
 
+	var barStatus = 1;
+
+	$('#bar').click(function() {
+		switch(barStatus) {
+			case 1: 
+				$('#interactionText').writeText(tikiText.bartenerIntro);
+				barStatus = 2;
+				break;
+			case 2: 
+				$('#interactionText').writeText(tikiText.advice1);
+				barStatus = 3;
+				break;
+			case 3:
+				$('#interactionText').writeText(tikiText.advice2);
+				barStatus = 4;
+				break;
+			case 4:
+				$('#interactionText').writeText(tikiText.advice3);
+				barStatus = 1;
+				break;
+		};
+	});
+
+	var manStatus = 'intro';
+
+	$('#mysteriousMan').click(function() {
+		switch(manStatus) {
+			case 'intro':
+				oneOption(tikiText.manIntro, "I'm listening...");
+				manStatus = 'listening';
+				break;
+			case 'accepted':
+				if(Oshu.items.fixedRobot == false) {
+					$('#interactionText').writeText(tikiText.questReturnIncomplete);
+					break;					
+				}
+				else {
+					$('#interactionText').writeText(tikiText.questReturnComplete);
+					Oshu.items.password = true;
+				};
+				break;
+			case 'rejected':
+				twoOptions(tikiText.questReturnAccept, 'Well, yeah!', 'Nevermind.');
+				break;
+		};
+	});
+
+	$('#optionOne').click(function() {
+		switch(manStatus) {
+			case 'listening':
+				$('#interactionText').writeText(tikiText.questIntro);
+				var robot1 = setInterval(function() {
+					if($('#interactionText').text() == tikiText.questIntro) {
+						clearInterval(robot1);
+						var robot2 = setTimeout(function() {
+							$('#interactionText').text('');
+							oneOption(tikiText.robotDescription, "Why can't you do this yourself?");
+						}, 3000)
+					};
+				}, 1);
+				manStatus = 'yourself';
+				break;
+			case 'yourself':
+				$('#interactionText').writeText(tikiText.questDescription);
+				var robot3 = setInterval(function() {
+					if($('#interactionText').text() == tikiText.questDescription) {
+						clearInterval(robot3);
+						var robot4 = setTimeout(function() {
+							$('#interactionText').text('');
+							twoOptions(tikiText.questInquiry, "I'm in.", "what");
+						}, 3000)
+					};
+				}, 1);
+				manStatus = 'inquiry';
+				break;
+			case 'inquiry': 
+				$('.option').hide();
+				$('#interactionText').writeText(tikiText.questYes);
+				// adds broken robot
+				Oshu.items.brokenRobot = true;
+				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
+				// now you can eat the electange
+				$('#brokenRobot').click(function() {
+					inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
+				});
+				manStatus = 'accepted';
+				break;
+			case 'rejected': 
+				$('.option').hide();
+				$('#interactionText').writeText(tikiText.questYes);
+				// adds broken robot
+				Oshu.items.brokenRobot = true;
+				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
+				// now you can eat the electange
+				$('#brokenRobot').click(function() {
+					inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
+				});
+				manStatus = 'accepted';
+				break;
+		};
+	});
+
+	$('#optionTwo').click(function() {
+		switch(manStatus) {
+			case 'inquiry':
+				manStatus = 'rejected';
+				$('.option').hide();
+				$('#interactionText').writeText(tikiText.questNo);
+				break;
+			case 'rejected':
+				$('.option').hide();
+				$('#interactionText').writeText(tikiText.questNo);
+				break;
+		}
+	})
 
 	//************************ interact with the sea ************************
 
@@ -388,7 +525,7 @@ $(document).ready(function() {
 	// ________________________________________________________________
 	// | ==============================================================|
 	// |															   |
-	// |						THE   DANCE HALL						   |
+	// |						THE   DANCE HALL					   |
 	// |															   |
 	// |===============================================================|
 	// |_______________________________________________________________|
@@ -414,7 +551,6 @@ $(document).ready(function() {
 		$('.danceHall').show();
 		$('.lunedaCity').hide();
 		if(Oshu.items.clothes == false) {
-			console.log(danceText.doorman);
 			$('.noDancing').show();
 			$('#interactionText').writeText(danceText.doorman);
 		}
