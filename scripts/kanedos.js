@@ -38,14 +38,17 @@ $(document).ready(function() {
 			case 'suckerPunch':
 				changeLocation('.suckerPunch');
 				$('.suckerPunch').show();
+				$('#interactionText').writeText(barText.intro);
 				break;
 			case 'camelRental':
 				changeLocation('.camelRental');
 				$('.camelRental').show();
+				$('#interactionText').writeText(camelText.intro);
 				break;
 			case 'kanedosJewelry':
 				changeLocation('.kanedosJewelry');
 				$('.kanedosJewelry').show();
+				$('#interactionText').writeText(jewelryText.intro);
 				break;
 		};
 	});
@@ -67,10 +70,6 @@ $(document).ready(function() {
 		no: "The Kanedos countryside is really something to behold... I hope you come back soon!",
 		options: "Do you want to rent a camel?"
 	};
-
-	$('#camelRental').click(function() {
-		$('#interactionText').writeText(camelText.intro);
-	});
 
 	$('#camelGuy').click(function() {
 		$('#interactionText').writeText(camelText.guyIntro);
@@ -104,7 +103,6 @@ $(document).ready(function() {
 
 	$('#kanedosJewelry').click(function() {
 		jewelryStatus = 1;
-		$('#interactionText').writeText(jewelryText.intro);
 	});
 
 	$('#kanedosJewelryLady').click(function() {
@@ -164,13 +162,15 @@ $(document).ready(function() {
 		apprenticeIntro: "I'm just taking a break in between classes. Fighting is thirsty work...",
 		apprentice2: "And why should I help you?",
 		apprenticeSympathy: "If you're sick, why would you want to strain your body in the dojo?",
+		sympathyConvince: "An android, huh? Androids always draw a crowd... I don't know what it is about robots, but people love having them in class with them. Sure, let's go talk to the sensei now.",
 		apprenticeThreaten: "I'm going to pretend that was a joke.",
-		brawlerIntro: "Man, I love seeing the fights at the Kanedome. It's the greatest!"
-	}
+		Threaten2: "Come back already? What are you going to do, threathen me again? Pitiful...",
+		Threaten3: "You know what, sure. I'll show to you to the dojo and talk to the sensei. We're learning about forgiveness and mercy anyway, it'll fit.",
+		threaten4: "Alright.",
+		apprenticeEnd: "You did great in class! I'm really glad I was able to get you in.",
+		brawlerIntro: "Man, I love seeing the fights at the Kanedome. It's the greatest!",
 
-	// $('#suckerPunch').click(function() {
-	// 	$('#interactionText').writeText(barText.intro);
-	// })
+	}
 
 	$('#suckerBartender').click(function() {
 		$('#interactionText').writeText(barText.bartenderIntro);
@@ -190,66 +190,49 @@ $(document).ready(function() {
 	})
 
 	// ************************ THE APPRENTICE ************************
-
+	apprenticeStatus = 'intro';
+	
 	$('#apprentice').click(function() {
-		$('#interactionText').writeText(barText.apprenticeIntro);
-		askApprentice();
+		if(apprenticeStatus == 'finished') {
+			$('#interactionText').writeText(barText.apprenticeEnd);
+		}
+		else if(apprenticeStatus == 'threaten') {
+			twoOptions(barText.Threaten2, "No, I want to apologize. I was just nervous.", "Nevermind.");
+			$('#optionOne').click(function() {
+				$('#interactionText').writeText(barText.Threaten3);
+				apprenticeStatus = 'finished';
+			});
+			$('#optionTwo').click(function() {
+				$('#interactionText').writeText(barText.threaten4);
+			});
+		}
+		else {
+			oneOption(barText.apprenticeIntro, "Can you help me get into a martial arts class?");
+			$('#optionOne').click(function() {
+				if(apprenticeStatus == 'intro') {
+					twoOptions(barText.apprentice2, "I'm dying, and it's on my bucket list.", "You don't want to find out what'll happen if you say no...");
+					apprenticeStatus = 'why';
+				}
+				else if(apprenticeStatus == 'why') {
+					oneOption(barText.apprenticeSympathy, "I'm not sick, I'm an android. I'm using the Lifecycle Program.");
+					apprenticeStatus = 'android';
+				}
+				else if(apprenticeStatus == 'android') {
+					$('.option').hide();
+					$('#interactionText').writeText(barText.sympathyConvince);
+					apprenticeStatus = 'finished';				
+				};
+			});
+			$('#optionTwo').click(function() {
+				if(apprenticeStatus == 'why') {
+					$('.option').hide();
+					$('#interactionText').writeText(barText.apprenticeThreaten);
+					apprenticeStatus = 'threaten';					
+				}
 
+			});			
+		};
 	});
-
-	function askApprentice() {
-		var bar2 = setInterval(function() {
-			if($('#planetInteraction').text() == barText.apprenticeIntro) {
-				clearInterval(bar2);
-				$('#planetInteraction').append("<ul><li class='clickHere'>Can you help me get into a martial arts class?</li></ul>");
-				$('.clickHere').click(function() {
-					$('#planetInteraction').text('');
-					$('#interactionText').writeText(barText.apprentice2);
-					convinceApprentice1();
-				})
-			}
-		}, 1)
-	};
-
-	function convinceApprentice1() {
-		var bar3 = setInterval(function() {
-			if($('#planetInteraction').text == barText.apprentice2) {
-				clearInterval(bar3);
-				$('#planetInteraction').append("<ul><li class='clickHere' id='sympathy'>I'm dying, and it's on my bucket list.</li><li class='clickHere' id='threaten'>You don't want to find out what'll happen if you say no...</li></ul>");
-				$('#sympathy').click(function() {
-					sympathyApprentice();
-				})
-				$('#threaten').click(function() {
-					threatenApprentice();
-				})
-			}
-		}, 1)
-	};
-
-	function sympathyApprentice() {
-		$('#interactionText').writeText(barText.apprenticeSympathy);
-		var bar4 = setInterval(function() {
-			if($('#planetInteraction').text() == barText.apprenticeSympathy) {
-				$('#planetInteraction').append("<ul><li class='clickHere' id='android'>I'm not sick, I'm an android. I'm using the Lifecycle Program.</li>")
-			}		
-		}, 1); 
-	};
-
-	function threatenApprentice() {
-		$('#interactionText').writeText(barText.apprenticeThreaten);
-	}
-
-
-	$('#brawler').click(function() {
-		$('#interactionText').writeText(barText.apprenticeThreaten);
-		optionOne(barText.intro, barText.apprenticeIntro);
-		optionTwo(barText.intro, barText.apprentice2);
-		$('#optionOne').click(function() {
-			$('#interactionText').writeText('hello');
-			optionOne('hello', 'it worked');
-			optionTwo('hello', 'you rock');
-		})
-	})
 
 
 

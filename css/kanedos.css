@@ -5,7 +5,7 @@
 	margin-top: 300px;
 }
 /*hide the planet*/
-#kanedosMap {
+#map {
 	display: none;
 }
 /*planet details*/

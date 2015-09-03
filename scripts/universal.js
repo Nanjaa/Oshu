@@ -270,6 +270,8 @@ $('#myShip').click(function() {
 // ------------------------------------------------------
 
 function oneOption(referenceText, option) {
+	$('#optionTwo').hide();
+	$('#optionThree').hide();
 	$('#interactionText').writeText(referenceText);
 	var option1 = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
@@ -280,6 +282,7 @@ function oneOption(referenceText, option) {
 	}, 1)
 }
 function twoOptions(referenceText, option1, option2) {
+	$('#optionThree').hide();
 	$('#interactionText').writeText(referenceText);
 	var wait = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
