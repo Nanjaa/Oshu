@@ -2,6 +2,9 @@ $(document).ready(function() {
 
 	// anytime you click the spaceship, you return to the maps page
 	$('#myShip').click(function() {
+		$('.return').hide();
+		$('.cityDetails').hide();
+		// $('.tyrianneCity').show();	
 		$('.visitPlanet').hide();
 		$('#map').show();
 		Oshu.onBoard = true;

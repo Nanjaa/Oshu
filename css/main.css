@@ -47,9 +47,19 @@ p {
 	background-color: black;
 	height: 525px;
 	color: white;
-	margin-left: 15px;
-	margin-top: 20px;
+	margin-left: 45px;
+	margin-top: 45px;
 	float: left;
+}
+#gameOptions {
+	width: 600px;
+	background-color: gray;
+	height: 100px;
+	color: black;
+	margin-left: 45px;
+	margin-top: 45px;
+	border: 5px solid black;
+	box-sizing: border-box;
 }
 pre {
 	margin: 0;

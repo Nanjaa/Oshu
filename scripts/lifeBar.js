@@ -53,7 +53,7 @@ $(document).ready(function() {
 		}
 		loseLife();
 		lifeBar();
-	}, 0.25);
+	}, 1000000);
 
 	window.setInterval(life);
 	

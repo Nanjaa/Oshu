@@ -252,7 +252,7 @@ $(document).ready(function() {
 				// adds broken robot
 				Oshu.items.brokenRobot = true;
 				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
-				// now you can eat the electange
+				// now you can select the robot
 				$('#brokenRobot').click(function() {
 					inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
 				});
@@ -263,7 +263,7 @@ $(document).ready(function() {
 				// adds broken robot
 				Oshu.items.brokenRobot = true;
 				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
-				// now you can eat the electange
+				// now you can select the robot
 				$('#brokenRobot').click(function() {
 					inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
 				});
@@ -385,11 +385,18 @@ $(document).ready(function() {
 		
 					// now you can eat the ganifruit
 					$('#myGanifruit').click(function() {
-						useItem(Oshu.items.ganifruit, '#ganifruitAmt')
+						useItem(Oshu.items.ganifruit, '#ganifruitAmt');
 						if(Oshu.items.ganifruit > 0) {
 							Oshu.items.ganifruit = Oshu.items.ganifruit - 1;
 						}
 					});
+
+					// this is in reference to feeding the poor man on Tyrianne
+					// var feedPoorMan = setInterval(function() {
+					// 	if($('#interactionText').text() == "Oh, bless your soul. Is there anything I can help you with? I have no money...") {
+					// 		useItem(Oshu.items.ganifruit)
+					// 	}
+					// }, 1)
 				}
 				// adds quantity amt after adding item to inventory
 				var ganifruit = Oshu.items.ganifruit + 1;

@@ -444,6 +444,10 @@ $(document).ready(function() {
 						changeLocation('#tyrianneMap');
 						$('#miloInteraction').show();
 						$('#miloSays').writeText(text.tyrianneIntro);
+						$('#skip').show();
+						$('#skip').click(function() {
+							ignore('#tyrianneMap');
+						});
 						play('speech/tyrianneIntro.mp3');
 						var test = setInterval(function() {
 							if($('#miloSays').text() == text.tyrianneIntro) {
