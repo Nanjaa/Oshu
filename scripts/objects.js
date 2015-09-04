@@ -29,7 +29,9 @@ var Oshu = {
 		libraryPass: false, 
 		weatherSpecimen: false,
 		kanedosJewelry: false,
-		kanedomeTicket: false
+		kanedomeTicket: false,
+		tyrianneJewelry: false,
+		emptyBottle: false
 	},
 
 	description: {
@@ -47,6 +49,8 @@ var Oshu = {
 		weatherSpecimen: "A vial of rain water that needs to be delivered to AliNada",
 		kanedosJewelry: "A silver necklace with bright red stones along the length of the chain",
 		kanedomeTicket: "A ticket stub allowing access to a fight at the Kanedome.",
+		tyrianneJewelry: "A beautiful beaded bradelet with tons of colors",
+		emptyBottle: "A small bottle, just big enough to house a fairy.",
 		sunstone: "The sunstone is small and orange, and gives off a calming warmth."
 	},
 	
@@ -83,7 +87,7 @@ var Oshu = {
 		kanedos1: "",
 		kanedos2: "When Andy went off to college and I had full days where I was alone in the house, I discovered a hobby I never expected to enjoy so much. Every day, I watched a new martial arts movies. I loved goofy ones, I loved serious ones, I loved everything about martial arts movies. All androids have some form of a self-defense program installed, but I wanted to formally learn a martial art, just like the movies. I wanted to walk inside a dojo, and I wanted the authentic experience. Most of the movies took place on Kanedos, so naturally I desired to learn there. Today, I finally completed that mission. The lesson was quite a bit harder than I was expecting, and I learned to move my body in ways that it had never moved before. Although I didn't have the time to learn the art completely, this one class was enough to make me feel as though I could die happily. I thanked everyone at the dojo, and went on my way.",
 		kanedos3: "",
-		tyrianne1: "",
+		tyrianne1: "I was always jealous of the human adolescents that had the opportunity to go to school. My model was specifically made without an extensive database to begin with and a high rate of learning. We really enjoy it, and it makes us seem more human to our users. Although it's possible for androids to go to school, education is very expensive, and my parents could only afford for their human son to go. So, I went to the library. And today, I got to go to the biggest one. Its enormity was something to behold in itself, but the sheer amount of books they had was breathtaking. I took hours to explore the entirety of it. It was incredible.",
 		tyrianne2: "Sunstones are said to bring a happy life, but that's what I've been living for 80 years. As with everyone, I have had my bad days alongside the good, but the people in my life have made it really something to behold. I've had such incredible opportunities, and each year is an adventure in itself. In honor of the happiness that has been given to me since the day I was first turned on, I wanted to buy a sunstone. I've already requested in my will that the sunstone be returned to my family after my death, as a token of our time together. Androids typically don't get the tombstones that living beings get, so I wanted to return something to them that would keep my memory alive.",
 		tyrianne3: "I stepped into the room and saw the intricate wooden table, with its fantastical philosophers surrounding it. It wasn't for any particular reason that I wanted to see them. I've always loved ethics and philosophy, and when I learned of the philosophers on Tyrianne, I wanted to see them. I wanted to hear the words they had to say, and take something out of it that would expand my mind and give me even more closure in my life. Seeing them was so sacred and so beautiful that I wish not to talk about it. Any words I may say about them will only dwarf their beauty and wisdom. I will never be able to express my experience at the magnitude that it happened.",
 		kaprika1: "When my brother Andrew was still in grade school, I went to pick him up as I always did. He got out of school, and ran up to me, more excited than he had been in a long time. He told me about how they learned about the nearby planet Kaprika that day, and how the planet was home to a fairy-like creature. He told me they looked just like the stories, and the excitement buzzed in his eyes.  Pulling out his science book, he showed me pictures of the strange and unusual beings, and I knew I had to see them for myself. That day, we promised we'd see them together, but obviously everything had not quite gone as planned. Seeing the fairy in front of me, though... It gave me fulfillment. I closed my eyes and imagined by brother at my side. Opening them again, I saw the fairies float around my head in delight.",
