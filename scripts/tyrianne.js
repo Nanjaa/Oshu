@@ -26,7 +26,7 @@ $(document).ready(function() {
 	// |===============================================================|
 	// |_______________________________________________________________|
 
-	var fuzzbuttEntry = false;
+	var fuzzbuttEntry = true;
 
 	$('#poorMan').click(function() {
 		console.log('hello');
@@ -317,9 +317,38 @@ $(document).ready(function() {
 
 
 	var marketText = {
-		intro: "Inside what was believed to be Fuzzbutt Factory is a black market, with stands full of illegal goods."
+		intro: "Inside what was believed to be Fuzzbutt Factory is a black market, with stands full of illegal goods.",
+		sunstoneIntro: "A voice is heard through the shadows: 'Would you like to purchase a sunstone? 50 coins each...'",
+		displayOptions: "Would you like to buy a sunstone?",
+		yes: "Enjoy the sunstone, stranger....",
+		no: "Your choice, stranger...",
+		needMore: "That's not enough... Come back when you're serious about doing business here.",
+		marketReturn: "Limit 1 per customer..."
 	}
 
+	$('.fuzzbuttDetails').click(function() {
+		console.log('test1');
+		if(Oshu.items.sunstone) {
+			console.log('test2');
+			$('#interactionText').writeText(marketText.marketReturn);
+		}
+		else {
+			$('#interactionText').writeText(marketText.sunstoneIntro);
+			displayOptions(marketText.sunstoneIntro, marketText.displayOptions, 50, marketText.yes, marketText.no, marketText.needMore);
+			var wait = setInterval(function() {
+				if($('#interactionText').text() == marketText.yes) {
+					clearInterval(wait);
+					$('.inventoryList').append('<li class="inventoryItem"><span id="sunstone">Sunstone</span></li>');
+					Oshu.items.sunstone = true;
+
+					// now you can select the clothes
+					$('#sunstone').click(function() {
+						inventoryDescription('#sunstone', 'Sunstone', Oshu.description.sunstone);
+					});
+				};
+			}, 1);		
+		};
+	});
 
 
 });

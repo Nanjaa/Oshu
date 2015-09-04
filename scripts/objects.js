@@ -16,7 +16,6 @@ var Oshu = {
 	items: {
 		ganifruit: 0,
 		electange: 0,
-		sunstone: 0,
 		brokenRobot: false,
 		fixedRobot: false,
 		password: false,
@@ -31,7 +30,8 @@ var Oshu = {
 		kanedosJewelry: false,
 		kanedomeTicket: false,
 		tyrianneJewelry: false,
-		emptyBottle: false
+		emptyBottle: false,
+		sunstone: false
 	},
 
 	description: {
