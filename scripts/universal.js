@@ -60,24 +60,37 @@ function resetText() {
 			current = 0,
 			click = false,
 			clicked = false,
+			clickable = false,
 			elem = this;
+		$('.clickable').click(function() {
+			clickable = true;
+			console.log('click');
+		});
 
-		setInterval(function() {
+		var textWait = setInterval(function() {
 			$(this).click(function() {
 				click = true;
 			});
-			if(current == contentArray.length-1 && click == false) {
-				click = true;
+
+			if(clickable == true) {
+				console.log('stop');
+				clearInterval(textWait);
 			}
-			else if((current < contentArray.length) && click == false) {
-				elem.text(elem.text() + contentArray[current]);
-				current = current+1;
+			else {
+				if(current == contentArray.length-1 && click == false) {
+					click = true;
+				}
+				else if((current < contentArray.length) && click == false) {
+					elem.text(elem.text() + contentArray[current]);
+					current = current+1;
+				}
+				else if(click == true && clicked == false) {
+					elem.text('');
+					elem.text(elem.text() + content);
+					clicked = true;
+				}				
 			}
-			else if(click == true && clicked == false) {
-				elem.text('');
-				elem.text(elem.text() + content);
-				clicked = true;
-			}
+
 		}, 30);
 	};
 }) (jQuery);

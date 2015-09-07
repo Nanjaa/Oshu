@@ -33,7 +33,11 @@ $(document).ready(function() {
 				changeLocation('.quietGrove');
 				$('.quietGrove').show();
 				if(Oshu.items.jewelry == false) {
+					$('#interactionText').writeText(groveText.noFairies);
 					$('#fairies').hide();
+				}
+				else {
+					$('#interactionText').writeText(groveText.fairies);
 				}
 				break;
 			case 'theTree':
@@ -130,7 +134,9 @@ $(document).ready(function() {
 		sleep: "What... is that smell... I'm feeling so... slee..py...",
 		sleepEnd: "The goons fall asleep, allowing you entrance to the tree.",
 		sleepReturn: "The goons are still asleep.",
-		awake: "No way! Now what did I just say? SCRAM!"
+		awake: "No way! Now what did I just say? SCRAM!",
+		treeGoons: "The tree stands tall above you, but goons guard the roots!",
+		treeNoGoons: "Climbing the tree was exhilirating! The world looked so small beneath you."
 	}
 
 	var goonStatus = 'intro';
@@ -162,5 +168,49 @@ $(document).ready(function() {
 		});
 	});
 
+	$('#treeClose').click(function() {
+		if(goonStatus == 'sleeping') {
+			$('#interactionText').writeText(treeText.treeNoGoons);
+		}
+		else {
+			$('#interactionText').writeText(treeText.treeGoons);
+		};
+	});
+
+
+	// ________________________________________________________________
+	// | ==============================================================|
+	// |															   |
+	// |						QUIET GROVE	 						   |
+	// |															   |
+	// |===============================================================|
+	// |_______________________________________________________________|
+
+	var firstTime = true;
+
+	var groveText = {
+		noFairies: "The grove is very quiet. You know this is where the fairies are supposed to be, but they're nowhere to be seen.",
+		fairies: "You take out the jewelry and it sparkles in the light. The sparkle attracts fairies, which fly all around the grove",
+		fairyDescription: "The fairies look like beams of light dancing around the trees.",
+		capture: "You pull out your bottle, and place the jewelry inside. A fairy wanders in, and you close the hole-filled cap. You look at the fairy closely. It's just like you imagined in the storybooks."
+	}
+
+	$('#fairies').click(function() {
+		if(Oshu.items.emptyBottle) {
+			$('#interactionText').writeText('This is where I change the div');
+		}
+		else {
+			$('#interactionText').writeText(groveText.fairyDescription);
+		}
+	});
+
+	$('#quietGrove').click(function() {
+		if(Oshu.items.jewelry && firstTime) {
+			firstTime = false;
+			var wait = setTimeout(function() {
+				completeItem(Oshu.quests[3][1][0], Oshu.questSpeech.kaprika1);
+			}, 3000);
+		}
+	});
 
 });
