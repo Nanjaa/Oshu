@@ -302,3 +302,6 @@ h1 {
 #soundsOff {
 	display: none;
 }
+#pause {
+/*	display: inline-block;*/
+}

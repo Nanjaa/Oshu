@@ -72,13 +72,18 @@ $(document).ready(function() {
 		gypsyShop: "Here is what I have for sale.",
 		shrunkenHead: "A shrunken head! Great for decorating any interior!",
 		sleepPotion: "This is great for putting even the most awake individual to sleep. Good choice!",
-		goodLuckCharm: "Ah, yes. May this bring you the best of luck."
+		goodLuckCharm: "Ah, yes. May this bring you the best of luck.",
+		nevermind: "Alright."
 
 	}
 
 	// var test = setInterval(function() {
 	// 	console.log(mysteryStatus);
 	// }, 1000)
+
+	$(this).click(function() {
+		console.log(mysteryStatus);
+	});
 
 	$('#fortuneTeller').click(function() {
 		if(Oshu.items.password) {
@@ -88,7 +93,6 @@ $(document).ready(function() {
 			oneOption(mysteryText.gypsyIntro, 'What have you got for sale?');
 		}
 		$('#optionOne').click(function() {
-			console.log(mysteryStatus);
 			if(mysteryStatus == 'intro') {
 				mysteryStatus = 'shop';	
 				threeOptions(mysteryText.gypsyShop, "Shrunken Heads - 15 Coins", "Sleep Potions - 10 Coins", 'Nevermind.');			
@@ -99,6 +103,9 @@ $(document).ready(function() {
 				addItem('shrunkenHead', 'Shrunken Head', Oshu.items.shrunkenHead, '#shrunkenHead', Oshu.description.shrunkenHead);
 				mysteryStatus = 'intro';
 			}
+			else {
+				console.log('dead end');
+			}
 
 		});
 		$('#optionTwo').click(function() {
@@ -107,9 +114,18 @@ $(document).ready(function() {
 				var timeout = setTimeout(function() {
 					completeItem(Oshu.quests[3][1][1], Oshu.questSpeech.kaprika2);
 				}, 2000)
-
 			}
-		})
+			else if(mysteryStatus == 'shop') {
+				$('#interactionText').writeText(mysteryText.sleepPotion);
+				payMoney(10);
+				addItem('sleepPotion', 'Sleep Potion', Oshu.items.sleepPotion, '#sleepPotion', Oshu.description.sleepPotion);
+				mysteryStatus = 'intro';
+			}
+		});
+		$('#optionThree').click(function() {
+			endConversation(mysteryText.nevermind);
+			mysteryStatus = 'intro';
+		});
 	});
 
 	$('#hangingSkulls').click(function() {
