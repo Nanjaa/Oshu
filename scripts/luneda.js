@@ -30,7 +30,7 @@ $(document).ready(function() {
 	}
 	$('.return').click(function() {
 		lunedaReturn();
-		changeLocation('#lunedaMap');
+		changeLocation('#lunedaMap', true);
 	});
 
 	// ________________________________________________________________
@@ -146,6 +146,8 @@ $(document).ready(function() {
 					$('#electroSuit').click(function() {
 						inventoryDescription('#electroSuit', 'electroSuit', Oshu.description.electroSuit);
 					});
+
+					
 
 				}
 			}, 1)

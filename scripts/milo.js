@@ -537,6 +537,10 @@ $(document).ready(function() {
 
 	$('#myShip').click(function() {
 		if($('#Kanedos').attr('first') == 'false') {
+			$('#skip').show();
+			$('#skip').click(function() {
+				ignore('#map');
+			});
 			if(knowledge.mortality == false) {
 				knowledge.mortality = true;
 				$('#map').hide();

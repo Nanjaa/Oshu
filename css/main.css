@@ -15,7 +15,6 @@ p {
 #wrapper {
 	background-color: gray;
 	padding-top: 2%;
-	border: 3px solid black;
 	padding-bottom: 100px;
 }
 
@@ -34,30 +33,27 @@ p {
 	margin-top: 0;
 	margin-bottom: 0;
 	border: 1px solid black;
+	border-bottom: none;
 }
+#gameConsole {}
 .clock {
 	text-align: right;
 	margin: 0;
 }
-#clock {
+/*#clock {
 	float: right;
-}
+}*/
 #interaction {
 	width: 600px;
 	background-color: black;
 	height: 525px;
 	color: white;
-	margin-left: 45px;
-	margin-top: 45px;
-	float: left;
 }
 #gameOptions {
 	width: 600px;
 	background-color: gray;
 	height: 100px;
 	color: black;
-	margin-left: 45px;
-	margin-top: 45px;
 	border: 5px solid black;
 	box-sizing: border-box;
 }
@@ -87,7 +83,7 @@ pre {
 }
 
 #gameConsole {
-	height: 750px;
+	border-top: none;
 }
 #shipStatus {
 	border: 1px solid black;
@@ -202,11 +198,9 @@ li {
 	display: none;
 }
 #bucketList, #inventory, #shipStats {
-	margin-left: 30px;
-	float: left;
-	margin-top: 20px;
 	width: 600px;
 	padding: 10px;
+	box-sizing: border-box;
 }
 #bucketList {
 	background-color: green;

@@ -48,14 +48,18 @@
     <div class="console" id="gameConsole">
       <!-- clock -->
 <!--       <div id="gameOptions">
-        <p>test1</p>
+        <p>mute:<span id="muteOptions">Off</span></p>
+        <h1>Time Remaining</h1>
+        <p class="clock" id="number"><span id="minutes">60</span>:<span id="seconds">00</span></p>
+        <p id="oshuTitle">Oshu</p>
       </div> -->
-      <div id="clock">
+
+<!--       <div id="clock">
         <p>Clock</p>
         <div id="clockNumbers">
-          <p class="clock" id="number"><span id="minutes">60</span>:<span id="seconds">00</span></p>
+          
         </div>
-      </div>
+      </div> -->
   <!-- ============ INTERACTION =========== -->
       <div id="interaction">
         <!-- MILO INTERACTION -->
@@ -67,6 +71,10 @@
             <li id="bad"></li>
             <li id="neut"></li>
           </ul>
+        </div>
+        <!-- return button -->
+        <div class="return cityDetails">
+          Return
         </div>
         <!-- Oshu Reflections -->
         <div id="oshuInteraction">
@@ -274,10 +282,7 @@ v  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ v
  |______|___|______|
           </pre>
         </div>
-        <!-- this div will return anyone to the city -->
-        <div class="return cityDetails">
-          Return
-        </div>
+ 
 <!-- =============================================================
 =============================================================
                         THE  BEACH
@@ -1606,6 +1611,8 @@ LIFECYCLE PROGRAM ADJUSTMENT (15 MINUTES) .. 5 COINS
   <div id="shipStats">
     <h1 id="shipTitle">Ship Status</h1>
     <pre id="myShip">
+RETURN TO SHIP
+
 |\____
 SS={o} [_\.__
 SS=[.________'>

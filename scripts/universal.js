@@ -231,7 +231,8 @@ function completeItem(quest, speech) {
 		}
 	});
 	$(Oshu.currentLocation).fadeOut();
-	$('.cityDetails').fadeOut();
+	$('.return').fadeOut();
+	$('#planetInteraction').hide();
 	var timeout = setTimeout(function() {
 		$('#oshuInteraction').show();
 		$('#skip').show();
@@ -287,9 +288,23 @@ function useItem(item, div) {
 // 				PROVIDE CURRENT LOCATION
 // ------------------------------------------------------
 
-function changeLocation(newLocation) {
+function changeLocation(newLocation, clickReturn) {
+	console.log('1');
 	Oshu.currentLocation = newLocation;
+	if(clickReturn) {
+		console.log('2');
+		play('soundEffects/return.wav');
+	}
+	else {
+		console.log('3');
+		play('soundEffects/click.wav');		
+	}
 };
+
+$('.return').click(function() {
+	console.log('4!!!');
+	// clickReturn = true;
+});
 $('#myShip').click(function() {
 	changeLocation('#map');
 });
@@ -352,3 +367,12 @@ function endConversation(referenceText) {
 	$('.option').hide();
 	$('#interactionText').writeText(referenceText);
 };
+
+// ------------------------------------------------------
+// 				CONSISTENT SOUND EFFECTS
+// ------------------------------------------------------
+
+// $('.return').click(function() {
+// 	console.log('clck');
+// 	play('soundEffects/return.wav');
+// });
