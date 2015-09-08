@@ -682,52 +682,51 @@ $(document).ready(function() {
 				oneOption(weatherText.Return, 'No, not yet...');
 			}
 		}
-	});
-
-	// these are the functions that run when you clck the options
-	$('#optionOne').click(function() {
-		switch(weatherStatus) {
-			case 'intro':
-				$('.option').hide();
-				if(Oshu.coins >= 1000) {
-					$('#interactionText').writeText(weatherText.coins);
-					payMoney(1000);
-					completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
-					weatherComplete = true;
-				}
-				else {
-					Oshu.items.weatherSpecimen = true;
-					$('#interactionText').writeText(weatherText.noCoinsLie);
-					$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
-					// now you can select the library pass
-					$('#weatherSpecimen').click(function() {
-						inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
-					});
-				};
-			break;
-			case 'return complete':
-				endConversation(weatherText.specimen);
-				var wait = setInterval(function() {
-					if($('#interactionText').text() == weatherText.specimen) {
-						var hold = setTimeout(function() {
-							completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
-						}, 2000);
+			// these are the functions that run when you clck the options
+		$('#optionOne').click(function() {
+			switch(weatherStatus) {
+				case 'intro':
+					$('.option').hide();
+					if(Oshu.coins >= 1000) {
+						$('#interactionText').writeText(weatherText.coins);
+						payMoney(1000);
+						completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
+						weatherComplete = true;
+					}
+					else {
+						Oshu.items.weatherSpecimen = true;
+						$('#interactionText').writeText(weatherText.noCoinsLie);
+						$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
+						// now you can select the library pass
+						$('#weatherSpecimen').click(function() {
+							inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+						});
 					};
-				}, 1);
-			break;
-			case 'return incomplete':
-				endConversation(weatherText.noSpecimen);
-			break;
-		};
-	});
+				break;
+				case 'return complete':
+					endConversation(weatherText.specimen);
+					var wait = setInterval(function() {
+						if($('#interactionText').text() == weatherText.specimen) {
+							var hold = setTimeout(function() {
+								completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
+							}, 2000);
+						};
+					}, 1);
+				break;
+				case 'return incomplete':
+					endConversation(weatherText.noSpecimen);
+				break;
+			};
+		});
 
-	$('#optionTwo').click(function() {
-		Oshu.items.weatherSpecimen = true;
-		endConversation(weatherText.noCoinsTruth);
-		$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
-		// now you can select the library pass
-		$('#weatherSpecimen').click(function() {
-			inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+		$('#optionTwo').click(function() {
+			Oshu.items.weatherSpecimen = true;
+			endConversation(weatherText.noCoinsTruth);
+			$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
+			// now you can select the library pass
+			$('#weatherSpecimen').click(function() {
+				inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+			});
 		});
 	});
 

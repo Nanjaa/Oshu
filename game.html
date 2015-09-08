@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/fontello.css">
   <!-- planets css -->
   <link rel="stylesheet" href="css/luneda.css">
   <link rel="stylesheet" href="css/tyrianne.css">
@@ -47,12 +48,24 @@
 <!-- game console -->
     <div class="console" id="gameConsole">
       <!-- clock -->
-<!--       <div id="gameOptions">
-        <p>mute:<span id="muteOptions">Off</span></p>
-        <h1>Time Remaining</h1>
-        <p class="clock" id="number"><span id="minutes">60</span>:<span id="seconds">00</span></p>
-        <p id="oshuTitle">Oshu</p>
-      </div> -->
+      <div id="gameOptions">
+        <div id="oshuOptions">
+          <h5 id="oshuOptionsTitle">Oshu</h5>
+          <p id="oshuOptionsSub">A Fulfillment Odyssey</p>
+        </div>
+        <div id="optionButtons">
+          <div id="sounds">
+            <p id="soundsTitle">Sounds:</p>
+            <i class="icon-volume-high" id="soundsOn"></i>
+            <i class="icon-volume-off" id="soundsOff"></i>
+          </div>
+          <p id="pause">Pause</p>
+        </div>
+        <div id="clock">
+          <p>Time Remaining</p>
+          <p class="clock" id="number"><span id="minutes">60</span>:<span id="seconds">00</span></p>
+        </div>
+      </div>
 
 <!--       <div id="clock">
         <p>Clock</p>
@@ -1055,23 +1068,19 @@ __/__________  |   |_| |_| |_| |_|   |
 
         <div class="poorMan cityDetails">
           <pre id="poorManClose">
-                                ___
-                               / ..\
-                              |  __ |
-                               \___/
-                              __|_|__
-                             /|     |\   _____
-                            //|     |\\ /  _  \
- _________________         // |     | \/  / \  \
-|   CURRENTLY ON  |       //  |     | /  /   \  \
-|   THE PATH TO   |  _________|     |/  /     \  \
-|  ENLIGHTENMENT, | /                  /       \  \___
-| IN NEED OF FOOD | \   ______________/         \_____B
-|_________________|  \________  )
-                              | |
-                              |  )
-                              Www
-
+                                 ___
+                                / ..\
+                               |  __ |
+                                \___/
+                               __| |__
+                              /| \_/ |\ _____
+                             //|     |\/  _  \
+ _________________          // |     |/  / \  \
+|   CURRENTLY ON  |        //  |     /  /   \  \
+|   THE PATH TO   |       //   |    /  /     \  \
+|  ENLIGHTENMENT, |      //    | __/  /       \  \
+| IN NEED OF FOOD |  ___//     |/    /\________\__\___ _____
+|_________________| /___/|     \____/___________\_____B_____B
           </pre>
         </div>
 
@@ -1081,7 +1090,8 @@ __/__________  |   |_| |_| |_| |_|   |
 =============================================================
 ============================================================= -->
        <div class="fuzzbutt cityDetails">
-          <pre class="fuzzbutt" id="fuzzbuttDoorman">
+        <div id="fuzzbuttDoorman">
+          <pre class="fuzzbutt" id="fuzzbuttGoon">
              WWWWW
             W     W
            |  \ /  |
@@ -1100,6 +1110,8 @@ __/__________  |   |_| |_| |_| |_|   |
   \     |             |     /
   /     |_____________|     \
           </pre>
+        </div>
+        <div id="fuzzbuttDetails">
           <pre class="fuzzbuttDetails" id="sunstoneStand">
     ____________________________________________________
    /////////////////////////////////////////////////////\
@@ -1140,7 +1152,8 @@ __/__________  |   |_| |_| |_| |_|   |
 |                | |
 |________________|/
           </pre>
-          </div>
+        </div>
+      </div>
 
 <!-- =============================================================
 =============================================================
@@ -1606,7 +1619,13 @@ LIFECYCLE PROGRAM ADJUSTMENT (15 MINUTES) .. 5 COINS
   <!-- ========== GAME STATS ============ -->
 
 
-
+  <!-- inventory -->
+    <div id="inventory">
+      <h1 id="inventoryTitle">Inventory</h1>
+      <ul class="inventoryList">
+        <li class="inventoryItem"><span id="coins">Coins:<span id="coinsAmt">0</span></span><span id="coinsDesc"></span></li>
+      </ul>
+    </div>
   <!-- ship stats -->
   <div id="shipStats">
     <h1 id="shipTitle">Ship Status</h1>
@@ -1627,13 +1646,6 @@ SS=[.________'>
     <div id="bucketList">
       <h1 id="bucketTitle">Bucket List</h1>
       <ul class="bucketList">
-      </ul>
-    </div>
-  <!-- inventory -->
-    <div id="inventory">
-      <h1 id="inventoryTitle">Inventory</h1>
-      <ul class="inventoryList">
-        <li class="inventoryItem"><span id="coins">Coins:<span id="coinsAmt">0</span></span><span id="coinsDesc"></span></li>
       </ul>
     </div>
   </div>

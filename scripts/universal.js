@@ -376,3 +376,23 @@ function endConversation(referenceText) {
 // 	console.log('clck');
 // 	play('soundEffects/return.wav');
 // });
+
+// ------------------------------------------------------
+// 				MUTE THE GAME
+// ------------------------------------------------------
+
+$('#sounds').click(function() {
+	console.log($('#audio').prop('muted'));
+	if(sound) {
+		$('#soundsOn').hide();
+		$('#soundsOff').show();
+		sound = false;
+		$('#audio').prop('muted', true);
+	}
+	else {
+		$('#soundsOff').hide();
+		$('#soundsOn').show();
+		$('#audio').prop('muted', false);
+		sound = true;
+	}
+})

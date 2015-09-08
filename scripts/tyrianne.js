@@ -26,11 +26,7 @@ $(document).ready(function() {
 	// |===============================================================|
 	// |_______________________________________________________________|
 
-	var fuzzbuttEntry = true;
-
-	$('#poorMan').click(function() {
-		console.log('hello');
-	})
+	var fuzzbuttEntry = false;
 
 	$('pre').click(function() {
 		var location = $(this).attr('id');
@@ -186,16 +182,13 @@ $(document).ready(function() {
 			$('#interactionText').writeText(jewelryText.purchase);
 			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
 			var wait = setInterval(function() {
-				console.log($('#planetInteraction').text())
-				console.log(jewelryText.yes);
-				if($('#planetInteraction').text() == jewelryText.yes) {
-					console.log('hello');
+				if($('#interactionText').text() == jewelryText.yes) {
 					// adds item to inventory if not already there
 					$('.inventoryList').append('<li class="inventoryItem"><span id="tyrianneBracelet">Bracelet from Tyrianne</span></li>');
 					Oshu.items.tyrianneJewelry = true;
 
 					// now you can select the clothes
-					$('#kanedosNecklace').click(function() {
+					$('#tyrianneBracelet').click(function() {
 						inventoryDescription('#tyrianneBracelet', 'Bracelet from Tyrianne', Oshu.description.tyrianneJewelry);
 					});
 					clearInterval(wait);
@@ -327,9 +320,7 @@ $(document).ready(function() {
 	}
 
 	$('.fuzzbuttDetails').click(function() {
-		console.log('test1');
 		if(Oshu.items.sunstone) {
-			console.log('test2');
 			$('#interactionText').writeText(marketText.marketReturn);
 		}
 		else {
@@ -338,6 +329,9 @@ $(document).ready(function() {
 			var wait = setInterval(function() {
 				if($('#interactionText').text() == marketText.yes) {
 					clearInterval(wait);
+					var hold = setTimeout(function() {
+						completeItem(Oshu.quests[2][1][1], Oshu.questSpeech.tyrianne2)
+					}, 2000);
 					$('.inventoryList').append('<li class="inventoryItem"><span id="sunstone">Sunstone</span></li>');
 					Oshu.items.sunstone = true;
 

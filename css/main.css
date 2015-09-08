@@ -35,11 +35,11 @@ p {
 	border: 1px solid black;
 	border-bottom: none;
 }
-#gameConsole {}
+/*#gameConsole {}
 .clock {
 	text-align: right;
 	margin: 0;
-}
+}*/
 /*#clock {
 	float: right;
 }*/
@@ -48,11 +48,11 @@ p {
 	background-color: black;
 	height: 525px;
 	color: white;
+	float: left;
 }
 #gameOptions {
 	width: 600px;
 	background-color: gray;
-	height: 100px;
 	color: black;
 	border: 5px solid black;
 	box-sizing: border-box;
@@ -64,7 +64,7 @@ pre {
 	position: absolute;
 	cursor: pointer;
 }
-#clock {
+/*#clock {
 	background-color: yellow;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -80,7 +80,7 @@ pre {
 #clockNumbers, #mapPreview {
 	background-color: orange;
 	border: 1px solid black;
-}
+}*/
 
 #gameConsole {
 	border-top: none;
@@ -271,4 +271,34 @@ h1 {
 	color: white;
 	padding: 25px;
 	padding-top: 0px;
+}
+#oshuOptions {
+	border: 1px solid white;
+	float: left;
+	color: white;
+	text-align: center;
+	font-family: 'Audiowide', cursive;
+	padding: 15px;
+}
+#oshuOptionsTitle {
+	margin-bottom: 0;
+}
+#optionButtons {
+	border: 1px solid pink;
+	text-align: center;
+}
+#clock {
+	border: 1px solid green;
+	text-align: center;
+}
+#sounds {
+	border: 1px solid yellow;
+	display: inline-block;
+}
+#soundsTitle, #soundsOn, #soundsOff {
+	display: inline-block;
+	cursor: pointer;
+}
+#soundsOff {
+	display: none;
 }
