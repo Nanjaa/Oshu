@@ -358,8 +358,7 @@ $(document).ready(function() {
 						useItem(Oshu.items.electange, '#electangeAmt')
 						if(Oshu.items.electange > 0) {
 							Oshu.items.electange = Oshu.items.electange - 1;
-							completeItem(Oshu.quests[0][1][2], Oshu.questSpeech.luneda3)
-
+							completeItem(Oshu.quests[0][1][2], Oshu.questSpeech.luneda3);
 						}
 					});
 				}
@@ -652,10 +651,12 @@ $(document).ready(function() {
 		coins: "Fantastic! Follow me!",
 		Return: "Did you drop off the specimen?",
 		noSpecimen: "Oh. Well, go drop it off! The sooner you do that, the sooner you can see the storms.",
-		specimen: "Great! Thank you so much. Follow me, let's go chase some storms!"
-	}
+		specimen: "Great! Thank you so much. Follow me, let's go chase some storms!",
+		end: "Those were some pretty incredible storms, weren't they?"
+	};
 
-	var specimenInventory = false;
+	var weatherComplete = false,
+		weatherStatus = 'intro';
 
 	// write the description of the weather monitoring facility
 	$('#weather').click(function() {
@@ -664,35 +665,70 @@ $(document).ready(function() {
 
 	// speak to the weatherman
 	$('#weatherman').click(function() {
-		if(specimenInventory == false) {
-			twoOptions(weatherText.weathermanIntro, "Here you go", "I don't have that kind of money!")
-			$('#optionOne').click(function() {
+		if(Oshu.items.weatherSpecimen == false && weatherComplete == false) {
+			console.log(3);
+			twoOptions(weatherText.weathermanIntro, "Here you go", "I don't have that kind of money!");
+		}
+		else if(weatherComplete) {
+			$('#interactionText').writeText(weatherText.end);
+		}
+		else {
+			if(Oshu.items.weatherComplete) {
+				weatherStatus = 'return complete';
+				oneOption(weatherText.Return, 'Sure did!');
+			}
+			else {
+				weatherStatus = 'return incomplete';
+				oneOption(weatherText.Return, 'No, not yet...');
+			}
+		}
+	});
+
+	// these are the functions that run when you clck the options
+	$('#optionOne').click(function() {
+		switch(weatherStatus) {
+			case 'intro':
 				$('.option').hide();
 				if(Oshu.coins >= 1000) {
 					$('#interactionText').writeText(weatherText.coins);
 					payMoney(1000);
+					completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
+					weatherComplete = true;
 				}
 				else {
+					Oshu.items.weatherSpecimen = true;
 					$('#interactionText').writeText(weatherText.noCoinsLie);
 					$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
 					// now you can select the library pass
 					$('#weatherSpecimen').click(function() {
 						inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
 					});
-				}
-			})
-			$('#optionTwo').click(function() {
-				endConversation(weatherText.noCoinsTruth);
-				$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
-				// now you can select the library pass
-				$('#weatherSpecimen').click(function() {
-					inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
-				});
-			});
-		}
-		else {
-			$('#interactionText').writeText(weatherText.Return);
-		}
+				};
+			break;
+			case 'return complete':
+				endConversation(weatherText.specimen);
+				var wait = setInterval(function() {
+					if($('#interactionText').text() == weatherText.specimen) {
+						var hold = setTimeout(function() {
+							completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
+						}, 2000);
+					};
+				}, 1);
+			break;
+			case 'return incomplete':
+				endConversation(weatherText.noSpecimen);
+			break;
+		};
+	});
+
+	$('#optionTwo').click(function() {
+		Oshu.items.weatherSpecimen = true;
+		endConversation(weatherText.noCoinsTruth);
+		$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
+		// now you can select the library pass
+		$('#weatherSpecimen').click(function() {
+			inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+		});
 	});
 
 	// ________________________________________________________________
