@@ -36,19 +36,19 @@ $(document).ready(function() {
 				var destination = $(this).attr('id');				
 				switch(destination) {
 					case 'Luneda':
-						$('#lunedaMap').show();
+						showContent('luneda.html #lunedaContent', 'scripts/luneda.js');
 						break;
 					case 'Kanedos':
-						$('#kanedosMap').show();
+						showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
 						break;
 					case 'Tyrianne':
-						$('#tyrianneMap').show();
+						showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 						break;
 					case 'Kaprika':
-						$('#kaprikaMap').show();
+						showContent('kaprika.html #kaprikaContent', 'scripts/kaprika.js');
 						break;
 					case 'AliNada':
-						$('#aliNadaMap').show();
+						showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
 						break;
 				}
 			};

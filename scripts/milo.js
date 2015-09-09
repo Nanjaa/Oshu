@@ -434,7 +434,8 @@ $(document).ready(function() {
 							else if(status > -5) {
 								$('#skip').show();
 								$('#skipButton').click(function() {
-									ignore('#kanedosMap');
+									showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+									ignore();
 								});
 								quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap', 12000);
 							}

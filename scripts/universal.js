@@ -118,12 +118,16 @@ function showContent(content, script) {
 }
 
 function hideContent(content) {
-	$('#lunedaContent').remove();	
+	$(content).remove();	
 }
 
-$('#oshuOptionsTitle').click(function() {
-	showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
-});
+$('#myShip').click(function() {
+	hideContent('#lunedaContent');
+	hideContent('#kanedosContent');
+	hideContent('#tyrianneContent');
+	hideContent('#kaprikaContent');
+	hideContent('#aliNadaContent');
+})
 
 
 // ------------------------------------------------------
@@ -307,14 +311,11 @@ function useItem(item, div) {
 // ------------------------------------------------------
 
 function changeLocation(newLocation, clickReturn) {
-	console.log('1');
 	Oshu.currentLocation = newLocation;
 	if(clickReturn) {
-		console.log('2');
 		play('soundEffects/return.wav');
 	}
 	else {
-		console.log('3');
 		play('soundEffects/click.wav');		
 	}
 };
