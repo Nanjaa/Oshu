@@ -504,7 +504,8 @@ $(document).ready(function() {
 						$('#skip').show();
 						quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.mp3', '#kaprikaMap', 19000);
 						$('#skip').click(function() {
-							ignore('#kaprikaMap');
+							showContent('kaprika.html #kaprikaContent', 'scripts/kaprika.js');
+							ignore();
 						})
 						break;
 
