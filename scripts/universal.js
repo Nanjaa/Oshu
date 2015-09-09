@@ -122,7 +122,7 @@ function hideContent(content) {
 }
 
 $('#oshuOptionsTitle').click(function() {
-	showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+	showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 });
 
 

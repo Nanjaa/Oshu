@@ -451,7 +451,8 @@ $(document).ready(function() {
 						$('#miloSays').writeText(text.tyrianneIntro);
 						$('#skip').show();
 						$('#skip').click(function() {
-							ignore('#tyrianneMap');
+							showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+							ignore();
 						});
 						play('speech/tyrianneIntro.mp3');
 						var test = setInterval(function() {
@@ -492,7 +493,8 @@ $(document).ready(function() {
 						})
 						$('#neut').click(function() {
 							if(tyrianneTimeline == 'tyrianneIntro') {
-								ignore('#tyrianneMap');
+								showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+								ignore();
 							}
 						})
 						break;
