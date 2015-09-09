@@ -107,6 +107,24 @@ function ignore(map) {
 	$('#skip').hide();
 }
 
+// ------------------------------------------------------
+// 				SHOW PLANET CONTENT!!
+// ------------------------------------------------------
+
+function showContent(content, script) {
+	$('#map').hide();
+	$('#planetContent').load(content);
+	$.getScript(script);
+}
+
+function hideContent(content) {
+	$('#lunedaContent').remove();	
+}
+
+$('#oshuOptionsTitle').click(function() {
+	showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+});
+
 
 // ------------------------------------------------------
 // 					PAY MONEY
@@ -395,4 +413,4 @@ $('#sounds').click(function() {
 		$('#audio').prop('muted', false);
 		sound = true;
 	}
-})
+});

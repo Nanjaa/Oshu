@@ -77,14 +77,6 @@ $(document).ready(function() {
 
 	}
 
-	// var test = setInterval(function() {
-	// 	console.log(mysteryStatus);
-	// }, 1000)
-
-	$(this).click(function() {
-		console.log(mysteryStatus);
-	});
-
 	$('#fortuneTeller').click(function() {
 		if(Oshu.items.password) {
 			twoOptions(mysteryText.gypsyIntro, "What have you got for sale?", "'Phoenix'");

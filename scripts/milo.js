@@ -43,7 +43,7 @@ $(document).ready(function() {
 		// |																																			|
 		// =============================================================================================================================================
 		// luneda interactions
-		lunedaIntro: "We have arrived on the planet Luneda. This planet is well known throughout the galaxy, as its peoples harness and reside with electricity unlike any other species in the galaxy. Here, you can visit the seas of electricity, and experience the unique culture through its series of small markets. The weather today is stormy with a high of 55 degrees Fahrenheit, thirteen degrees Celsius.",
+		lunedaIntro: "We have arrived on the planet Luneda. This planet is well known throughout the galaxy, as its peoples harness and reside with electricity unlike any other species in the galaxy. Here, you can visit the seas of electricity, and experience the unique culture through its series of small markets.",
 		// kanedos interactions
 		kanedosIntro: "Kanedos is known for its unique fighting styles. many of the natives began learning the martial art of their choice at a very young age. It is advisable to take extra caution when visiting this planet. I would suggest another route.",
 		kanedosThankGood: "I will see you upon your return.",
@@ -389,14 +389,16 @@ $(document).ready(function() {
 			if($(this).attr('first') == 'true') {
 				$(this).attr('first', 'false');
 				$('#map').hide();
+				$('#miloSays').text('');
 				switch(destination) {
-
 					case 'Luneda':
 						changeLocation('#lunedaMap');
-						quickMilo(text.lunedaIntro, 'speech/lunedaIntro.mp3', '#lunedaMap', 28000);
+						quickMilo(text.lunedaIntro, 'speech/lunedaIntro.wav', '#lunedaMap', 28000);
 						$('#skip').show();
 						$('#skipButton').click(function() {
-							ignore('#lunedaMap');
+							$('#map').hide();
+							showContent('luneda.html #lunedaContent', 'scripts/luneda.js');
+							ignore();
 						});
 						break;
 
@@ -408,14 +410,16 @@ $(document).ready(function() {
 								quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap', 4000);
 								$('#skip').show();
 								$('#skipButton').click(function() {
-									ignore('#kanedosMap');
+								showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+								ignore();
 								});
 							}
 							else {
 								quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap', 7000);
 								$('#skip').show();
 								$('#skipButton').click(function() {
-									ignore('#kanedosMap');
+									showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+									ignore();
 								});
 							}
 						});
@@ -436,7 +440,8 @@ $(document).ready(function() {
 							}
 						});
 						$('#neut').click(function() {
-							ignore('#kanedosMap');
+							showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+							ignore();
 						});
 						break;
 
@@ -537,6 +542,7 @@ $(document).ready(function() {
 
 	$('#myShip').click(function() {
 		if($('#Kanedos').attr('first') == 'false') {
+			console.log('show skip button');
 			$('#skip').show();
 			$('#skip').click(function() {
 				ignore('#map');
@@ -544,6 +550,7 @@ $(document).ready(function() {
 			if(knowledge.mortality == false) {
 				knowledge.mortality = true;
 				$('#map').hide();
+				$('#miloSays').text('');
 				$('#miloInteraction').show();
 				if(knowledge.name == true) {
 					$('#miloSays').writeText(text.miloRealizationOshu);

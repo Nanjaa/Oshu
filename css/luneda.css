@@ -1,8 +1,3 @@
-/* hide the whole planet */
-#lunedaMap {
-	display: none;
-}
-
 /* the planet on the map */
 #Luneda {
 	color: #c1e3da;
