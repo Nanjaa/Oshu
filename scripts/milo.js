@@ -268,15 +268,11 @@ $(document).ready(function() {
 
 	// Let's say MILO only has one thing to say, not a full conversation...
 
-	function quickMilo(text, audio, map, timeout) {
+	function quickMilo(text, audio, map) {
 		$('#miloInteraction').show();
 		$('#miloResponse').hide();
 		$('#miloSays').writeText(text);
 		play(audio);
-		setTimeout(function() {
-			$('#miloInteraction').hide();
-			$(map).show();
-		}, timeout);
 	}
 
 	// But more often than not, there's much more to be said. 
@@ -381,6 +377,15 @@ $(document).ready(function() {
 	//											//
 	//__________________________________________//
 
+	// function that will wait for the speech to finish before loading the planet
+
+	function miloIntroduction(timeout, locationHtml, location) {
+		var wait = setTimeout(function() {
+			ignore();
+			showContent(locationHtml, location);
+		}, timeout)
+	}
+
 	// lose time as you travel to another planet
 	$('.planet').click(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
@@ -394,6 +399,7 @@ $(document).ready(function() {
 					case 'Luneda':
 						changeLocation('#lunedaMap');
 						quickMilo(text.lunedaIntro, 'speech/lunedaIntro.wav', '#lunedaMap', 28000);
+						miloIntroduction(19500, 'luneda.html #lunedaContent', 'scripts/luneda.js');
 						$('#skip').show();
 						$('#skipButton').click(function() {
 							$('#map').hide();
@@ -407,7 +413,8 @@ $(document).ready(function() {
 						miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
 						$('#good').click(function() {
 							if(status >= 1) {
-								quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap', 4000);
+								quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap');
+								miloIntroduction(3000, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 								$('#skip').show();
 								$('#skipButton').click(function() {
 								showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
@@ -415,7 +422,8 @@ $(document).ready(function() {
 								});
 							}
 							else {
-								quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap', 7000);
+								quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap');
+								miloIntroduction(6500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 								$('#skip').show();
 								$('#skipButton').click(function() {
 									showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
@@ -425,19 +433,21 @@ $(document).ready(function() {
 						});
 						$('#bad').click(function() {
 							if(status >= -5) {
-								quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3', '#kanedosMap', 12000); 
+								quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3', '#kanedosMap');
+								miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 								$('#skip').show();
 								$('#skipButton').click(function() {
 									ignore('#kanedosMap');
 								});
 							}
-							else if(status > -5) {
+							else if(status < -5) {
 								$('#skip').show();
 								$('#skipButton').click(function() {
 									showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
 									ignore();
 								});
-								quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap', 12000);
+								quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap');
+								miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 							}
 						});
 						$('#neut').click(function() {
