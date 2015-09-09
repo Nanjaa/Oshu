@@ -22,7 +22,7 @@ $(document).ready(function() {
 // \\											    //
 //  \\											   //
 //   \\___________________________________________//
-	var status = 0;
+	var status = -10;
 	
 //    _____________________________________________
 //   //											  \\
@@ -87,7 +87,7 @@ $(document).ready(function() {
 		aliNadaGoodGoodBad: "I understand you must be emotional. I’ll let you be.",
 		aliNadaGoodNeut: "Well. Let’s move on then. I wish you all the best on AliNada. I will see you soon.",
 		aliNadaGoodBadMiss: "You’re right. It was very impolite. Take care, miss. I will see you upon your return.",
-		aliNadaGoodBadOshi: "You’re right. It was very impolite. Take care, Oshu. I will see you upon your return.",
+		aliNadaGoodBadOshu: "You’re right. It was very impolite. Take care, Oshu. I will see you upon your return.",
 		aliNadaBad: "Oh. Well, this is embarrassing. Take care.",
 		// capric interactions
 		capricIntro: "The swampy planet of Capric has very little to no laws, making it home to all kinds of ruffians. Here, you will find the infamous black market known as the Thieves’ District, as well as criminals of every kind. It also is a planet with unexplained weather patterns, matching the chaos of its citizens perfectly. It is inadvisable to land.",
@@ -191,7 +191,7 @@ $(document).ready(function() {
 		aliNadaGoodGoodGood: "His name was Andy. He was my brother.",
 		aliNadaGoodGoodNeut: "Your assumption before was way less intrusive than this, MILO.",
 		aliNadaGoodGoodBad: "You need to stop pestering me, MILO.",
-		aliNadaGoodGoodNeut: "It's fine.",
+		aliNadaGoodNeut: "It's fine.",
 		aliNadaGoodBad: "It was rude of you to make assumptions about my intentions here.",
 		
 		// =============================================================================================================================================
@@ -406,7 +406,7 @@ $(document).ready(function() {
 							showContent('luneda.html #lunedaContent', 'scripts/luneda.js');
 							ignore();
 						});
-						break;
+					break;
 
 					case 'Kanedos':
 						changeLocation('#kanedosMap');
@@ -454,7 +454,7 @@ $(document).ready(function() {
 							showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
 							ignore();
 						});
-						break;
+					break;
 
 					case 'Tyrianne':
 						changeLocation('#tyrianneMap');
@@ -466,16 +466,16 @@ $(document).ready(function() {
 							ignore();
 						});
 						play('speech/tyrianneIntro.mp3');
-						var test = setInterval(function() {
+						var wait = setInterval(function() {
 							if($('#miloSays').text() == text.tyrianneIntro) {
-								clearInterval(test);
+								clearInterval(wait);
 								setTimeout(function() {
 									$('#miloSays').text('');
 									$('#miloResponse').show();
 									$('#good').writeText(response.tyrianneGood);
 									$('#bad').writeText(response.tyrianneBad);
 									$('#neut').writeText(response.ignore);
-								}, 1000);
+								}, 3000);
 							}
 						}, 1);
 
@@ -483,12 +483,13 @@ $(document).ready(function() {
 						$('#good').click(function() {
 							if(tyrianneTimeline == 'tyrianneIntro') {
 								missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
-								concludeInteraction();
+								$('#miloResponse').hide();
+								miloIntroduction(25500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 								tyrianneTimeline = 'Would you like';
 							}
 							else {
 								missVsOshu(text.tyrianneBadGoodMiss, 'speech/tyrianneBadGoodMiss.mp3', text.tyrianneBadGoodOshu, 'speech/tyrianneBadGoodOshu.mp3', '','','');
-								concludeInteraction();
+								miloIntroduction(10500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js')
 							}
 						})
 						$('#bad').click(function() {
@@ -497,9 +498,9 @@ $(document).ready(function() {
 								tyrianneTimeline = 'I am, miss';
 							}
 							else {
-								ignore('#tyrianneMap');
+								showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+								ignore();
 								status = status + 1;
-								console.log(status);
 							}
 						})
 						$('#neut').click(function() {
@@ -508,17 +509,18 @@ $(document).ready(function() {
 								ignore();
 							}
 						})
-						break;
+					break;
 
 					case 'Kaprika':
 						changeLocation('#kaprikaMap');
 						$('#skip').show();
-						quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.mp3', '#kaprikaMap', 19000);
+						quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.mp3', '#kaprikaMap');
+						miloIntroduction(19000, 'kaprika.html #kaprikaContent', 'scripts/kaprika.js');
 						$('#skip').click(function() {
 							showContent('kaprika.html #kaprikaContent', 'scripts/kaprika.js');
 							ignore();
 						})
-						break;
+					break;
 
 					case 'AliNada':
 						changeLocation('#aliNadaMap');
@@ -528,21 +530,52 @@ $(document).ready(function() {
 						$('#good').click(function() {
 							if(aliTimeline == 'aliIntro') {
 								if(status >= 0) {
-
+									$('#bad').show();
+									miloResponse(text.aliNadaGood, 'speech/aliNadaPos.wav', response.aliNadaGoodGood, response.aliNadaGoodBad, response.aliNadaGoodNeut);
+									aliTimeline = 'so sorry';
 								}
 								else {
-									
+									quickMilo(text.aliNadaBad, 'speech/aliNadaNeg.mp3');
+									miloIntroduction(5500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+									$('#bad').show();
 								}
+							}
+							else if(aliTimeline == 'so sorry') {
+								miloResponse(text.aliNadaGoodGood, 'speech/aliNadaGoodGood.mp3', response.aliNadaGoodGoodGood, response.aliNadaGoodGoodBad, response.aliNadaGoodGoodNeut);
+								aliTimeline = 'who';
+							}
+							else if(aliTimeline == 'who') {
+								quickMilo(text.aliNadaGoodGoodGood, 'speech/aliNadaGoodGoodGood.mp3');
+								miloIntroduction(6500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
+								ignore();
 							}
 						});
 						$('#bad').click(function() {
-
+							if(aliTimeline == 'so sorry') {
+								missVsOshu(text.aliNadaGoodBadMiss, 'speech/aliNadaGoodBadMiss.mp3', text.aliNadaGoodBadOshu, 'speech/aliNadaGoodBadOshu.mp3', '','','');
+								$('#miloResponse').hide();
+								miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+							}
+							else if(aliTimeline == 'who') {
+								quickMilo(text.aliNadaGoodGoodBad, 'speech/aliNadaGoodGoodBad.mp3');
+								miloIntroduction(4500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
+							}
 						});
 						$('#neut').click(function() {
-							ignore();
-							showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
-						})
-						break;
+							if(aliTimeline == 'intro') {
+								ignore();
+								showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+							}
+							else if(aliTimeline == 'so sorry') {
+								quickMilo(text.aliNadaGoodNeut, 'speech/aliNadaGoodNeut.mp3');
+								miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+							}
+							else if(aliTimeline == 'who') {
+								quickMilo(text.aliNadaGoodGoodNeut, 'speech/aliNadaGoodGoodNeut.mp3');
+								miloIntroduction(3700, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+							}
+						});
+					break;
 				}
 			};
 		};
