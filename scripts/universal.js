@@ -122,7 +122,7 @@ function hideContent(content) {
 }
 
 $('#oshuOptionsTitle').click(function() {
-	showContent('kaprika.html #kaprikaContent', 'scripts/kaprika.js');
+	showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
 });
 
 

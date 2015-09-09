@@ -528,7 +528,8 @@ $(document).ready(function() {
 
 						});
 						$('#neut').click(function() {
-
+							ignore();
+							showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
 						})
 						break;
 				}
