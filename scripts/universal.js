@@ -320,10 +320,6 @@ function changeLocation(newLocation, clickReturn) {
 	}
 };
 
-$('.return').click(function() {
-	console.log('4!!!');
-	// clickReturn = true;
-});
 $('#myShip').click(function() {
 	changeLocation('#map');
 });

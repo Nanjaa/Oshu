@@ -13,7 +13,7 @@ function kanedosReturn() {
 }
 $('.return').click(function() {
 	kanedosReturn();
-	changeLocation('#kanedosMap');
+	changeLocation('#kanedosMap', true);
 });
 
 // ________________________________________________________________

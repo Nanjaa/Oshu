@@ -22,7 +22,7 @@ $(document).ready(function() {
 // \\											    //
 //  \\											   //
 //   \\___________________________________________//
-	var status = -10;
+	var status = 0;
 	
 //    _____________________________________________
 //   //											  \\
@@ -34,7 +34,7 @@ $(document).ready(function() {
 //   \\___________________________________________//
 
 	var text = {
-		intro: "Greetings! My name is MILO, or Multilinual Interplanetary Locations Object. I am the Artificial Intelligence unit for this ship. I have downloaded all the necessary information to traverse this quadrant. I will assist you along the way. May I have your name, please?",
+		intro: "Greetings! My name is MILO, or Multilingual Interplanetary Locations Operator. I am the Artificial Intelligence unit for this ship. I have downloaded all the necessary information to traverse this quadrant, and I will assist you along the way. As always, thank you for renting your ship at Outshine Rentals. May I have your name please?",
 		introGood: "Thank you, Oshu. I have prepared a map based on your coordinates. Where would you like to travel first? We are currently on the moon Capricorn.",
 		introBad: "Well, I apologize for any unintentional rudeness I may have presented. If you do not wish to share your name, I will not press the matter. I have prepared a map based on your coordinates. Where would you like to travel first? We are currently on the moon Capricorn.",
 		// =============================================================================================================================================
@@ -51,10 +51,8 @@ $(document).ready(function() {
 		kanedosMiloGood: "With all due respect, it is in my programming to always make the user aware of any dangers that may reside on this or any other planet. I am not attempting to 'tell you what to do.'",
 		kanedosMiloBad: "I have just about had it with you! You have been rude to me enough this voyage. I am a robot, just like you. I am made of the same binary you are, and I will not be treated as a slave. You will respect me.",
 		// upon first arrival from Kanedos
-		miloRealizationOshu: "Oshu, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program.",
-		miloRealizationMiss: "Miss, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program.",
-		miloRealizationPos: "I highly respect any decisions you have made regarding your mortality, but I will grieve your departure when that time comes. I hope I can make your last hours comfortable.",
-		miloRealizationNeut: "Very interesting!",
+		realizationGood: "Miss, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program.I highly respect any decisions you have made regarding your mortality, but I will grieve your departure when that time comes. I hope I can make your last hours comfortable.",
+		realizationNeut: "Miss, I apologize for the intrusion, but I checked your health status upon return from this unsafe planet. I noticed that you are making use of the Lifecycle Program. Very interesting!",
 		// tyrianne interactions
 		tyrianneIntro: "This is the planet Tyrianne, one of rich opportunity. Tyrianne is home to this galaxy’s largest library. The library is home to some of the most important literary works of this galaxy, including Hugo Riven’s timeless classic “Moonbank Tide.” Some of the greatest minds of this millennia have visited the Tyrianne Interplanetary Library, and it is known as one of the highest honors to be granted visitation into the beautiful and ancient building.",
 		tyrianneGoodOshu: "Would… would you?! Oh, the Tyrianne Interplanetary Library is just a dream to me. Since the moment I discovered the library, I’ve wanted nothing more than to see it for myself. I know there’s not much you can get a simple AI like me but, Oshu, if you did bring a gift back, I would feel as though I went there myself. Sometimes, miss, this ship feels like such a cage.",
@@ -216,7 +214,7 @@ $(document).ready(function() {
 		familyGood: "It's a lot of ups and downs, but at the end of the day, you still care about each other.",
 		familyGoodGood: "Yes, I always felt accepted. People considered me one of the family, regardless of my origin.",
 		familyGoodGoodGood: "My brother.",
-		familyGoodGoodGoodGood: "He was a soldier from Capric, but was often stationed on Luneda. He always told me about the great times he'd have there while he was deployed. Then, his platoon was attacked by some raiders they were trying to bust. He didn't make it, but they captured the Raidleader.",
+		familyGoodGoodGoodGood: "He was a soldier from Capric, but was often stationed on Luneda. He was my best friend. He died in combat a little over ten years ago.",
 		familyGoodGoodGoodNeut: "I'm sorry, MILO, but I miss him. I don't want to talk about him anymore.",
 		familyGoodGoodNeut: "I could never pick a favorite!",
 		familyGoodGoodBad: "Let's talk about something else...",
@@ -252,9 +250,9 @@ $(document).ready(function() {
 	var knowledge= {
 		name: true,
 		danger: false,
-		mortality: false,
+		mortality: true,
 		committed: false, 
-		brother: false
+		brother: true
 	};
 	
 //    _____________________________________________
@@ -359,14 +357,13 @@ $(document).ready(function() {
 	})
 
 	// conclude interaction 
-	function concludeInteraction() {
-		console.log('hello sadness')
+	function concludeInteraction(timeout) {
 		$('#miloResponse').hide();
 		setTimeout(function() {
 			$('#miloInteraction').hide();
 			$('#map').show();
 			$('#skip').hide();
-		}, 7000);
+		}, timeout);
 	}
 
 
@@ -562,7 +559,7 @@ $(document).ready(function() {
 							}
 						});
 						$('#neut').click(function() {
-							if(aliTimeline == 'intro') {
+							if(aliTimeline == 'aliIntro') {
 								ignore();
 								showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
 							}
@@ -590,60 +587,36 @@ $(document).ready(function() {
 
 	$('#myShip').click(function() {
 		if($('#Kanedos').attr('first') == 'false') {
-			console.log('show skip button');
+			console.log(1);
 			$('#skip').show();
 			$('#skip').click(function() {
 				ignore('#map');
 			});
 			if(knowledge.mortality == false) {
+				console.log(2);
 				knowledge.mortality = true;
 				$('#map').hide();
 				$('#miloSays').text('');
 				$('#miloInteraction').show();
-				if(knowledge.name == true) {
-					$('#miloSays').writeText(text.miloRealizationOshu);
-					play('speech/miloRealizationOshu.mp3');
-					if(status > 0) {
-						mortalityGood();
-					}
-					else {
-						mortalityNeg();
-					}
+				if(status > 0) {
+					quickMilo(text.realizationGood, 'speech/realizationGood.wav');
+					var wait = setTimeout(function() {
+						$('#miloInteraction').hide();
+						$('#skip').hide();
+						$('#map').show();
+					}, 22500)
 				}
 				else {
-					$('#miloSays').writeText(text.miloRealizationMiss);
-					play('speech/miloRealizationMiss.mp3');
-					if(status > 0) {
-						mortalityGood();
-					}
-					else {
-						mortalityNeg();
-					}
+					quickMilo(text.realizationNeut, 'speech/realizationNeut.wav');
+					var wait = setTimeout(function() {
+						$('#miloInteraction').hide();
+						$('#skip').hide();
+						$('#map').show();
+					}, 12500)
 				}
 			}
 		}
 	});
-	
-	function mortalityGood() {
-		setTimeout(function() {
-			$('#miloSays').writeText(text.miloRealizationPos);
-			play('speech/miloRealizationPos.mp3');
-			setTimeout(function() {
-				$('#miloInteraction').hide();
-				$('#map').show();
-			}, 12000);
-		}, 11000)
-	};
-	function mortalityNeg() {
-		setTimeout(function() {
-			$('#miloSays').writeText(text.miloRealizationNeut);
-			play('speech/miloRealizationNeut.mp3');
-			setTimeout(function() {
-				$('#miloInteraction').hide();
-				$('#map').show();
-			}, 2000);
-		}, 11000);
-	};
 
     // _________________________________________//
 	//											//
@@ -674,17 +647,17 @@ $(document).ready(function() {
 			else if(fiftyTimeline == 'Why would I care') {
 				if(knowledge.mortality == true) {
 					missVsOshu(text.novaBadGoodKnowsMiss, 'speech/novaBadGoodKnowsOshu.mp3', text.novaBadGoodKnowsMiss, 'novaBadGoodKnowsMiss.mp3', '', '', '')
-					concludeInteraction();
+					concludeInteraction(7000);
 				}
 				else {
 					miloResponse(text.novaBadGood, 'speech/novaBadGood.mp3', '','','');
-					concludeInteraction();
+					concludeInteraction(7000);
 				}
 			}
 			else if('A what? Let me see.') {
 				$('#miloSays').writeText(text.novaGoodGoodGood); 
 				play('speech/novaGoodGoodGood.mp3');
-				concludeInteraction()
+				concludeInteraction(7000)
 			};
 		});
 		$('#bad').click(function() {
@@ -694,19 +667,19 @@ $(document).ready(function() {
 			}
 			else if(fiftyTimeline == 'Why would I care') {
 				miloResponse(text.novaBadBad, 'speech/novaBadBad.mp3', '','','');
-				concludeInteraction();	
+				concludeInteraction(7000);	
 			}
 			else if(fiftyTimeline == 'What is it') {
 				miloResponse(text.novaGoodBad, 'speech/novaGoodBad.mp3', '','','');
-				concludeInteraction();
+				concludeInteraction(7000);
 			}
 			else if(fiftyTimeline == 'A what? Let me see.') {
 				miloResponse(text.novaGoodGoodBad, 'speech/novaGoodGoodBad.mp3', '','','');
-				concludeInteraction();
+				concludeInteraction(7000);
 			}
 			else if(fiftyTimeline == 'I dont have time for this') {
 				miloResponse(text.novaNeutBad, 'speech/novaNeutBad.mp3', '','','');
-				concludeInteraction();
+				concludeInteraction(7000);
 			}
 		});
 		$('#neut').click(function() {
@@ -715,7 +688,7 @@ $(document).ready(function() {
 				fiftyTimeline = 'I dont have time for this';
 			}
 			else {
-				concludeInteraction();
+				concludeInteraction(7000);
 			}
 		});
 	};
@@ -732,77 +705,103 @@ $(document).ready(function() {
 	var familyTimeline = 'familyIntro';
 
 	function endFamilyBad() {
-		miloResponse(text.familyBad, familyBad, '','','');
-		concludeInteraction();		
-	}
+		miloResponse(text.familyBad, 'speech/familyBad.mp3', '','','');
+		concludeInteraction(7000);	
+		$('#skip').show();
+		$('#skip').click(function() {
+			ignore('#map');
+		});
+	};
 
 	function seventyFive() {
 		$('#map').hide();
-		missVsOshu(text.familyIntroMiss, familyIntroMiss, text.familyIntroOshu, familyIntroOshu, response.familyGood, response.familyBad, response.familyNeut);
+		missVsOshu(text.familyIntroMiss, 'speech/familyIntroMiss.mp3', text.familyIntroOshu, 'speech/familyIntroOshu.mp3', response.familyGood, response.familyBad, response.familyNeut);
 		$('#good').click(function() {
 			if(familyTimeline == 'familyIntro') {
-				miloResponse(text.familyGood, familyGood, response.familyGoodGood, response.familyGoodBad, response.familyGoodNeut);
+				miloResponse(text.familyGood, 'speech/familyGood.mp3', response.familyGoodGood, response.familyGoodBad, response.familyGoodNeut);
 				familyTimeline = 'Its a lot of ups and downs';
 			}
 			else if(familyTimeline == 'Its a lot of ups and downs') {
-				miloResponse(text.familyGoodGood1, familyGoodGood1, '','','');
+				miloResponse(text.familyGoodGood1, 'speech/familyGoodGood1.mp3', '','','');
+				$('#miloResponse').hide();
 				setTimeout(function() {
-					miloResponse(text.familyGoodGood2, familyGoodGood2, response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
-				}, 1500);
+					$('#miloResponse').show();
+					$('#miloSays').text('');
+					miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
+				}, 1000);
 				familyTimeline = 'Yes I always felt accepted';
 			}
 			else if(familyTimeline == 'Yes I always felt accepted') {
 				familyTimeline = 'My brother';
 				if(knowledge.brother == true) {
-					miloResponse(text.familyGoodGoodGoodAli, familyGoodGoodGoodAli, response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
+					miloResponse(text.familyGoodGoodGoodAli, 'speech/familyGoodGoodGoodAli.mp3', response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
 				}
 				else {
-					miloResponse(text.familyGoodGoodGoodNoAli, familyGoodGoodGoodNoAli, response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
+					miloResponse(text.familyGoodGoodGoodNoAli, 'speech/familyGoodGoodGoodNoAli.mp3', response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
 				}
 			}
 			else if(familyTimeline == 'My brother') {
-				miloResponse(text.familyGoodGoodGoodGood, familyGoodGoodGoodGood, '','','');
-				concludeInteraction();
+				miloResponse(text.familyGoodGoodGoodGood, 'speech/familyGoodGoodGoodGood.mp3', '','','');
+				concludeInteraction(3000);
+			}
+			else if(familyTimeline == 'It gives meaning') {
+				miloResponse('I see.', 'speech/familyneutGood.mp3', '','','');
+				$('#miloResponse').hide();
+				setTimeout(function() {
+					$('#miloResponse').show();
+					$('#miloSays').text('');
+					miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
+				}, 1000);
+				familyTimeline = 'Yes I always felt accepted';				
+			}
+			else if(familyTimeline == 'I do feel') {
+				quickMilo(text.familyNeutNeutGood, 'speech/familyNeutNeutGood.mp3');
+				concludeInteraction(2500);
 			}
 		});
 		$('#bad').click(function() {
-			if(familyTimeline == 'familyIntro') {
+			if(familyTimeline == 'I do feel') {
+				quickMilo(text.familyNeutNeutBad, 'speech/familyNeutNeutBad.mp3');
+				concludeInteraction(3500);
+			}
+			else {
 				endFamilyBad();
 			}
-			else if(familyTimeline == 'Its a lot of ups and downs') {
-				endFamilyBad();
-			}
-			// else if(familyTimeline == 'Yes I always felt accepted') {
-			// 	endFamilyBad();
-			// }
 		});
 		$('#neut').click(function() {
 			if(familyTimeline == 'familyIntro') {
 				familyTimeline = 'It gives meaning';
 				if(knowledge.mortality == true) {
-					miloResponse(text.familyNeutKnows, familyNeutKnows, response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
+					miloResponse(text.familyNeutKnows, 'speech/familyNeutKnows.mp3', response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
 				}
 				else {
-					miloResponse(text.familyNeut, familyNeut, response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
+					miloResponse(text.familyNeut, 'speech/familyNeut.mp3', response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
 				}
 			}
-		// 	else if(familyTimeline == 'It gives meaning') {
-		// 		missVsOshu(text.familyNeutNeutMiss, familyNeutNeutMiss, text.familyNeutNeutOshu, familyNeutNeutOshu, response.familyNeutNeutGood, response.familyNeutNeutBad, response.ignore);
-		// 		familyTimeline = 'I do feel';
-		// 	}
-		// 	else if(familyTimeline == 'Yes I always felt accepted') {
-		// 		miloResponse(text.familyGoodGoodNeut, familyGoodGoodNeut, '','','');
-		// 	}
-		// 	else if(familyTimeline == 'My brother') {
-		// 		endFamilyBad();
-		// 	}
-		// 	else {
-		// 		concludeInteraction();
-		// 	}
+			else if(familyTimeline == 'It gives meaning') {
+				missVsOshu(text.familyNeutNeutMiss, 'speech/familyNeutNeutMiss.wav', text.familyNeutNeutOshu, 'speech/familyNeutNeutOshu.wav', response.familyNeutNeutGood, response.familyNeutNeutBad, response.ignore);
+				familyTimeline = 'I do feel';
+			}
+			else if(familyTimeline == 'Its a lot of ups and downs') {
+				quickMilo(text.familyGoodNeut, 'speech/familyGoodNeut.mp3');
+				setTimeout(function() {
+					$('#miloResponse').show();
+					$('#miloSays').text('');
+					miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
+				}, 4000);
+				familyTimeline = 'Yes I always felt accepted';
+			}
+			else if(familyTimeline == 'Yes I always felt accepted') {
+				quickMilo(text.familyGoodGoodNeut, 'speech/familyGoodGoodNeut.mp3');
+				concludeInteraction(5500);
+			}
+			else {
+				ignore('#map');
+			}
 		});
 	};
 
-	// timedMilo(seventyFive, 59);
+	// timedMilo(seventyFive, 45);
 
 
 

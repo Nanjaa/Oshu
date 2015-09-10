@@ -13,7 +13,7 @@ function kaprikaReturn() {
 }
 $('.return').click(function() {
 	kaprikaReturn();
-	changeLocation('#kaprikaMap');
+	changeLocation('#kaprikaMap', true);
 });
 
 // ________________________________________________________________

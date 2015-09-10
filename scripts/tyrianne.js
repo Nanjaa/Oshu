@@ -13,7 +13,7 @@ function tyrianneReturn() {
 }
 $('.return').click(function() {
 	tyrianneReturn();
-	changeLocation('#tyrianneMap');
+	changeLocation('#tyrianneMap', true);
 });
 
 // ________________________________________________________________

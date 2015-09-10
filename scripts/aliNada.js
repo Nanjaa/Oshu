@@ -13,7 +13,7 @@ function aliNadaReturn() {
 }
 $('.return').click(function() {
 	aliNadaReturn();
-	changeLocation('#aliNadaMap');
+	changeLocation('#aliNadaMap', true);
 });
 
 // ________________________________________________________________
