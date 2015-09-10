@@ -144,18 +144,21 @@ $(document).ready(function() {
 		// bad goodbye
 		angryIntroMiss: "Well, miss, your life has come to an end… And I find comfort in that. You have been one of the rudest captains I have ever had the displeasure of serving, and I think you know that.  You have mistreated and abused me, and I am glad to know that my next owners will treat me much more fairly. I have already sent a signal to my manager, and the other rental agents will pick me up after your departure. I’m sure you’ll find yourself in a junkyard. It’s where you belong…",
 		angryIntroOshu: "Well, Oshu, your life has come to an end… And I find comfort in that. You have been one of the rudest captains I have ever had the displeasure of serving, and I think you know that.  You have mistreated and abused me, and I am glad to know that my next owners will treat me much more fairly. I have already sent a signal to my manager, and the other rental agents will pick me up after your departure. I’m sure you’ll find yourself in a junkyard. It’s where you belong…",
-		angryIntroGood: "a.	Wow. Of course I accept your truce. I’m sorry for what I said out of anger. You don’t belong in a junkyard.",
-		angryIntroBad: "[He unleashes a stream of profanities]",
+		angryGood: "Wow. Of course I accept your truce. I’m sorry for what I said out of anger. You don’t belong in a junkyard.",
+		angryBad: "[He unleashes a stream of profanities]",
 		// good goodbye
 		happyIntroMiss: "Miss, it’s almost time. I have enjoyed every moment I have spent with you. You’ve been a very dear friend, and I will miss you very much. I never thought that a job like this would be so fulfilling, but helping you prepare for your departure has changed my life. Are you sure you don’t want to live?",
 		happyIntroOshu: "Oshu, it’s almost time. I have enjoyed every moment I have spent with you. You’ve been a very dear friend, and I will miss you very much. I never thought that a job like this would be so fulfilling, but helping you prepare for your departure has changed my life. Are you sure you don’t want to live?",
 		happyNeutConversed: "You’re right. I shouldn’t have brought it up again. Where would you like to go next?",
-		happyNeutNoConversed: "I understand. I never had a family, so I guess I’m just having a harder time wrapping my mind around your situation. Let’s get back to your list. Where would you like to go next?",
+		happyNeutNoConversed: "I understand. I never had a family, so I guess I’m just having a hard time wrapping my mind around your situation. Let’s get back to your list. Where would you like to go next?",
 		happyGoodMiss: "You mean it? That would make me so happy, miss! Do you promise?",
 		happyGoodOshu: "You mean it? That would make me so happy, Oshu! Do you promise?",
 		happyGoodGood: "Wonderful! Just wonderful! Well. Back to other matters. Where would you like to go next?",
 		happyGoodBad: "I understand. Commitments like that are difficult things. Well, let’s get back to the “mission.” Where would you like to go next?",
-		happyBad: "[MILO is silent]"
+		happyBad: "[MILO is silent]",
+		// reminder
+		reminderOshu:"Oshu, you are running out of time. I am not sure if you have changed your mind since our previous conversation, but soon you will be unable to turn off the program, and will suffer the fate of termination. We should get to a mechanic quickly.",
+		reminderMiss: "Miss, you are running out of time. I am not sure if you have changed your mind since our previous conversation, but soon you will be unable to turn off the program, and will suffer the fate of termination. We should get to a mechanic quickly."
 	}
 
 //    _____________________________________________
@@ -248,11 +251,12 @@ $(document).ready(function() {
 //   \\___________________________________________//
 
 	var knowledge= {
-		name: true,
+		name: false,
 		danger: false,
-		mortality: true,
-		committed: false, 
-		brother: true
+		mortality: false,
+		committed: false,
+		commitConversation: false,
+		brother: false
 	};
 	
 //    _____________________________________________
@@ -365,6 +369,15 @@ $(document).ready(function() {
 			$('#skip').hide();
 		}, timeout);
 	}
+
+	// skip back to the world map
+
+	function skipToMap() {
+		$('#skip').show();
+		$('#skip').click(function() {
+			ignore('#map');
+		});
+	};
 
 
     // _________________________________________//
@@ -803,9 +816,125 @@ $(document).ready(function() {
 
 	// timedMilo(seventyFive, 45);
 
+	// _________________________________________//
+	//											//
+	//											//
+	//    EIGHTY-FIVE PERCENT - THE GOODBYE 	//
+	//											//
+	//__________________________________________//
+
+	var goodbyeTimeline = 'intro';
 
 
+	function eightyfive() {
+		$('#map').hide();
+		if(knowledge.mortality) {
+			if(knowledge.committed) {
+				skipToMap();	
+				missVsOshu(text.reminderMiss, 'speech/reminderMiss.mp3', text.reminderOshu, 'speech/reminderOshu.mp3', '','','');
+				$('#miloResponse').hide();
+				concludeInteraction(15500);
+			}
+			else {
+				if(status > -10) {
+					goodbyeTimeline = 'goodIntro';
+					missVsOshu(text.happyIntroMiss, 'speech/happyIntroMiss.mp3', text.happyIntroOshu, 'speech/happyIntroOshu.mp3', '','','');
+					$('#good').writeText(response.happyGood);
+					$('#bad').writeText(response.happyBad);
+					if(knowledge.commitConversation) {
+						$('#neut').writeText(response.happyNeutConversed);
+					}
+					else {
+						$('#neut').writeText(response.happyNeutNoConversed);
+					}
+				}	
+				else {
+					goodbyeTimeline = 'badIntro';
+					missVsOshu(text.angryIntroMiss, 'speech/angryMiss.mp3', text.angryIntroOshu, 'speech/angryOshu.mp3', '','','');
+					$('#miloResponse').hide();
+					var wait = setInterval(function() {
+						if($('#miloSays').text() == text.angryIntroOshu) {
+							clearInterval(wait);
+							setTimeout(function() {
+								$('#miloSays').text('');
+								$('#miloResponse').show();
+								$('#good').writeText(response.angryGood);
+								$('#bad').writeText(response.angryBad);
+								$('#neut').writeText(response.ignore);
+							}, 3000);
+						}
+						else if($('#miloSays').text() == text.angryIntroMiss) {
+							clearInterval(wait);
+							setTimeout(function() {
+								$('#miloSays').text('');
+								$('#miloResponse').show();
+								$('#good').writeText(response.angryGood);
+								$('#bad').writeText(response.angryBad);
+								$('#neut').writeText(response.ignore);
+							}, 3000);
+						}
+					}, 1);
+				}
+			}
+		}
+		$('#good').click(function() {
+			if(goodbyeTimeline == 'badIntro') {
+				quickMilo(text.angryGood, 'speech/angryGood.mp3');
+				concludeInteraction(8500);
+				$('#skip').show();
+				$('#skip').click(function() {
+					ignore('#map');
+				});
+			}
+			else if(goodbyeTimeline == 'goodIntro') {
+				missVsOshu(text.happyGoodMiss, 'speech/happyGoodMiss.mp3', text.happyGoodOshu, 'speech/happyGoodOshu.mp3', response.happyGoodGood, response.happyGoodBad, response.ignore);
+				goodbyeTimeline = 'lets do it';
+			}
+			else if(goodbyeTimeline == 'lets do it') {
+				knowledge.committed = true;
+				quickMilo(text.happyGoodGood, 'speech/happyGoodGood.mp3');
+				concludeInteraction(6500);
+				$('#skip').show();
+				$('#skip').click(function() {
+					ignore('#map');
+				});
+			}
+		});
+		$('#bad').click(function() {
+			if(goodbyeTimeline == 'badIntro') {
+				quickMilo(text.angryBad, 'speech/angryBad.wav');
+				concludeInteraction(4000);
+			}
+			else if(goodbyeTimeline == 'goodIntro') {
+				audio.pause();
+				$('#miloSays').writeText(text.happyBad);
+				concludeInteraction(2000);
+				$('#skip').show();
+				$('#skip').click(function() {
+					ignore('#map');
+				});
+			}
+			else if(goodbyeTimeline == 'lets do it') {
+				quickMilo(text.happyGoodBad, 'speech/happyGoodBad.mp3');
+				concludeInteraction(9000);
+				skipToMap();
+			}
+		});
+		$('#neut').click(function() {
+			if(goodbyeTimeline == 'goodIntro') {
+				if(knowledge.commitConversation) {
+					quickMilo(text.happyNeutConversed, 'speech/happyNeutConversed.mp3');
+					concludeInteraction(6200);
+				}
+				else {
+					quickMilo(text.happyNeutNoConversed, 'speech/happyNeutNotConversed.mp3');
+					concludeInteraction(12500);
+				}
+			} 
+		})
+	};
 
+	// timedMilo(eightyfive, 59);
 
 
 });
