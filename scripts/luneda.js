@@ -10,8 +10,7 @@ var beachText = {
 	rentalNo: "That's alright! Don't try to swim, though. Unless, of course, you want to be fish food!",
 	drinksWelcome: "You've come to the right place, my friend! I have the coldest drinks on this most sunny of days!",
 	drinksGoodbye: "Come back anytime, my friend. Stay safe!",
-	seaLife: "You step into the sea, and submerge yourself. There are fish everywhere. You try to take as many pictures as you can before you have to return the suit!",
-	seaDeath: "You step into the sea without protection. The electricity swallows you up, and you feel yourself losing control. Slowly, everything fades..."	
+	cantSwim: "You cannot enter the sea without proper protection!"	
 };
 
 // brings up the common divs between all the city details
@@ -158,7 +157,7 @@ function rentalActivate() {
 var tikiText = {
 	intro: "You talk into the tiki hut, which is softly playing tropical music.",
 	bartenerIntro: "Hi there. Is there anything I can help you with?",
-	advice1: "If you want to go to the electric seas, make sure you wear an ElectroSuit. You'll die otherwise!",
+	advice1: "If you want to go to the electric seas, make sure you wear an ElectroSuit from the rental. You'll die otherwise!",
 	advice2: "They have a strict dress code at the Dance Hall. You absolutely have to wear formal clothes!",
 	advice3: "The best place to buy electric fruit is at the marketplace.",
 	manIntro: "Hey, stranger. I'll tell you a secret if you do me a good turn...",
@@ -288,12 +287,11 @@ $('#optionTwo').click(function() {
 //************************ interact with the sea ************************
 
 $('#closerSeas').click(function() {
-	$('#beach').hide();
 	if(Oshu.items.electroSuit) {
 		completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda1);
 	}
 	else {
-		$('#interactionText').writeText(beachText.seaDeath);
+		$('#interactionText').writeText(beachText.cantSwim);
 	}
 })
 

@@ -47,6 +47,10 @@ function lifeEvent(minutesLost) {
 // 					WRITE TEXT
 // ------------------------------------------------------
 
+$('pre').click(function() {
+	$('pre').unbind('click');
+	console.log('unbind');
+})
 function resetText() {
 	$(this).text('');
 	$('#interactionText').text('');
@@ -56,7 +60,6 @@ var startText = true;
 
 $(this).click(function() {
 	startText = !startText;
-	console.log(startText);
 });
 
 (function($) {
@@ -125,6 +128,20 @@ $('#myShip').click(function() {
 	hideContent('#aliNadaContent');
 })
 
+// ------------------------------------------------------
+// 					PAY MONEY
+// ------------------------------------------------------
+
+function getPaid(price) {
+	var coins = Oshu.coins;
+	var payment = setInterval(function() {
+		coins = coins + 1;
+		Oshu.coins = coins;
+		$('#coinsAmt').text(coins);		
+	}, 500);
+};
+
+getPaid();
 
 // ------------------------------------------------------
 // 					PAY MONEY
