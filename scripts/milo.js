@@ -386,7 +386,9 @@ $(document).ready(function() {
 	//											//
 	//__________________________________________//
 
-	startGame();
+	// startGame();
+
+	$('#map').show();
 
 	function startGame() {
 		miloResponse(text.intro, 'speech/intro.mp3', response.introGood, response.introBad, response.ignore);
@@ -502,7 +504,7 @@ $(document).ready(function() {
 							showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 							ignore();
 						});
-						play('speech/tyrianneIntro.mp3');
+						play('speech/tyrianneIntro.wav');
 						var wait = setInterval(function() {
 							if($('#miloSays').text() == text.tyrianneIntro) {
 								clearInterval(wait);
