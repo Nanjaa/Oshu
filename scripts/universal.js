@@ -48,49 +48,52 @@ function lifeEvent(minutesLost) {
 // ------------------------------------------------------
 
 $('pre').click(function() {
-	$('pre').unbind('click');
-	console.log('unbind');
+	if($(this).attr('id') !== 'myShip') {
+		$('pre').unbind('click');
+		console.log('unbind');		
+	}
 })
+
 function resetText() {
 	$(this).text('');
 	$('#interactionText').text('');
 }
 
-var startText = true;
+// var startText = true;
 
-$(this).click(function() {
-	startText = !startText;
-});
+// $(this).click(function() {
+// 	startText = !startText;
+// });
 
 (function($) {
 	resetText();
 	$.fn.writeText = function(content) {
-		// if(startText) {
-			resetText();
-			var contentArray = content.split(""),
-				current = 0,
-				click = false,
-				clicked = false,
-				elem = this;
+		resetText();
+		var contentArray = content.split(""),
+			current = 0,
+			click = false,
+			clicked = false,
+			elem = this;
 
-			var textWait = setInterval(function() {
-				$(this).click(function() {
-					click = true;
-				});
-				if(current == contentArray.length-1 && click == false) {
-					click = true;
-				}
-				else if((current < contentArray.length) && click == false) {
-					elem.text(elem.text() + contentArray[current]);
-					current = current+1;
-				}
-				else if(click == true && clicked == false) {
-					elem.text('');
-					elem.text(elem.text() + content);
-					clicked = true;
-				}				
-			}, 30);
-		// };
+		var textWait = setInterval(function() {
+			$(this).click(function() {
+				click = true;
+			});
+			if(current == contentArray.length-1 && click == false) {
+				click = true;
+			}
+			else if((current < contentArray.length) && click == false) {
+				elem.text(elem.text() + contentArray[current]);
+				current = current+1;
+			}
+			else if(click == true && clicked == false) {
+				elem.text('');
+				elem.text(elem.text() + content);
+				clicked = true;
+				// $('pre').bind('click');
+				// console.log('bind');
+			}				
+		}, 30);
 	};
 }) (jQuery);
 

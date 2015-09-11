@@ -1,3 +1,10 @@
+$('pre').click(function() {
+	if($(this).attr('id') !== 'myShip') {
+		$('pre').unbind('click');
+		console.log('unbind');		
+	}
+})
+
 // all the text that will be used throughout this level
 var beachText = {
 	inUse: false,
