@@ -47,27 +47,23 @@ function lifeEvent(minutesLost) {
 // 					WRITE TEXT
 // ------------------------------------------------------
 
-$('pre').click(function() {
-	if($(this).attr('id') !== 'myShip') {
-		$('pre').unbind('click');
-		console.log('unbind');		
-	}
-})
+// This small var will help immensely with all the writetext
+var go = true;
 
 function resetText() {
 	$(this).text('');
 	$('#interactionText').text('');
 }
-
 // var startText = true;
 
-// $(this).click(function() {
-// 	startText = !startText;
-// });
+$(this).click(function() {
+	console.log(go);
+});
 
 (function($) {
 	resetText();
 	$.fn.writeText = function(content) {
+		go = false;
 		resetText();
 		var contentArray = content.split(""),
 			current = 0,
@@ -90,8 +86,7 @@ function resetText() {
 				elem.text('');
 				elem.text(elem.text() + content);
 				clicked = true;
-				// $('pre').bind('click');
-				// console.log('bind');
+				go = true;
 			}				
 		}, 30);
 	};
@@ -340,6 +335,7 @@ function changeLocation(newLocation, clickReturn, clickShip) {
 };
 
 $('#myShip').click(function() {
+	go = true;
 	changeLocation('#map', false, true);
 });
 

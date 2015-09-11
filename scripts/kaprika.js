@@ -1,3 +1,4 @@
+
 // brings up the common divs between all the city details
 $('.kaprikaCity').click(function() {
 	$('.kaprikaCity').hide();
@@ -76,54 +77,60 @@ var mysteryText = {
 }
 
 $('#fortuneTeller').click(function() {
-	if(Oshu.items.password) {
-		twoOptions(mysteryText.gypsyIntro, "What have you got for sale?", "'Phoenix'");
-	}
-	else {
-		oneOption(mysteryText.gypsyIntro, 'What have you got for sale?');
-	}
-	$('#optionOne').click(function() {
-		if(mysteryStatus == 'intro') {
-			mysteryStatus = 'shop';	
-			threeOptions(mysteryText.gypsyShop, "Shrunken Heads - 15 Coins", "Sleep Potions - 10 Coins", 'Nevermind.');			
-		}
-		else if(mysteryStatus == 'shop') {
-			$('#interactionText').writeText(mysteryText.shrunkenHead);
-			payMoney(15);
-			addItem('shrunkenHead', 'Shrunken Head', Oshu.items.shrunkenHead, '#shrunkenHead', Oshu.description.shrunkenHead);
-			mysteryStatus = 'intro';
+	if(go) {
+		if(Oshu.items.password) {
+			twoOptions(mysteryText.gypsyIntro, "What have you got for sale?", "'Phoenix'");
 		}
 		else {
-			console.log('dead end');
+			oneOption(mysteryText.gypsyIntro, 'What have you got for sale?');
 		}
+		$('#optionOne').click(function() {
+			if(mysteryStatus == 'intro') {
+				mysteryStatus = 'shop';	
+				threeOptions(mysteryText.gypsyShop, "Shrunken Heads - 15 Coins", "Sleep Potions - 10 Coins", 'Nevermind.');			
+			}
+			else if(mysteryStatus == 'shop') {
+				$('#interactionText').writeText(mysteryText.shrunkenHead);
+				payMoney(15);
+				addItem('shrunkenHead', 'Shrunken Head', Oshu.items.shrunkenHead, '#shrunkenHead', Oshu.description.shrunkenHead);
+				mysteryStatus = 'intro';
+			}
+			else {
+				console.log('dead end');
+			}
 
-	});
-	$('#optionTwo').click(function() {
-		if(mysteryStatus == 'intro') {
-			$('#interactionText').writeText(mysteryText.lifePools);
-			var timeout = setTimeout(function() {
-				completeItem(Oshu.quests[3][1][1], Oshu.questSpeech.kaprika2);
-			}, 2000)
-		}
-		else if(mysteryStatus == 'shop') {
-			$('#interactionText').writeText(mysteryText.sleepPotion);
-			payMoney(10);
-			addItem('sleepPotion', 'Sleep Potion', Oshu.items.sleepPotion, '#sleepPotion', Oshu.description.sleepPotion);
+		});
+		$('#optionTwo').click(function() {
+			if(mysteryStatus == 'intro') {
+				$('#interactionText').writeText(mysteryText.lifePools);
+				var timeout = setTimeout(function() {
+					completeItem(Oshu.quests[3][1][1], Oshu.questSpeech.kaprika2);
+				}, 2000)
+			}
+			else if(mysteryStatus == 'shop') {
+				$('#interactionText').writeText(mysteryText.sleepPotion);
+				payMoney(10);
+				addItem('sleepPotion', 'Sleep Potion', Oshu.items.sleepPotion, '#sleepPotion', Oshu.description.sleepPotion);
+				mysteryStatus = 'intro';
+			}
+		});
+		$('#optionThree').click(function() {
+			endConversation(mysteryText.nevermind);
 			mysteryStatus = 'intro';
-		}
-	});
-	$('#optionThree').click(function() {
-		endConversation(mysteryText.nevermind);
-		mysteryStatus = 'intro';
-	});
+		});		
+	};
 });
 
 $('#hangingSkulls').click(function() {
-	$('#interactionText').writeText(mysteryText.hangingSkulls);
+	if(go) {
+		$('#interactionText').writeText(mysteryText.hangingSkulls);		
+	};
 });
 
 $('#crystalBall').click(function() {
-	$('#interactionText').writeText(mysteryText.crystalBall);
+	if(go) {
+		$('#interactionText').writeText(mysteryText.crystalBall);		
+	};
 });
 
 // ________________________________________________________________
@@ -148,38 +155,42 @@ var treeText = {
 var goonStatus = 'intro';
 
 $('.treeGoons').click(function() {
-	if((Oshu.items.sleepPotion) && (goonStatus == 'intro')) {
-		oneOption(treeText.goonsIntro, "Can you smell this potion for me?");
-	}
-	else if(Oshu.items.sleepPotion) {
-		$('#interactionText').writeText(treeText.sleepReturn);
-	}
-	else {
-		oneOption(treeText.goonsIntro, "Maybe there's some way I could convince you.");
-	};
-
-	$('#optionOne').click(function() {
-		if(Oshu.items.sleepPotion) {
-			goonStatus = 'sleeping';
-			$('#interactionText').writeText(treeText.sleep);
-			var timeout = setTimeout(function() {
-				$('#interactionText').writeText(treeText.sleepEnd);
-				var wait = setTimeout(function() {
-					completeItem(Oshu.quests[3][1][2], Oshu.questSpeech.kaprika3);
-				}, 2200)
-			}, 3000);
-		} 
+	if(go) {
+		if((Oshu.items.sleepPotion) && (goonStatus == 'intro')) {
+			oneOption(treeText.goonsIntro, "Can you smell this potion for me?");
+		}
+		else if(Oshu.items.sleepPotion) {
+			$('#interactionText').writeText(treeText.sleepReturn);
+		}
 		else {
-			endConversation(treeText.awake);			};
-	});
+			oneOption(treeText.goonsIntro, "Maybe there's some way I could convince you.");
+		};
+
+		$('#optionOne').click(function() {
+			if(Oshu.items.sleepPotion) {
+				goonStatus = 'sleeping';
+				$('#interactionText').writeText(treeText.sleep);
+				var timeout = setTimeout(function() {
+					$('#interactionText').writeText(treeText.sleepEnd);
+					var wait = setTimeout(function() {
+						completeItem(Oshu.quests[3][1][2], Oshu.questSpeech.kaprika3);
+					}, 2200)
+				}, 3000);
+			} 
+			else {
+				endConversation(treeText.awake);			};
+		});		
+	};
 });
 
 $('#treeClose').click(function() {
-	if(goonStatus == 'sleeping') {
-		$('#interactionText').writeText(treeText.treeNoGoons);
-	}
-	else {
-		$('#interactionText').writeText(treeText.treeGoons);
+	if(go) {
+		if(goonStatus == 'sleeping') {
+			$('#interactionText').writeText(treeText.treeNoGoons);
+		}
+		else {
+			$('#interactionText').writeText(treeText.treeGoons);
+		};		
 	};
 });
 
@@ -202,19 +213,23 @@ var groveText = {
 }
 
 $('#fairies').click(function() {
-	if(Oshu.items.emptyBottle) {
-		$('#interactionText').writeText('This is where I change the div');
-	}
-	else {
-		$('#interactionText').writeText(groveText.fairyDescription);
-	}
+	if(go) {
+		if(Oshu.items.emptyBottle) {
+			$('#interactionText').writeText('This is where I change the div');
+		}
+		else {
+			$('#interactionText').writeText(groveText.fairyDescription);
+		}		
+	};
 });
 
 $('#quietGrove').click(function() {
-	if(Oshu.items.jewelry && firstTime) {
-		firstTime = false;
-		var wait = setTimeout(function() {
-			completeItem(Oshu.quests[3][1][0], Oshu.questSpeech.kaprika1);
-		}, 3000);
-	}
+	if(go) {
+		if(Oshu.items.jewelry && firstTime) {
+			firstTime = false;
+			var wait = setTimeout(function() {
+				completeItem(Oshu.quests[3][1][0], Oshu.questSpeech.kaprika1);
+			}, 3000);
+		}		
+	};
 });

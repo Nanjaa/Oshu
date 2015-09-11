@@ -1,3 +1,4 @@
+
 // brings up the common divs between all the city details
 $('.tyrianneCity').click(function() {
 	$('.tyrianneCity').hide();
@@ -92,40 +93,42 @@ var poorText = {
 };
 
 $('#poorManClose').click(function() {
-	if(poorStatus == 'end') {
-		$('#interactionText').writeText(poorStatus.end);
-	}
-	else {
-		twoOptions(poorText.manIntro, "Yes, I do.", "No, I don't");
-		$('#optionOne').click(function() {
-			if(poorStatus == 'intro') {
-				if(Oshu.items.ganifruit > 0) {
-					useItem(Oshu.items.ganifruit, '#ganifruitAmt');
-					oneOption(poorText.yesFoodTruth, "Actually, can you help me see the philosophers?");
-					poorStatus = 'giveFruit';
+	if(go) {
+		if(poorStatus == 'end') {
+			$('#interactionText').writeText(poorStatus.end);
+		}
+		else {
+			twoOptions(poorText.manIntro, "Yes, I do.", "No, I don't");
+			$('#optionOne').click(function() {
+				if(poorStatus == 'intro') {
+					if(Oshu.items.ganifruit > 0) {
+						useItem(Oshu.items.ganifruit, '#ganifruitAmt');
+						oneOption(poorText.yesFoodTruth, "Actually, can you help me see the philosophers?");
+						poorStatus = 'giveFruit';
+					}
+					else if(Oshu.items.electange > 0) {
+						endConversation(poorText.ganifruitOnly);
+					}
+					else {
+						endConversation(poorText.yesFoodLie);
+					}				
 				}
-				else if(Oshu.items.electange > 0) {
-					endConversation(poorText.ganifruitOnly);
-				}
+				else if(poorStatus == 'giveFruit') {
+					endConversation(poorText.philosophers);
+					var timeout = setTimeout(function() {
+						completeItem(Oshu.quests[2][1][2], Oshu.questSpeech.tyrianne3);
+					}, 2000);
+				}	
 				else {
-					endConversation(poorText.yesFoodLie);
-				}				
-			}
-			else if(poorStatus == 'giveFruit') {
-				endConversation(poorText.philosophers);
-				var timeout = setTimeout(function() {
-					completeItem(Oshu.quests[2][1][2], Oshu.questSpeech.tyrianne3);
-				}, 2000);
-			}	
-			else {
-				endConversation(poorText.end);
-			}
+					endConversation(poorText.end);
+				}
 
-		});
-		$('#optionTwo').click(function() {
-			endConversation(poorText.noFood);
-		});
-	};
+			});
+			$('#optionTwo').click(function() {
+				endConversation(poorText.noFood);
+			});
+		};		
+	}
 });
 
 // ________________________________________________________________
@@ -156,42 +159,46 @@ $('#tyrianneJewelry').click(function() {
 });
 
 $('#tyrianneJewelryLady').click(function() {
-	switch(jewelryStatus) {
-		case 1:
-			$('#interactionText').writeText(jewelryText.ladyIntro);
-			jewelryStatus = 2;
-		break;
-		case 2:
-			$('#interactionText').writeText(jewelryText.advice1);
-			jewelryStatus = 3;
-		break
-		case 3:
-			$('#interactionText').writeText(jewelryText.advice2);
-			jewelryStatus = 1;
-		break;
+	if(go) {
+		switch(jewelryStatus) {
+			case 1:
+				$('#interactionText').writeText(jewelryText.ladyIntro);
+				jewelryStatus = 2;
+			break;
+			case 2:
+				$('#interactionText').writeText(jewelryText.advice1);
+				jewelryStatus = 3;
+			break
+			case 3:
+				$('#interactionText').writeText(jewelryText.advice2);
+				jewelryStatus = 1;
+			break;
+		};		
 	};
 });
 
 $('#tyrianneJewelryPieces').click(function() {
-	if(Oshu.items.tyrianneJewelry) {
-		$('#interactionText').writeText(jewelryText.jewelryGoodbye);
-	}
-	else {
-		$('#interactionText').writeText(jewelryText.purchase);
-		displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
-		var wait = setInterval(function() {
-			if($('#interactionText').text() == jewelryText.yes) {
-				// adds item to inventory if not already there
-				$('.inventoryList').append('<li class="inventoryItem"><span id="tyrianneBracelet">Bracelet from Tyrianne</span></li>');
-				Oshu.items.tyrianneJewelry = true;
+	if(go) {
+		if(Oshu.items.tyrianneJewelry) {
+			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
+		}
+		else {
+			$('#interactionText').writeText(jewelryText.purchase);
+			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
+			var wait = setInterval(function() {
+				if($('#interactionText').text() == jewelryText.yes) {
+					// adds item to inventory if not already there
+					$('.inventoryList').append('<li class="inventoryItem"><span id="tyrianneBracelet">Bracelet from Tyrianne</span></li>');
+					Oshu.items.tyrianneJewelry = true;
 
-				// now you can select the clothes
-				$('#tyrianneBracelet').click(function() {
-					inventoryDescription('#tyrianneBracelet', 'Bracelet from Tyrianne', Oshu.description.tyrianneJewelry);
-				});
-				clearInterval(wait);
-			}
-		}, 1);			
+					// now you can select the clothes
+					$('#tyrianneBracelet').click(function() {
+						inventoryDescription('#tyrianneBracelet', 'Bracelet from Tyrianne', Oshu.description.tyrianneJewelry);
+					});
+					clearInterval(wait);
+				}
+			}, 1);			
+		};		
 	};
 });
 
@@ -224,86 +231,88 @@ var factoryText = {
 factoryStatus = 'intro';
 
 $('#fuzzbuttDoorman').click(function() {
-	if(factoryStatus == 'intro') {
-		twoOptions(factoryText.goonIntro, "Maybe I can persuade you otherwise...", "I do have the proper authority.");
-		$('#optionOne').click(function() {
-			if(factoryStatus == 'intro') {
-				twoOptions(factoryText.goonPersuade, "How about some coins?", "Any odd jobs you need finished?");				
-				factoryStatus = 'persuasion';
-			}
-			else if(factoryStatus == 'persuasion') {
-				twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
-				factoryStatus = 'bribe';
-			}
-			else if(factoryStatus == 'bribe') {
-				if(Oshu.coins >= 200) {
-					payMoney(200);
-					fuzzbuttEntry = true;
-					endConversation(factoryText.acceptBribe);
-					var timeout = setTimeout(function() {
-						$('#fuzzbuttDoorman').hide();
-						$('.fuzzbuttDetails').show();
-						$('#interactionText').writeText(marketText.intro);
-					}, 3500);						
+	if(go) {
+		if(factoryStatus == 'intro') {
+			twoOptions(factoryText.goonIntro, "Maybe I can persuade you otherwise...", "I do have the proper authority.");
+			$('#optionOne').click(function() {
+				if(factoryStatus == 'intro') {
+					twoOptions(factoryText.goonPersuade, "How about some coins?", "Any odd jobs you need finished?");				
+					factoryStatus = 'persuasion';
 				}
-				else {
-					endConversation(factoryText.noMoney);
+				else if(factoryStatus == 'persuasion') {
+					twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
+					factoryStatus = 'bribe';
+				}
+				else if(factoryStatus == 'bribe') {
+					if(Oshu.coins >= 200) {
+						payMoney(200);
+						fuzzbuttEntry = true;
+						endConversation(factoryText.acceptBribe);
+						var timeout = setTimeout(function() {
+							$('#fuzzbuttDoorman').hide();
+							$('.fuzzbuttDetails').show();
+							$('#interactionText').writeText(marketText.intro);
+						}, 3500);						
+					}
+					else {
+						endConversation(factoryText.noMoney);
+						factoryStatus = 'declined';
+					};
+				}
+				else if(factoryStatus == 'pressured') {
+					threeOptions(factoryText.lie, "I'll pay you.", "I'll help you out.", "Nevermind.");
 					factoryStatus = 'declined';
+				}
+				else if(factoryStatus == 'declined') {
+					twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
+					factoryStatus = 'bribe';
+				}
+				else if(factoryStatus == 'quest') {
+					endConversation(factoryText.declineOffer);
+					factoryStatus = 'declined';
+				}
+			});	
+			$('#optionTwo').click(function() {
+				if(factoryStatus == 'intro') {
+					twoOptions(factoryText.authority, "I... uh... have it... somewhere...", "Okay, fine. I don't have the authority.");
+					factoryStatus = 'pressured';
+				}
+				else if(factoryStatus == 'pressured') {
+					threeOptions(factoryText.authorityAdmit, "I'll pay you.", "I'll help you out.", "Nevermind.");
+					factoryStatus = 'declined';
+				}
+				else if(factoryStatus == 'bribe') {
+					endConversation(factoryText.declineOffer);
+					factoryStatus = 'declined';
+				}
+				else if(factoryStatus == 'declined') {
+					twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
+					factoryStatus = 'quest';
+				}
+				else if(factoryStatus == 'persuasion') {
+					twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
+					factoryStatus = 'quest';
+				}
+				else if(factoryStatus == 'quest') {
+					endConversation(factoryText.acceptQuest);
+
+					$('.inventoryList').append('<li class="inventoryItem"><span id="emptyBottle">Empty Fairy Bottle</span></li>');
+					Oshu.items.emptyBottle = true;
+
+					// now you can select the clothes
+					$('#emptyBottle').click(function() {
+						inventoryDescription('#emptyBottle', 'Empty Fairy Bottle', Oshu.description.emptyBottle);
+					});
 				};
-			}
-			else if(factoryStatus == 'pressured') {
-				threeOptions(factoryText.lie, "I'll pay you.", "I'll help you out.", "Nevermind.");
-				factoryStatus = 'declined';
-			}
-			else if(factoryStatus == 'declined') {
-				twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
-				factoryStatus = 'bribe';
-			}
-			else if(factoryStatus == 'quest') {
-				endConversation(factoryText.declineOffer);
-				factoryStatus = 'declined';
-			}
-		});	
-		$('#optionTwo').click(function() {
-			if(factoryStatus == 'intro') {
-				twoOptions(factoryText.authority, "I... uh... have it... somewhere...", "Okay, fine. I don't have the authority.");
-				factoryStatus = 'pressured';
-			}
-			else if(factoryStatus == 'pressured') {
-				threeOptions(factoryText.authorityAdmit, "I'll pay you.", "I'll help you out.", "Nevermind.");
-				factoryStatus = 'declined';
-			}
-			else if(factoryStatus == 'bribe') {
-				endConversation(factoryText.declineOffer);
-				factoryStatus = 'declined';
-			}
-			else if(factoryStatus == 'declined') {
-				twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
-				factoryStatus = 'quest';
-			}
-			else if(factoryStatus == 'persuasion') {
-				twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
-				factoryStatus = 'quest';
-			}
-			else if(factoryStatus == 'quest') {
-				endConversation(factoryText.acceptQuest);
-
-				$('.inventoryList').append('<li class="inventoryItem"><span id="emptyBottle">Empty Fairy Bottle</span></li>');
-				Oshu.items.emptyBottle = true;
-
-				// now you can select the clothes
-				$('#emptyBottle').click(function() {
-					inventoryDescription('#emptyBottle', 'Empty Fairy Bottle', Oshu.description.emptyBottle);
-				});
-			};
-		});
-	}
-	else if(factoryStatus == 'declined'){
-		threeOptions(factoryText.declinedReturn, "I'll pay you.", "I'll help you out.", "Nevermind.");
-	}
-	$('#optionThree').click(function() {
-		endConversation(factoryText.declineOffer);
-	});
+			});
+		}
+		else if(factoryStatus == 'declined'){
+			threeOptions(factoryText.declinedReturn, "I'll pay you.", "I'll help you out.", "Nevermind.");
+		}
+		$('#optionThree').click(function() {
+			endConversation(factoryText.declineOffer);
+		});		
+	};
 });
 
 
@@ -318,26 +327,28 @@ var marketText = {
 }
 
 $('.fuzzbuttDetails').click(function() {
-	if(Oshu.items.sunstone) {
-		$('#interactionText').writeText(marketText.marketReturn);
-	}
-	else {
-		$('#interactionText').writeText(marketText.sunstoneIntro);
-		displayOptions(marketText.sunstoneIntro, marketText.displayOptions, 50, marketText.yes, marketText.no, marketText.needMore);
-		var wait = setInterval(function() {
-			if($('#interactionText').text() == marketText.yes) {
-				clearInterval(wait);
-				var hold = setTimeout(function() {
-					completeItem(Oshu.quests[2][1][1], Oshu.questSpeech.tyrianne2)
-				}, 2000);
-				$('.inventoryList').append('<li class="inventoryItem"><span id="sunstone">Sunstone</span></li>');
-				Oshu.items.sunstone = true;
+	if(go) {
+		if(Oshu.items.sunstone) {
+			$('#interactionText').writeText(marketText.marketReturn);
+		}
+		else {
+			$('#interactionText').writeText(marketText.sunstoneIntro);
+			displayOptions(marketText.sunstoneIntro, marketText.displayOptions, 50, marketText.yes, marketText.no, marketText.needMore);
+			var wait = setInterval(function() {
+				if($('#interactionText').text() == marketText.yes) {
+					clearInterval(wait);
+					var hold = setTimeout(function() {
+						completeItem(Oshu.quests[2][1][1], Oshu.questSpeech.tyrianne2)
+					}, 2000);
+					$('.inventoryList').append('<li class="inventoryItem"><span id="sunstone">Sunstone</span></li>');
+					Oshu.items.sunstone = true;
 
-				// now you can select the clothes
-				$('#sunstone').click(function() {
-					inventoryDescription('#sunstone', 'Sunstone', Oshu.description.sunstone);
-				});
-			};
-		}, 1);		
+					// now you can select the clothes
+					$('#sunstone').click(function() {
+						inventoryDescription('#sunstone', 'Sunstone', Oshu.description.sunstone);
+					});
+				};
+			}, 1);		
+		};		
 	};
 });

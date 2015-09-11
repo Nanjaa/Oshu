@@ -1,3 +1,4 @@
+
 // brings up the common divs between all the city details
 $('.kanedosCity').click(function() {
 	$('.kanedosCity').hide();
@@ -70,8 +71,10 @@ var camelText = {
 };
 
 $('#camelGuy').click(function() {
-	$('#interactionText').writeText(camelText.guyIntro);
-	displayOptions(camelText.guyIntro, camelText.options, 25, camelText.yes, camelText.no, camelText.noCoins);
+	if(go) {
+		$('#interactionText').writeText(camelText.guyIntro);
+		displayOptions(camelText.guyIntro, camelText.options, 25, camelText.yes, camelText.no, camelText.noCoins);		
+	};
 });
 
 
@@ -104,43 +107,47 @@ $('#kanedosJewelry').click(function() {
 });
 
 $('#kanedosJewelryLady').click(function() {
-	switch(jewelryStatus) {
-		case 1:
-			$('#interactionText').writeText(jewelryText.ladyIntro);
-			jewelryStatus = 2;
-			break;
-		case 2:
-			$('#interactionText').writeText(jewelryText.advice1);
-			jewelryStatus = 3;
-			break;
-		case 3: 
-			$('#interactionText').writeText(jewelryText.advice2);
-			jewelryStatus = 2;
-			break;
-	}
+	if(go) {
+		switch(jewelryStatus) {
+			case 1:
+				$('#interactionText').writeText(jewelryText.ladyIntro);
+				jewelryStatus = 2;
+				break;
+			case 2:
+				$('#interactionText').writeText(jewelryText.advice1);
+				jewelryStatus = 3;
+				break;
+			case 3: 
+				$('#interactionText').writeText(jewelryText.advice2);
+				jewelryStatus = 2;
+				break;
+		}		
+	};
 });
 
 $('#kanedosJewelryDisplay').click(function() {
-	if(Oshu.items.kanedosJewelry) {
-		$('#interactionText').writeText(jewelryText.jewelryGoodbye);
-	}
-	else {
-		$('#interactionText').writeText(jewelryText.purchase);
-		displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
-		var buyJewelry = setInterval(function() {
-			if($('#planetInteraction').text() == jewelryText.yes) {
-				// adds item to inventory if not already there
-				$('.inventoryList').append('<li class="inventoryItem"><span id="kanedosNecklace">Necklace from Kanedos</span></li>');
-				Oshu.items.kanedosJewelry = true;
+	if(go) {
+		if(Oshu.items.kanedosJewelry) {
+			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
+		}
+		else {
+			$('#interactionText').writeText(jewelryText.purchase);
+			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
+			var buyJewelry = setInterval(function() {
+				if($('#planetInteraction').text() == jewelryText.yes) {
+					// adds item to inventory if not already there
+					$('.inventoryList').append('<li class="inventoryItem"><span id="kanedosNecklace">Necklace from Kanedos</span></li>');
+					Oshu.items.kanedosJewelry = true;
 
-				// now you can select the clothes
-				$('#kanedosNecklace').click(function() {
-					inventoryDescription('#kanedosNecklace', 'Necklace from Kanedos', Oshu.description.kanedosJewelry);
-				});
-				clearInterval(buyJewelry);
-			};
-		}, 1);			
-	}
+					// now you can select the clothes
+					$('#kanedosNecklace').click(function() {
+						inventoryDescription('#kanedosNecklace', 'Necklace from Kanedos', Oshu.description.kanedosJewelry);
+					});
+					clearInterval(buyJewelry);
+				};
+			}, 1);			
+		}		
+	};
 });
 
 // ________________________________________________________________
@@ -168,61 +175,65 @@ var barText = {
 }
 
 $('#suckerBartender').click(function() {
-	$('#interactionText').writeText(barText.bartenderIntro);
-	var bar1 = setInterval(function() {
-		if($('#planetInteraction').text() == barText.bartenderIntro) {
-			clearInterval(bar1);
-			// $('#planetInteraction').text('');
-			$('#planetInteraction').append("<ul><li class='clickHere' id='kanedomeQuestion'>Can I get into the Kanedome without paying?</li><li class='clickHere' id='classesQuestion'>How do I get access to martial arts classes?</li></ul>");
-			$('#kanedomeQuestion').click(function() {
-				$('#interactionText').writeText(barText.kanedome);
-			});
-			$('#classesQuestion').click(function() {
-				$('#interactionText').writeText(barText.classes);
-			});
-		} 
-	}, 1)
+	if(go) {
+		$('#interactionText').writeText(barText.bartenderIntro);
+		var bar1 = setInterval(function() {
+			if($('#planetInteraction').text() == barText.bartenderIntro) {
+				clearInterval(bar1);
+				// $('#planetInteraction').text('');
+				$('#planetInteraction').append("<ul><li class='clickHere' id='kanedomeQuestion'>Can I get into the Kanedome without paying?</li><li class='clickHere' id='classesQuestion'>How do I get access to martial arts classes?</li></ul>");
+				$('#kanedomeQuestion').click(function() {
+					$('#interactionText').writeText(barText.kanedome);
+				});
+				$('#classesQuestion').click(function() {
+					$('#interactionText').writeText(barText.classes);
+				});
+			} 
+		}, 1)		
+	};
 })
 
 // ************************ THE APPRENTICE ************************
 apprenticeStatus = 'intro';
 
 $('#apprentice').click(function() {
-	if(apprenticeStatus == 'finished') {
-		$('#interactionText').writeText(barText.apprenticeEnd);
-	}
-	else if(apprenticeStatus == 'threaten') {
-		twoOptions(barText.Threaten2, "No, I want to apologize. I was just nervous.", "Nevermind.");
-		$('#optionOne').click(function() {
-			$('#interactionText').writeText(barText.Threaten3);
-			apprenticeStatus = 'finished';
-		});
-		$('#optionTwo').click(function() {
-			$('#interactionText').writeText(barText.threaten4);
-		});
-	}
-	else {
-		oneOption(barText.apprenticeIntro, "Can you help me get into a martial arts class?");
-		$('#optionOne').click(function() {
-			if(apprenticeStatus == 'intro') {
-				twoOptions(barText.apprentice2, "I'm dying, and it's on my bucket list.", "You don't want to find out what'll happen if you say no...");
-				apprenticeStatus = 'why';
-			}
-			else if(apprenticeStatus == 'why') {
-				oneOption(barText.apprenticeSympathy, "I'm not sick, I'm an android. I'm using the Lifecycle Program.");
-				apprenticeStatus = 'android';
-			}
-			else if(apprenticeStatus == 'android') {
-				endConversation(barText.sympathyConvince);
-				apprenticeStatus = 'finished';				
-			};
-		});
-		$('#optionTwo').click(function() {
-			if(apprenticeStatus == 'why') {
-				endConversation(barText.apprenticeThreaten);
-				apprenticeStatus = 'threaten';					
-			}
-		});			
+	if(go) {
+		if(apprenticeStatus == 'finished') {
+			$('#interactionText').writeText(barText.apprenticeEnd);
+		}
+		else if(apprenticeStatus == 'threaten') {
+			twoOptions(barText.Threaten2, "No, I want to apologize. I was just nervous.", "Nevermind.");
+			$('#optionOne').click(function() {
+				$('#interactionText').writeText(barText.Threaten3);
+				apprenticeStatus = 'finished';
+			});
+			$('#optionTwo').click(function() {
+				$('#interactionText').writeText(barText.threaten4);
+			});
+		}
+		else {
+			oneOption(barText.apprenticeIntro, "Can you help me get into a martial arts class?");
+			$('#optionOne').click(function() {
+				if(apprenticeStatus == 'intro') {
+					twoOptions(barText.apprentice2, "I'm dying, and it's on my bucket list.", "You don't want to find out what'll happen if you say no...");
+					apprenticeStatus = 'why';
+				}
+				else if(apprenticeStatus == 'why') {
+					oneOption(barText.apprenticeSympathy, "I'm not sick, I'm an android. I'm using the Lifecycle Program.");
+					apprenticeStatus = 'android';
+				}
+				else if(apprenticeStatus == 'android') {
+					endConversation(barText.sympathyConvince);
+					apprenticeStatus = 'finished';				
+				};
+			});
+			$('#optionTwo').click(function() {
+				if(apprenticeStatus == 'why') {
+					endConversation(barText.apprenticeThreaten);
+					apprenticeStatus = 'threaten';					
+				}
+			});			
+		};		
 	};
 });
 
@@ -252,103 +263,105 @@ var brawlerText = {
 var brawlerStatus = 'intro';
 
 $('#brawler').click(function() {
-	if(brawlerStatus == 'intro') {
-		oneOption(brawlerText.intro, 'Can you get me into the Kanedome?');
-		$('#optionOne').click(function() {
-			switch(brawlerStatus) {
-				case 'intro':
-					threeOptions(brawlerText.kanedome, "Do you have any extra tickets?", "Do you know anyone that works there?", "I'll arm wrestle you!");
-					brawlerStatus = 'how';
-				break;
-				case 'how':
-					threeOptions(brawlerText.ticket, "I'll buy them from you.", "Do you need any odd jobs done?", "I may die and never see the Kanedome...");
-					brawlerStatus = 'why';
-				break;
-				case 'why':
-					twoOptions(brawlerText.sellTicket, "Deal!", "No way!");
-					brawlerStatus = 'sell';
-				break;
-				case 'sell':
-					if(Oshu.coins >= 100) {
-						endConversation(brawlerText.ticketSold);
-						payMoney(100);
-						// add ticket to inventory
-						$('.inventoryList').append('<li class="inventoryItem"><span id="kanedomeTicket">Kanedome Ticket</span></li>');
-						Oshu.items.kanedomeTicket = true;
+	if(go) {
+		if(brawlerStatus == 'intro') {
+			oneOption(brawlerText.intro, 'Can you get me into the Kanedome?');
+			$('#optionOne').click(function() {
+				switch(brawlerStatus) {
+					case 'intro':
+						threeOptions(brawlerText.kanedome, "Do you have any extra tickets?", "Do you know anyone that works there?", "I'll arm wrestle you!");
+						brawlerStatus = 'how';
+					break;
+					case 'how':
+						threeOptions(brawlerText.ticket, "I'll buy them from you.", "Do you need any odd jobs done?", "I may die and never see the Kanedome...");
+						brawlerStatus = 'why';
+					break;
+					case 'why':
+						twoOptions(brawlerText.sellTicket, "Deal!", "No way!");
+						brawlerStatus = 'sell';
+					break;
+					case 'sell':
+						if(Oshu.coins >= 100) {
+							endConversation(brawlerText.ticketSold);
+							payMoney(100);
+							// add ticket to inventory
+							$('.inventoryList').append('<li class="inventoryItem"><span id="kanedomeTicket">Kanedome Ticket</span></li>');
+							Oshu.items.kanedomeTicket = true;
 
-						// now you can select the ticket
-						$('#kanedomeTicket').click(function() {
-							inventoryDescription('#kanedomeTicket', 'Kanedome Ticket', Oshu.description.kanedomeTicket);
-						});
-						brawlerStatus = 'sold';
-					}
-					else {
-						endConversation(brawlerText.needMore);
+							// now you can select the ticket
+							$('#kanedomeTicket').click(function() {
+								inventoryDescription('#kanedomeTicket', 'Kanedome Ticket', Oshu.description.kanedomeTicket);
+							});
+							brawlerStatus = 'sold';
+						}
+						else {
+							endConversation(brawlerText.needMore);
+							brawlerStatus = 'intro';
+						}
+					break;
+					case 'worker':
+						endConversation(brawlerText.smuggleRejected);
+						brawlerStatus = 'noSmuggle';
+					break;
+					case 'smuggle':
+						if(Oshu.coins >= 50) {
+							endConversation(brawlerText.smuggleDeal);
+							payMoney(50);
+							brawlerStatus = 'smuggleEnd';
+						}
+						else {
+							endConversation(brawlerText.smuggleNeedMore);
+							brawlerStatus = 'intro';
+						}
+					break;
+				};
+			});	
+			$('#optionTwo').click(function() {
+				switch(brawlerStatus) {
+					case 'how':
+						twoOptions(brawlerText.worker, "Can't you sneak me in?", "Can I bribe you to sneak me in?");
+						brawlerStatus = 'worker';
+					break;
+					case 'worker':
+						twoOptions(brawlerText.smuggleFee, "You've got a deal", "No, thanks");
+						brawlerStatus = 'smuggle';
+					break;
+					case 'smuggle':
+						endConversation(brawlerText.smuggleNoDeal);
 						brawlerStatus = 'intro';
-					}
-				break;
-				case 'worker':
-					endConversation(brawlerText.smuggleRejected);
-					brawlerStatus = 'noSmuggle';
-				break;
-				case 'smuggle':
-					if(Oshu.coins >= 50) {
-						endConversation(brawlerText.smuggleDeal);
-						payMoney(50);
-						brawlerStatus = 'smuggleEnd';
-					}
-					else {
-						endConversation(brawlerText.smuggleNeedMore);
+					break;
+					case 'why':
+						endConversation(brawlerText.jobs);
 						brawlerStatus = 'intro';
-					}
-				break;
-			};
-		});	
-		$('#optionTwo').click(function() {
-			switch(brawlerStatus) {
-				case 'how':
-					twoOptions(brawlerText.worker, "Can't you sneak me in?", "Can I bribe you to sneak me in?");
-					brawlerStatus = 'worker';
-				break;
-				case 'worker':
-					twoOptions(brawlerText.smuggleFee, "You've got a deal", "No, thanks");
-					brawlerStatus = 'smuggle';
-				break;
-				case 'smuggle':
-					endConversation(brawlerText.smuggleNoDeal);
-					brawlerStatus = 'intro';
-				break;
-				case 'why':
-					endConversation(brawlerText.jobs);
-					brawlerStatus = 'intro';
-				break;
+					break;
 
-			};
-		});
-		$('#optionThree').click(function() {
-			if(brawlerStatus == 'how') {
-				endConversation(brawlerText.wrestle);
-				brawlerStatus = 'wrestleEnd';
-			}
-			else if(brawlerStatus == 'why') {
-				endConversation(brawlerText.die);
-				brawlerStatus = 'dieEnd';
-			}
-		})
-	}
-	else if(brawlerStatus == 'sold') {
-		$('#interactionText').writeText(brawlerText.ticketReturn);
-	}
-	else if(brawlerStatus == 'noSmuggle') {
-		$('#interactionText').writeText(brawlerText.smuggleReturn);
-	}
-	else if(brawlerStatus == 'smuggleEnd') {
-		$('#interactionText').writeText(brawlerText.smuggleEnd);
-	}
-	else if(brawlerStatus == 'wrestleEnd') {
-		$('#interactionText').writeText(brawlerText.wrestleEnd);
-	}
-	else if(brawlerStatus == 'dieEnd') {
-		$('#interactionText').writeText(brawlerText.dieEnd);
-	}
+				};
+			});
+			$('#optionThree').click(function() {
+				if(brawlerStatus == 'how') {
+					endConversation(brawlerText.wrestle);
+					brawlerStatus = 'wrestleEnd';
+				}
+				else if(brawlerStatus == 'why') {
+					endConversation(brawlerText.die);
+					brawlerStatus = 'dieEnd';
+				}
+			})
+		}
+		else if(brawlerStatus == 'sold') {
+			$('#interactionText').writeText(brawlerText.ticketReturn);
+		}
+		else if(brawlerStatus == 'noSmuggle') {
+			$('#interactionText').writeText(brawlerText.smuggleReturn);
+		}
+		else if(brawlerStatus == 'smuggleEnd') {
+			$('#interactionText').writeText(brawlerText.smuggleEnd);
+		}
+		else if(brawlerStatus == 'wrestleEnd') {
+			$('#interactionText').writeText(brawlerText.wrestleEnd);
+		}
+		else if(brawlerStatus == 'dieEnd') {
+			$('#interactionText').writeText(brawlerText.dieEnd);
+		}		
+	};
 });

@@ -1,9 +1,3 @@
-$('pre').click(function() {
-	if($(this).attr('id') !== 'myShip') {
-		$('pre').unbind('click');
-		console.log('unbind');		
-	}
-})
 
 // all the text that will be used throughout this level
 var beachText = {
@@ -34,6 +28,7 @@ function lunedaReturn() {
 	$('.lunedaCity').show();		
 }
 $('.return').click(function() {
+	go = true;
 	lunedaReturn();
 	changeLocation('#lunedaMap', true);
 });
@@ -130,33 +125,36 @@ $('#equipment').click(function() {
 });
 
 function rentalActivate() {
-	if(beachText.inUse == true) {
-		$('#interactionText').writeText(beachText.rentalInUse);
-	}
-	else {
-		// plays the sound effect of the man talking
-		if($('#interactionText').text().length < beachText.rentalWelcome.length) {
-			maleVoice();
+	if(go) {
+		if(beachText.inUse == true) {
+			$('#interactionText').writeText(beachText.rentalInUse);
 		}
-		$('#interactionText').writeText(beachText.rentalWelcome);
-		displayOptions(beachText.rentalWelcome, beachText.rentalOptions, 50, beachText.rentalComplete, beachText.rentalNo, beachText.rentalNoCoins);
-		var boughtSuit = setInterval(function() {
-			if($('#interactionText').text() == beachText.rentalComplete) {
-			// adds item to inventory if not already there
-				$('.inventoryList').append('<li class="inventoryItem" id="electroSuit">ElectroSuit</li>');
-				Oshu.items.electroSuit = true;
-				clearInterval(boughtSuit);
-
-				// now you can click the electroSuit
-				$('#electroSuit').click(function() {
-					inventoryDescription('#electroSuit', 'electroSuit', Oshu.description.electroSuit);
-				});
-
-				
-
+		else {
+			// plays the sound effect of the man talking
+			if($('#interactionText').text().length < beachText.rentalWelcome.length) {
+				maleVoice();
 			}
-		}, 1)
-	};
+			$('#interactionText').writeText(beachText.rentalWelcome);
+			displayOptions(beachText.rentalWelcome, beachText.rentalOptions, 50, beachText.rentalComplete, beachText.rentalNo, beachText.rentalNoCoins);
+			var boughtSuit = setInterval(function() {
+				if($('#interactionText').text() == beachText.rentalComplete) {
+				// adds item to inventory if not already there
+					$('.inventoryList').append('<li class="inventoryItem" id="electroSuit">ElectroSuit</li>');
+					Oshu.items.electroSuit = true;
+					clearInterval(boughtSuit);
+
+					// now you can click the electroSuit
+					$('#electroSuit').click(function() {
+						inventoryDescription('#electroSuit', 'electroSuit', Oshu.description.electroSuit);
+					});
+
+					
+
+				}
+			}, 1)
+		};		
+	}
+
 };
 
 //************************ interact with the drinks stand ************************
@@ -182,123 +180,135 @@ var tikiText = {
 var barStatus = 1;
 
 $('#bar').click(function() {
-	switch(barStatus) {
-		case 1: 
-			$('#interactionText').writeText(tikiText.bartenerIntro);
-			barStatus = 2;
-			break;
-		case 2: 
-			$('#interactionText').writeText(tikiText.advice1);
-			barStatus = 3;
-			break;
-		case 3:
-			$('#interactionText').writeText(tikiText.advice2);
-			barStatus = 4;
-			break;
-		case 4:
-			$('#interactionText').writeText(tikiText.advice3);
-			barStatus = 1;
-			break;
-	};
+	if(go) {
+		switch(barStatus) {
+			case 1: 
+				$('#interactionText').writeText(tikiText.bartenerIntro);
+				barStatus = 2;
+				break;
+			case 2: 
+				$('#interactionText').writeText(tikiText.advice1);
+				barStatus = 3;
+				break;
+			case 3:
+				$('#interactionText').writeText(tikiText.advice2);
+				barStatus = 4;
+				break;
+			case 4:
+				$('#interactionText').writeText(tikiText.advice3);
+				barStatus = 1;
+				break;
+		};		
+	}
 });
 
 var manStatus = 'intro';
 
 $('#mysteriousMan').click(function() {
-	switch(manStatus) {
-		case 'intro':
-			oneOption(tikiText.manIntro, "I'm listening...");
-			manStatus = 'listening';
-			break;
-		case 'accepted':
-			if(Oshu.items.fixedRobot == false) {
-				$('#interactionText').writeText(tikiText.questReturnIncomplete);
-				break;					
-			}
-			else {
-				$('#interactionText').writeText(tikiText.questReturnComplete);
-				Oshu.items.password = true;
-			};
-			break;
-		case 'rejected':
-			twoOptions(tikiText.questReturnAccept, 'Well, yeah!', 'Nevermind.');
-			break;
-	};
+	if(go) {
+		switch(manStatus) {
+			case 'intro':
+				oneOption(tikiText.manIntro, "I'm listening...");
+				manStatus = 'listening';
+				break;
+			case 'accepted':
+				if(Oshu.items.fixedRobot == false) {
+					$('#interactionText').writeText(tikiText.questReturnIncomplete);
+					break;					
+				}
+				else {
+					$('#interactionText').writeText(tikiText.questReturnComplete);
+					Oshu.items.password = true;
+				};
+				break;
+			case 'rejected':
+				twoOptions(tikiText.questReturnAccept, 'Well, yeah!', 'Nevermind.');
+				break;
+		};		
+	}
 });
 
 $('#optionOne').click(function() {
-	switch(manStatus) {
-		case 'listening':
-			$('#interactionText').writeText(tikiText.questIntro);
-			var robot1 = setInterval(function() {
-				if($('#interactionText').text() == tikiText.questIntro) {
-					clearInterval(robot1);
-					var robot2 = setTimeout(function() {
-						$('#interactionText').text('');
-						oneOption(tikiText.robotDescription, "Why can't you do this yourself?");
-					}, 3000)
-				};
-			}, 1);
-			manStatus = 'yourself';
-			break;
-		case 'yourself':
-			$('#interactionText').writeText(tikiText.questDescription);
-			var robot3 = setInterval(function() {
-				if($('#interactionText').text() == tikiText.questDescription) {
-					clearInterval(robot3);
-					var robot4 = setTimeout(function() {
-						$('#interactionText').text('');
-						twoOptions(tikiText.questInquiry, "I'm in.", "what");
-					}, 3000)
-				};
-			}, 1);
-			manStatus = 'inquiry';
-			break;
-		case 'inquiry': 
-			endConversation(tikiText.questYes);
-			// adds broken robot
-			Oshu.items.brokenRobot = true;
-			$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
-			// now you can select the robot
-			$('#brokenRobot').click(function() {
-				inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
-			});
-			manStatus = 'accepted';
-			break;
-		case 'rejected': 
-			endConversation(tikiText.questYes);
-			// adds broken robot
-			Oshu.items.brokenRobot = true;
-			$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
-			// now you can select the robot
-			$('#brokenRobot').click(function() {
-				inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
-			});
-			manStatus = 'accepted';
-			break;
+	if(go) {
+		switch(manStatus) {
+			case 'listening':
+				$('#interactionText').writeText(tikiText.questIntro);
+				var robot1 = setInterval(function() {
+					if($('#interactionText').text() == tikiText.questIntro) {
+						clearInterval(robot1);
+						var robot2 = setTimeout(function() {
+							$('#interactionText').text('');
+							oneOption(tikiText.robotDescription, "Why can't you do this yourself?");
+						}, 3000)
+					};
+				}, 1);
+				manStatus = 'yourself';
+				break;
+			case 'yourself':
+				$('#interactionText').writeText(tikiText.questDescription);
+				var robot3 = setInterval(function() {
+					if($('#interactionText').text() == tikiText.questDescription) {
+						clearInterval(robot3);
+						var robot4 = setTimeout(function() {
+							$('#interactionText').text('');
+							twoOptions(tikiText.questInquiry, "I'm in.", "what");
+						}, 3000)
+					};
+				}, 1);
+				manStatus = 'inquiry';
+				break;
+			case 'inquiry': 
+				endConversation(tikiText.questYes);
+				// adds broken robot
+				Oshu.items.brokenRobot = true;
+				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
+				// now you can select the robot
+				$('#brokenRobot').click(function() {
+					inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
+				});
+				manStatus = 'accepted';
+				break;
+			case 'rejected': 
+				endConversation(tikiText.questYes);
+				// adds broken robot
+				Oshu.items.brokenRobot = true;
+				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
+				// now you can select the robot
+				$('#brokenRobot').click(function() {
+					inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
+				});
+				manStatus = 'accepted';
+				break;
+		};		
 	};
 });
 
 $('#optionTwo').click(function() {
-	switch(manStatus) {
-		case 'inquiry':
-			manStatus = 'rejected';
-			endConversation(tikiText.questNo);
-			break;
-		case 'rejected':
-			endConversation(tikiText.questNo);
-			break;
+	if(go) {
+		switch(manStatus) {
+			case 'inquiry':
+				manStatus = 'rejected';
+				endConversation(tikiText.questNo);
+				break;
+			case 'rejected':
+				endConversation(tikiText.questNo);
+				break;
+		}		
 	}
 })
 
 //************************ interact with the sea ************************
 
 $('#closerSeas').click(function() {
-	if(Oshu.items.electroSuit) {
-		completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda1);
+	if(go) {
+		if(Oshu.items.electroSuit) {
+			completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda1);
+		}
+		else {
+			$('#interactionText').writeText(beachText.cantSwim);
+		}		
 	}
 	else {
-		$('#interactionText').writeText(beachText.cantSwim);
 	}
 })
 
@@ -347,182 +357,186 @@ var yes = marketText.yes;
 var no = marketText.no;
 
 $('#electange').click(function() {
-	$('#interactionText').writeText(marketText.electange);
-	displayOptions(marketText.electange, marketText.electangeOptions, 25, yes, no, marketText.needMore);
-	var stop = false;
-	var boughtElectange = setInterval(function() {
-		if($('#interactionText').text() == yes) {
-			// adds item to inventory if not already there
-			if(Oshu.itemFirst.electange == true) {
-				Oshu.itemFirst.electange = false;
-				$('.inventoryList').append('<li class="inventoryItem" id="myElectange">Electange: <span id="electangeAmt"></span></li>');				
-			
-				// now you can eat the electange
-				$('#myElectange').click(function() {
-					useItem(Oshu.items.electange, '#electangeAmt')
-					if(Oshu.items.electange > 0) {
-						Oshu.items.electange = Oshu.items.electange - 1;
-						completeItem(Oshu.quests[0][1][2], Oshu.questSpeech.luneda3);
-					}
-				});
-			}
-			// then adds quantity amt
-			var electange = Oshu.items.electange + 1;
-			Oshu.items.electange = electange;
-			$('#electangeAmt').text(electange);
+	if(go) {
+		$('#interactionText').writeText(marketText.electange);
+		displayOptions(marketText.electange, marketText.electangeOptions, 25, yes, no, marketText.needMore);
+		var stop = false;
+		var boughtElectange = setInterval(function() {
+			if($('#interactionText').text() == yes) {
+				// adds item to inventory if not already there
+				if(Oshu.itemFirst.electange == true) {
+					Oshu.itemFirst.electange = false;
+					$('.inventoryList').append('<li class="inventoryItem" id="myElectange">Electange: <span id="electangeAmt"></span></li>');				
+				
+					// now you can eat the electange
+					$('#myElectange').click(function() {
+						useItem(Oshu.items.electange, '#electangeAmt')
+						if(Oshu.items.electange > 0) {
+							Oshu.items.electange = Oshu.items.electange - 1;
+							completeItem(Oshu.quests[0][1][2], Oshu.questSpeech.luneda3);
+						}
+					});
+				}
+				// then adds quantity amt
+				var electange = Oshu.items.electange + 1;
+				Oshu.items.electange = electange;
+				$('#electangeAmt').text(electange);
 
-			clearInterval(boughtElectange);
-		};
-	}, 1);		
+				clearInterval(boughtElectange);
+			};
+		}, 1);				
+	};
 });
 
 
 
 $('#ganifruit').click(function() {
-	$('#interactionText').writeText(marketText.ganifruit);
-	displayOptions(marketText.ganifruit, marketText.ganifruitOptions, 10, yes, no, marketText.needMore);
-	var boughtGanifruit = setInterval(function() {
-		if($('#interactionText').text() == yes) {
-			// adds item to inventory if not already there
-			if(Oshu.itemFirst.ganifruit == true) {
-				Oshu.itemFirst.ganifruit = false;
-				$('.inventoryList').append('<li class="inventoryItem"><span id="myGanifruit">Ganifruit: <span id="ganifruitAmt"></span></span><span id="ganiDesc"></span></li>');
-	
-				// now you can eat the ganifruit
-				$('#myGanifruit').click(function() {
-					useItem(Oshu.items.ganifruit, '#ganifruitAmt');
-					if(Oshu.items.ganifruit > 0) {
-						Oshu.items.ganifruit = Oshu.items.ganifruit - 1;
-					}
-				});
+	if(go) {
+		$('#interactionText').writeText(marketText.ganifruit);
+		displayOptions(marketText.ganifruit, marketText.ganifruitOptions, 10, yes, no, marketText.needMore);
+		var boughtGanifruit = setInterval(function() {
+			if($('#interactionText').text() == yes) {
+				// adds item to inventory if not already there
+				if(Oshu.itemFirst.ganifruit == true) {
+					Oshu.itemFirst.ganifruit = false;
+					$('.inventoryList').append('<li class="inventoryItem"><span id="myGanifruit">Ganifruit: <span id="ganifruitAmt"></span></span><span id="ganiDesc"></span></li>');
+		
+					// now you can eat the ganifruit
+					$('#myGanifruit').click(function() {
+						useItem(Oshu.items.ganifruit, '#ganifruitAmt');
+						if(Oshu.items.ganifruit > 0) {
+							Oshu.items.ganifruit = Oshu.items.ganifruit - 1;
+						}
+					});
 
-				// this is in reference to feeding the poor man on Tyrianne
-				// var feedPoorMan = setInterval(function() {
-				// 	if($('#interactionText').text() == "Oh, bless your soul. Is there anything I can help you with? I have no money...") {
-				// 		useItem(Oshu.items.ganifruit)
-				// 	}
-				// }, 1)
-			}
-			// adds quantity amt after adding item to inventory
-			var ganifruit = Oshu.items.ganifruit + 1;
-			Oshu.items.ganifruit = ganifruit;
-			$('#ganifruitAmt').text(ganifruit);
-			
-			clearInterval(boughtGanifruit);
-		};
-	}, 1);
+					// this is in reference to feeding the poor man on Tyrianne
+					// var feedPoorMan = setInterval(function() {
+					// 	if($('#interactionText').text() == "Oh, bless your soul. Is there anything I can help you with? I have no money...") {
+					// 		useItem(Oshu.items.ganifruit)
+					// 	}
+					// }, 1)
+				}
+				// adds quantity amt after adding item to inventory
+				var ganifruit = Oshu.items.ganifruit + 1;
+				Oshu.items.ganifruit = ganifruit;
+				$('#ganifruitAmt').text(ganifruit);
+				
+				clearInterval(boughtGanifruit);
+			};
+		}, 1);		
+	};
 });
 
 $('#dresses').click(function() {
-	if(Oshu.items.clothes == false) {
-		$('#interactionText').writeText(marketText.clothes);
-		displayOptions(marketText.clothes, marketText.clothesOptions, 25, marketText.clothesYes, marketText.clothesNo, marketText.clothesNeedMore);
-		var boughtClothes = setInterval(function() {
-			if($('#interactionText').text() == marketText.clothesYes) {
-				// adds item to inventory if not already there
-				if(Oshu.itemFirst.clothes == true) {
-					Oshu.items.clothes = true;
-					Oshu.itemFirst.clothes = false;
-					$('.inventoryList').append('<li class="inventoryItem"><span id="myClothes">Lunedian Dress</span></li>');
-		
-					// now you can select the clothes
-					$('#myClothes').click(function() {
-						inventoryDescription('#myClothes', 'Lunedian Dress', Oshu.description.clothes);
-					});
-				}
-				clearInterval(boughtClothes);
-			};
-		}, 1);			
-	}
-	else {
-		$('#interactionText').writeText(marketText.clothesReturn);
-	}
-
+	if(go) {
+		if(Oshu.items.clothes == false) {
+			$('#interactionText').writeText(marketText.clothes);
+			displayOptions(marketText.clothes, marketText.clothesOptions, 25, marketText.clothesYes, marketText.clothesNo, marketText.clothesNeedMore);
+			var boughtClothes = setInterval(function() {
+				if($('#interactionText').text() == marketText.clothesYes) {
+					// adds item to inventory if not already there
+					if(Oshu.itemFirst.clothes == true) {
+						Oshu.items.clothes = true;
+						Oshu.itemFirst.clothes = false;
+						$('.inventoryList').append('<li class="inventoryItem"><span id="myClothes">Lunedian Dress</span></li>');
+			
+						// now you can select the clothes
+						$('#myClothes').click(function() {
+							inventoryDescription('#myClothes', 'Lunedian Dress', Oshu.description.clothes);
+						});
+					}
+					clearInterval(boughtClothes);
+				};
+			}, 1);			
+		}
+		else {
+			$('#interactionText').writeText(marketText.clothesReturn);
+		}		
+	};
 });
 
 $('#snowglobes').click(function() {
-	console.log(Oshu.items.lunedaSnowglobe);
-	console.log(Oshu.items.lunedaBobblehead);
-	console.log(Oshu.items.lunedaPostcard);
-
-	if(Oshu.items.lunedaSnowglobe == false) {
-		$('#interactionText').writeText(marketText.snowglobes);
-		displayOptions(marketText.snowglobes, marketText.snowglobeOptions, 10, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
-		var boughtSnowglobe = setInterval(function() {
-			if($('#interactionText').text() == marketText.souvenirYes) {
-				// adds item to inventory if not already there
-				if(Oshu.itemFirst.lunedaSnowglobe == true) {
-					Oshu.items.lunedaSnowglobe = true;
-					Oshu.itemFirst.lunedaSnowglobe = false;
-					$('.inventoryList').append('<li class="inventoryItem"><span id="lunedaSnowglobe">Beach Snowglobe</span></li>');
-		
-					// now you can select the snowglobe
-					$('#lunedaSnowglobe').click(function() {
-						inventoryDescription('#lunedaSnowglobe', 'Beach Snowglobe', Oshu.description.lunedaSnowglobe);
-					});
-				}
-				clearInterval(boughtSnowglobe);
-			};
-		}, 1);
-	}
-	else {
-		$('#interactionText').writeText(marketText.souvenirReturn);
-	}
-
+	if(go) {
+		if(Oshu.items.lunedaSnowglobe == false) {
+			$('#interactionText').writeText(marketText.snowglobes);
+			displayOptions(marketText.snowglobes, marketText.snowglobeOptions, 10, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
+			var boughtSnowglobe = setInterval(function() {
+				if($('#interactionText').text() == marketText.souvenirYes) {
+					// adds item to inventory if not already there
+					if(Oshu.itemFirst.lunedaSnowglobe == true) {
+						Oshu.items.lunedaSnowglobe = true;
+						Oshu.itemFirst.lunedaSnowglobe = false;
+						$('.inventoryList').append('<li class="inventoryItem"><span id="lunedaSnowglobe">Beach Snowglobe</span></li>');
+			
+						// now you can select the snowglobe
+						$('#lunedaSnowglobe').click(function() {
+							inventoryDescription('#lunedaSnowglobe', 'Beach Snowglobe', Oshu.description.lunedaSnowglobe);
+						});
+					}
+					clearInterval(boughtSnowglobe);
+				};
+			}, 1);
+		}
+		else {
+			$('#interactionText').writeText(marketText.souvenirReturn);
+		}
+	};
 });
 
 $('#bobbleheads').click(function() {
-	if(Oshu.items.lunedaBobblehead == false) {
-		$('#interactionText').writeText(marketText.bobbleheads);
-		displayOptions(marketText.bobbleheads, marketText.bobbleheadOptions, 15, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
-		var boughtBobbleheads = setInterval(function() {
-			if($('#interactionText').text() == marketText.souvenirYes) {
-				// adds item to inventory if not already there
-				if(Oshu.itemFirst.lunedaBobblehead == true) {
-					Oshu.items.lunedaBobblehead = true;
-					Oshu.itemFirst.lunedaBobblehead = false;
-					$('.inventoryList').append('<li class="inventoryItem"><span id="lunedaBobblehead">Stormchaser Bobblehead</span></li>');
-		
-					// now you can select the clothes
-					$('#lunedaBobblehead').click(function() {
-						inventoryDescription('#lunedaBobblehead', 'Stormchaser Bobblehead', Oshu.description.lunedaBobblehead);
-					});
-				}
-				clearInterval(boughtBobbleheads);
-			};
-		}, 1);
-	}
-	else {
-		$('#interactionText').writeText(marketText.souvenirReturn);
-	}
-
+	if(go) {
+		if(Oshu.items.lunedaBobblehead == false) {
+			$('#interactionText').writeText(marketText.bobbleheads);
+			displayOptions(marketText.bobbleheads, marketText.bobbleheadOptions, 15, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
+			var boughtBobbleheads = setInterval(function() {
+				if($('#interactionText').text() == marketText.souvenirYes) {
+					// adds item to inventory if not already there
+					if(Oshu.itemFirst.lunedaBobblehead == true) {
+						Oshu.items.lunedaBobblehead = true;
+						Oshu.itemFirst.lunedaBobblehead = false;
+						$('.inventoryList').append('<li class="inventoryItem"><span id="lunedaBobblehead">Stormchaser Bobblehead</span></li>');
+			
+						// now you can select the clothes
+						$('#lunedaBobblehead').click(function() {
+							inventoryDescription('#lunedaBobblehead', 'Stormchaser Bobblehead', Oshu.description.lunedaBobblehead);
+						});
+					}
+					clearInterval(boughtBobbleheads);
+				};
+			}, 1);
+		}
+		else {
+			$('#interactionText').writeText(marketText.souvenirReturn);
+		}		
+	};
 });
 
 $('#postcards').click(function() {
-	if(Oshu.items.lunedaPostcard == false) {
-		$('#interactionText').writeText(marketText.postcards);
-		displayOptions(marketText.postcards, marketText.postcardOptions, 1, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
-		var boughtPostcards = setInterval(function() {
-			if($('#interactionText').text() == marketText.souvenirYes) {
-				// adds item to inventory if not already there
-				if(Oshu.itemFirst.lunedaPostcard == true) {
-					Oshu.items.lunedaPostcard = true;
-					Oshu.itemFirst.lunedaPostcard = false;
-					$('.inventoryList').append('<li class="inventoryItem"><span id="lunedaPostcard">Luneda Postcard</span></li>');
+	if(go) {
+		if(Oshu.items.lunedaPostcard == false) {
+			$('#interactionText').writeText(marketText.postcards);
+			displayOptions(marketText.postcards, marketText.postcardOptions, 1, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
+			var boughtPostcards = setInterval(function() {
+				if($('#interactionText').text() == marketText.souvenirYes) {
+					// adds item to inventory if not already there
+					if(Oshu.itemFirst.lunedaPostcard == true) {
+						Oshu.items.lunedaPostcard = true;
+						Oshu.itemFirst.lunedaPostcard = false;
+						$('.inventoryList').append('<li class="inventoryItem"><span id="lunedaPostcard">Luneda Postcard</span></li>');
 
-					// now you can select the clothes
-					$('#lunedaPostcard').click(function() {
-						inventoryDescription('#lunedaPostcard', 'Luneda Postcard', Oshu.description.lunedaPostcard);
-					});
-				}
-				clearInterval(boughtPostcards);
-			};
-		}, 1);
-	}
-	else {
-		$('#interactionText').writeText(marketText.souvenirReturn);
-	}
-
+						// now you can select the clothes
+						$('#lunedaPostcard').click(function() {
+							inventoryDescription('#lunedaPostcard', 'Luneda Postcard', Oshu.description.lunedaPostcard);
+						});
+					}
+					clearInterval(boughtPostcards);
+				};
+			}, 1);
+		}
+		else {
+			$('#interactionText').writeText(marketText.souvenirReturn);
+		}		
+	};
 });
 // ________________________________________________________________
 // | ==============================================================|
@@ -550,91 +564,98 @@ var danceText = {
 }
 
 $('#danceHall').click(function() {
-	$('.danceHall').show();
-	$('.lunedaCity').hide();
-	if(Oshu.items.clothes == false) {
-		$('.noDancing').show();
-		$('#interactionText').writeText(danceText.doorman);
+	if(go) {
+		$('.danceHall').show();
+		$('.lunedaCity').hide();
+		if(Oshu.items.clothes == false) {
+			$('.noDancing').show();
+			$('#interactionText').writeText(danceText.doorman);
+		}
+		else {
+			$('.noDancing').hide();
+			$('.danceDetails').show();
+			$('#interactionText').writeText(danceText.danceIntro);
+		}		
 	}
-	else {
-		$('.noDancing').hide();
-		$('.danceDetails').show();
-		$('#interactionText').writeText(danceText.danceIntro);
-	}
+
 });
 
 var dancerSpeech = 1;
 $('.dancer').click(function() {
-	switch(dancerSpeech) {
-		case 1: 
-			$('#interactionText').writeText(danceText.barryAdvice);
-			dancerSpeech = 2;
-			break;
-		case 2: 
-			$('#interactionText').writeText(danceText.advice1);
-			dancerSpeech = 3;
-			break;
-		case 3: 
-			$('#interactionText').writeText(danceText.advice2);
-			dancerSpeech = 4;
-			break;
-		case 4:
-			$('#interactionText').writeText(danceText.advice3);
-			dancerSpeech = 1;
-			break;
-	}
+	if(go) {
+		switch(dancerSpeech) {
+			case 1: 
+				$('#interactionText').writeText(danceText.barryAdvice);
+				dancerSpeech = 2;
+				break;
+			case 2: 
+				$('#interactionText').writeText(danceText.advice1);
+				dancerSpeech = 3;
+				break;
+			case 3: 
+				$('#interactionText').writeText(danceText.advice2);
+				dancerSpeech = 4;
+				break;
+			case 4:
+				$('#interactionText').writeText(danceText.advice3);
+				dancerSpeech = 1;
+				break;
+		}		
+	};
 })
 
 $('#dancer4').click(function() {
-	if(Oshu.items.libraryPass) {
-		$('#interactionText').writeText(danceText.barryGoodbye);
-	}
-	else {
-		oneOption(danceText.barryIntro, 'Is there a way you could get me into the library?');
-		var dancerStatus = 'intro';
-		$('#optionOne').click(function() {
-			switch(dancerStatus) {
-				case 'intro': 
-					oneOption(danceText.barryOffer, 'Alright.');
-					dancerStatus = 'alright';
-				break;
-				case 'alright':
-					dancerStatus = 'riddle';
-					$('#interactionText').writeText(danceText.barryRiddle);
-					var wait = setInterval(function() {
-						if($('#interactionText').text() == danceText.barryRiddle) {
-							clearInterval(wait);
-							var hold = setTimeout(function() {
-								$('#interactionText').text('');
-								$('#optionOne').show();
-								$('#optionTwo').show();
-								$('#optionOne').text('Your shadow?');
-								$('#optionTwo').text('Time?');
+	if(go) {
+		if(Oshu.items.libraryPass) {
+			$('#interactionText').writeText(danceText.barryGoodbye);
+		}
+		else {
+			oneOption(danceText.barryIntro, 'Is there a way you could get me into the library?');
+			var dancerStatus = 'intro';
+			$('#optionOne').click(function() {
+				switch(dancerStatus) {
+					case 'intro': 
+						oneOption(danceText.barryOffer, 'Alright.');
+						dancerStatus = 'alright';
+					break;
+					case 'alright':
+						dancerStatus = 'riddle';
+						$('#interactionText').writeText(danceText.barryRiddle);
+						var wait = setInterval(function() {
+							if($('#interactionText').text() == danceText.barryRiddle) {
+								clearInterval(wait);
+								var hold = setTimeout(function() {
+									$('#interactionText').text('');
+									$('#optionOne').show();
+									$('#optionTwo').show();
+									$('#optionOne').text('Your shadow?');
+									$('#optionTwo').text('Time?');
 
-							}, 3000)
-						}
-					}, 1);
-				break;
-				case 'riddle':
-					endConversation(danceText.barryWrong);
-					$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
-					// now you can select the library pass
-					$('#libraryPass').click(function() {
-						inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
-					});
-				break;
-			}
-		
-		});
-		
-		$('#optionTwo').click(function() {
-			$('#interactionText').writeText(danceText.barryRight);
-			$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
-			// now you can select the library pass
-			$('#libraryPass').click(function() {
-				inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
-			});				
-		});
+								}, 3000)
+							}
+						}, 1);
+					break;
+					case 'riddle':
+						endConversation(danceText.barryWrong);
+						$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
+						// now you can select the library pass
+						$('#libraryPass').click(function() {
+							inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
+						});
+					break;
+				}
+			
+			});
+			
+			$('#optionTwo').click(function() {
+				$('#interactionText').writeText(danceText.barryRight);
+				$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
+				// now you can select the library pass
+				$('#libraryPass').click(function() {
+					inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
+				});				
+			});
+		};		
 	};
 });
 
@@ -664,74 +685,78 @@ var weatherComplete = false,
 
 // write the description of the weather monitoring facility
 $('#weather').click(function() {
-		$('#interactionText').writeText(weatherText.intro);
+	if(go) {
+		$('#interactionText').writeText(weatherText.intro);		
+	};
 });
 
 // speak to the weatherman
 $('#weatherman').click(function() {
-	if(Oshu.items.weatherSpecimen == false && weatherComplete == false) {
-		console.log(3);
-		twoOptions(weatherText.weathermanIntro, "Here you go", "I don't have that kind of money!");
-	}
-	else if(weatherComplete) {
-		$('#interactionText').writeText(weatherText.end);
-	}
-	else {
-		if(Oshu.items.weatherComplete) {
-			weatherStatus = 'return complete';
-			oneOption(weatherText.Return, 'Sure did!');
+	if(go) {
+		if(Oshu.items.weatherSpecimen == false && weatherComplete == false) {
+			console.log(3);
+			twoOptions(weatherText.weathermanIntro, "Here you go", "I don't have that kind of money!");
+		}
+		else if(weatherComplete) {
+			$('#interactionText').writeText(weatherText.end);
 		}
 		else {
-			weatherStatus = 'return incomplete';
-			oneOption(weatherText.Return, 'No, not yet...');
+			if(Oshu.items.weatherComplete) {
+				weatherStatus = 'return complete';
+				oneOption(weatherText.Return, 'Sure did!');
+			}
+			else {
+				weatherStatus = 'return incomplete';
+				oneOption(weatherText.Return, 'No, not yet...');
+			}
 		}
-	}
-		// these are the functions that run when you clck the options
-	$('#optionOne').click(function() {
-		switch(weatherStatus) {
-			case 'intro':
-				$('.option').hide();
-				if(Oshu.coins >= 1000) {
-					$('#interactionText').writeText(weatherText.coins);
-					payMoney(1000);
-					completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
-					weatherComplete = true;
-				}
-				else {
-					Oshu.items.weatherSpecimen = true;
-					$('#interactionText').writeText(weatherText.noCoinsLie);
-					$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
-					// now you can select the library pass
-					$('#weatherSpecimen').click(function() {
-						inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
-					});
-				};
-			break;
-			case 'return complete':
-				endConversation(weatherText.specimen);
-				var wait = setInterval(function() {
-					if($('#interactionText').text() == weatherText.specimen) {
-						var hold = setTimeout(function() {
-							completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
-						}, 2000);
+			// these are the functions that run when you clck the options
+		$('#optionOne').click(function() {
+			switch(weatherStatus) {
+				case 'intro':
+					$('.option').hide();
+					if(Oshu.coins >= 1000) {
+						$('#interactionText').writeText(weatherText.coins);
+						payMoney(1000);
+						completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
+						weatherComplete = true;
+					}
+					else {
+						Oshu.items.weatherSpecimen = true;
+						$('#interactionText').writeText(weatherText.noCoinsLie);
+						$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
+						// now you can select the library pass
+						$('#weatherSpecimen').click(function() {
+							inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+						});
 					};
-				}, 1);
-			break;
-			case 'return incomplete':
-				endConversation(weatherText.noSpecimen);
-			break;
-		};
-	});
-
-	$('#optionTwo').click(function() {
-		Oshu.items.weatherSpecimen = true;
-		endConversation(weatherText.noCoinsTruth);
-		$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
-		// now you can select the library pass
-		$('#weatherSpecimen').click(function() {
-			inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+				break;
+				case 'return complete':
+					endConversation(weatherText.specimen);
+					var wait = setInterval(function() {
+						if($('#interactionText').text() == weatherText.specimen) {
+							var hold = setTimeout(function() {
+								completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
+							}, 2000);
+						};
+					}, 1);
+				break;
+				case 'return incomplete':
+					endConversation(weatherText.noSpecimen);
+				break;
+			};
 		});
-	});
+
+		$('#optionTwo').click(function() {
+			Oshu.items.weatherSpecimen = true;
+			endConversation(weatherText.noCoinsTruth);
+			$('.inventoryList').append('<li class="inventoryItem"><span id="weatherSpecimen">Luneda Rain Specimen</span></li>');
+			// now you can select the library pass
+			$('#weatherSpecimen').click(function() {
+				inventoryDescription('#weatherSpecimen', 'Luneda Rain Specimen', Oshu.description.weatherSpecimen);
+			});
+		});		
+	};
 });
 
 // ________________________________________________________________
@@ -747,9 +772,13 @@ var mechanicText = {
 }
 
 $('#lunedaMechanic').click(function() {
-	$('#interactionText').writeText(mechanicText.intro);
+	if(go) {
+		$('#interactionText').writeText(mechanicText.intro);		
+	};
 })
 
 $('#lunedaLifecycleAdd').click(function() {
-	lifeEvent(-15);
+	if(go) {
+		lifeEvent(-15);		
+	};
 });

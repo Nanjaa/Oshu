@@ -1,3 +1,4 @@
+
 // brings up the common divs between all the city details
 $('.aliNadaCity').click(function() {
 	$('.aliNadaCity').hide();
@@ -91,24 +92,27 @@ var weatherText = {
 var weatherStatus = 'intro';
 
 $('#capitolWeatherman').click(function() {
-	if(weatherStatus == 'intro') {
-		$('#interactionText').writeText(weatherText.intro);
-		weatherStatus = 1;
+	if(go) {
+		if(weatherStatus == 'intro') {
+			$('#interactionText').writeText(weatherText.intro);
+			weatherStatus = 1;
+		}
+		else if(weatherStatus == 1) {
+			$('#interactionText').writeText(weatherText.goodbye);
+			weatherStatus = 2;
+		}
+		else if(weatherStatus == 2) {
+			$('#interactionText').writeText(weatherText.advice1);
+			weatherStatus = 3;
+		}
+		else if(weatherStatus == 3) {
+			$('#interactionText').writeText(weatherText.advice2);
+			weatherStatus = 4;
+		}
+		else if(weatherStatus == 4) {
+			$('#interactionText').writeText(weatherText.advice3);
+			weatherStatus = 1;
+		};		
 	}
-	else if(weatherStatus == 1) {
-		$('#interactionText').writeText(weatherText.goodbye);
-		weatherStatus = 2;
-	}
-	else if(weatherStatus == 2) {
-		$('#interactionText').writeText(weatherText.advice1);
-		weatherStatus = 3;
-	}
-	else if(weatherStatus == 3) {
-		$('#interactionText').writeText(weatherText.advice2);
-		weatherStatus = 4;
-	}
-	else if(weatherStatus == 4) {
-		$('#interactionText').writeText(weatherText.advice3);
-		weatherStatus = 1;
-	};
+
 });
