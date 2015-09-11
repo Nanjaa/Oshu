@@ -41,41 +41,51 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- The wrapper (gray) around the entire game -->
   <div id="wrapper">
+    <!-- This is the life bar above the console -->
     <div class="console">
       <div id="life"></div>
     </div>
-<!-- game console -->
+<!-- This is the  full game console, in which the game divs reside-->
     <div class="console" id="gameConsole">
-      <!-- clock -->
-    <div class = "testwrap">
-      <div id="gameOptions">
-        <div id="oshuOptions">
-          <h5 id="oshuOptionsTitle">Oshu</h5>
-          <p id="oshuOptionsSub">A Fulfillment Odyssey</p>
-        </div>
-        <div id="optionButtons">
-          <div id="sounds">
-            <p id="soundsTitle">Sounds:</p>
-            <i class="icon-volume-high" id="soundsOn"></i>
-            <i class="icon-volume-off" id="soundsOff"></i>
+    <!-- This is the wrap that will float everything left -->
+      <div class = "testwrap">
+        <!-- This is the gray box around the game options -->
+        <div id="gameOptions">
+          <!-- This is the Oshu: A Fullfillment Odyssey title -->
+          <div id="oshuOptions">
+            <h5 id="oshuOptionsTitle">Oshu</h5>
+            <p id="oshuOptionsSub">A Fulfillment Odyssey</p>
           </div>
-          <p id="pause">Pause</p>
-        </div>
+          <!-- This is the buttons to mute and pause the game -->
+          <div id="optionButtons">
+            <!-- mute -->
+            <div id="sounds">
+              <p id="soundsTitle">Sounds:</p>
+              <i class="icon-volume-high" id="soundsOn"></i>
+              <i class="icon-volume-off" id="soundsOff"></i>
+            </div>
+            <!-- pause -->
+            <p id="pause">Pause</p>
+          </div>
+          <!-- This is the "return to ship" button -->
+          <pre id="myShip">
+RETURN TO SHIP
+
+   |\____
+SS={o} [_\.__
+SS=[.________'>
+    [_/
+        </pre>
+        <!-- This is the countdown clock -->
         <div id="clock">
           <p>Time Remaining</p>
           <p class="clock" id="number"><span id="minutes">60</span>:<span id="seconds">00</span></p>
         </div>
-      </div><!--gameoptions-->
+      </div>
 
-<!--       <div id="clock">
-        <p>Clock</p>
-        <div id="clockNumbers">
-    
-        </div>
-      </div> -->
-
-  <!-- ============ INTERACTION =========== -->
+  <!-- ============ INTERACTION - THIS IS THE BLACK GAME CONSOLE ON WHICH THE GAME EVENTS TAKE PLACE =========== -->
       <div id="interaction">
         <!-- MILO INTERACTION -->
         <div id="skip"><span id="skipButton">Skip</span></div>
@@ -175,19 +185,7 @@
     </div>
   <!-- ship stats -->
   <div id="shipStats">
-    <h1 id="shipTitle">Ship Status</h1>
-    <pre id="myShip">
-RETURN TO SHIP
-
-|\____
-SS={o} [_\.__
-SS=[.________'>
-[_/
-    </pre>
-    <ul>
-      <li>Return to Ship</li>
-      <li>Gas:<span id="gasAmt">100%</span></li>
-    </ul>
+    <p>Footer div</p>
   </div>
   <!-- bucket list -->
     <div id="bucketList">
