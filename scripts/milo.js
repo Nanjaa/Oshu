@@ -379,6 +379,33 @@ $(document).ready(function() {
 		});
 	};
 
+    // _________________________________________//
+	//											//
+	//											//
+	//     INTRODUCTION - WILL RUN ON LOAD      //
+	//											//
+	//__________________________________________//
+
+	startGame();
+
+	function startGame() {
+		miloResponse(text.intro, 'speech/intro.mp3', response.introGood, response.introBad, response.ignore);
+		$('#good').click(function() {
+			knowledge.name = true;
+			quickMilo(text.introGood, 'speech/introOshu.mp3');
+			concludeInteraction(10500);
+			skipToMap();
+		});
+		$('#bad').click(function() {
+			quickMilo(text.introBad, 'speech/introNot.mp3');
+			concludeInteraction(18500);
+			skipToMap();
+		});
+		$('#neut').click(function() {
+			ignore('#map');
+		});
+	};
+
 
     // _________________________________________//
 	//											//

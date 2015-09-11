@@ -12,6 +12,13 @@ p {
 	margin: 0;
 	cursor: default;
 }
+#map {
+	display: none;
+}
+.testwrap {
+	float: left;
+}
+
 #wrapper {
 	background-color: gray;
 	padding-top: 2%;

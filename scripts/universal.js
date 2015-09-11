@@ -52,31 +52,28 @@ function resetText() {
 	$('#interactionText').text('');
 }
 
+var startText = true;
+
+$(this).click(function() {
+	startText = !startText;
+	console.log(startText);
+});
+
 (function($) {
 	resetText();
 	$.fn.writeText = function(content) {
-		resetText();
-		var contentArray = content.split(""),
-			current = 0,
-			click = false,
-			clicked = false,
-			clickable = false,
-			elem = this;
-		$('.clickable').click(function() {
-			clickable = true;
-			console.log('click');
-		});
+		// if(startText) {
+			resetText();
+			var contentArray = content.split(""),
+				current = 0,
+				click = false,
+				clicked = false,
+				elem = this;
 
-		var textWait = setInterval(function() {
-			$(this).click(function() {
-				click = true;
-			});
-
-			if(clickable == true) {
-				console.log('stop');
-				clearInterval(textWait);
-			}
-			else {
+			var textWait = setInterval(function() {
+				$(this).click(function() {
+					click = true;
+				});
 				if(current == contentArray.length-1 && click == false) {
 					click = true;
 				}
@@ -89,9 +86,8 @@ function resetText() {
 					elem.text(elem.text() + content);
 					clicked = true;
 				}				
-			}
-
-		}, 30);
+			}, 30);
+		// };
 	};
 }) (jQuery);
 
