@@ -306,10 +306,13 @@ function useItem(item, div) {
 // 				PROVIDE CURRENT LOCATION
 // ------------------------------------------------------
 
-function changeLocation(newLocation, clickReturn) {
+function changeLocation(newLocation, clickReturn, clickShip) {
 	Oshu.currentLocation = newLocation;
 	if(clickReturn) {
 		play('soundEffects/return.wav');
+	}
+	else if(clickShip) {
+		play('soundEffects/shipReturn.wav');
 	}
 	else {
 		play('soundEffects/click.wav');		
@@ -317,7 +320,7 @@ function changeLocation(newLocation, clickReturn) {
 };
 
 $('#myShip').click(function() {
-	changeLocation('#map');
+	changeLocation('#map', false, true);
 });
 
 // ------------------------------------------------------
