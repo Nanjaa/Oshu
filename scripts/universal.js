@@ -154,48 +154,31 @@ function payMoney(price) {
 
 function displayOptions(text1, text2, price, yes, no, needMore) {
 	// the following chunk has to do with displaying the "do you want to buy" question
-	var displayOptions = setInterval(function() {
-		showOptions(text1);
-	}, 1000);
-	function showOptions(text1) {
+	var wait = setTimeout(function() {
 		if($('#interactionText').text() == text1) {
-			clearInterval(displayOptions);
 			setTimeout(function() {
-				$('#interactionText').writeText(text2);
+			// now to display the yes or no options
+				twoOptions(text2, 'Yes', 'No');
+				$('#optionOne').unbind('click');
+				$('#optionOne').click(function() {
+					$('.option').hide();
+					var coins = Oshu.coins;
+					if(coins >= price) {
+			 			$('#interactionText').writeText(yes);	
+			 			payMoney(price);			
+					}
+					else {
+						$('#interactionText').writeText(needMore);
+					}
+				});
+				$('#optionTwo').unbind('click');
+				$('#optionTwo').click(function() {
+					$('.options').hide();
+					$('#interactionText').writeText(no);
+				})
 			}, 2000);
-		};				
-	};
-	// now to display the yes or no options
-	var displayYesNo = setInterval(function() {
-		showYesNo(text2, price, yes, no, needMore)
-	}, 1000);	
-	function showYesNo(text2, price, yes, no, needMore) {
-		if($('#interactionText').text() == text2) {
-			clearInterval(displayYesNo);
-			function yesNo(price) {
-				$('#optionOne').show();
-				$('#optionTwo').show();
-				$('#optionOne').writeText('Yes');
-				$('#optionTwo').writeText('No');
-			};
-			setTimeout(yesNo(), 1000);
-		};
-		$('#optionOne').click(function() {
-			$('.options').hide();
-			var coins = Oshu.coins;
-			if(coins >= price) {
-	 			$('#interactionText').writeText(yes);	
-	 			payMoney(price);			
-			}
-			else {
-				$('#interactionText').writeText(needMore);
-			}
-		});
-		$('#optionTwo').click(function() {
-			$('.options').hide();
-			$('#interactionText').writeText(no);
-		})
-	}
+		};						
+	}, 1000);
 };
 
 // ------------------------------------------------------

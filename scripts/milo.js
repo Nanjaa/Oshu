@@ -587,7 +587,7 @@ $(document).ready(function() {
 					case 'Kaprika':
 						changeLocation('#kaprikaMap');
 						$('#skip').show();
-						quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.mp3', '#kaprikaMap');
+						quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.wav', '#kaprikaMap');
 						miloIntroduction(19000, 'kaprika.html #kaprikaContent', 'scripts/kaprika.js');
 						$('#skip').click(function() {
 							showContent('kaprika.html #kaprikaContent', 'scripts/kaprika.js');
