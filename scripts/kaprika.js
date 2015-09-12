@@ -76,44 +76,49 @@ var mysteryText = {
 
 }
 
+$('#fortuneTeller').unbind('click');
 $('#fortuneTeller').click(function() {
 	if(go) {
+		mysteryStatus = 'intro';
 		if(Oshu.items.password) {
 			twoOptions(mysteryText.gypsyIntro, "What have you got for sale?", "'Phoenix'");
 		}
 		else {
 			oneOption(mysteryText.gypsyIntro, 'What have you got for sale?');
 		}
+		$('#optionOne').unbind('click');
 		$('#optionOne').click(function() {
 			if(mysteryStatus == 'intro') {
+				$('.option').hide();
 				mysteryStatus = 'shop';	
 				threeOptions(mysteryText.gypsyShop, "Shrunken Heads - 15 Coins", "Sleep Potions - 10 Coins", 'Nevermind.');			
 			}
 			else if(mysteryStatus == 'shop') {
+				$('.option').hide();
+				mysteryStatus = 'intro';
 				$('#interactionText').writeText(mysteryText.shrunkenHead);
 				payMoney(15);
 				addItem('shrunkenHead', 'Shrunken Head', Oshu.items.shrunkenHead, '#shrunkenHead', Oshu.description.shrunkenHead);
-				mysteryStatus = 'intro';
 			}
-			else {
-				console.log('dead end');
-			}
-
 		});
+		$('#optionTwo').unbind('click');
 		$('#optionTwo').click(function() {
 			if(mysteryStatus == 'intro') {
+				$('.option').hide();
 				$('#interactionText').writeText(mysteryText.lifePools);
 				var timeout = setTimeout(function() {
 					completeItem(Oshu.quests[3][1][1], Oshu.questSpeech.kaprika2);
 				}, 2000)
 			}
 			else if(mysteryStatus == 'shop') {
+				$('.option').hide();
 				$('#interactionText').writeText(mysteryText.sleepPotion);
 				payMoney(10);
 				addItem('sleepPotion', 'Sleep Potion', Oshu.items.sleepPotion, '#sleepPotion', Oshu.description.sleepPotion);
 				mysteryStatus = 'intro';
 			}
 		});
+		$('#optionThree').unbind('click')
 		$('#optionThree').click(function() {
 			endConversation(mysteryText.nevermind);
 			mysteryStatus = 'intro';

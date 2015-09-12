@@ -92,7 +92,7 @@ var weatherText = {
 };
 
 var weatherStatus = 'intro';
-
+$('#capitolWeatherman').unbind('click');
 $('#capitolWeatherman').click(function() {
 	if(go) {
 		if(weatherStatus == 'intro') {
@@ -131,6 +131,7 @@ var graveText = {
 	intro: "You walk into the cemetery and find your brother's grave."
 }
 
+$('#brothersGrave').unbind('click');
 $('#brothersGrave').click(function() {
 	if(go) {
 		completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);		

@@ -213,6 +213,7 @@ li {
 }
 #bucketList {
 	background-color: green;
+	float: left;
 }
 .bucketList, .inventoryItem {
 	list-style-type: none;

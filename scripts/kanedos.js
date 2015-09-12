@@ -71,6 +71,7 @@ var kanedomeText = {
 	end: "Wasn't that the greatest? Such a good fight!"
 }
 
+$('#ticketGuy').unbind('click');
 $('#ticketGuy').click(function() {
 	if(go) {
 		maleVoice2();
@@ -111,6 +112,7 @@ var camelText = {
 	options: "Do you want to rent a camel?"
 };
 
+$('#camelGuy').unbind('click');
 $('#camelGuy').click(function() {
 	if(go) {
 		$('#interactionText').writeText(camelText.guyIntro);
@@ -154,6 +156,7 @@ $('#kanedosJewelry').click(function() {
 	jewelryStatus = 1;
 });
 
+$('#kanedosJewelryLady').unbind('click');
 $('#kanedosJewelryLady').click(function() {
 	if(go) {
 		switch(jewelryStatus) {
@@ -173,6 +176,7 @@ $('#kanedosJewelryLady').click(function() {
 	};
 });
 
+$('#kanedosJewelryDisplay').unbind('click');
 $('#kanedosJewelryDisplay').click(function() {
 	if(go) {
 		if(Oshu.items.kanedosJewelry) {
@@ -188,6 +192,7 @@ $('#kanedosJewelryDisplay').click(function() {
 					Oshu.items.kanedosJewelry = true;
 
 					// now you can select the clothes
+					$('#kanedosNecklace').unbind('click');
 					$('#kanedosNecklace').click(function() {
 						inventoryDescription('#kanedosNecklace', 'Necklace from Kanedos', Oshu.description.kanedosJewelry);
 					});
@@ -222,6 +227,7 @@ var barText = {
 	apprenticeEnd: "You did great in class! I'm really glad I was able to get you in."
 }
 
+$('#suckerBartender').unbind('click');
 $('#suckerBartender').click(function() {
 	if(go) {
 		$('#interactionText').writeText(barText.bartenderIntro);
@@ -244,6 +250,7 @@ $('#suckerBartender').click(function() {
 // ************************ THE APPRENTICE ************************
 apprenticeStatus = 'intro';
 
+$('#apprentice').unbind('click');
 $('#apprentice').click(function() {
 	if(go) {
 		if(apprenticeStatus == 'finished') {
@@ -251,16 +258,19 @@ $('#apprentice').click(function() {
 		}
 		else if(apprenticeStatus == 'threaten') {
 			twoOptions(barText.Threaten2, "No, I want to apologize. I was just nervous.", "Nevermind.");
+			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
 				$('#interactionText').writeText(barText.Threaten3);
 				apprenticeStatus = 'finished';
 			});
+			$('#optionTwo').unbind('click');
 			$('#optionTwo').click(function() {
 				$('#interactionText').writeText(barText.threaten4);
 			});
 		}
 		else {
 			oneOption(barText.apprenticeIntro, "Can you help me get into a martial arts class?");
+			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
 				if(apprenticeStatus == 'intro') {
 					twoOptions(barText.apprentice2, "I'm dying, and it's on my bucket list.", "You don't want to find out what'll happen if you say no...");
@@ -275,6 +285,7 @@ $('#apprentice').click(function() {
 					apprenticeStatus = 'finished';				
 				};
 			});
+			$('#optionTwo').unbind('click');
 			$('#optionTwo').click(function() {
 				if(apprenticeStatus == 'why') {
 					endConversation(barText.apprenticeThreaten);
@@ -310,10 +321,12 @@ var brawlerText = {
 }
 var brawlerStatus = 'intro';
 
+$('#brawler').unbind('click');
 $('#brawler').click(function() {
 	if(go) {
 		if(brawlerStatus == 'intro') {
 			oneOption(brawlerText.intro, 'Can you get me into the Kanedome?');
+			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
 				switch(brawlerStatus) {
 					case 'intro':
@@ -337,6 +350,7 @@ $('#brawler').click(function() {
 							Oshu.items.kanedomeTicket = true;
 
 							// now you can select the ticket
+							$('#kanedomeTicket').unbind('click');
 							$('#kanedomeTicket').click(function() {
 								inventoryDescription('#kanedomeTicket', 'Kanedome Ticket', Oshu.description.kanedomeTicket);
 							});
@@ -364,6 +378,7 @@ $('#brawler').click(function() {
 					break;
 				};
 			});	
+			$('#optionTwo').unbind('click');
 			$('#optionTwo').click(function() {
 				switch(brawlerStatus) {
 					case 'how':
@@ -385,6 +400,7 @@ $('#brawler').click(function() {
 
 				};
 			});
+			$('#optionThree').unbind('click');
 			$('#optionThree').click(function() {
 				if(brawlerStatus == 'how') {
 					endConversation(brawlerText.wrestle);
