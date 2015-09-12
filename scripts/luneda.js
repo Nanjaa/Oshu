@@ -111,7 +111,6 @@ $('pre').click(function() {
 // |_______________________________________________________________|
 
 var beachText = {
-	inUse: false,
 	welcome: "You have arrived on the beaches of the Electric Sea. There is a buzzing sound that mixes gently with the sound of the waves crashing.",
 	rentalWelcome: "Hello there young lady! I have everything you'll need to swim in the seas without getting yourself killed. What do you say? 50 coins covers it all!",
 	rentalNoCoins: "That's not enough money! 50 coins or no deal. I don't bargain.",
@@ -125,13 +124,16 @@ var beachText = {
 };
 
 //************************ interact with the equipment shack ************************
+
+$('#equipment').unbind('click');
 $('#equipment').click(function() {
 	rentalActivate();
 });
 
 function rentalActivate() {
 	if(go) {
-		if(beachText.inUse == true) {
+		$('.option').hide();
+		if(Oshu.items.electroSuit) {
 			maleVoice();
 			$('#interactionText').writeText(beachText.rentalInUse);
 		}
@@ -140,20 +142,12 @@ function rentalActivate() {
 			maleVoice();
 			$('#interactionText').writeText(beachText.rentalWelcome);
 			displayOptions(beachText.rentalWelcome, beachText.rentalOptions, 50, beachText.rentalComplete, beachText.rentalNo, beachText.rentalNoCoins);
-			var boughtSuit = setInterval(function() {
+			var wait = setInterval(function() {
 				if($('#interactionText').text() == beachText.rentalComplete) {
-				// adds item to inventory if not already there
-					$('.inventoryList').append('<li class="inventoryItem" id="electroSuit">ElectroSuit</li>');
+					addItem('electroSuit', 'ElectroSuit', '#electroSuit', Oshu.description.electroSuit);
+					// adds item to inventory if not already there
 					Oshu.items.electroSuit = true;
-					clearInterval(boughtSuit);
-
-					// now you can click the electroSuit
-					$('#electroSuit').click(function() {
-						inventoryDescription('#electroSuit', 'electroSuit', Oshu.description.electroSuit);
-					});
-
-					
-
+					clearInterval(wait);
 				}
 			}, 1)
 		};		
@@ -306,9 +300,17 @@ $('#optionTwo').click(function() {
 //************************ interact with the sea ************************
 
 $('#closerSeas').click(function() {
+	console.log(Oshu.currentLocation);
 	if(go) {
 		if(Oshu.items.electroSuit) {
 			completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda1);
+			$('#skip').unbind('click');
+			$('#skipButton').unbind('click');
+			$('#skipButton').click(function() {
+				$('#lunedaMap').hide();
+				$('#beach').show();
+				endSpeech();
+			});
 		}
 		else {
 			$('#interactionText').writeText(beachText.cantSwim);

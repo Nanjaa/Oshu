@@ -155,9 +155,16 @@ function payMoney(price) {
 function displayOptions(text1, text2, price, yes, no, needMore) {
 	// the following chunk has to do with displaying the "do you want to buy" question
 	var wait = setTimeout(function() {
+		// $('.clickable').click(function() {
+		// 	if(go) {
+		// 		clearTimeout(wait);
+		// 		clearTimeout(holding);				
+		// 	}
+		// });
 		if($('#interactionText').text() == text1) {
-			setTimeout(function() {
-			// now to display the yes or no options
+
+			var holding = setTimeout(function() {
+				// now to display the yes or no options
 				twoOptions(text2, 'Yes', 'No');
 				$('#optionOne').unbind('click');
 				$('#optionOne').click(function() {
@@ -251,15 +258,18 @@ function completeItem(quest, speech) {
 		$('#oshuInteraction').show();
 		$('#skip').show();
 		$('#oshuInteraction').writeText(speech);
-		$('#skip').click(function() {
-			$('#oshuInteraction').hide();
-			$('.return').show();
-			$('#planetInteraction').show();
-			ignore(Oshu.currentLocation);
-			console.log(Oshu.currentLocation);
-		})
 	}, 500);
 };
+
+function endSpeech() {
+	$('#skip').hide();
+	$('#oshuInteraction').hide();
+	$('#oshuInteraction').text('');
+	if(Oshu.currentLocation !== '#map') {
+		$('.return').show();
+		$('#planetInteraction').show();		
+	};
+}
 
 // ------------------------------------------------------
 // 				USE INVENTORY
