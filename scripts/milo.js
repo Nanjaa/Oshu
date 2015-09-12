@@ -347,18 +347,24 @@ $(document).ready(function() {
 	// adjust the standing with MILO after choosing an option, and also clear all the options
 
 	$('#good').click(function() {
-		clearInteraction();
-		status = status + 1;
-		console.log(status)		
+		if(go) {
+			clearInteraction();
+			status = status + 1;
+			console.log(status)				
+		}
 	});
 	$('#bad').click(function() {
-		clearInteraction();
-		status = status - 1;
-		console.log(status)		
+		if(go) {
+			clearInteraction();
+			status = status - 1;
+			console.log(status)				
+		}
 	});
 	$('#neut').click(function() {
-		clearInteraction();
-	})
+		if(go) {
+			clearInteraction();			
+		}
+	});
 
 	// conclude interaction 
 	function concludeInteraction(timeout) {
@@ -393,18 +399,24 @@ $(document).ready(function() {
 	function startGame() {
 		miloResponse(text.intro, 'speech/intro.mp3', response.introGood, response.introBad, response.ignore);
 		$('#good').click(function() {
-			knowledge.name = true;
-			quickMilo(text.introGood, 'speech/introOshu.mp3');
-			concludeInteraction(10500);
-			skipToMap();
+			if(go) {
+				knowledge.name = true;
+				quickMilo(text.introGood, 'speech/introOshu.mp3');
+				concludeInteraction(10500);
+				skipToMap();				
+			}
 		});
 		$('#bad').click(function() {
-			quickMilo(text.introBad, 'speech/introNot.mp3');
-			concludeInteraction(18500);
-			skipToMap();
+			if(go) {
+				quickMilo(text.introBad, 'speech/introNot.mp3');
+				concludeInteraction(18500);
+				skipToMap();				
+			};
 		});
 		$('#neut').click(function() {
-			ignore('#map');
+			if(go) {
+				ignore('#map');				
+			}
 		});
 	};
 
@@ -454,42 +466,46 @@ $(document).ready(function() {
 						changeLocation('#kanedosMap');
 						miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
 						$('#good').click(function() {
-							if(status >= 1) {
-								quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap');
-								miloIntroduction(3000, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
-								$('#skip').show();
-								$('#skipButton').click(function() {
-									showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
-									ignore();
-								});
-							}
-							else {
-								quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap');
-								miloIntroduction(6500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
-								$('#skip').show();
-								$('#skipButton').click(function() {
-									showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
-									ignore();
-								});
+							if(go) {
+								if(status >= 1) {
+									quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap');
+									miloIntroduction(3000, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+									$('#skip').show();
+									$('#skipButton').click(function() {
+										showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+										ignore();
+									});
+								}
+								else {
+									quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap');
+									miloIntroduction(6500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+									$('#skip').show();
+									$('#skipButton').click(function() {
+										showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+										ignore();
+									});
+								}								
 							}
 						});
 						$('#bad').click(function() {
-							if(status >= -5) {
-								quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3', '#kanedosMap');
-								miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
-								$('#skip').show();
-								$('#skipButton').click(function() {
-									ignore('#kanedosMap');
-								});
-							}
-							else if(status < -5) {
-								$('#skip').show();
-								$('#skipButton').click(function() {
-									showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
-									ignore();
-								});
-								quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap');
-								miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+							if(go) {
+								if(status >= -5) {
+									quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3', '#kanedosMap');
+									miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+									$('#skip').show();
+									$('#skipButton').click(function() {
+										ignore('#kanedosMap');
+									});
+								}
+								else if(status < -5) {
+									$('#skip').show();
+									$('#skipButton').click(function() {
+										showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+										ignore();
+									});
+									quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap');
+									miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+								}								
 							}
 						});
 						$('#neut').click(function() {
@@ -523,34 +539,40 @@ $(document).ready(function() {
 
 						var tyrianneTimeline = 'tyrianneIntro';
 						$('#good').click(function() {
-							if(tyrianneTimeline == 'tyrianneIntro') {
-								missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
-								$('#miloResponse').hide();
-								miloIntroduction(25500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
-								tyrianneTimeline = 'Would you like';
-							}
-							else {
-								missVsOshu(text.tyrianneBadGoodMiss, 'speech/tyrianneBadGoodMiss.mp3', text.tyrianneBadGoodOshu, 'speech/tyrianneBadGoodOshu.mp3', '','','');
-								miloIntroduction(10500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js')
+							if(go) {
+								if(tyrianneTimeline == 'tyrianneIntro') {
+									missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
+									$('#miloResponse').hide();
+									miloIntroduction(25500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+									tyrianneTimeline = 'Would you like';
+								}
+								else {
+									missVsOshu(text.tyrianneBadGoodMiss, 'speech/tyrianneBadGoodMiss.mp3', text.tyrianneBadGoodOshu, 'speech/tyrianneBadGoodOshu.mp3', '','','');
+									miloIntroduction(10500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js')
+								}								
 							}
 						})
 						$('#bad').click(function() {
-							if(tyrianneTimeline == 'tyrianneIntro') {
-								miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneBadNeut, response.ignore);
-								tyrianneTimeline = 'I am, miss';
+							if(go) {
+								if(tyrianneTimeline == 'tyrianneIntro') {
+									miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneBadNeut, response.ignore);
+									tyrianneTimeline = 'I am, miss';
+								}
+								else {
+									showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+									ignore();
+									status = status + 1;
+								}
 							}
-							else {
-								showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
-								ignore();
-								status = status + 1;
-							}
-						})
+						});
 						$('#neut').click(function() {
-							if(tyrianneTimeline == 'tyrianneIntro') {
-								showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
-								ignore();
-							}
-						})
+							if(go) {
+								if(tyrianneTimeline == 'tyrianneIntro') {
+									showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+									ignore();
+								}								
+							};
+						});
 					break;
 
 					case 'Kaprika':
@@ -570,51 +592,57 @@ $(document).ready(function() {
 						$('#bad').hide();
 						var aliTimeline = 'aliIntro';
 						$('#good').click(function() {
-							if(aliTimeline == 'aliIntro') {
-								if(status >= 0) {
-									$('#bad').show();
-									miloResponse(text.aliNadaGood, 'speech/aliNadaPos.wav', response.aliNadaGoodGood, response.aliNadaGoodBad, response.aliNadaGoodNeut);
-									aliTimeline = 'so sorry';
+							if(go) {
+								if(aliTimeline == 'aliIntro') {
+									if(status >= 0) {
+										$('#bad').show();
+										miloResponse(text.aliNadaGood, 'speech/aliNadaPos.wav', response.aliNadaGoodGood, response.aliNadaGoodBad, response.aliNadaGoodNeut);
+										aliTimeline = 'so sorry';
+									}
+									else {
+										quickMilo(text.aliNadaBad, 'speech/aliNadaNeg.mp3');
+										miloIntroduction(5500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+										$('#bad').show();
+									}
 								}
-								else {
-									quickMilo(text.aliNadaBad, 'speech/aliNadaNeg.mp3');
-									miloIntroduction(5500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
-									$('#bad').show();
+								else if(aliTimeline == 'so sorry') {
+									miloResponse(text.aliNadaGoodGood, 'speech/aliNadaGoodGood.mp3', response.aliNadaGoodGoodGood, response.aliNadaGoodGoodBad, response.aliNadaGoodGoodNeut);
+									aliTimeline = 'who';
 								}
-							}
-							else if(aliTimeline == 'so sorry') {
-								miloResponse(text.aliNadaGoodGood, 'speech/aliNadaGoodGood.mp3', response.aliNadaGoodGoodGood, response.aliNadaGoodGoodBad, response.aliNadaGoodGoodNeut);
-								aliTimeline = 'who';
-							}
-							else if(aliTimeline == 'who') {
-								quickMilo(text.aliNadaGoodGoodGood, 'speech/aliNadaGoodGoodGood.mp3');
-								miloIntroduction(6500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
-								ignore();
+								else if(aliTimeline == 'who') {
+									quickMilo(text.aliNadaGoodGoodGood, 'speech/aliNadaGoodGoodGood.mp3');
+									miloIntroduction(6500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
+									ignore();
+								}								
 							}
 						});
 						$('#bad').click(function() {
-							if(aliTimeline == 'so sorry') {
-								missVsOshu(text.aliNadaGoodBadMiss, 'speech/aliNadaGoodBadMiss.mp3', text.aliNadaGoodBadOshu, 'speech/aliNadaGoodBadOshu.mp3', '','','');
-								$('#miloResponse').hide();
-								miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
-							}
-							else if(aliTimeline == 'who') {
-								quickMilo(text.aliNadaGoodGoodBad, 'speech/aliNadaGoodGoodBad.mp3');
-								miloIntroduction(4500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
+							if(go) {
+								if(aliTimeline == 'so sorry') {
+									missVsOshu(text.aliNadaGoodBadMiss, 'speech/aliNadaGoodBadMiss.mp3', text.aliNadaGoodBadOshu, 'speech/aliNadaGoodBadOshu.mp3', '','','');
+									$('#miloResponse').hide();
+									miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+								}
+								else if(aliTimeline == 'who') {
+									quickMilo(text.aliNadaGoodGoodBad, 'speech/aliNadaGoodGoodBad.mp3');
+									miloIntroduction(4500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
+								}								
 							}
 						});
 						$('#neut').click(function() {
-							if(aliTimeline == 'aliIntro') {
-								ignore();
-								showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
-							}
-							else if(aliTimeline == 'so sorry') {
-								quickMilo(text.aliNadaGoodNeut, 'speech/aliNadaGoodNeut.mp3');
-								miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
-							}
-							else if(aliTimeline == 'who') {
-								quickMilo(text.aliNadaGoodGoodNeut, 'speech/aliNadaGoodGoodNeut.mp3');
-								miloIntroduction(3700, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+							if(go) {
+								if(aliTimeline == 'aliIntro') {
+									ignore();
+									showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+								}
+								else if(aliTimeline == 'so sorry') {
+									quickMilo(text.aliNadaGoodNeut, 'speech/aliNadaGoodNeut.mp3');
+									miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+								}
+								else if(aliTimeline == 'who') {
+									quickMilo(text.aliNadaGoodGoodNeut, 'speech/aliNadaGoodGoodNeut.mp3');
+									miloIntroduction(3700, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+								}								
 							}
 						});
 					break;
@@ -677,63 +705,71 @@ $(document).ready(function() {
 		missVsOshu(text.novaIntroMiss, 'speech/novaIntroMiss', text.novaIntroOshu, 'speech/novaIntroOshu.mp3', response.novaGood, response.novaBad, response.novaNeut)
 		// What is it?
 		$('#good').click(function() {
-			if(fiftyTimeline == 'novaIntro') {
-				miloResponse(text.novaGood, 'speech/novaGood.mp3', response.novaGoodGood, response.novaGoodBad, response.ignore);
-				fiftyTimeline = 'What is it';
+			if(go) {
+				if(fiftyTimeline == 'novaIntro') {
+					miloResponse(text.novaGood, 'speech/novaGood.mp3', response.novaGoodGood, response.novaGoodBad, response.ignore);
+					fiftyTimeline = 'What is it';
+				}
+				else if(fiftyTimeline == 'What is it') {
+					missVsOshu(text.novaGoodGoodMiss, 'speech/novaGoodGoodMiss.mp3', text.novaGoodGoodOshu, 'speech/novaGoodGoodOshu.mp3', response.novaGoodGoodGood, response.novaGoodGoodBad, response.ignore);
+					fiftyTimeline = 'A what? Let me see.';
+				}
+				else if(fiftyTimeline == 'I dont have time for this') {
+					miloResponse(text.novaGood, 'speech/novaGood.mp3', response.novaGoodGood, response.novaGoodBad, response.ignore);
+					fiftyTimeline = 'What is it';
+				}
+				else if(fiftyTimeline == 'Why would I care') {
+					if(knowledge.mortality == true) {
+						missVsOshu(text.novaBadGoodKnowsMiss, 'speech/novaBadGoodKnowsOshu.mp3', text.novaBadGoodKnowsMiss, 'novaBadGoodKnowsMiss.mp3', '', '', '')
+						concludeInteraction(7000);
+					}
+					else {
+						miloResponse(text.novaBadGood, 'speech/novaBadGood.mp3', '','','');
+						concludeInteraction(7000);
+					}
+				}
+				else if('A what? Let me see.') {
+					$('#miloSays').writeText(text.novaGoodGoodGood); 
+					play('speech/novaGoodGoodGood.mp3');
+					concludeInteraction(7000)
+				};				
 			}
-			else if(fiftyTimeline == 'What is it') {
-				missVsOshu(text.novaGoodGoodMiss, 'speech/novaGoodGoodMiss.mp3', text.novaGoodGoodOshu, 'speech/novaGoodGoodOshu.mp3', response.novaGoodGoodGood, response.novaGoodGoodBad, response.ignore);
-				fiftyTimeline = 'A what? Let me see.';
-			}
-			else if(fiftyTimeline == 'I dont have time for this') {
-				miloResponse(text.novaGood, 'speech/novaGood.mp3', response.novaGoodGood, response.novaGoodBad, response.ignore);
-				fiftyTimeline = 'What is it';
-			}
-			else if(fiftyTimeline == 'Why would I care') {
-				if(knowledge.mortality == true) {
-					missVsOshu(text.novaBadGoodKnowsMiss, 'speech/novaBadGoodKnowsOshu.mp3', text.novaBadGoodKnowsMiss, 'novaBadGoodKnowsMiss.mp3', '', '', '')
+		});
+
+		$('#bad').click(function() {
+			if(go) {
+				if(fiftyTimeline == 'novaIntro') {
+					miloResponse(text.novaBad, 'speech/novaBad.mp3', response.novaBadGood, response.novaBadBad, response.ignore);
+					fiftyTimeline = 'Why would I care';
+				}
+				else if(fiftyTimeline == 'Why would I care') {
+					miloResponse(text.novaBadBad, 'speech/novaBadBad.mp3', '','','');
+					concludeInteraction(7000);	
+				}
+				else if(fiftyTimeline == 'What is it') {
+					miloResponse(text.novaGoodBad, 'speech/novaGoodBad.mp3', '','','');
 					concludeInteraction(7000);
+				}
+				else if(fiftyTimeline == 'A what? Let me see.') {
+					miloResponse(text.novaGoodGoodBad, 'speech/novaGoodGoodBad.mp3', '','','');
+					concludeInteraction(7000);
+				}
+				else if(fiftyTimeline == 'I dont have time for this') {
+					miloResponse(text.novaNeutBad, 'speech/novaNeutBad.mp3', '','','');
+					concludeInteraction(7000);
+				}				
+			}
+		});
+
+		$('#neut').click(function() {
+			if(go) {
+				if(fiftyTimeline == 'novaIntro') {
+					missVsOshu(text.novaNeutMiss, 'speech/novaNeutMiss.mp3', text.novaNeutOshu, 'speech/novaNeutOshu.mp3', response.novaNeutGood, response.novaNeutBad, response.ignore);
+					fiftyTimeline = 'I dont have time for this';
 				}
 				else {
-					miloResponse(text.novaBadGood, 'speech/novaBadGood.mp3', '','','');
 					concludeInteraction(7000);
-				}
-			}
-			else if('A what? Let me see.') {
-				$('#miloSays').writeText(text.novaGoodGoodGood); 
-				play('speech/novaGoodGoodGood.mp3');
-				concludeInteraction(7000)
-			};
-		});
-		$('#bad').click(function() {
-			if(fiftyTimeline == 'novaIntro') {
-				miloResponse(text.novaBad, 'speech/novaBad.mp3', response.novaBadGood, response.novaBadBad, response.ignore);
-				fiftyTimeline = 'Why would I care';
-			}
-			else if(fiftyTimeline == 'Why would I care') {
-				miloResponse(text.novaBadBad, 'speech/novaBadBad.mp3', '','','');
-				concludeInteraction(7000);	
-			}
-			else if(fiftyTimeline == 'What is it') {
-				miloResponse(text.novaGoodBad, 'speech/novaGoodBad.mp3', '','','');
-				concludeInteraction(7000);
-			}
-			else if(fiftyTimeline == 'A what? Let me see.') {
-				miloResponse(text.novaGoodGoodBad, 'speech/novaGoodGoodBad.mp3', '','','');
-				concludeInteraction(7000);
-			}
-			else if(fiftyTimeline == 'I dont have time for this') {
-				miloResponse(text.novaNeutBad, 'speech/novaNeutBad.mp3', '','','');
-				concludeInteraction(7000);
-			}
-		});
-		$('#neut').click(function() {
-			if(fiftyTimeline == 'novaIntro') {
-				missVsOshu(text.novaNeutMiss, 'speech/novaNeutMiss.mp3', text.novaNeutOshu, 'speech/novaNeutOshu.mp3', response.novaNeutGood, response.novaNeutBad, response.ignore);
-				fiftyTimeline = 'I dont have time for this';
-			}
-			else {
-				concludeInteraction(7000);
+				}				
 			}
 		});
 	};
@@ -762,87 +798,95 @@ $(document).ready(function() {
 		$('#map').hide();
 		missVsOshu(text.familyIntroMiss, 'speech/familyIntroMiss.mp3', text.familyIntroOshu, 'speech/familyIntroOshu.mp3', response.familyGood, response.familyBad, response.familyNeut);
 		$('#good').click(function() {
-			if(familyTimeline == 'familyIntro') {
-				miloResponse(text.familyGood, 'speech/familyGood.mp3', response.familyGoodGood, response.familyGoodBad, response.familyGoodNeut);
-				familyTimeline = 'Its a lot of ups and downs';
-			}
-			else if(familyTimeline == 'Its a lot of ups and downs') {
-				miloResponse(text.familyGoodGood1, 'speech/familyGoodGood1.mp3', '','','');
-				$('#miloResponse').hide();
-				setTimeout(function() {
-					$('#miloResponse').show();
-					$('#miloSays').text('');
-					miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
-				}, 1000);
-				familyTimeline = 'Yes I always felt accepted';
-			}
-			else if(familyTimeline == 'Yes I always felt accepted') {
-				familyTimeline = 'My brother';
-				if(knowledge.brother == true) {
-					miloResponse(text.familyGoodGoodGoodAli, 'speech/familyGoodGoodGoodAli.mp3', response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
+			if(go) {
+				if(familyTimeline == 'familyIntro') {
+					miloResponse(text.familyGood, 'speech/familyGood.mp3', response.familyGoodGood, response.familyGoodBad, response.familyGoodNeut);
+					familyTimeline = 'Its a lot of ups and downs';
 				}
-				else {
-					miloResponse(text.familyGoodGoodGoodNoAli, 'speech/familyGoodGoodGoodNoAli.mp3', response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
+				else if(familyTimeline == 'Its a lot of ups and downs') {
+					miloResponse(text.familyGoodGood1, 'speech/familyGoodGood1.mp3', '','','');
+					$('#miloResponse').hide();
+					setTimeout(function() {
+						$('#miloResponse').show();
+						$('#miloSays').text('');
+						miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
+					}, 1000);
+					familyTimeline = 'Yes I always felt accepted';
 				}
-			}
-			else if(familyTimeline == 'My brother') {
-				miloResponse(text.familyGoodGoodGoodGood, 'speech/familyGoodGoodGoodGood.mp3', '','','');
-				concludeInteraction(3000);
-			}
-			else if(familyTimeline == 'It gives meaning') {
-				miloResponse('I see.', 'speech/familyneutGood.mp3', '','','');
-				$('#miloResponse').hide();
-				setTimeout(function() {
-					$('#miloResponse').show();
-					$('#miloSays').text('');
-					miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
-				}, 1000);
-				familyTimeline = 'Yes I always felt accepted';				
-			}
-			else if(familyTimeline == 'I do feel') {
-				quickMilo(text.familyNeutNeutGood, 'speech/familyNeutNeutGood.mp3');
-				concludeInteraction(2500);
+				else if(familyTimeline == 'Yes I always felt accepted') {
+					familyTimeline = 'My brother';
+					if(knowledge.brother == true) {
+						miloResponse(text.familyGoodGoodGoodAli, 'speech/familyGoodGoodGoodAli.mp3', response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
+					}
+					else {
+						miloResponse(text.familyGoodGoodGoodNoAli, 'speech/familyGoodGoodGoodNoAli.mp3', response.familyGoodGoodGoodGood, response.ignore, response.familyGoodGoodGoodNeut);
+					}
+				}
+				else if(familyTimeline == 'My brother') {
+					miloResponse(text.familyGoodGoodGoodGood, 'speech/familyGoodGoodGoodGood.mp3', '','','');
+					concludeInteraction(3000);
+				}
+				else if(familyTimeline == 'It gives meaning') {
+					miloResponse('I see.', 'speech/familyneutGood.mp3', '','','');
+					$('#miloResponse').hide();
+					setTimeout(function() {
+						$('#miloResponse').show();
+						$('#miloSays').text('');
+						miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
+					}, 1000);
+					familyTimeline = 'Yes I always felt accepted';				
+				}
+				else if(familyTimeline == 'I do feel') {
+					quickMilo(text.familyNeutNeutGood, 'speech/familyNeutNeutGood.mp3');
+					concludeInteraction(2500);
+				}				
 			}
 		});
+
 		$('#bad').click(function() {
-			if(familyTimeline == 'I do feel') {
-				quickMilo(text.familyNeutNeutBad, 'speech/familyNeutNeutBad.mp3');
-				concludeInteraction(3500);
-			}
-			else {
-				endFamilyBad();
-			}
-		});
-		$('#neut').click(function() {
-			if(familyTimeline == 'familyIntro') {
-				familyTimeline = 'It gives meaning';
-				if(knowledge.mortality == true) {
-					miloResponse(text.familyNeutKnows, 'speech/familyNeutKnows.mp3', response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
+			if(go) {
+				if(familyTimeline == 'I do feel') {
+					quickMilo(text.familyNeutNeutBad, 'speech/familyNeutNeutBad.mp3');
+					concludeInteraction(3500);
 				}
 				else {
-					miloResponse(text.familyNeut, 'speech/familyNeut.mp3', response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
+					endFamilyBad();
+				}				
+			};
+		});
+
+		$('#neut').click(function() {
+			if(go) {
+				if(familyTimeline == 'familyIntro') {
+					familyTimeline = 'It gives meaning';
+					if(knowledge.mortality == true) {
+						miloResponse(text.familyNeutKnows, 'speech/familyNeutKnows.mp3', response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
+					}
+					else {
+						miloResponse(text.familyNeut, 'speech/familyNeut.mp3', response.familyNeutGood, response.familyNeutBad, response.familyNeutNeut);
+					}
 				}
-			}
-			else if(familyTimeline == 'It gives meaning') {
-				missVsOshu(text.familyNeutNeutMiss, 'speech/familyNeutNeutMiss.wav', text.familyNeutNeutOshu, 'speech/familyNeutNeutOshu.wav', response.familyNeutNeutGood, response.familyNeutNeutBad, response.ignore);
-				familyTimeline = 'I do feel';
-			}
-			else if(familyTimeline == 'Its a lot of ups and downs') {
-				quickMilo(text.familyGoodNeut, 'speech/familyGoodNeut.mp3');
-				setTimeout(function() {
-					$('#miloResponse').show();
-					$('#miloSays').text('');
-					miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
-				}, 4000);
-				familyTimeline = 'Yes I always felt accepted';
-			}
-			else if(familyTimeline == 'Yes I always felt accepted') {
-				quickMilo(text.familyGoodGoodNeut, 'speech/familyGoodGoodNeut.mp3');
-				concludeInteraction(5500);
-			}
-			else {
-				ignore('#map');
-			}
+				else if(familyTimeline == 'It gives meaning') {
+					missVsOshu(text.familyNeutNeutMiss, 'speech/familyNeutNeutMiss.wav', text.familyNeutNeutOshu, 'speech/familyNeutNeutOshu.wav', response.familyNeutNeutGood, response.familyNeutNeutBad, response.ignore);
+					familyTimeline = 'I do feel';
+				}
+				else if(familyTimeline == 'Its a lot of ups and downs') {
+					quickMilo(text.familyGoodNeut, 'speech/familyGoodNeut.mp3');
+					setTimeout(function() {
+						$('#miloResponse').show();
+						$('#miloSays').text('');
+						miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
+					}, 4000);
+					familyTimeline = 'Yes I always felt accepted';
+				}
+				else if(familyTimeline == 'Yes I always felt accepted') {
+					quickMilo(text.familyGoodGoodNeut, 'speech/familyGoodGoodNeut.mp3');
+					concludeInteraction(5500);
+				}
+				else {
+					ignore('#map');
+				}				
+			};
 		});
 	};
 
@@ -910,60 +954,66 @@ $(document).ready(function() {
 			}
 		}
 		$('#good').click(function() {
-			if(goodbyeTimeline == 'badIntro') {
-				quickMilo(text.angryGood, 'speech/angryGood.mp3');
-				concludeInteraction(8500);
-				$('#skip').show();
-				$('#skip').click(function() {
-					ignore('#map');
-				});
-			}
-			else if(goodbyeTimeline == 'goodIntro') {
-				missVsOshu(text.happyGoodMiss, 'speech/happyGoodMiss.mp3', text.happyGoodOshu, 'speech/happyGoodOshu.mp3', response.happyGoodGood, response.happyGoodBad, response.ignore);
-				goodbyeTimeline = 'lets do it';
-			}
-			else if(goodbyeTimeline == 'lets do it') {
-				knowledge.committed = true;
-				quickMilo(text.happyGoodGood, 'speech/happyGoodGood.mp3');
-				concludeInteraction(6500);
-				$('#skip').show();
-				$('#skip').click(function() {
-					ignore('#map');
-				});
-			}
+			if(go) {
+				if(goodbyeTimeline == 'badIntro') {
+					quickMilo(text.angryGood, 'speech/angryGood.mp3');
+					concludeInteraction(8500);
+					$('#skip').show();
+					$('#skip').click(function() {
+						ignore('#map');
+					});
+				}
+				else if(goodbyeTimeline == 'goodIntro') {
+					missVsOshu(text.happyGoodMiss, 'speech/happyGoodMiss.mp3', text.happyGoodOshu, 'speech/happyGoodOshu.mp3', response.happyGoodGood, response.happyGoodBad, response.ignore);
+					goodbyeTimeline = 'lets do it';
+				}
+				else if(goodbyeTimeline == 'lets do it') {
+					knowledge.committed = true;
+					quickMilo(text.happyGoodGood, 'speech/happyGoodGood.mp3');
+					concludeInteraction(6500);
+					$('#skip').show();
+					$('#skip').click(function() {
+						ignore('#map');
+					});
+				};				
+			};
 		});
 		$('#bad').click(function() {
-			if(goodbyeTimeline == 'badIntro') {
-				quickMilo(text.angryBad, 'speech/angryBad.wav');
-				concludeInteraction(4000);
-			}
-			else if(goodbyeTimeline == 'goodIntro') {
-				audio.pause();
-				$('#miloSays').writeText(text.happyBad);
-				concludeInteraction(2000);
-				$('#skip').show();
-				$('#skip').click(function() {
-					ignore('#map');
-				});
-			}
-			else if(goodbyeTimeline == 'lets do it') {
-				quickMilo(text.happyGoodBad, 'speech/happyGoodBad.mp3');
-				concludeInteraction(9000);
-				skipToMap();
-			}
+			if(go) {
+				if(goodbyeTimeline == 'badIntro') {
+					quickMilo(text.angryBad, 'speech/angryBad.wav');
+					concludeInteraction(4000);
+				}
+				else if(goodbyeTimeline == 'goodIntro') {
+					audio.pause();
+					$('#miloSays').writeText(text.happyBad);
+					concludeInteraction(2000);
+					$('#skip').show();
+					$('#skip').click(function() {
+						ignore('#map');
+					});
+				}
+				else if(goodbyeTimeline == 'lets do it') {
+					quickMilo(text.happyGoodBad, 'speech/happyGoodBad.mp3');
+					concludeInteraction(9000);
+					skipToMap();
+				}				
+			};
 		});
 		$('#neut').click(function() {
 			if(goodbyeTimeline == 'goodIntro') {
-				if(knowledge.commitConversation) {
-					quickMilo(text.happyNeutConversed, 'speech/happyNeutConversed.mp3');
-					concludeInteraction(6200);
-				}
-				else {
-					quickMilo(text.happyNeutNoConversed, 'speech/happyNeutNotConversed.mp3');
-					concludeInteraction(12500);
-				}
-			} 
-		})
+				if(go) {
+					if(knowledge.commitConversation) {
+						quickMilo(text.happyNeutConversed, 'speech/happyNeutConversed.mp3');
+						concludeInteraction(6200);
+					}
+					else {
+						quickMilo(text.happyNeutNoConversed, 'speech/happyNeutNotConversed.mp3');
+						concludeInteraction(12500);
+					}					
+				};
+			};
+		});
 	};
 
 	// timedMilo(eightyfive, 59);

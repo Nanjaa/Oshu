@@ -116,3 +116,19 @@ $('#capitolWeatherman').click(function() {
 	}
 
 });
+
+// ________________________________________________________________
+// | ==============================================================|
+// |															   |
+// |						THE GRAVE 	 						   |
+// |															   |
+// |===============================================================|
+// |_______________________________________________________________|
+
+var graveText = {
+	intro: "You walk into the cemetery and find your brother's grave."
+}
+
+$('#brothersGrave').click(function() {
+	completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
+});

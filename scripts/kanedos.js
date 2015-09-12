@@ -75,6 +75,13 @@ $('#camelGuy').click(function() {
 		$('#interactionText').writeText(camelText.guyIntro);
 		displayOptions(camelText.guyIntro, camelText.options, 25, camelText.yes, camelText.no, camelText.noCoins);		
 	};
+	var hold = setInterval(function() {
+		if($('#interactionText').text() == camelText.yes) {
+			var wait = setTimeout(function() {
+				completeItem(Oshu.quests[1][1][2], Oshu.questSpeech.kanedos3);
+			}, 1500) 
+		}
+	}, 1) 
 });
 
 
