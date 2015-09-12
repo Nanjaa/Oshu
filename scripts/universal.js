@@ -432,3 +432,14 @@ $('#sounds').click(function() {
 		sound = true;
 	}
 });
+
+// ------------------------------------------------------
+// 					RESET THE OPTIONS
+// ------------------------------------------------------
+
+$('.clickable').click(function() {
+	$('.option').hide();
+});
+$('.return').click(function() {
+	$('.option').hide();
+});
