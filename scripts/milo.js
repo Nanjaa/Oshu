@@ -423,7 +423,10 @@ $(document).ready(function() {
 			ignore();
 			showContent(locationHtml, location);
 		}, timeout)
-	}
+		$('#skip').click(function() {
+			clearTimeout(wait);
+		});
+	};
 
 	// lose time as you travel to another planet
 	$('.planet').click(function() {
@@ -456,8 +459,8 @@ $(document).ready(function() {
 								miloIntroduction(3000, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 								$('#skip').show();
 								$('#skipButton').click(function() {
-								showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
-								ignore();
+									showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+									ignore();
 								});
 							}
 							else {

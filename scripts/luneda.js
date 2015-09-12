@@ -1,22 +1,7 @@
 
-// all the text that will be used throughout this level
-var beachText = {
-	inUse: false,
-	welcome: "You have arrived on the beaches of the Electric Sea. There is a buzzing sound that mixes gently with the sound of the waves crashing.",
-	rentalWelcome: "Hello there young lady! I have everything you'll need to swim in the seas without getting yourself killed. What do you say? 50 coins covers it all!",
-	rentalNoCoins: "That's not enough money! 50 coins or no deal. I don't bargain.",
-	rentalComplete: "Fantastic! Here's your ElectroSuit. You have an hour to swim, then I'll need the equipment back. Have a great day!",
-	rentalOptions: "Do you want to rent an ElectroSuit?",
-	rentalInUse: "Go have fun with your equipment! But remember to bring it back...",
-	rentalNo: "That's alright! Don't try to swim, though. Unless, of course, you want to be fish food!",
-	drinksWelcome: "You've come to the right place, my friend! I have the coldest drinks on this most sunny of days!",
-	drinksGoodbye: "Come back anytime, my friend. Stay safe!",
-	cantSwim: "You cannot enter the sea without proper protection!"	
-};
-
 // brings up the common divs between all the city details
 $('.lunedaCity').click(function() {
-	$('.lunedaCity').hide();
+	$('#lunedaMap').hide();
 	$('.return').show();
 	$('#planetInteraction').show();
 });
@@ -25,7 +10,7 @@ $('.lunedaCity').click(function() {
 function lunedaReturn() {
 	$('.return').hide();
 	$('.cityDetails').hide();
-	$('.lunedaCity').show();		
+	$('#lunedaMap').show();		
 }
 $('.return').click(function() {
 	go = true;
@@ -65,12 +50,12 @@ $('pre').click(function() {
 			changeLocation('.danceHall');
 			break;
 		case 'weather':
-			$('.lunedaCity').hide();
+			$('#lunedaMap').hide();
 			$('.weather').show();
 			changeLocation('.weather');
 			break;
 		case 'marketCircle':
-			$('.lunedaCity').hide();
+			$('.lunedaMap').hide();
 			$('.marketStands').hide();
 			$('.theMarkets').show();
 			$('.marketDetails').show();
@@ -78,7 +63,7 @@ $('pre').click(function() {
 			changeLocation('.theMarkets');
 			break;
 		case 'marketCentre':
-			$('.lunedaCity').hide();
+			$('.lunedaMap').hide();
 			$('.marketStands').hide();
 			$('.theMarkets').show();
 			$('.marketDetails').show();
@@ -86,27 +71,33 @@ $('pre').click(function() {
 			changeLocation('.theMarkets');
 			break;
 		case 'lunedaMechanic':
-			$('.lunedaCity').hide();
+			$('.lunedaMap').hide();
 			$('.lunedaMechanic').show();
 			break;
 		case 'fruitStand':
-			$('.marketDetails').hide();
-			$('.fruitStand').show();
-			$('#interactionText').writeText(marketText.fruitWelcome);
-			maleVoice();
-			changeLocation('.fruitStand');
+			if(go) {
+				$('.marketDetails').hide();
+				$('.fruitStand').show();
+				$('#interactionText').writeText(marketText.fruitWelcome);
+				maleVoice();
+				changeLocation('.fruitStand');				
+			}
 			break;
 		case 'souvenirStand':
-			$('.marketDetails').hide();
-			$('.souvenirStand').show();
-			$('#interactionText').writeText(marketText.souvenirWelcome);
-			changeLocation('.souvenirStand');
+			if(go) {
+				$('.marketDetails').hide();
+				$('.souvenirStand').show();
+				$('#interactionText').writeText(marketText.souvenirWelcome);
+				changeLocation('.souvenirStand');				
+			}
 			break;
 		case 'clothesStand':
-			$('.marketDetails').hide();
-			$('.clothesStand').show();
-			$('#interactionText').writeText(marketText.clothesWelcome);
-			changeLocation('.clothesStand');
+			if(go) {
+				$('.marketDetails').hide();
+				$('.clothesStand').show();
+				$('#interactionText').writeText(marketText.clothesWelcome);
+				changeLocation('.clothesStand');				
+			}
 			break;
 	}
 })
@@ -119,6 +110,20 @@ $('pre').click(function() {
 // |===============================================================|
 // |_______________________________________________________________|
 
+var beachText = {
+	inUse: false,
+	welcome: "You have arrived on the beaches of the Electric Sea. There is a buzzing sound that mixes gently with the sound of the waves crashing.",
+	rentalWelcome: "Hello there young lady! I have everything you'll need to swim in the seas without getting yourself killed. What do you say? 50 coins covers it all!",
+	rentalNoCoins: "That's not enough money! 50 coins or no deal. I don't bargain.",
+	rentalComplete: "Fantastic! Here's your ElectroSuit. You have an hour to swim, then I'll need the equipment back. Have a great day!",
+	rentalOptions: "Do you want to rent an ElectroSuit?",
+	rentalInUse: "Go have fun with your equipment! But remember to bring it back...",
+	rentalNo: "That's alright! Don't try to swim, though. Unless, of course, you want to be fish food!",
+	drinksWelcome: "You've come to the right place, my friend! I have the coldest drinks on this most sunny of days!",
+	drinksGoodbye: "Come back anytime, my friend. Stay safe!",
+	cantSwim: "You cannot enter the sea without proper protection!"	
+};
+
 //************************ interact with the equipment shack ************************
 $('#equipment').click(function() {
 	rentalActivate();
@@ -127,13 +132,12 @@ $('#equipment').click(function() {
 function rentalActivate() {
 	if(go) {
 		if(beachText.inUse == true) {
+			maleVoice();
 			$('#interactionText').writeText(beachText.rentalInUse);
 		}
 		else {
 			// plays the sound effect of the man talking
-			if($('#interactionText').text().length < beachText.rentalWelcome.length) {
-				maleVoice();
-			}
+			maleVoice();
 			$('#interactionText').writeText(beachText.rentalWelcome);
 			displayOptions(beachText.rentalWelcome, beachText.rentalOptions, 50, beachText.rentalComplete, beachText.rentalNo, beachText.rentalNoCoins);
 			var boughtSuit = setInterval(function() {
@@ -181,6 +185,7 @@ var barStatus = 1;
 
 $('#bar').click(function() {
 	if(go) {
+		maleVoice3();
 		switch(barStatus) {
 			case 1: 
 				$('#interactionText').writeText(tikiText.bartenerIntro);
@@ -206,6 +211,7 @@ var manStatus = 'intro';
 
 $('#mysteriousMan').click(function() {
 	if(go) {
+		maleVoice2();
 		switch(manStatus) {
 			case 'intro':
 				oneOption(tikiText.manIntro, "I'm listening...");
@@ -325,7 +331,7 @@ $('#closerSeas').click(function() {
 
 var marketText = {
 	marketWelcome: "You arrive in a marketplace, filled with stands of all different kinds. You step towards a few of them.",
-	fruitWelcome: "You step into the fruit stand, and are surrounded by a rainbow of produce. A boy with brown, curly hair approaches you. 'Hello! What would you like to buy?'",
+	fruitWelcome: "Hello! What would you like to buy?",
 	electange: "Electange, eh? The best supercharged fruit out there! 25 coins.",
 	ganifruit: "I love ganifruit. They're tangy and tasty and full of vitamins! 10 coins each.",
 	electangeOptions: "Would you like to buy an electange?",
@@ -359,7 +365,8 @@ var no = marketText.no;
 $('#electange').click(function() {
 	if(go) {
 		$('#interactionText').writeText(marketText.electange);
-		displayOptions(marketText.electange, marketText.electangeOptions, 25, yes, no, marketText.needMore);
+		maleVoice3();
+		displayOptions(marketText.electange, marketText.electangeOptions, 25, yes, no, marketText.needMore, maleVoice3());
 		var stop = false;
 		var boughtElectange = setInterval(function() {
 			if($('#interactionText').text() == yes) {
@@ -393,7 +400,8 @@ $('#electange').click(function() {
 $('#ganifruit').click(function() {
 	if(go) {
 		$('#interactionText').writeText(marketText.ganifruit);
-		displayOptions(marketText.ganifruit, marketText.ganifruitOptions, 10, yes, no, marketText.needMore);
+		maleVoice3();
+		displayOptions(marketText.ganifruit, marketText.ganifruitOptions, 10, yes, no, marketText.needMore, maleVoice3());
 		var boughtGanifruit = setInterval(function() {
 			if($('#interactionText').text() == yes) {
 				// adds item to inventory if not already there
@@ -429,6 +437,7 @@ $('#ganifruit').click(function() {
 
 $('#dresses').click(function() {
 	if(go) {
+		femVoice();
 		if(Oshu.items.clothes == false) {
 			$('#interactionText').writeText(marketText.clothes);
 			displayOptions(marketText.clothes, marketText.clothesOptions, 25, marketText.clothesYes, marketText.clothesNo, marketText.clothesNeedMore);
@@ -457,9 +466,10 @@ $('#dresses').click(function() {
 
 $('#snowglobes').click(function() {
 	if(go) {
+		femVoice2();
 		if(Oshu.items.lunedaSnowglobe == false) {
 			$('#interactionText').writeText(marketText.snowglobes);
-			displayOptions(marketText.snowglobes, marketText.snowglobeOptions, 10, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
+			displayOptions(marketText.snowglobes, marketText.snowglobeOptions, 10, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore, femVoice2());
 			var boughtSnowglobe = setInterval(function() {
 				if($('#interactionText').text() == marketText.souvenirYes) {
 					// adds item to inventory if not already there
@@ -485,9 +495,10 @@ $('#snowglobes').click(function() {
 
 $('#bobbleheads').click(function() {
 	if(go) {
+		femVoice2();
 		if(Oshu.items.lunedaBobblehead == false) {
 			$('#interactionText').writeText(marketText.bobbleheads);
-			displayOptions(marketText.bobbleheads, marketText.bobbleheadOptions, 15, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
+			displayOptions(marketText.bobbleheads, marketText.bobbleheadOptions, 15, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore, femVoice2());
 			var boughtBobbleheads = setInterval(function() {
 				if($('#interactionText').text() == marketText.souvenirYes) {
 					// adds item to inventory if not already there
@@ -513,9 +524,10 @@ $('#bobbleheads').click(function() {
 
 $('#postcards').click(function() {
 	if(go) {
+		femVoice2();
 		if(Oshu.items.lunedaPostcard == false) {
 			$('#interactionText').writeText(marketText.postcards);
-			displayOptions(marketText.postcards, marketText.postcardOptions, 1, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore);
+			displayOptions(marketText.postcards, marketText.postcardOptions, 1, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore, femVoice2());
 			var boughtPostcards = setInterval(function() {
 				if($('#interactionText').text() == marketText.souvenirYes) {
 					// adds item to inventory if not already there
@@ -549,8 +561,6 @@ $('#postcards').click(function() {
 var danceText = {
 	doorman: "A muscular doorman blocks the entrance to the Dance Hall. 'You can't get in without proper attire,' he says.",
 	danceIntro: "You step onto the busy dance floor. The music is happy and light, and everyone twirls around you.",
-	danceSight: "You see a man across the way that looks just like the picture. You take it out to double-check. It's definitely him!",
-	danceSpeak: "'What's this? Ah, I was told",
 	advice1: "I read you can attract fairies with shiny objects. How interesting!",
 	advice2: "Fuzzbutt factory is always running, but when was the last time you saw a Fuzzbutt toy? I think there's something fishy going on...",
 	advice3: "I heard the only way to turn off the Lifecycle Program on an android was to have a mechanic do it. Is that true?",
@@ -566,7 +576,7 @@ var danceText = {
 $('#danceHall').click(function() {
 	if(go) {
 		$('.danceHall').show();
-		$('.lunedaCity').hide();
+		$('#lunedaMap').hide();
 		if(Oshu.items.clothes == false) {
 			$('.noDancing').show();
 			$('#interactionText').writeText(danceText.doorman);
@@ -581,6 +591,15 @@ $('#danceHall').click(function() {
 });
 
 var dancerSpeech = 1;
+$('#dancer1').click(function() {
+	femVoice2();
+});
+$('#dancer2').click(function() {
+	femVoice3();
+});
+$('#dancer3').click(function() {
+	maleVoice();
+});
 $('.dancer').click(function() {
 	if(go) {
 		switch(dancerSpeech) {
@@ -606,6 +625,7 @@ $('.dancer').click(function() {
 
 $('#dancer4').click(function() {
 	if(go) {
+		maleVoice3();
 		if(Oshu.items.libraryPass) {
 			$('#interactionText').writeText(danceText.barryGoodbye);
 		}
@@ -693,6 +713,7 @@ $('#weather').click(function() {
 // speak to the weatherman
 $('#weatherman').click(function() {
 	if(go) {
+		maleVoice2();
 		if(Oshu.items.weatherSpecimen == false && weatherComplete == false) {
 			console.log(3);
 			twoOptions(weatherText.weathermanIntro, "Here you go", "I don't have that kind of money!");

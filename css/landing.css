@@ -14,8 +14,14 @@ body {
 #welcome {
 	display: none;
 }
-.title {
+#instructionTitle, #instructionSub, .title {
 	font-family: 'Audiowide', cursive;	
+}
+#instructionTitle {
+	font-size: 50px;
+}
+#instructionSub {
+	font-size: 25px;
 }
 #play {
 	font-family: 'Orbitron', sans-serif;
@@ -26,7 +32,8 @@ body {
 #intro {
 	font-family: 'Share Tech Mono';
 	color: green;
-	font-size: 40px;
+	font-size: 25px;
+	margin: 5%;
 	text-align: left;
 }
 #bigTitle, #bigSub {
@@ -53,4 +60,27 @@ body {
 }
 #four {
 	font-family: 'Share Tech Mono';
+}
+#skip {
+	display: none;
+	font-family: 'Audiowide', cursive;
+	font-size: 30px;
+	text-align: right;
+	margin-right: 10px;
+	cursor: pointer;
+}
+#instructions {
+	display: none;
+}
+#begin {
+	text-decoration: none;
+	color: black;
+	border: 3px solid green;
+	padding: 15px;
+	background-color: white;
+}
+#instructionList {
+	font-family: "Share Tech Mono";
+	border: 1px solid green;
+	padding: 35px;
 }

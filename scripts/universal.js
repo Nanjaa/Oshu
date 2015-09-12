@@ -173,11 +173,15 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 		if($('#interactionText').text() == text2) {
 			clearInterval(displayYesNo);
 			function yesNo(price) {
-				$('#interactionText').append('<ul><li class="options yes">Yes</li><li class="options no">No</li></ul>')
+				$('#optionOne').show();
+				$('#optionTwo').show();
+				$('#optionOne').writeText('Yes');
+				$('#optionTwo').writeText('No');
 			};
 			setTimeout(yesNo(), 1000);
 		};
-		$('.yes').click(function() {
+		$('#optionOne').click(function() {
+			$('.options').hide();
 			var coins = Oshu.coins;
 			if(coins >= price) {
 	 			$('#interactionText').writeText(yes);	
@@ -187,7 +191,8 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 				$('#interactionText').writeText(needMore);
 			}
 		});
-		$('.no').click(function() {
+		$('#optionTwo').click(function() {
+			$('.options').hide();
 			$('#interactionText').writeText(no);
 		})
 	}
@@ -217,12 +222,6 @@ function play(source) {
 	audio.play();
 }
 
-function maleVoice() {
-	play('soundEffects/maleVoice.wav');
-}
-function femVoice() {
-	play('soundEffects/femVoice.wav');
-}
 
 // ------------------------------------------------------
 // 	CHANGE THE COLOR OF THE INTERACTION BASED ON LOCATION
@@ -285,23 +284,27 @@ function completeItem(quest, speech) {
 // ------------------------------------------------------
 
 function inventoryDescription(div, item, desc) {
-	$(div).text(' - ');
-	$(div).writeText(desc);
-	var inventoryWait = setInterval(function() {
-		$(div).text('');
-		$(div).text(item);
-		clearInterval(inventoryWait);
-	}, 7000);
+	if(go) {
+		$(div).text(' - ');
+		$(div).writeText(desc);
+		var inventoryWait = setInterval(function() {
+			$(div).text('');
+			$(div).text(item);
+			clearInterval(inventoryWait);
+		}, 7000);		
+	};
 };
 
 function complexDescription(itemSpan, descSpan, desc) {
-	$(itemSpan).hide();
-	$(descSpan).text(' - ');
-	$(descSpan).writeText(desc);
-	var inventoryWait = setInterval(function() {
-		$(descSpan).text('');
-		$(itemSpan).show();
-	}, 7000)
+	if(go) {
+		$(itemSpan).hide();
+		$(descSpan).text(' - ');
+		$(descSpan).writeText(desc);
+		var inventoryWait = setInterval(function() {
+			$(descSpan).text('');
+			$(itemSpan).show();
+		}, 7000)		
+	};
 }
 
 // since coins is the only item already in the inventory, here is the function for it
@@ -401,6 +404,26 @@ function endConversation(referenceText) {
 // ------------------------------------------------------
 // 				CONSISTENT SOUND EFFECTS
 // ------------------------------------------------------
+
+
+function maleVoice() {
+	play('soundEffects/maleVoice.wav');
+}
+function maleVoice2() {
+	play('soundEffects/maleVoice2.wav');
+}
+function maleVoice3() {
+	play('soundEffects/maleVoice3.wav');
+}
+function femVoice() {
+	play('soundEffects/femVoice.wav');
+}
+function femVoice2() {
+	play('soundEffects/femVoice2.wav');
+}
+function femVoice3() {
+	play('soundEffects/femVoice3.wav');
+}
 
 // $('.return').click(function() {
 // 	console.log('clck');
