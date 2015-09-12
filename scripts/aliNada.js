@@ -55,10 +55,12 @@ $('pre').click(function() {
 			}
 			break;
 		case 'cemetery':
+			$('#interactionText').writeText(graveText.intro);
 			changeLocation('.cemetery');
 			$('.cemetery').show();
 			break;
 		case 'tombstones':
+			$('#interactionText').writeText(graveText.intro);
 			changeLocation('.cemetery');
 			$('.cemetery').show();
 			break;
@@ -130,5 +132,7 @@ var graveText = {
 }
 
 $('#brothersGrave').click(function() {
-	completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
+	if(go) {
+		completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);		
+	}
 });

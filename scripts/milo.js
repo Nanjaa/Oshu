@@ -385,6 +385,12 @@ $(document).ready(function() {
 		});
 	};
 
+	$('#myShip').click(function() {
+		if($('#miloInteraction').css('display') == 'block') {
+			ignore('#map');
+		}
+	})
+
     // _________________________________________//
 	//											//
 	//											//
@@ -438,6 +444,9 @@ $(document).ready(function() {
 		$('#skip').click(function() {
 			clearTimeout(wait);
 		});
+		$('#myShip').click(function() {
+			clearTimeout(wait);
+		})
 	};
 
 	// lose time as you travel to another planet

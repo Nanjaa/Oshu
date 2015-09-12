@@ -56,9 +56,9 @@ function resetText() {
 }
 // var startText = true;
 
-$(this).click(function() {
-	console.log(go);
-});
+// $(this).click(function() {
+// 	console.log(go);
+// });
 
 (function($) {
 	resetText();
