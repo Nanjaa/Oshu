@@ -70,7 +70,9 @@ var mysteryText = {
 	lifePools: "Yes, of course. Follow me.",
 	gypsyShop: "Here is what I have for sale.",
 	shrunkenHead: "A shrunken head! Great for decorating any interior!",
+	noHead: "Sorry, only one shrunken head per customer!",
 	sleepPotion: "This is great for putting even the most awake individual to sleep. Good choice!",
+	noSleep: "Sorry, only one potion per customer! I'm sure you understand why...",
 	goodLuckCharm: "Ah, yes. May this bring you the best of luck.",
 	nevermind: "Alright."
 
@@ -79,6 +81,8 @@ var mysteryText = {
 $('#fortuneTeller').unbind('click');
 $('#fortuneTeller').click(function() {
 	if(go) {
+		$('.option').hide();
+
 		mysteryStatus = 'intro';
 		if(Oshu.items.password) {
 			twoOptions(mysteryText.gypsyIntro, "What have you got for sale?", "'Phoenix'");
@@ -88,6 +92,7 @@ $('#fortuneTeller').click(function() {
 		}
 		$('#optionOne').unbind('click');
 		$('#optionOne').click(function() {
+			$('.option').hide();
 			if(mysteryStatus == 'intro') {
 				$('.option').hide();
 				mysteryStatus = 'shop';	
@@ -96,13 +101,20 @@ $('#fortuneTeller').click(function() {
 			else if(mysteryStatus == 'shop') {
 				$('.option').hide();
 				mysteryStatus = 'intro';
-				$('#interactionText').writeText(mysteryText.shrunkenHead);
-				payMoney(15);
-				addItem('shrunkenHead', 'Shrunken Head', Oshu.items.shrunkenHead, '#shrunkenHead', Oshu.description.shrunkenHead);
+				if(Oshu.items.shrunkenHead) {
+					$('#interactionText').writeText(mysteryText.noHead);
+				}
+				else {
+					$('#interactionText').writeText(mysteryText.shrunkenHead);
+					payMoney(15);
+					addItem('shrunkenHead', 'Shrunken Head', '#shrunkenHead', Oshu.description.shrunkenHead);
+					Oshu.items.shrunkenHead = true;					
+				}
 			}
 		});
 		$('#optionTwo').unbind('click');
 		$('#optionTwo').click(function() {
+			$('.option').hide();
 			if(mysteryStatus == 'intro') {
 				$('.option').hide();
 				$('#interactionText').writeText(mysteryText.lifePools);
@@ -112,14 +124,21 @@ $('#fortuneTeller').click(function() {
 			}
 			else if(mysteryStatus == 'shop') {
 				$('.option').hide();
-				$('#interactionText').writeText(mysteryText.sleepPotion);
-				payMoney(10);
-				addItem('sleepPotion', 'Sleep Potion', Oshu.items.sleepPotion, '#sleepPotion', Oshu.description.sleepPotion);
 				mysteryStatus = 'intro';
+				if(Oshu.items.sleepPotion) {
+					$('#interactionText').writeText(mysteryText.noSleep);
+				}
+				else {
+					$('#interactionText').writeText(mysteryText.sleepPotion);
+					payMoney(10);
+					addItem('sleepPotion', 'Sleep Potion', '#sleepPotion', Oshu.description.sleepPotion);	
+					Oshu.items.sleepPotion = true;				
+				}
 			}
 		});
 		$('#optionThree').unbind('click')
 		$('#optionThree').click(function() {
+			$('.option').hide();
 			endConversation(mysteryText.nevermind);
 			mysteryStatus = 'intro';
 		});		
@@ -128,12 +147,14 @@ $('#fortuneTeller').click(function() {
 
 $('#hangingSkulls').click(function() {
 	if(go) {
+		$('.option').hide();
 		$('#interactionText').writeText(mysteryText.hangingSkulls);		
 	};
 });
 
 $('#crystalBall').click(function() {
 	if(go) {
+		$('.option').hide();
 		$('#interactionText').writeText(mysteryText.crystalBall);		
 	};
 });
@@ -161,6 +182,7 @@ var goonStatus = 'intro';
 
 $('.treeGoons').click(function() {
 	if(go) {
+		$('.option').hide();
 		if((Oshu.items.sleepPotion) && (goonStatus == 'intro')) {
 			oneOption(treeText.goonsIntro, "Can you smell this potion for me?");
 		}
@@ -171,7 +193,9 @@ $('.treeGoons').click(function() {
 			oneOption(treeText.goonsIntro, "Maybe there's some way I could convince you.");
 		};
 
+		$('#optionOne').unbind('click');
 		$('#optionOne').click(function() {
+			$('.option').hide();
 			if(Oshu.items.sleepPotion) {
 				goonStatus = 'sleeping';
 				$('#interactionText').writeText(treeText.sleep);
@@ -190,6 +214,7 @@ $('.treeGoons').click(function() {
 
 $('#treeClose').click(function() {
 	if(go) {
+		$('.option').hide();
 		if(goonStatus == 'sleeping') {
 			$('#interactionText').writeText(treeText.treeNoGoons);
 		}
@@ -217,6 +242,7 @@ var groveText = {
 	capture: "You pull out your bottle, and place the jewelry inside. A fairy wanders in, and you close the hole-filled cap. You look at the fairy closely. It's just like you imagined in the storybooks."
 }
 
+$('#fairies').unbind('click');
 $('#fairies').click(function() {
 	if(go) {
 		if(Oshu.items.emptyBottle) {
@@ -228,6 +254,7 @@ $('#fairies').click(function() {
 	};
 });
 
+$('#fairies').unbind('click');
 $('#quietGrove').click(function() {
 	if(go) {
 		if(Oshu.items.jewelry && firstTime) {

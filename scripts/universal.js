@@ -185,10 +185,9 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 // 					ADD INVENTORY ITEM
 // ------------------------------------------------------
 
-function addItem(id, name, object, fullId, description) {
+function addItem(id, name, fullId, description) {
 	// adds item to inventory if not already there
 	$('.inventoryList').append("<li class='inventoryItem'><span id=" + id + ">" + name + "</span></li>");
-	object = true;
 
 	// now you can select the clothes
 	$(fullId).click(function() {
