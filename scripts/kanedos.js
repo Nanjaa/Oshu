@@ -30,25 +30,66 @@ $('pre').click(function() {
 	switch(location) {
 		case 'kanedome': 
 			changeLocation('.theKanedome');
-			if(Oshu.items.kanedomeTicket == false) {
-				$('.theKanedome').show();
-			}
-			break;
+			$('.theKanedome').show();
+			$('#interactionText').writeText(kanedomeText.intro);
+		break;
 		case 'suckerPunch':
 			changeLocation('.suckerPunch');
 			$('.suckerPunch').show();
 			$('#interactionText').writeText(barText.intro);
-			break;
+		break;
 		case 'camelRental':
 			changeLocation('.camelRental');
 			$('.camelRental').show();
 			$('#interactionText').writeText(camelText.intro);
-			break;
+		break;
 		case 'kanedosJewelry':
 			changeLocation('.kanedosJewelry');
 			$('.kanedosJewelry').show();
 			$('#interactionText').writeText(jewelryText.intro);
-			break;
+		break;
+	};
+});
+
+// ________________________________________________________________
+// | ==============================================================|
+// |															   |
+// |						THE KANEDOME	 	 				   |
+// |															   |
+// |===============================================================|
+// |_______________________________________________________________|
+
+var watched = false;
+
+var kanedomeText = {
+	intro: "There is a large man in a ticket stand at the gate.",
+	ticketIntro: "Would you like to buy a ticket for the fight tonight? Only 75 coins!",
+	noCoins: "Sorry, but that's not enough money...",
+	options: "Do you want to buy a ticket?",
+	yes: "Fantastic. The fight's about to start!",
+	no: "You're missing out on a great fight, you know!",
+	end: "Wasn't that the greatest? Such a good fight!"
+}
+
+$('#ticketGuy').click(function() {
+	if(go) {
+		maleVoice2();
+		if(watched) {
+			$('#interactionText').writeText(kanedomeText.end);
+		}
+		else {
+			$('#interactionText').writeText(kanedomeText.ticketIntro);
+			displayOptions(kanedomeText.ticketIntro, kanedomeText.options, 75, kanedomeText.yes, kanedomeText.no, kanedomeText.noCoins);
+			var wait = setInterval(function() {
+				if($('#interactionText').text() == kanedomeText.yes) {
+					clearInterval(wait);
+					var hold = setTimeout(function() {
+						completeItem(Oshu.quests[1][1][0], Oshu.questSpeech.kanedos1);	
+						watched = true;				
+					}, 1500);			
+				};
+			}, 1);
+		};
 	};
 });
 
