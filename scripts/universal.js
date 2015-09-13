@@ -314,7 +314,7 @@ function changeLocation(newLocation, clickReturn, clickShip) {
 		play('soundEffects/return.wav');
 	}
 	else if(clickShip) {
-		play('soundEffects/shipReturn.wav');
+		play('soundEffects/returnToShip.wav');
 	}
 	else {
 		play('soundEffects/click.wav');		

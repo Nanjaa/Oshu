@@ -469,9 +469,6 @@ $(document).ready(function() {
 				$('#map').hide();
 				$('#miloSays').text('');
 				switch(destination) {
-
-
-
 					case 'Luneda':
 						lunedaFirst();
 					break;
@@ -524,6 +521,7 @@ $(document).ready(function() {
 		miloIntroduction(19500, 'luneda.html #lunedaContent', 'scripts/luneda.js');
 	}
 	function kanedosFirst() {
+		startKanedos = true;
 		changeLocation('#kanedosMap');
 		miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
 
@@ -711,50 +709,66 @@ $(document).ready(function() {
 	//											//
 	//__________________________________________//
 
-	// $('#myShip').click(function() {
-	// 	$('#skip').show();
-	// 	if($('#Kanedos').attr('first') == 'false') {			
-	// 		if(knowledge.mortality == false) {
-	// 			knowledge.mortality = true;
-	// 			$('#map').hide();
-	// 			$('#miloSays').text('');
-	// 			$('#miloInteraction').show();
-	// 			if(status > 0) {
-	// 				quickMilo(text.realizationGood, 'speech/realizationGood.wav');
-	// 				var wait2 = setTimeout(function() {
-	// 					$('#miloInteraction').hide();
-	// 					$('#skip').hide();
-	// 					$('#map').show();
+	var startKanedos = false;
 
-	// 					// $('#skip').unbind('click');
-	// 					$('#skipButton').unbind('click');
-	// 					$('#skipButton').click(function() {
-	// 						console.log(1);
-	// 						ignore('#map');
-	// 						clearTimeout(wait2);
-	// 					});
-	// 				}, 22500)
-	// 			}
-	// 			else {
-	// 				quickMilo(text.realizationNeut, 'speech/realizationNeut.wav');
-	// 				var wait3 = setTimeout(function() {
+	$('#myShip').click(function() {
+		Oshu.onBoard = true;
 
-	// 					// $('#skip').unbind('click');
-	// 					// $('#skipButton').unbind('click');
-	// 					$('#skip').show();
-	// 					$('#skipButton').click(function() {
-	// 						console.log(2);
-	// 						ignore('#map');
-	// 						clearTimeout(wait3);
-	// 					});
-	// 					$('#miloInteraction').hide();
-	// 					$('#skip').hide();
-	// 					$('#map').show();
-	// 				}, 12500)
-	// 			}
-	// 		}
-	// 	}
-	// });
+		// MILO discovers your secret
+		if(startKanedos) {
+			startKanedos = false;
+			$('#skip').show();
+			knowledge.mortality = true;
+			$('#map').hide();
+			$('#miloSays').text('');
+			$('#miloInteraction').show();
+
+			// milo respects you, good response
+			if(status > 0) {
+				quickMilo(text.realizationGood, 'speech/realizationGood.wav');
+				var wait2 = setTimeout(function() {
+					$('#miloInteraction').hide();
+					$('#skip').hide();
+					$('#map').show();
+
+					// $('#skip').unbind('click');
+					$('#skipButton').unbind('click');
+					$('#skipButton').click(function() {
+						console.log(1);
+						ignore('#map');
+						clearTimeout(wait2);
+					});
+				}, 22500);
+			}
+
+			// milo is already angry with you, bad response
+			else {
+				quickMilo(text.realizationNeut, 'speech/realizationNeut.wav');
+				var wait3 = setTimeout(function() {
+
+					// $('#skip').unbind('click');
+					// $('#skipButton').unbind('click');
+					$('#skip').show();
+					$('#skipButton').click(function() {
+						console.log(2);
+						ignore('#map');
+						clearTimeout(wait3);
+					});
+					$('#miloInteraction').hide();
+					$('#skip').hide();
+					$('#map').show();
+				}, 12500)
+			};		
+		}
+
+		// Or you just go to the map
+		else {
+			$('.return').hide();
+			$('.cityDetails').hide();
+			$('.visitPlanet').hide();
+			$('#map').show();
+		};
+	});
 
     // _________________________________________//
 	//											//
