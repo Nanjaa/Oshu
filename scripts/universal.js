@@ -56,11 +56,6 @@ function resetText() {
 	$('#interactionText').text('');
 	$('#miloSays').text('');
 }
-// var startText = true;
-
-// $(this).click(function() {
-// 	console.log(go);
-// });
 
 (function($) {
 	resetText();
@@ -72,7 +67,6 @@ function resetText() {
 			click = false,
 			clicked = false,
 			elem = this;
-		console.log(content);
 
 		var textWait = setInterval(function() {
 			$(this).click(function() {
@@ -404,17 +398,11 @@ function femVoice3() {
 	play('soundEffects/femVoice3.wav');
 }
 
-// $('.return').click(function() {
-// 	console.log('clck');
-// 	play('soundEffects/return.wav');
-// });
-
 // ------------------------------------------------------
 // 				MUTE THE GAME
 // ------------------------------------------------------
 
 $('#sounds').click(function() {
-	console.log($('#audio').prop('muted'));
 	if(sound) {
 		$('#soundsOn').hide();
 		$('#soundsOff').show();

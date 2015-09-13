@@ -30,8 +30,23 @@ $('pre').click(function() {
 	switch(location) {
 		case 'kanedome': 
 			changeLocation('.theKanedome');
-			$('.theKanedome').show();
-			$('#interactionText').writeText(kanedomeText.intro);
+			// complete the kanedome event if you have the authorizaton
+			if(Oshu.items.kanedomeTicket) {
+				lifeEvent(4);
+				completeItem(Oshu.quests[1][1][0], Oshu.questSpeech.kanedos1);	
+				watched = true;	
+				$('#skip').unbind('click');
+				$('#skipButton').unbind('click');
+				$('#skipButton').click(function() {
+					$('.theKanedome').show();
+					endSpeech();
+					$('#interactionText').writeText(kanedomeText.end);
+				});		
+			}
+			else {
+				$('.theKanedome').show();
+				$('#interactionText').writeText(kanedomeText.intro);				
+			};
 		break;
 		case 'suckerPunch':
 			changeLocation('.suckerPunch');
@@ -86,14 +101,21 @@ $('#ticketGuy').click(function() {
 					var hold = setTimeout(function() {
 						lifeEvent(4);
 						completeItem(Oshu.quests[1][1][0], Oshu.questSpeech.kanedos1);	
-						watched = true;				
+						watched = true;	
+
+						$('#skip').unbind('click');
+						$('#skipButton').unbind('click');
+						$('#skipButton').click(function() {
+							$('.theKanedome').show();
+							endSpeech();
+							$('#interactionText').writeText(kanedomeText.end);
+						});			
 					}, 1500);			
 				};
 			}, 1);
 		};
 	};
 });
-
 
 // ________________________________________________________________
 // | ==============================================================|
@@ -103,28 +125,45 @@ $('#ticketGuy').click(function() {
 // |===============================================================|
 // |_______________________________________________________________|
 
+var camelEnd = false;
+
 var camelText = {
 	intro: "You walk into the camel rental building and an interesting smell fills your nostrils.",
 	guyIntro: "Welcome to my humble agency! Interested in traversing the Kanedos countryside? A camel is the best way to go! 25 coins for an hour.",
 	noCoins: "Sorry, but you don't have enough coins to rent one of these bad boys. Come back when you have 25.",
 	yes: "Follow me to the back, I'll show you to your camel.",
 	no: "The Kanedos countryside is really something to behold... I hope you come back soon!",
-	options: "Do you want to rent a camel?"
+	options: "Do you want to rent a camel?",
+	end: "Did you enjoy the Crater Valley? Really something, isn't it?"
 };
 
 $('#camelGuy').unbind('click');
 $('#camelGuy').click(function() {
 	if(go) {
-		displayOptions(camelText.guyIntro, camelText.options, 25, camelText.yes, camelText.no, camelText.noCoins);
-		var hold = setInterval(function() {
-			if($('#interactionText').text() == camelText.yes) {
-				clearInterval(hold);
-				var wait = setTimeout(function() {
-					lifeEvent(1);
-					completeItem(Oshu.quests[1][1][2], Oshu.questSpeech.kanedos3);
-				}, 1500) 
-			}
-		}, 1) 		
+		if(camelEnd) {
+			$('#interactionText').writeText(camelText.end);
+		}
+		else {
+			displayOptions(camelText.guyIntro, camelText.options, 25, camelText.yes, camelText.no, camelText.noCoins);
+			var hold = setInterval(function() {
+				if($('#interactionText').text() == camelText.yes) {
+					clearInterval(hold);
+					var wait = setTimeout(function() {
+						lifeEvent(1);
+						completeItem(Oshu.quests[1][1][2], Oshu.questSpeech.kanedos3);
+						camelEnd = true;
+
+						$('#skip').unbind('click');
+						$('#skipButton').unbind('click');
+						$('#skipButton').click(function() {
+							endSpeech();
+							$('#interactionText').writeText(camelText.end);
+							$('.camelRental').show();
+						});		
+					}, 1500) 
+				};
+			}, 1); 				
+		};
 	};
 });
 
@@ -180,22 +219,16 @@ $('#kanedosJewelryLady').click(function() {
 $('.kanedosJewelryDisplay').unbind('click');
 $('.kanedosJewelryDisplay').click(function() {
 	if(go) {
-		if(Oshu.items.kanedosJewelry) {
+		if(Oshu.items.kanedosNecklace) {
 			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
 		}
 		else {
 			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
 			var buyJewelry = setInterval(function() {
-				if($('#planetInteraction').text() == jewelryText.yes) {
-					// adds item to inventory if not already there
-					$('.inventoryList').append('<li class="inventoryItem"><span id="kanedosNecklace">Necklace from Kanedos</span></li>');
-					Oshu.items.kanedosJewelry = true;
-
-					// now you can select the clothes
-					$('#kanedosNecklace').unbind('click');
-					$('#kanedosNecklace').click(function() {
-						inventoryDescription('#kanedosNecklace', 'Necklace from Kanedos', Oshu.description.kanedosJewelry);
-					});
+				if($('#interactionText').text() == jewelryText.yes) {
+					addItem('kanedosNecklace', 'Necklace from Kanedos', '#kanedosNecklace', Oshu.description.kanedosNecklace);
+					Oshu.items.kanedosNecklace = true;
+					Oshu.items.jewelry = true;
 					clearInterval(buyJewelry);
 				};
 			}, 1);			
@@ -214,16 +247,16 @@ $('.kanedosJewelryDisplay').click(function() {
 var barText = {
 	intro: "You walk into a bar called Sucker Punch. There's a rough-looking crowd inside. You walk up to the bar.",
 	bartenderIntro: "Welcome to Sucker Punch! What can I get you today?",
-	kanedome: "You're a cheapskate, huh? Well, I've heard talking to current or retired fighters works well. That guy over there is a fan, why don't you ask him?",
-	classes: "I'm not going to beat around the bush, real classes here are hard to get into if you're not a native. There are lots of tourist classes you can take, though. I know one of my customers studies at one of the dojos nearby.",
+	kanedome: "You're a cheapskate, huh? You know, I'm honestly not sure. That guy over there is a fan, why don't you ask him?",
+	classes: "I'm not going to beat around the bush, real classes here are hard to get into if you're not a native. I know one of my customers studies at one of the dojos nearby.",
 	apprenticeIntro: "I'm just taking a break in between classes. Fighting is thirsty work...",
 	apprentice2: "And why should I help you?",
 	apprenticeSympathy: "If you're sick, why would you want to strain your body in the dojo?",
-	sympathyConvince: "An android, huh? Androids always draw a crowd... I don't know what it is about robots, but people love having them in class with them. Sure, let's go talk to the sensei now.",
+	sympathyConvince: "An android, huh? Androids do always get everyone excited... Dunno what it is, but people like to fight the machine. Sure, let's go talk to the sensei now.",
 	apprenticeThreaten: "I'm going to pretend that was a joke.",
 	Threaten2: "Come back already? What are you going to do, threathen me again? Pitiful...",
-	Threaten3: "You know what, sure. I'll show to you to the dojo and talk to the sensei. We're learning about forgiveness and mercy anyway, it'll fit.",
-	threaten4: "Alright.",
+	apologize: "You know what, sure. Androids do always get everyone excited... Dunno what it is, but people like to fight the machine. I'll show to you to the dojo and talk to the sensei. We're learning about forgiveness and mercy anyway, it'll fit.",
+	threaten3: "Alright.",
 	apprenticeEnd: "You did great in class! I'm really glad I was able to get you in."
 }
 
@@ -260,7 +293,19 @@ $('#apprentice').click(function() {
 			$('#optionOne').click(function() {
 				if(go) {
 					$('.option').hide();
-					$('#interactionText').writeText(barText.Threaten3);
+					$('#interactionText').writeText(barText.apologize);
+					var wait = setTimeout(function() {
+						lifeEvent(1);
+						completeItem(Oshu.quests[1][1][1], Oshu.questSpeech.kanedos2);
+
+						$('#skip').unbind('click');
+						$('#skipButton').unbind('click');
+						$('#skipButton').click(function() {
+							$('.suckerPunch').show();
+							endSpeech();
+							$('#interactionText').writeText(barText.apprenticeEnd);
+						});		
+					}, 2000)
 					apprenticeStatus = 'finished';					
 				}
 			});
@@ -269,7 +314,7 @@ $('#apprentice').click(function() {
 			$('#optionTwo').click(function() {
 				if(go) {
 					$('.option').hide();
-					$('#interactionText').writeText(barText.threaten4);					
+					$('#interactionText').writeText(barText.threaten3);					
 				}
 			});
 		}
@@ -295,7 +340,15 @@ $('#apprentice').click(function() {
 								clearInterval(check);
 								var wait = setTimeout(function() {
 									lifeEvent(1);
-									completeItem(Oshu.quests[1][1][1], Oshu.questSpeech.kanedos2);								
+									completeItem(Oshu.quests[1][1][1], Oshu.questSpeech.kanedos2);	
+
+									$('#skip').unbind('click');
+									$('#skipButton').unbind('click');
+									$('#skipButton').click(function() {
+										$('.suckerPunch').show();
+										endSpeech();
+										$('#interactionText').writeText(barText.apprenticeEnd);
+									});							
 								}, 2000);
 							}
 						}, 1)
@@ -370,15 +423,8 @@ $('#brawler').click(function() {
 						if(Oshu.coins >= 100) {
 							endConversation(brawlerText.ticketSold);
 							payMoney(100);
-							// add ticket to inventory
-							$('.inventoryList').append('<li class="inventoryItem"><span id="kanedomeTicket">Kanedome Ticket</span></li>');
+							addItem('kanedomeTicket', 'Kanedome Ticket', '#kanedomeTicket', Oshu.description.kanedomeTicket);
 							Oshu.items.kanedomeTicket = true;
-
-							// now you can select the ticket
-							$('#kanedomeTicket').unbind('click');
-							$('#kanedomeTicket').click(function() {
-								inventoryDescription('#kanedomeTicket', 'Kanedome Ticket', Oshu.description.kanedomeTicket);
-							});
 							brawlerStatus = 'sold';
 						}
 						else {
@@ -395,6 +441,7 @@ $('#brawler').click(function() {
 							endConversation(brawlerText.smuggleDeal);
 							payMoney(50);
 							brawlerStatus = 'smuggleEnd';
+							Oshu.items.kanedomeTicket = true;
 						}
 						else {
 							endConversation(brawlerText.smuggleNeedMore);
