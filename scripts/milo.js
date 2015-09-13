@@ -53,6 +53,9 @@ $(document).ready(function() {
 	}
 
 	function presentOptions(responseOne, responseTwo, responseThree) {
+		$('#good').text('');
+		$('#bad').text('');
+		$('#neut').text('');
 		$('#miloResponse').show()
 		$('#good').writeText(responseOne);
 		$('#bad').writeText(responseTwo);
@@ -434,6 +437,9 @@ $(document).ready(function() {
 	var startKanedos = false;
 
 	$('#myShip').click(function() {
+		$('.return').hide();
+		$('.cityDetails').hide();
+		$('.visitPlanet').hide();
 		Oshu.onBoard = true;
 
 /////////////////////////////////////////////////
@@ -499,9 +505,6 @@ $(document).ready(function() {
 		}
 		// Or you just go to the map
 		else {
-			$('.return').hide();
-			$('.cityDetails').hide();
-			$('.visitPlanet').hide();
 			$('#map').show();
 		};
 	});

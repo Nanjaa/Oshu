@@ -87,6 +87,29 @@
 	margin-left: 425px;
 	margin-top: 287px;
 }
+#librarian {
+	color: #b5b6ff;
+	margin-left: 425px;
+	margin-top: 100px;
+}
+#libraryBobbleheads {
+	color: #f0a4ff;
+	margin-left: 25px;
+	margin-top: 200px;
+}
+#bookmarks {
+	color: #10c9ff;
+	margin-left: 325px;
+}
+#bookDisplay {
+	color: #fff7a4;
+	margin-left: 150px;
+}
+#emptyBookDisplay {
+	color: #fff7a4;
+	margin-left: 150px;
+	display: none;
+}
 #tyrianneMechanicMenu {
 	margin-left: 50px;
 	margin-top: 100px;
