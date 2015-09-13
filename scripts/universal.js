@@ -235,6 +235,7 @@ $('.planet').click(function() {
 // 				COMPLETE LIST ITEM
 // ------------------------------------------------------
 function completeItem(quest, speech) {
+	play('soundEffects/completeItem.wav');
 	$('.quest').each(function() {
 		if($(this).text() == quest) {
 			$(this).css('text-decoration', 'line-through');	

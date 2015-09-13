@@ -166,10 +166,14 @@ var beachText = {
 	rentalNo: "That's alright! Don't try to swim, though. Unless, of course, you want to be fish food!",
 	drinksWelcome: "You've come to the right place, my friend! I have the coldest drinks on this most sunny of days!",
 	drinksGoodbye: "Come back anytime, my friend. Stay safe!",
-	cantSwim: "You cannot enter the sea without proper protection!"	
+	cantSwim: "You cannot enter the sea without proper protection!",
+	suitReturn: "Thank you for returning the suit! I wish you all the best!",
+	end: "I hope you enjoyed your swim!"
 };
 
 //************************ interact with the equipment shack ************************
+
+var beachEnd = false;
 
 $('.rentalDetails').unbind('click');
 $('.rentalDetails').click(function() {
@@ -179,7 +183,11 @@ $('.rentalDetails').click(function() {
 function rentalActivate() {
 	if(go) {
 		$('.option').hide();
-		if(Oshu.items.electroSuit) {
+		if(beachEnd) {
+			maleVoice();
+			$('#interactionText').writeText(beachText.end);
+		}
+		else if(Oshu.items.electroSuit) {
 			maleVoice();
 			$('#interactionText').writeText(beachText.rentalInUse);
 		}
@@ -357,6 +365,8 @@ $('#closerSeas').click(function() {
 				$('#lunedaMap').hide();
 				$('#beach').show();
 				endSpeech();
+				$('#interactionText').writeText(beachText.suitReturn);
+				beachEnd = true;
 			});
 		}
 		else {
@@ -867,28 +877,27 @@ $('#weatherman').click(function() {
 // |===============================================================|
 // |_______________________________________________________________|
 
+
+// Shut off Lifecycle Program
 var shutoffText = {
 	intro: "You walk into the mechanic's shop, and see a menu with his options and prices.",
-	shutoffIntro: "Are you absolutely sure you want to shut off the Lifecycle Program? It will, in effect, end your travels.",
+	shutoffIntro: "If you'd like, I can turn off the Lifecycle Program, and you can go on living as long as you'd like.",
+	options: "Are you absolutely sure you want to shut off the Lifecycle Program? It will, in effect, end your travels.",
 	noCoins: "Sorry, but that's not enough to pay for that.",
 	yes: "Alright, one moment, I'll turn off that program of yours.",
 	no: "Come back anytime!"
 }
 
-$('#lunedaLifecycleAdd').click(function() {
+$('#lunedaLifecycleShutoff').click(function() {
 	if(go) {
-		console.log(1);
-		lifeEvent(-15);	
-	// 	displayOptions(generalText.introRobot, generalText.robotOptions, 15, generalText.yesRobot, generalText.no, generalText.noCoins);
+		displayOptions(shutoffText.shutoffIntro, shutoffText.options, 15, shutoffText.yes, shutoffText.no, shutoffText.noCoins);
 
-	// 	var wait7 = setInterval(function() {
-	// 		if($('#interactionText').text() == generalText.yesRobot) {
-	// 			lifeEvent(-15);				
-	// 		}
-	// 	}, 1)
-
-	// 	});
-	// 	$()		
+		var wait7 = setInterval(function() {
+			if($('#interactionText').text() == shutoffText.yes) {
+				clearInterval(wait7);
+				lifeEvent(-15);				
+			}
+		}, 1)	
 	};
 });
 
@@ -921,6 +930,8 @@ function robotWait(text1, text2) {
 	}, 1);
 };
 
+
+// General Robot Repairs
 $('#lunedaGeneralRobot').click(function() {
 	if(go) {
 		if(Oshu.items.brokenRobot) {
@@ -930,6 +941,36 @@ $('#lunedaGeneralRobot').click(function() {
 		else {
 			displayOptions(generalText.introNoRobot, generalText.noRobotOptions, 20, generalText.yesNoRobot, generalText.no, generalText.noCoins);
 			robotWait(generalText.yesNoRobot, generalText.yesNoRobotEnd);
+		}
+	};
+});
+
+
+var addText = {
+	intro: "We'll adjust the countdown on your Lifecycle Program! 15 coins!",
+	options: "Would you like to add time to your life?",
+	noCoins: "That's not enough money!",
+	yes: "15 minutes has been added to your life",
+	no: "Have a good day!",
+	noMore: "I'm sorry, but you're not low enough on time for me to change it!"
+}
+
+// Lifecycle Adjustment
+$('#lunedaLifecycleAdd').click(function() {
+	console.log(Oshu.remainingLife);
+	if(go) {
+		if(Oshu.remainingLife <= 2700) {
+			displayOptions(addText.intro, addText.options, 5, addText.yes, addText.no, addText.noCoins);
+
+			var wait7 = setInterval(function() {
+				if($('#interactionText').text() == addText.yes) {
+					clearInterval(wait7);
+					lifeEvent(-15);				
+				}
+			}, 1)	
+		}
+		else {
+			$('#interactionText').writeText(addText.noMore);
 		}
 	};
 });

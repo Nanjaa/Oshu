@@ -461,12 +461,14 @@ $(document).ready(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
 		if(($('#minutes').text() - minutesLost) > 0) {
 			var destination = $(this).attr('id');	
+			lifeEvent(minutesLost);
+			Oshu.onBoard = false;
+			$('#map').hide();
+			myLocation.current = $(this).attr('distance');
 
+			// Run the milo introduction if this is the first time. The introductory functions are below this $('.planet').click function
 			if($(this).attr('first') == 'true') {
-				lifeEvent(minutesLost);
-				Oshu.onBoard = false;
 				$(this).attr('first', 'false');
-				$('#map').hide();
 				$('#miloSays').text('');
 				switch(destination) {
 					case 'Luneda':
@@ -486,12 +488,10 @@ $(document).ready(function() {
 					break;
 				}
 			}
+
+			// Go to the planet without introduction
 			else {
 				if($(this).attr('first') == 'false') {
-					lifeEvent(minutesLost);
-					myLocation.current = $(this).attr('distance');
-					Oshu.onBoard = false;
-					$('#map').hide();
 					var destination = $(this).attr('id');				
 					switch(destination) {
 						case 'Luneda':
