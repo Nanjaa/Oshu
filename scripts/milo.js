@@ -380,7 +380,7 @@ $(document).ready(function() {
 
 	function skipToMap() {
 		$('#skip').show();
-		$('#skip').click(function() {
+		$('#skipButton').click(function() {
 			ignore('#map');
 		});
 	};
@@ -441,7 +441,9 @@ $(document).ready(function() {
 			ignore();
 			showContent(locationHtml, location);
 		}, timeout)
-		$('#skip').click(function() {
+
+		$('#skipButton').unbind('click');
+		$('#skipButton').click(function() {
 			clearTimeout(wait);
 		});
 		$('#myShip').click(function() {
@@ -450,6 +452,7 @@ $(document).ready(function() {
 	};
 
 	// lose time as you travel to another planet
+	$('.planet').unbind('click');
 	$('.planet').click(function() {
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
 		if(($('#minutes').text() - minutesLost) > 0) {
@@ -459,21 +462,33 @@ $(document).ready(function() {
 				$('#map').hide();
 				$('#miloSays').text('');
 				switch(destination) {
+
+
+
 					case 'Luneda':
 						changeLocation('#lunedaMap');
 						quickMilo(text.lunedaIntro, 'speech/lunedaIntro.wav', '#lunedaMap', 28000);
 						miloIntroduction(19500, 'luneda.html #lunedaContent', 'scripts/luneda.js');
+
 						$('#skip').show();
+						$('#skipButton').unbind('click');
 						$('#skipButton').click(function() {
+							$('#skipButton').unbind('click');
+							$('#skip').unbind('click');
+
 							$('#map').hide();
 							showContent('luneda.html #lunedaContent', 'scripts/luneda.js');
 							ignore();
 						});
 					break;
 
+
+
 					case 'Kanedos':
 						changeLocation('#kanedosMap');
 						miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
+
+						$('#good').unbind('click');
 						$('#good').click(function() {
 							if(go) {
 								if(status >= 1) {
@@ -496,6 +511,8 @@ $(document).ready(function() {
 								}								
 							}
 						});
+
+						$('#bad').unbind('click');
 						$('#bad').click(function() {
 							if(go) {
 								if(status >= -5) {
@@ -517,21 +534,31 @@ $(document).ready(function() {
 								}								
 							}
 						});
+
+						$('#neut').unbind('click');
 						$('#neut').click(function() {
-							showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
-							ignore();
+							if(go) {
+								showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+								ignore();								
+							};
 						});
 					break;
+
+
+
 
 					case 'Tyrianne':
 						changeLocation('#tyrianneMap');
 						$('#miloInteraction').show();
 						$('#miloSays').writeText(text.tyrianneIntro);
 						$('#skip').show();
-						$('#skip').click(function() {
+
+						$('#skip').unbind('click');
+						$('#skipButton').click(function() {
 							showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 							ignore();
 						});
+
 						play('speech/tyrianneIntro.wav');
 						var wait = setInterval(function() {
 							if($('#miloSays').text() == text.tyrianneIntro) {
@@ -547,6 +574,8 @@ $(document).ready(function() {
 						}, 1);
 
 						var tyrianneTimeline = 'tyrianneIntro';
+
+						$('#good').unbind('click');
 						$('#good').click(function() {
 							if(go) {
 								if(tyrianneTimeline == 'tyrianneIntro') {
@@ -560,7 +589,9 @@ $(document).ready(function() {
 									miloIntroduction(10500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js')
 								}								
 							}
-						})
+						});
+
+						$('#good').unbind('click');
 						$('#bad').click(function() {
 							if(go) {
 								if(tyrianneTimeline == 'tyrianneIntro') {
@@ -574,6 +605,8 @@ $(document).ready(function() {
 								}
 							}
 						});
+
+						$('#neut').unbind('click');
 						$('#neut').click(function() {
 							if(go) {
 								if(tyrianneTimeline == 'tyrianneIntro') {
@@ -584,22 +617,33 @@ $(document).ready(function() {
 						});
 					break;
 
+
+
+
 					case 'Kaprika':
 						changeLocation('#kaprikaMap');
 						$('#skip').show();
 						quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.wav', '#kaprikaMap');
 						miloIntroduction(19000, 'kaprika.html #kaprikaContent', 'scripts/kaprika.js');
-						$('#skip').click(function() {
+
+						$('#skip').unbind('click');
+						$('#skipButton').unbind('click');
+						$('#skipButton').click(function() {
 							showContent('kaprika.html #kaprikaContent', 'scripts/kaprika.js');
 							ignore();
 						})
 					break;
+
+
+
 
 					case 'AliNada':
 						changeLocation('#aliNadaMap');
 						miloResponse(text.aliNadaIntro, 'speech/aliNadaIntro.mp3', response.aliNadaGoodOrBad, '', response.ignore);
 						$('#bad').hide();
 						var aliTimeline = 'aliIntro';
+
+						$('#good').unbind('click');
 						$('#good').click(function() {
 							if(go) {
 								if(aliTimeline == 'aliIntro') {
@@ -625,6 +669,8 @@ $(document).ready(function() {
 								}								
 							}
 						});
+
+						$('#bad').unbind('click');
 						$('#bad').click(function() {
 							if(go) {
 								if(aliTimeline == 'so sorry') {
@@ -638,6 +684,8 @@ $(document).ready(function() {
 								}								
 							}
 						});
+
+						$('#neut').unbind('click');
 						$('#neut').click(function() {
 							if(go) {
 								if(aliTimeline == 'aliIntro') {
@@ -669,13 +717,11 @@ $(document).ready(function() {
 
 	$('#myShip').click(function() {
 		if($('#Kanedos').attr('first') == 'false') {
-			console.log(1);
 			$('#skip').show();
-			$('#skip').click(function() {
+			$('#skipButton').click(function() {
 				ignore('#map');
 			});
 			if(knowledge.mortality == false) {
-				console.log(2);
 				knowledge.mortality = true;
 				$('#map').hide();
 				$('#miloSays').text('');
@@ -713,6 +759,8 @@ $(document).ready(function() {
 		$('#map').hide();
 		missVsOshu(text.novaIntroMiss, 'speech/novaIntroMiss', text.novaIntroOshu, 'speech/novaIntroOshu.mp3', response.novaGood, response.novaBad, response.novaNeut)
 		// What is it?
+
+		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(go) {
 				if(fiftyTimeline == 'novaIntro') {
@@ -745,6 +793,7 @@ $(document).ready(function() {
 			}
 		});
 
+		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(go) {
 				if(fiftyTimeline == 'novaIntro') {
@@ -770,6 +819,7 @@ $(document).ready(function() {
 			}
 		});
 
+		$('#neut').unbind('click');
 		$('#neut').click(function() {
 			if(go) {
 				if(fiftyTimeline == 'novaIntro') {
@@ -798,7 +848,7 @@ $(document).ready(function() {
 		miloResponse(text.familyBad, 'speech/familyBad.mp3', '','','');
 		concludeInteraction(7000);	
 		$('#skip').show();
-		$('#skip').click(function() {
+		$('#skipButton').click(function() {
 			ignore('#map');
 		});
 	};
@@ -806,6 +856,8 @@ $(document).ready(function() {
 	function seventyFive() {
 		$('#map').hide();
 		missVsOshu(text.familyIntroMiss, 'speech/familyIntroMiss.mp3', text.familyIntroOshu, 'speech/familyIntroOshu.mp3', response.familyGood, response.familyBad, response.familyNeut);
+		
+		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(go) {
 				if(familyTimeline == 'familyIntro') {
@@ -852,6 +904,7 @@ $(document).ready(function() {
 			}
 		});
 
+		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(go) {
 				if(familyTimeline == 'I do feel') {
@@ -864,6 +917,7 @@ $(document).ready(function() {
 			};
 		});
 
+		$('#neut').unbind('click');
 		$('#neut').click(function() {
 			if(go) {
 				if(familyTimeline == 'familyIntro') {
@@ -962,13 +1016,15 @@ $(document).ready(function() {
 				}
 			}
 		}
+
+		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(go) {
 				if(goodbyeTimeline == 'badIntro') {
 					quickMilo(text.angryGood, 'speech/angryGood.mp3');
 					concludeInteraction(8500);
 					$('#skip').show();
-					$('#skip').click(function() {
+					$('#skipButton').click(function() {
 						ignore('#map');
 					});
 				}
@@ -981,12 +1037,14 @@ $(document).ready(function() {
 					quickMilo(text.happyGoodGood, 'speech/happyGoodGood.mp3');
 					concludeInteraction(6500);
 					$('#skip').show();
-					$('#skip').click(function() {
+					$('#skipButton').click(function() {
 						ignore('#map');
 					});
 				};				
 			};
 		});
+
+		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(go) {
 				if(goodbyeTimeline == 'badIntro') {
@@ -998,7 +1056,7 @@ $(document).ready(function() {
 					$('#miloSays').writeText(text.happyBad);
 					concludeInteraction(2000);
 					$('#skip').show();
-					$('#skip').click(function() {
+					$('#skipButton').click(function() {
 						ignore('#map');
 					});
 				}
@@ -1009,6 +1067,8 @@ $(document).ready(function() {
 				}				
 			};
 		});
+
+		$('#neut').unbind('click');
 		$('#neut').click(function() {
 			if(goodbyeTimeline == 'goodIntro') {
 				if(go) {

@@ -102,6 +102,8 @@ function ignore(map) {
 	$(map).show();
 	audio.pause();
 	$('#skip').hide();
+	$('#skip').unbind('click');
+	$('#skipButton').unbind('click');
 }
 
 // ------------------------------------------------------

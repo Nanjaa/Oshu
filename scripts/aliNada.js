@@ -85,7 +85,7 @@ var weatherText = {
 	weather: "You are led to the Galactic Weather Department's main office. The room looks very similar to the monitoring room on Luneda.",
 	intro: "Oh, did you bring the specimen from Luneda? Thanks! They told us you'd be on the way. Here, have some coins. Thanks for your help.",
 	computers: "The computers are displaying programs that look incredibly confusing.",
-	goodbye: "Thanks for your help! Let us know if there's anything about AliNada that you want to know!",
+	goodbye: "Thanks for your help, but if you were supposed to get something from the guys on Luneda, you'll have to bring it up with them.",
 	advice1: "Advice2",
 	advice2: "Advice2 for real",
 	advice3: "advice 3"

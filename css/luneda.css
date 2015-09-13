@@ -222,3 +222,18 @@
 	margin-left: 150px;
 	padding: 10px;
 }
+#rentalGuy {
+	color: tan;
+	margin-left: 150px;
+	margin-top: 115px;
+}
+#equipmentShack {
+	color: brown;
+	margin-left: 275px;
+	margin-top: 25px;
+}
+#equipmentSign {
+	color: white;
+	margin-left: 275px;
+	margin-top: 70px;
+}
