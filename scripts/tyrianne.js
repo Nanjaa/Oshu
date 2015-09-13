@@ -1,18 +1,43 @@
 
 // brings up the common divs between all the city details
-// $('.tyrianneCity').click(function() {
-// 	$('#tyrianneMap').hide();
-// 	$('.return').show();
-// 	$('#planetInteraction').show();
-// })
+$('.tyrianneCity').click(function() {
+	$('#tyrianneMap').hide();
+	$('.return').show();
+	$('#planetInteraction').show();
+})
 
 // takes you back to the city map from any city details
-// $('.return').click(function() {
-// 	$('.return').hide();
-// 	$('.cityDetails').hide();
-// 	$('#tyrianneMap').show();
-// 	changeLocation('#tyrianneMap', true);
-// });
+$('.return').unbind('click');
+$('.return').click(function() {
+	console.log(Oshu.currentLocation);
+	// Returning from the library - it'll remind you you can't return before you can do so
+	if(Oshu.currentLocation == '.libraryShop') {
+		if(go) {
+			twoOptions("Are you sure you want to leave? You'll never be able to return to the shop again.", 'Yes', 'No');
+
+			$('#optionOne').unbind('click');
+			$('#optionOne').click(function() {
+				$('.option').hide();
+				$('.return').hide();
+				$('.cityDetails').hide();
+				$('#tyrianneMap').show();
+				changeLocation('#tyrianneMap');
+			});
+
+			$('#optionTwo').unbind('click');
+			$('#optionTwo').click(function() {
+				$('#interactionText').text('');
+				$('.option').hide();
+			})
+		}
+	}
+	else {
+		$('.return').hide();
+		$('.cityDetails').hide();
+		$('#tyrianneMap').show();
+		changeLocation('#tyrianneMap', true);		
+	};
+});
 
 // ________________________________________________________________
 // | ==============================================================|
@@ -31,11 +56,30 @@ $('pre').click(function() {
 			if(Oshu.items.libraryPass) {
 				lifeEvent(3);
 				completeItem(Oshu.quests[2][1][0], Oshu.questSpeech.tyrianne1);
+				// Oshu.items.libraryPass = false;
+				// $('#libraryPass').remove();
 
 				$('#skipButton').unbind('click');
 				$('#skipButton').click(function() {
+					// Offer the user the chance to visit the shop
 					endSpeech();
-					libraryShop();
+					twoOptions(libraryText.intro, 'Yes', 'No');
+
+					$('#optionOne').unbind('click');
+					$('#optionOne').click(function() {
+						$('.option').hide();
+						$('.libraryShop').show();
+						$('#interactionText').writeText(libraryText.options);
+						changeLocation('.libraryShop');
+					});
+
+					$('#optionTwo').unbind('click');
+					$('#optionTwo').click(function() {
+						$('.option').hide();
+						$('.library').show();
+						$('#interactionText').writeText("You exit the library, sad that you won't return.");
+						changeLocation('.library');
+					});
 				});
 			}
 			// else {
@@ -379,26 +423,6 @@ libraryText = {
 	yes: "Perfect! Here's your souvenir!",
 	no: "That's alright!",
 	end: "Thank you for your purchase!"
-}
-
-function libraryShop() {
-	twoOptions(libraryText.intro, 'Yes', 'No');
-
-	$('#optionOne').unbind('click');
-	$('#optionOne').click(function() {
-		$('.option').hide();
-		$('.libraryShop').show();
-		$('#interactionText').writeText(libraryText.options);
-		changeLocation('.libraryShop');
-	});
-
-	$('#optionTwo').unbind('click');
-	$('#optionTwo').click(function() {
-		$('.option').hide();
-		$('.library').show();
-		$('#interactionText').writeText("You exit the library, sad that you won't return.");
-		changeLocation('.library');
-	});
 }
 
 // THE LIBRARY SHOP
