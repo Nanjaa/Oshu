@@ -922,6 +922,7 @@ function robotWait(text1, text2) {
 				lifeEvent(1);
 				$('#lunedaMechanicMenu').fadeOut(1000);
 				$('#lunedaMechanicMenu').fadeIn(1000);
+				replace = true;
 				var wait6 = setTimeout(function() {
 					$('#interactionText').writeText(text2);
 				}, 2000);
@@ -930,6 +931,7 @@ function robotWait(text1, text2) {
 	}, 1);
 };
 
+var replace = false;
 
 // General Robot Repairs
 $('#lunedaGeneralRobot').click(function() {
@@ -937,6 +939,15 @@ $('#lunedaGeneralRobot').click(function() {
 		if(Oshu.items.brokenRobot) {
 			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
 			robotWait(generalText.yesRobot, generalText.yesRobotEnd);
+			var wait8 = setInterval(function() {
+				if(replace) {
+					clearInterval(wait8);
+					$('#brokenRobot').remove();
+					Oshu.items.brokenRobot = false;
+					Oshu.items.fixedRobot = true;
+					addItem('fixedRobot', 'Fixed Robot', '#fixedRobot', Oshu.description.fixedRobot);
+				}
+			}, 1);
 		}
 		else {
 			displayOptions(generalText.introNoRobot, generalText.noRobotOptions, 20, generalText.yesNoRobot, generalText.no, generalText.noCoins);
