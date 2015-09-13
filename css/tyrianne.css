@@ -32,8 +32,12 @@
 }
 #poorManClose {
 	color: tan;
-	margin-left: 25px;
+	margin-left: 215px;
 	margin-top: 75px;
+}
+#poorSign {
+	margin-left: 25px;
+	margin-top: 180px;
 }
 #fuzzbuttDoorman {
 	color: orange;

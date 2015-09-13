@@ -41,7 +41,7 @@ $('pre').click(function() {
 				$('#interactionText').writeText("The library is closed to the public. The building stands tall above you.");					
 			}
 
-			break;
+		break;
 		case 'fuzzbuttFactory':
 			changeLocation('.fuzzbutt');
 			$('.fuzzbutt').show();
@@ -55,21 +55,21 @@ $('pre').click(function() {
 				$('#fuzzbuttDoorman').hide();
 				$('#interactionText').writeText(marketText.intro)
 			}
-			break;
+		break;
 		case 'tyrianneMechanic':
 			changeLocation('.tyrianneMechanic');
 			$('.tyrianneMechanic').show();
-			break;
+		break;
 		case 'poorMan':
 			changeLocation('.poorMan');
 			$('.poorMan').show();
 			$('#interactionText').writeText(poorText.intro);
-			break;
+		break;
 		case 'tyrianneJewelry':
 			changeLocation('.tyrianneJewelry');
 			$('.tyrianneJewelry').show();
 			$('#interactionText').writeText(jewelryText.intro);
-			break;
+		break;
 	};
 });
 
@@ -93,13 +93,17 @@ var poorText = {
 	end: "Thank you so much for your gift. I hope you enjoyed seeing the philosophers"
 };
 
+$('#poorManClose').unbind('click');
 $('#poorManClose').click(function() {
+	console.log(1);
 	if(go) {
 		if(poorStatus == 'end') {
 			$('#interactionText').writeText(poorStatus.end);
 		}
 		else {
 			twoOptions(poorText.manIntro, "Yes, I do.", "No, I don't");
+
+			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
 				if(poorStatus == 'intro') {
 					if(Oshu.items.ganifruit > 0) {
@@ -115,10 +119,19 @@ $('#poorManClose').click(function() {
 					}				
 				}
 				else if(poorStatus == 'giveFruit') {
+					poorStatus = 'end';
 					endConversation(poorText.philosophers);
 					var timeout = setTimeout(function() {
 						lifeEvent(2);
 						completeItem(Oshu.quests[2][1][2], Oshu.questSpeech.tyrianne3);
+
+						$('#skip').unbind('click');
+						$('#skipButton').unbind('click');
+						$('#skipButton').click(function() {
+							$('.poorMan').show();
+							endSpeech();
+							$('#interactionText').writeText(poorText.end);
+						});		
 					}, 2000);
 				}	
 				else {
@@ -126,6 +139,8 @@ $('#poorManClose').click(function() {
 				}
 
 			});
+
+			$('#optionTwo').unbind('click');
 			$('#optionTwo').click(function() {
 				endConversation(poorText.noFood);
 			});
@@ -181,21 +196,16 @@ $('#tyrianneJewelryLady').click(function() {
 
 $('#tyrianneJewelryPieces').click(function() {
 	if(go) {
-		if(Oshu.items.tyrianneJewelry) {
+		if(Oshu.items.tyrianneBracelet) {
 			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
 		}
 		else {
 			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
 			var wait = setInterval(function() {
 				if($('#interactionText').text() == jewelryText.yes) {
-					// adds item to inventory if not already there
-					$('.inventoryList').append('<li class="inventoryItem"><span id="tyrianneBracelet">Bracelet from Tyrianne</span></li>');
-					Oshu.items.tyrianneJewelry = true;
-
-					// now you can select the clothes
-					$('#tyrianneBracelet').click(function() {
-						inventoryDescription('#tyrianneBracelet', 'Bracelet from Tyrianne', Oshu.description.tyrianneJewelry);
-					});
+					addItem('tyrianneBracelet', 'Bracelet from Tyrianne', '#tyrianneBracelet', Oshu.description.tyrianneBracelet);
+					Oshu.items.jewelry = true;
+					Oshu.items.tyrianneBracelet = true;
 					clearInterval(wait);
 				}
 			}, 1);			
@@ -296,14 +306,8 @@ $('#fuzzbuttDoorman').click(function() {
 				}
 				else if(factoryStatus == 'quest') {
 					endConversation(factoryText.acceptQuest);
-
-					$('.inventoryList').append('<li class="inventoryItem"><span id="emptyBottle">Empty Fairy Bottle</span></li>');
+					addItem('emptyBottle', 'Empty Fairy Bottle', '#emptyBottle', Oshu.description.emptyBottle);
 					Oshu.items.emptyBottle = true;
-
-					// now you can select the clothes
-					$('#emptyBottle').click(function() {
-						inventoryDescription('#emptyBottle', 'Empty Fairy Bottle', Oshu.description.emptyBottle);
-					});
 				};
 			});
 		}

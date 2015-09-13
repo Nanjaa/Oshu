@@ -50,6 +50,7 @@ function lifeEvent(minutesLost) {
 
 // This small var will help immensely with all the writetext
 var go = true;
+var dontGo = false;
 
 function resetText() {
 	$(this).text('');
@@ -83,7 +84,10 @@ function resetText() {
 				elem.text('');
 				elem.text(elem.text() + content);
 				clicked = true;
-				go = true;
+				if(dontGo !== true) {
+					go = true;					
+				}
+
 			}				
 		}, 30);
 	};
@@ -118,7 +122,7 @@ function hideContent(content) {
 }
 
 // ------------------------------------------------------
-// 					PAY MONEY
+// 				GET MONEY GET PAID
 // ------------------------------------------------------
 
 function getPaid(price) {
@@ -143,16 +147,59 @@ function payMoney(price) {
 	$('#coinsAmt').text(coins);
 };
 
+var optionsStatus = 1;
+
 function displayOptions(text1, text2, price, yes, no, needMore) {
-	$('#interactionText').writeText(text1);
-	// the following chunk has to do with displaying the "do you want to buy" question
-	var wait = setTimeout(function() {
-		if($('#interactionText').text() == text1) {
-			var holding = setTimeout(function() {
+	if(dontGo !== true) {
+		$('#interactionText').writeText(text1);
+		dontGo = true;
+		var displayGo = false;
+
+		// the following chunk has to do with displaying the "do you want to buy" question
+		var holding = setTimeout(function() {
+			dontGo = false;
+			// now to display the yes or no options
+			twoOptions(text2, 'Yes', 'No');
+			dontGo = true;
+			$('#optionOne').unbind('click');
+			$('#optionOne').click(function() {
+				dontGo = false;
+				$('.option').hide();
+				var coins = Oshu.coins;
+				if(coins >= price) {
+		 			$('#interactionText').writeText(yes);	
+		 			payMoney(price);			
+				}
+				else {
+					$('#interactionText').writeText(needMore);
+				}
+			});
+			$('#optionTwo').unbind('click');
+			$('#optionTwo').click(function() {
+				dontGo = false;
+				$('.options').hide();
+				$('#interactionText').writeText(no);
+			})
+		}, 4000);					
+
+		// click your mouse button to skip the wait
+		$(this).click(function() {
+			var wait2 = setInterval(function() {
+				if($('#interactionText').text() == text1) {
+					clearInterval(wait2);
+					displayGo = true;
+				}
+			}, 1)
+			if(displayGo == true) {
+				displayGo = false;
+				clearTimeout(holding);
+				dontGo = false;
 				// now to display the yes or no options
 				twoOptions(text2, 'Yes', 'No');
+				dontGo = true;
 				$('#optionOne').unbind('click');
 				$('#optionOne').click(function() {
+					dontGo = false;
 					$('.option').hide();
 					var coins = Oshu.coins;
 					if(coins >= price) {
@@ -165,12 +212,13 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 				});
 				$('#optionTwo').unbind('click');
 				$('#optionTwo').click(function() {
+					dontGo = false;
 					$('.options').hide();
 					$('#interactionText').writeText(no);
-				})
-			}, 2000);
-		};						
-	}, 1000);
+				});
+			};
+		});
+	};
 };
 
 // ------------------------------------------------------
