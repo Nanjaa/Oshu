@@ -344,13 +344,8 @@ $('.fuzzbuttDetails').click(function() {
 					var hold = setTimeout(function() {
 						completeItem(Oshu.quests[2][1][1], Oshu.questSpeech.tyrianne2)
 					}, 2000);
-					$('.inventoryList').append('<li class="inventoryItem"><span id="sunstone">Sunstone</span></li>');
+					addItem('sunstone', 'Sunstone', '#sunstone', Oshu.description.sunstone);
 					Oshu.items.sunstone = true;
-
-					// now you can select the clothes
-					$('#sunstone').click(function() {
-						inventoryDescription('#sunstone', 'Sunstone', Oshu.description.sunstone);
-					});
 				};
 			}, 1);		
 		};		

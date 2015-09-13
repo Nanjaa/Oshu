@@ -278,7 +278,9 @@ $('.planet').click(function() {
 // ------------------------------------------------------
 // 				COMPLETE LIST ITEM
 // ------------------------------------------------------
+
 function completeItem(quest, speech) {
+	finished = finished + 1;
 	$('#oshuInteraction').text('');
 	play('soundEffects/completeItem.wav');
 	$('.quest').each(function() {
