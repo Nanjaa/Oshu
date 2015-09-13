@@ -183,7 +183,6 @@ $('#tyrianneJewelryPieces').click(function() {
 			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
 		}
 		else {
-			$('#interactionText').writeText(jewelryText.purchase);
 			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
 			var wait = setInterval(function() {
 				if($('#interactionText').text() == jewelryText.yes) {
@@ -332,7 +331,6 @@ $('.fuzzbuttDetails').click(function() {
 			$('#interactionText').writeText(marketText.marketReturn);
 		}
 		else {
-			$('#interactionText').writeText(marketText.sunstoneIntro);
 			displayOptions(marketText.sunstoneIntro, marketText.displayOptions, 50, marketText.yes, marketText.no, marketText.needMore);
 			var wait = setInterval(function() {
 				if($('#interactionText').text() == marketText.yes) {

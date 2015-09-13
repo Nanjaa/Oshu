@@ -79,7 +79,6 @@ $('#ticketGuy').click(function() {
 			$('#interactionText').writeText(kanedomeText.end);
 		}
 		else {
-			$('#interactionText').writeText(kanedomeText.ticketIntro);
 			displayOptions(kanedomeText.ticketIntro, kanedomeText.options, 75, kanedomeText.yes, kanedomeText.no, kanedomeText.noCoins);
 			var wait = setInterval(function() {
 				if($('#interactionText').text() == kanedomeText.yes) {
@@ -115,7 +114,6 @@ var camelText = {
 $('#camelGuy').unbind('click');
 $('#camelGuy').click(function() {
 	if(go) {
-		$('#interactionText').writeText(camelText.guyIntro);
 		displayOptions(camelText.guyIntro, camelText.options, 25, camelText.yes, camelText.no, camelText.noCoins);
 		var hold = setInterval(function() {
 			if($('#interactionText').text() == camelText.yes) {
@@ -184,7 +182,6 @@ $('.kanedosJewelryDisplay').click(function() {
 			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
 		}
 		else {
-			$('#interactionText').writeText(jewelryText.purchase);
 			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
 			var buyJewelry = setInterval(function() {
 				if($('#planetInteraction').text() == jewelryText.yes) {

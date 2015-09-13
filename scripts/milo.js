@@ -442,9 +442,13 @@ $(document).ready(function() {
 			showContent(locationHtml, location);
 		}, timeout)
 
+		$('#skip').show();
 		$('#skipButton').unbind('click');
 		$('#skipButton').click(function() {
 			clearTimeout(wait);
+			$('#map').hide();
+			showContent(locationHtml, location);
+			ignore();
 		});
 		$('#myShip').click(function() {
 			clearTimeout(wait);
@@ -469,17 +473,6 @@ $(document).ready(function() {
 						changeLocation('#lunedaMap');
 						quickMilo(text.lunedaIntro, 'speech/lunedaIntro.wav', '#lunedaMap', 28000);
 						miloIntroduction(19500, 'luneda.html #lunedaContent', 'scripts/luneda.js');
-
-						$('#skip').show();
-						$('#skipButton').unbind('click');
-						$('#skipButton').click(function() {
-							$('#skipButton').unbind('click');
-							$('#skip').unbind('click');
-
-							$('#map').hide();
-							showContent('luneda.html #lunedaContent', 'scripts/luneda.js');
-							ignore();
-						});
 					break;
 
 
@@ -494,20 +487,10 @@ $(document).ready(function() {
 								if(status >= 1) {
 									quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap');
 									miloIntroduction(3000, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
-									$('#skip').show();
-									$('#skipButton').click(function() {
-										showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
-										ignore();
-									});
 								}
 								else {
 									quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap');
 									miloIntroduction(6500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
-									$('#skip').show();
-									$('#skipButton').click(function() {
-										showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
-										ignore();
-									});
 								}								
 							}
 						});
@@ -518,17 +501,8 @@ $(document).ready(function() {
 								if(status >= -5) {
 									quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3', '#kanedosMap');
 									miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
-									$('#skip').show();
-									$('#skipButton').click(function() {
-										ignore('#kanedosMap');
-									});
 								}
 								else if(status < -5) {
-									$('#skip').show();
-									$('#skipButton').click(function() {
-										showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
-										ignore();
-									});
 									quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap');
 									miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 								}								
@@ -553,7 +527,6 @@ $(document).ready(function() {
 						$('#miloSays').writeText(text.tyrianneIntro);
 						$('#skip').show();
 
-						$('#skip').unbind('click');
 						$('#skipButton').click(function() {
 							showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 							ignore();
@@ -625,13 +598,6 @@ $(document).ready(function() {
 						$('#skip').show();
 						quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.wav', '#kaprikaMap');
 						miloIntroduction(19000, 'kaprika.html #kaprikaContent', 'scripts/kaprika.js');
-
-						$('#skip').unbind('click');
-						$('#skipButton').unbind('click');
-						$('#skipButton').click(function() {
-							showContent('kaprika.html #kaprikaContent', 'scripts/kaprika.js');
-							ignore();
-						})
 					break;
 
 
@@ -716,11 +682,8 @@ $(document).ready(function() {
 	//__________________________________________//
 
 	$('#myShip').click(function() {
-		if($('#Kanedos').attr('first') == 'false') {
-			$('#skip').show();
-			$('#skipButton').click(function() {
-				ignore('#map');
-			});
+		$('#skip').show();
+		if($('#Kanedos').attr('first') == 'false') {			
 			if(knowledge.mortality == false) {
 				knowledge.mortality = true;
 				$('#map').hide();
@@ -728,15 +691,32 @@ $(document).ready(function() {
 				$('#miloInteraction').show();
 				if(status > 0) {
 					quickMilo(text.realizationGood, 'speech/realizationGood.wav');
-					var wait = setTimeout(function() {
+					var wait2 = setTimeout(function() {
 						$('#miloInteraction').hide();
 						$('#skip').hide();
 						$('#map').show();
+
+						// $('#skip').unbind('click');
+						$('#skipButton').unbind('click');
+						$('#skipButton').click(function() {
+							console.log(1);
+							ignore('#map');
+							clearTimeout(wait2);
+						});
 					}, 22500)
 				}
 				else {
 					quickMilo(text.realizationNeut, 'speech/realizationNeut.wav');
-					var wait = setTimeout(function() {
+					var wait3 = setTimeout(function() {
+
+						// $('#skip').unbind('click');
+						// $('#skipButton').unbind('click');
+						$('#skip').show();
+						$('#skipButton').click(function() {
+							console.log(2);
+							ignore('#map');
+							clearTimeout(wait3);
+						});
 						$('#miloInteraction').hide();
 						$('#skip').hide();
 						$('#map').show();

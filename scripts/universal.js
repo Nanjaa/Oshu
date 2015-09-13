@@ -155,16 +155,10 @@ function payMoney(price) {
 };
 
 function displayOptions(text1, text2, price, yes, no, needMore) {
+	$('#interactionText').writeText(text1);
 	// the following chunk has to do with displaying the "do you want to buy" question
 	var wait = setTimeout(function() {
-		// $('.clickable').click(function() {
-		// 	if(go) {
-		// 		clearTimeout(wait);
-		// 		clearTimeout(holding);				
-		// 	}
-		// });
 		if($('#interactionText').text() == text1) {
-
 			var holding = setTimeout(function() {
 				// now to display the yes or no options
 				twoOptions(text2, 'Yes', 'No');

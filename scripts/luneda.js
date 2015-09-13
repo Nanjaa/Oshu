@@ -82,6 +82,7 @@ $('pre').click(function() {
 		case 'lunedaMechanic':
 			$('.lunedaMap').hide();
 			$('.lunedaMechanic').show();
+			$('#interactionText').writeText(shutoffText.intro);
 		break;
 		case 'fruitStand':
 			if(go) {
@@ -150,7 +151,6 @@ function rentalActivate() {
 		else {
 			// plays the sound effect of the man talking
 			maleVoice();
-			$('#interactionText').writeText(beachText.rentalWelcome);
 			displayOptions(beachText.rentalWelcome, beachText.rentalOptions, 50, beachText.rentalComplete, beachText.rentalNo, beachText.rentalNoCoins);
 			var wait = setInterval(function() {
 				if($('#interactionText').text() == beachText.rentalComplete) {
@@ -378,7 +378,6 @@ var no = marketText.no;
 $('#electange').unbind('click');
 $('#electange').click(function() {
 	if(go) {
-		$('#interactionText').writeText(marketText.electange);
 		maleVoice3();
 		displayOptions(marketText.electange, marketText.electangeOptions, 25, yes, no, marketText.needMore, maleVoice3());
 		var stop = false;
@@ -413,7 +412,6 @@ $('#electange').click(function() {
 $('#ganifruit').unbind('click');
 $('#ganifruit').click(function() {
 	if(go) {
-		$('#interactionText').writeText(marketText.ganifruit);
 		maleVoice3();
 		displayOptions(marketText.ganifruit, marketText.ganifruitOptions, 10, yes, no, marketText.needMore, maleVoice3());
 		var boughtGanifruit = setInterval(function() {
@@ -454,7 +452,6 @@ $('#dresses').click(function() {
 	if(go) {
 		femVoice();
 		if(Oshu.items.clothes == false) {
-			$('#interactionText').writeText(marketText.clothes);
 			displayOptions(marketText.clothes, marketText.clothesOptions, 25, marketText.clothesYes, marketText.clothesNo, marketText.clothesNeedMore);
 			var boughtClothes = setInterval(function() {
 				if($('#interactionText').text() == marketText.clothesYes) {
@@ -486,7 +483,6 @@ $('#snowglobes').click(function() {
 	if(go) {
 		femVoice2();
 		if(Oshu.items.lunedaSnowglobe == false) {
-			$('#interactionText').writeText(marketText.snowglobes);
 			displayOptions(marketText.snowglobes, marketText.snowglobeOptions, 10, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore, femVoice2());
 			var boughtSnowglobe = setInterval(function() {
 				if($('#interactionText').text() == marketText.souvenirYes) {
@@ -519,7 +515,6 @@ $('#bobbleheads').click(function() {
 	if(go) {
 		femVoice2();
 		if(Oshu.items.lunedaBobblehead == false) {
-			$('#interactionText').writeText(marketText.bobbleheads);
 			displayOptions(marketText.bobbleheads, marketText.bobbleheadOptions, 15, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore, femVoice2());
 			var boughtBobbleheads = setInterval(function() {
 				if($('#interactionText').text() == marketText.souvenirYes) {
@@ -552,7 +547,6 @@ $('#postcards').click(function() {
 	if(go) {
 		femVoice2();
 		if(Oshu.items.lunedaPostcard == false) {
-			$('#interactionText').writeText(marketText.postcards);
 			displayOptions(marketText.postcards, marketText.postcardOptions, 1, marketText.souvenirYes, marketText.souvenirNo, marketText.souvenirNeedMore, femVoice2());
 			var boughtPostcards = setInterval(function() {
 				if($('#interactionText').text() == marketText.souvenirYes) {
@@ -835,18 +829,47 @@ $('#weatherman').click(function() {
 // |===============================================================|
 // |_______________________________________________________________|
 
-var mechanicText = {
-	intro: "You walk into the mechanic's shop, and see a menu with his options and prices."
+var shutoffText = {
+	intro: "You walk into the mechanic's shop, and see a menu with his options and prices.",
+	shutoffIntro: "Are you absolutely sure you want to shut off the Lifecycle Program? It will, in effect, end your travels.",
+	noCoins: "Sorry, but that's not enough to pay for that.",
+	yes: "Alright, one moment, I'll turn off that program of yours.",
+	no: "Come back anytime!"
 }
 
-$('#lunedaMechanic').click(function() {
-	if(go) {
-		$('#interactionText').writeText(mechanicText.intro);		
-	};
-})
+// $('#lunedaLifecycleAdd').click(function() {
+// 	if(go) {
+// 		twoOptions(shutoffText.shutoffIntro, 'Yes', 'No');
 
-$('#lunedaLifecycleAdd').click(function() {
+// 		$('#optionOne').unbind('click');
+// 		$('#optionOne').click(function() {
+
+// 		});
+// 		$()
+// 		lifeEvent(-15);		
+// 	};
+// });
+
+var generalText = {
+	introRobot: "I see you have a broken robot in need of fixing! 20 coins will do 'ya!",
+	introNoRobot: "Would you like to feel fresh and new? Like a spa day for robots!",
+	robotOptions: "Would you like to fix the robot?",
+	noRobotOptions: "Would you like to be worked on?",
+	noCoins: "Sorry, but I'm gonna need more than that.",
+	yesRobot: "Alright, hand him over, and give me just a sec...",
+	yesRobotEnd: "Here ya go. Bright and shiny like new!",
+	yesNoRobot: "You're gonna feel like a brand new robot!",
+	yesRobotEnd: "You return to your ship, feeling like new. There's even a skip in your step.",
+	no: "That's fine."
+}
+
+$('#lunedaGeneralRobot').click(function() {
 	if(go) {
-		lifeEvent(-15);		
+		if(Oshu.items.brokenRobot) {
+			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
+		}
+		else {
+			displayOptions(generalText.introNoRobot, generalText.noRobotOptions, 20, generalText.yesNoRobot, generalText.no, generalText.noCoins);
+		}
 	};
 });
