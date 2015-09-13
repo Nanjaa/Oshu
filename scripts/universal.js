@@ -279,6 +279,7 @@ $('.planet').click(function() {
 // 				COMPLETE LIST ITEM
 // ------------------------------------------------------
 function completeItem(quest, speech) {
+	$('#oshuInteraction').text('');
 	play('soundEffects/completeItem.wav');
 	$('.quest').each(function() {
 		if($(this).text() == quest) {
