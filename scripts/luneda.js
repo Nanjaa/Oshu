@@ -7,15 +7,47 @@ $('.lunedaCity').click(function() {
 });
 
 // takes you back to the city map from any city details
-function lunedaReturn() {
-	$('.return').hide();
-	$('.cityDetails').hide();
-	$('#lunedaMap').show();		
-}
+$('.return').unbind('click');
 $('.return').click(function() {
+	console.log(Oshu.currentLocation);
 	go = true;
-	lunedaReturn();
-	changeLocation('#lunedaMap', true);
+	$(Oshu.currentLocation).hide();
+
+	if(Oshu.currentLocation == '.rentalDetails') {
+		console.log(1);
+		$('.beachDetails').show();	
+		changeLocation('#beach', true);	
+	}
+	else if(Oshu.currentLocation == '.drinkStand') {
+		console.log(2);
+		$('.beachDetails').show();	
+		changeLocation('#beach', true);	
+	}
+	else if(Oshu.currentLocation == '.fruitStand') {
+		console.log(3);
+		$('.theMarkets').show();
+		$('.marketDetails').show();	
+		changeLocation('#lunedaMap', true);	
+	}
+	else if(Oshu.currentLocation == '.souvenirStand') {
+		console.log(4);
+		$('.theMarkets').show();
+		$('.marketDetails').show();
+		changeLocation('.theMarkets', true);	
+	}
+	else if(Oshu.currentLocation == '.clothesStand') {
+		console.log(5);
+		$('.theMarkets').show();
+		$('.marketDetails').show();
+		changeLocation('.theMarkets', true);	
+	}
+	else {
+		$('.cityDetails').hide();
+		$('.return').hide();
+		console.log(6);
+		$('#lunedaMap').show();	
+		changeLocation('.theMarkets', true);		
+	};
 });
 
 // ________________________________________________________________
@@ -46,6 +78,7 @@ $('pre').click(function() {
 				$('.beachDetails').hide();
 				$('.rentalDetails').show();
 				$('#interactionText').writeText(beachText.intro);
+				changeLocation('.rentalDetails');
 			};
 		break;
 		case 'tikiHut':
@@ -53,6 +86,7 @@ $('pre').click(function() {
 				$('.beachDetails').hide();
 				$('.drinkStand').show();
 				$('#interactionText').writeText(tikiText.intro);
+				changeLocation('.drinkStand')
 			}
 		break;
 		case 'danceHall':
@@ -83,6 +117,7 @@ $('pre').click(function() {
 			$('.lunedaMap').hide();
 			$('.lunedaMechanic').show();
 			$('#interactionText').writeText(shutoffText.intro);
+			changeLocation('.lunedaMechanic');
 		break;
 		case 'fruitStand':
 			if(go) {
