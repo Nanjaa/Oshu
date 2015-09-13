@@ -26,9 +26,7 @@ function randomizeQuests() {
 // ------------------------------------------------------
 
 function lifeEvent(minutesLost) {
-	console.log('hello');
 // calculate loss
-
 	// first, the timer
 	var currentTime = $('#minutes').text(),
 		newTime = currentTime - minutesLost,
@@ -44,7 +42,6 @@ function lifeEvent(minutesLost) {
 	$('#life').css('width', percent);
 	$('#minutes').text(newTime);
 
-	// sync it with 
 };
 
 // ------------------------------------------------------

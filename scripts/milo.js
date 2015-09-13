@@ -730,34 +730,32 @@ $(document).ready(function() {
 					$('#miloInteraction').hide();
 					$('#skip').hide();
 					$('#map').show();
-
-					// $('#skip').unbind('click');
-					$('#skipButton').unbind('click');
-					$('#skipButton').click(function() {
-						console.log(1);
-						ignore('#map');
-						clearTimeout(wait2);
-					});
 				}, 22500);
+				// click the skip button
+				$('#skip').unbind('click');
+				$('#skipButton').unbind('click');
+				$('#skipButton').click(function() {
+					console.log(3);
+					ignore('#map');
+					clearTimeout(wait2);
+				});
 			}
-
 			// milo is already angry with you, bad response
 			else {
 				quickMilo(text.realizationNeut, 'speech/realizationNeut.wav');
 				var wait3 = setTimeout(function() {
-
-					// $('#skip').unbind('click');
-					// $('#skipButton').unbind('click');
-					$('#skip').show();
-					$('#skipButton').click(function() {
-						console.log(2);
-						ignore('#map');
-						clearTimeout(wait3);
-					});
 					$('#miloInteraction').hide();
 					$('#skip').hide();
 					$('#map').show();
-				}, 12500)
+				}, 12500);
+				// click the skip button
+				$('#skip').unbind('click');
+				$('#skipButton').unbind('click');
+				$('#skipButton').click(function() {
+					console.log(4);
+					ignore('#map');
+					clearTimeout(wait3);
+				});
 			};		
 		}
 
