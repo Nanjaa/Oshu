@@ -26,6 +26,7 @@ function randomizeQuests() {
 // ------------------------------------------------------
 
 function lifeEvent(minutesLost) {
+	console.log('hello');
 // calculate loss
 
 	// first, the timer
@@ -122,14 +123,6 @@ function showContent(content, script) {
 function hideContent(content) {
 	$(content).remove();	
 }
-
-$('#myShip').click(function() {
-	hideContent('#lunedaContent');
-	hideContent('#kanedosContent');
-	hideContent('#tyrianneContent');
-	hideContent('#kaprikaContent');
-	hideContent('#aliNadaContent');
-})
 
 // ------------------------------------------------------
 // 					PAY MONEY
@@ -328,11 +321,6 @@ function changeLocation(newLocation, clickReturn, clickShip) {
 	}
 };
 
-$('#myShip').click(function() {
-	go = true;
-	changeLocation('#map', false, true);
-});
-
 // ------------------------------------------------------
 // 				CONVERSATION FUNCTIONS
 // ------------------------------------------------------
@@ -450,4 +438,18 @@ $('.clickable').click(function() {
 });
 $('.return').click(function() {
 	$('.option').hide();
+});
+
+// ------------------------------------------------------
+// 					CLICK ON MY SHIP
+// ------------------------------------------------------
+
+$('#myShip').click(function() {
+	go = true;
+	changeLocation('#map', false, true);
+	hideContent('#lunedaContent');
+	hideContent('#kanedosContent');
+	hideContent('#tyrianneContent');
+	hideContent('#kaprikaContent');
+	hideContent('#aliNadaContent');
 });

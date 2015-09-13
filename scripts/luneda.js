@@ -875,6 +875,7 @@ function robotWait(text1, text2) {
 		if($('#interactionText').text() == text1) {
 			clearInterval(wait4);
 			var wait5 = setTimeout(function() {
+				lifeEvent(1);
 				$('#lunedaMechanicMenu').fadeOut(1000);
 				$('#lunedaMechanicMenu').fadeIn(1000);
 				var wait6 = setTimeout(function() {
@@ -888,12 +889,10 @@ function robotWait(text1, text2) {
 $('#lunedaGeneralRobot').click(function() {
 	if(go) {
 		if(Oshu.items.brokenRobot) {
-			lifeEvent(1);
 			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
 			robotWait(generalText.yesRobot, generalText.yesRobotEnd);
 		}
 		else {
-			lifeEvent(1);
 			displayOptions(generalText.introNoRobot, generalText.noRobotOptions, 20, generalText.yesNoRobot, generalText.no, generalText.noCoins);
 			robotWait(generalText.yesNoRobot, generalText.yesNoRobotEnd);
 		}
