@@ -84,6 +84,7 @@ $('#ticketGuy').click(function() {
 				if($('#interactionText').text() == kanedomeText.yes) {
 					clearInterval(wait);
 					var hold = setTimeout(function() {
+						lifeEvent(4);
 						completeItem(Oshu.quests[1][1][0], Oshu.questSpeech.kanedos1);	
 						watched = true;				
 					}, 1500);			
@@ -119,6 +120,7 @@ $('#camelGuy').click(function() {
 			if($('#interactionText').text() == camelText.yes) {
 				clearInterval(hold);
 				var wait = setTimeout(function() {
+					lifeEvent(1);
 					completeItem(Oshu.quests[1][1][2], Oshu.questSpeech.kanedos3);
 				}, 1500) 
 			}
@@ -292,6 +294,7 @@ $('#apprentice').click(function() {
 							if($('#interactionText').text() == barText.sympathyConvince) {
 								clearInterval(check);
 								var wait = setTimeout(function() {
+									lifeEvent(1);
 									completeItem(Oshu.quests[1][1][1], Oshu.questSpeech.kanedos2);								
 								}, 2000);
 							}

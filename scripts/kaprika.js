@@ -119,6 +119,7 @@ $('#fortuneTeller').click(function() {
 				$('.option').hide();
 				$('#interactionText').writeText(mysteryText.lifePools);
 				var timeout = setTimeout(function() {
+					lifeEvent(4);
 					completeItem(Oshu.quests[3][1][1], Oshu.questSpeech.kaprika2);
 				}, 2000)
 			}
@@ -202,6 +203,7 @@ $('.treeGoons').click(function() {
 				var timeout = setTimeout(function() {
 					$('#interactionText').writeText(treeText.sleepEnd);
 					var wait = setTimeout(function() {
+						lifeEvent(1);
 						completeItem(Oshu.quests[3][1][2], Oshu.questSpeech.kaprika3);
 					}, 2200)
 				}, 3000);

@@ -314,6 +314,7 @@ $('#closerSeas').click(function() {
 	console.log(Oshu.currentLocation);
 	if(go) {
 		if(Oshu.items.electroSuit) {
+			lifeEvent(2);
 			completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda1);
 			$('#skip').unbind('click');
 			$('#skipButton').unbind('click');
@@ -778,6 +779,7 @@ $('#weatherman').click(function() {
 						if(Oshu.coins >= 1000) {
 							$('#interactionText').writeText(weatherText.coins);
 							payMoney(1000);
+							lifeEvent(3);
 							completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
 							weatherComplete = true;
 						}
@@ -796,6 +798,7 @@ $('#weatherman').click(function() {
 						var wait = setInterval(function() {
 							if($('#interactionText').text() == weatherText.specimen) {
 								var hold = setTimeout(function() {
+									lifeEvent(3);
 									completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda2);
 								}, 2000);
 							};
@@ -837,18 +840,22 @@ var shutoffText = {
 	no: "Come back anytime!"
 }
 
-// $('#lunedaLifecycleAdd').click(function() {
-// 	if(go) {
-// 		twoOptions(shutoffText.shutoffIntro, 'Yes', 'No');
+$('#lunedaLifecycleAdd').click(function() {
+	if(go) {
+		console.log(1);
+		lifeEvent(-15);	
+	// 	displayOptions(generalText.introRobot, generalText.robotOptions, 15, generalText.yesRobot, generalText.no, generalText.noCoins);
 
-// 		$('#optionOne').unbind('click');
-// 		$('#optionOne').click(function() {
+	// 	var wait7 = setInterval(function() {
+	// 		if($('#interactionText').text() == generalText.yesRobot) {
+	// 			lifeEvent(-15);				
+	// 		}
+	// 	}, 1)
 
-// 		});
-// 		$()
-// 		lifeEvent(-15);		
-// 	};
-// });
+	// 	});
+	// 	$()		
+	};
+});
 
 var generalText = {
 	introRobot: "I see you have a broken robot in need of fixing! 20 coins will do 'ya!",
@@ -859,17 +866,36 @@ var generalText = {
 	yesRobot: "Alright, hand him over, and give me just a sec...",
 	yesRobotEnd: "Here ya go. Bright and shiny like new!",
 	yesNoRobot: "You're gonna feel like a brand new robot!",
-	yesRobotEnd: "You return to your ship, feeling like new. There's even a skip in your step.",
+	yesNoRobotEnd: "An hour later, and you're feeling fantastic! There's even a skip in your step.",
 	no: "That's fine."
 }
+
+function robotWait(text1, text2) {
+	var wait4 = setInterval(function() {
+		if($('#interactionText').text() == text1) {
+			clearInterval(wait4);
+			var wait5 = setTimeout(function() {
+				$('#lunedaMechanicMenu').fadeOut(1000);
+				$('#lunedaMechanicMenu').fadeIn(1000);
+				var wait6 = setTimeout(function() {
+					$('#interactionText').writeText(text2);
+				}, 2000);
+			}, 1500);
+		};
+	}, 1);
+};
 
 $('#lunedaGeneralRobot').click(function() {
 	if(go) {
 		if(Oshu.items.brokenRobot) {
+			lifeEvent(1);
 			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
+			robotWait(generalText.yesRobot, generalText.yesRobotEnd);
 		}
 		else {
+			lifeEvent(1);
 			displayOptions(generalText.introNoRobot, generalText.noRobotOptions, 20, generalText.yesNoRobot, generalText.no, generalText.noCoins);
+			robotWait(generalText.yesNoRobot, generalText.yesNoRobotEnd);
 		}
 	};
 });

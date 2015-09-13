@@ -29,11 +29,12 @@ function lifeEvent(minutesLost) {
 // calculate loss
 
 	// first, the timer
-	var currentTime = $('#minutes').text();
-	var newTime = currentTime - minutesLost;
+	var currentTime = $('#minutes').text(),
+		newTime = currentTime - minutesLost,
+		bar = minutesLost * 60;		
 
 	// next, the life bar
-	var bar = minutesLost * 60;
+
 	var remainingLife = Oshu.remainingLife;
 	Oshu.remainingLife = remainingLife - bar;
 	
@@ -41,6 +42,8 @@ function lifeEvent(minutesLost) {
 	var percent = ((Oshu.remainingLife/3600)*100) + "%";
 	$('#life').css('width', percent);
 	$('#minutes').text(newTime);
+
+	// sync it with 
 };
 
 // ------------------------------------------------------

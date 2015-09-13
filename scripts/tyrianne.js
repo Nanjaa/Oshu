@@ -32,6 +32,7 @@ $('pre').click(function() {
 	switch(location) {
 		case 'library': 
 			if(Oshu.items.libraryPass) {
+				lifeEvent(3);
 				completeItem(Oshu.quests[2][1][0], Oshu.questSpeech.tyrianne1);
 			}
 			else {
@@ -116,6 +117,7 @@ $('#poorManClose').click(function() {
 				else if(poorStatus == 'giveFruit') {
 					endConversation(poorText.philosophers);
 					var timeout = setTimeout(function() {
+						lifeEvent(2);
 						completeItem(Oshu.quests[2][1][2], Oshu.questSpeech.tyrianne3);
 					}, 2000);
 				}	
