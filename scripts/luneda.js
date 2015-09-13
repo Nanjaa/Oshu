@@ -9,42 +9,41 @@ $('.lunedaCity').click(function() {
 // takes you back to the city map from any city details
 $('.return').unbind('click');
 $('.return').click(function() {
-	console.log(Oshu.currentLocation);
+	$('.option').hide();
 	go = true;
 	$(Oshu.currentLocation).hide();
 
 	if(Oshu.currentLocation == '.rentalDetails') {
-		console.log(1);
-		$('.beachDetails').show();	
+		$('.beachDetails').show();
+		$('#interactionText').writeText(beachText.welcome);
 		changeLocation('#beach', true);	
 	}
 	else if(Oshu.currentLocation == '.drinkStand') {
-		console.log(2);
 		$('.beachDetails').show();	
+		$('#interactionText').writeText(beachText.welcome);
 		changeLocation('#beach', true);	
 	}
 	else if(Oshu.currentLocation == '.fruitStand') {
-		console.log(3);
 		$('.theMarkets').show();
 		$('.marketDetails').show();	
+		$('#interactionText').writeText(marketText.marketWelcome);
 		changeLocation('#lunedaMap', true);	
 	}
 	else if(Oshu.currentLocation == '.souvenirStand') {
-		console.log(4);
 		$('.theMarkets').show();
 		$('.marketDetails').show();
+		$('#interactionText').writeText(marketText.marketWelcome);
 		changeLocation('.theMarkets', true);	
 	}
 	else if(Oshu.currentLocation == '.clothesStand') {
-		console.log(5);
 		$('.theMarkets').show();
 		$('.marketDetails').show();
+		$('#interactionText').writeText(marketText.marketWelcome);
 		changeLocation('.theMarkets', true);	
 	}
 	else {
 		$('.cityDetails').hide();
 		$('.return').hide();
-		console.log(6);
 		$('#lunedaMap').show();	
 		changeLocation('.theMarkets', true);		
 	};
@@ -278,87 +277,93 @@ $('#mysteriousMan').click(function() {
 			case 'rejected':
 				twoOptions(tikiText.questReturnAccept, 'Well, yeah!', 'Nevermind.');
 				break;
-		};		
-	}
-});
+		};	
+		
+		$('#optionOne').unbind('click');
+		$('#optionOne').click(function() {
+			if(go) {
+				switch(manStatus) {
+					case 'listening':
+						console.log(1);
+						$('#interactionText').writeText(tikiText.questIntro);
+						var robot1 = setInterval(function() {
+							if($('#interactionText').text() == tikiText.questIntro) {
+								clearInterval(robot1);
+								var robot2 = setTimeout(function() {
+									$('#interactionText').text('');
+									oneOption(tikiText.robotDescription, "Why can't you do this yourself?");
+								}, 3000)
+							};
+						}, 1);
+						manStatus = 'yourself';
+						break;
+					case 'yourself':
+						console.log(2);
+						$('#interactionText').writeText(tikiText.questDescription);
+						var robot3 = setInterval(function() {
+							if($('#interactionText').text() == tikiText.questDescription) {
+								clearInterval(robot3);
+								var robot4 = setTimeout(function() {
+									$('#interactionText').text('');
+									twoOptions(tikiText.questInquiry, "I'm in.", "what");
+								}, 3000)
+							};
+						}, 1);
+						manStatus = 'inquiry';
+						break;
+					case 'inquiry': 
+						console.log(3);
+						endConversation(tikiText.questYes);
+						// adds broken robot
+						Oshu.items.brokenRobot = true;
+						$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
+						// now you can select the robot
+						$('#brokenRobot').click(function() {
+							inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
+						});
+						manStatus = 'accepted';
+						break;
+					case 'rejected': 
+						console.log(4);
+						endConversation(tikiText.questYes);
+						// adds broken robot
+						Oshu.items.brokenRobot = true;
+						$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
+						// now you can select the robot
+						$('#brokenRobot').click(function() {
+							inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
+						});
+						manStatus = 'accepted';
+						break;
+				};		
+			};
+		});
 
-$('#optionOne').click(function() {
-	if(go) {
-		switch(manStatus) {
-			case 'listening':
-				$('#interactionText').writeText(tikiText.questIntro);
-				var robot1 = setInterval(function() {
-					if($('#interactionText').text() == tikiText.questIntro) {
-						clearInterval(robot1);
-						var robot2 = setTimeout(function() {
-							$('#interactionText').text('');
-							oneOption(tikiText.robotDescription, "Why can't you do this yourself?");
-						}, 3000)
-					};
-				}, 1);
-				manStatus = 'yourself';
-				break;
-			case 'yourself':
-				$('#interactionText').writeText(tikiText.questDescription);
-				var robot3 = setInterval(function() {
-					if($('#interactionText').text() == tikiText.questDescription) {
-						clearInterval(robot3);
-						var robot4 = setTimeout(function() {
-							$('#interactionText').text('');
-							twoOptions(tikiText.questInquiry, "I'm in.", "what");
-						}, 3000)
-					};
-				}, 1);
-				manStatus = 'inquiry';
-				break;
-			case 'inquiry': 
-				endConversation(tikiText.questYes);
-				// adds broken robot
-				Oshu.items.brokenRobot = true;
-				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
-				// now you can select the robot
-				$('#brokenRobot').click(function() {
-					inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
-				});
-				manStatus = 'accepted';
-				break;
-			case 'rejected': 
-				endConversation(tikiText.questYes);
-				// adds broken robot
-				Oshu.items.brokenRobot = true;
-				$('.inventoryList').append('<li class="inventoryItem" id="brokenRobot">Broken Robot</li>');				
-				// now you can select the robot
-				$('#brokenRobot').click(function() {
-					inventoryDescription('#brokenRobot', 'Broken Robot', Oshu.description.brokenRobot);
-				});
-				manStatus = 'accepted';
-				break;
-		};		
+		$('#optionTwo').unbind('click');
+		$('#optionTwo').click(function() {
+			if(go) {
+				switch(manStatus) {
+					case 'inquiry':
+						manStatus = 'rejected';
+						endConversation(tikiText.questNo);
+						break;
+					case 'rejected':
+						endConversation(tikiText.questNo);
+						break;
+				};	
+			};
+		});
 	};
 });
-
-$('#optionTwo').click(function() {
-	if(go) {
-		switch(manStatus) {
-			case 'inquiry':
-				manStatus = 'rejected';
-				endConversation(tikiText.questNo);
-				break;
-			case 'rejected':
-				endConversation(tikiText.questNo);
-				break;
-		}		
-	}
-})
 
 //************************ interact with the sea ************************
 
 $('#closerSeas').click(function() {
-	console.log(Oshu.currentLocation);
 	if(go) {
 		if(Oshu.items.electroSuit) {
 			lifeEvent(2);
 			completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda1);
+			beachEnd = true;
 			$('#skip').unbind('click');
 			$('#skipButton').unbind('click');
 			$('#skipButton').click(function() {
@@ -366,15 +371,14 @@ $('#closerSeas').click(function() {
 				$('#beach').show();
 				endSpeech();
 				$('#interactionText').writeText(beachText.suitReturn);
-				beachEnd = true;
+				$('#electroSuit').parent().remove();
+				Oshu.items.electroSuit = false;
 			});
 		}
 		else {
 			$('#interactionText').writeText(beachText.cantSwim);
-		}		
-	}
-	else {
-	}
+		};	
+	};
 })
 
 
@@ -636,7 +640,7 @@ var danceText = {
 	barryIntro: "Oh, the Intergalactic Library? I loved working there. It was one of my favorite jobs.",
 	barryOffer: "Only if you can answer my riddle!",
 	barryRiddle: "It runs and runs but can never flee. It is often watched but never sees. When long, it brings boredom, and when short, it brings fear. What is it?",
-	barryWrong: "Incorrect! It's TIME! That was fun, wasn't it? But I feel guilty, I shouldn't not let you come because you couldn't guess it... Here, just take this library pass.",
+	barryWrong: "Incorrect!",
 	barryRight: "DING DING DING! You are correct! That was fun, wasn't it? Alright, you answered correctly, here's your library pass.",
 	barryGoodbye: "Go use your library pass! You won't believe how amazing it is there!"
 }
@@ -660,13 +664,19 @@ $('#danceHall').click(function() {
 
 var dancerSpeech = 1;
 $('#dancer1').click(function() {
-	femVoice2();
+	if(go) {
+		femVoice2();		
+	}
 });
 $('#dancer2').click(function() {
-	femVoice3();
+	if(go) {
+		femVoice3();		
+	}
 });
 $('#dancer3').click(function() {
-	maleVoice();
+	if(go) {
+		maleVoice();		
+	}
 });
 $('.dancer').click(function() {
 	if(go) {
@@ -714,28 +724,24 @@ $('#dancer4').click(function() {
 						break;
 						case 'alright':
 							dancerStatus = 'riddle';
-							$('#interactionText').writeText(danceText.barryRiddle);
-							var wait = setInterval(function() {
-								if($('#interactionText').text() == danceText.barryRiddle) {
-									clearInterval(wait);
-									var hold = setTimeout(function() {
-										$('#interactionText').text('');
-										$('#optionOne').show();
-										$('#optionTwo').show();
-										$('#optionOne').text('Your shadow?');
-										$('#optionTwo').text('Time?');
+							threeOptions(danceText.barryRiddle, 'Your shadow?', 'Time?', 'A Television?');
+							// $('#interactionText').writeText(danceText.barryRiddle);
+							// var wait = setInterval(function() {
+							// 	if($('#interactionText').text() == danceText.barryRiddle) {
+							// 		clearInterval(wait);
+							// 		var hold = setTimeout(function() {
+							// 			$('#interactionText').text('');
+							// 			$('#optionOne').show();
+							// 			$('#optionTwo').show();
+							// 			$('#optionOne').text('Your shadow?');
+							// 			$('#optionTwo').text('Time?');
 
-									}, 3000)
-								}
-							}, 1);
+							// 		}, 3000)
+							// 	}
+							// }, 1);
 						break;
 						case 'riddle':
 							endConversation(danceText.barryWrong);
-							$('.inventoryList').append('<li class="inventoryItem"><span id="libraryPass">Intergalactic Library Pass</span></li>');
-							// now you can select the library pass
-							$('#libraryPass').click(function() {
-								inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
-							});
 						break;
 					};				
 				};
@@ -752,6 +758,13 @@ $('#dancer4').click(function() {
 						inventoryDescription('#libraryPass', 'Intergalactic Library Pass', Oshu.description.libraryPass);
 					});						
 				}
+			});
+
+			$('#optionThree').unbind('click');
+			$('#optionThree').click(function() {
+				if(go) {
+					endConversation(danceText.barryWrong);
+				};
 			});
 		};		
 	};
@@ -794,7 +807,6 @@ $('#weatherman').click(function() {
 	if(go) {
 		maleVoice2();
 		if(Oshu.items.weatherSpecimen == false && weatherComplete == false) {
-			console.log(3);
 			twoOptions(weatherText.weathermanIntro, "Here you go", "I don't have that kind of money!");
 		}
 		else if(weatherComplete) {
@@ -968,7 +980,6 @@ var addText = {
 
 // Lifecycle Adjustment
 $('#lunedaLifecycleAdd').click(function() {
-	console.log(Oshu.remainingLife);
 	if(go) {
 		if(Oshu.remainingLife <= 2700) {
 			displayOptions(addText.intro, addText.options, 5, addText.yes, addText.no, addText.noCoins);

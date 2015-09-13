@@ -54,6 +54,7 @@ var go = true;
 function resetText() {
 	$(this).text('');
 	$('#interactionText').text('');
+	$('#miloSays').text('');
 }
 // var startText = true;
 
@@ -71,6 +72,7 @@ function resetText() {
 			click = false,
 			clicked = false,
 			elem = this;
+		console.log(content);
 
 		var textWait = setInterval(function() {
 			$(this).click(function() {
@@ -183,7 +185,7 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 
 function addItem(id, name, fullId, description) {
 	// adds item to inventory if not already there
-	$('.inventoryList').append("<li class='inventoryItem'><span id=" + id + ">" + name + "</span></li>");
+	$('.inventoryList').append("<li class='inventoryItem'><span class='clickInventory' id=" + id + ">" + name + "</span></li>");
 
 	// now you can select the clothes
 	$(fullId).click(function() {

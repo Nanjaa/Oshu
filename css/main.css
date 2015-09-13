@@ -221,7 +221,7 @@ li {
 .quest, .inventoryItem {
 	background-color: white;
 }
-.inventoryItem {
+.clickInventory {
 	cursor: pointer;
 }
 h1 {
