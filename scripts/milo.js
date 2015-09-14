@@ -245,6 +245,8 @@ $(document).ready(function() {
 		quickMilo(text.lunedaIntro, 'speech/lunedaIntro.wav', '#lunedaMap', 28000);
 		miloIntroduction(19500, 'luneda.html #lunedaContent', 'scripts/luneda.js');
 	}
+
+
 	function kanedosFirst() {
 		startKanedos = true;
 		changeLocation('#kanedosMap');
@@ -286,12 +288,15 @@ $(document).ready(function() {
 			};
 		});
 	}
+
+
+
 	function tyrianneFirst() {
 		changeLocation('#tyrianneMap');
 		$('#miloInteraction').show();
 		$('#miloSays').writeText(text.tyrianneIntro);
 		$('#skip').show();
-
+		$('#skipButton').unbind('click');
 		$('#skipButton').click(function() {
 			showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 			ignore();

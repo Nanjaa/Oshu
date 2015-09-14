@@ -210,10 +210,11 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 						$('#interactionText').writeText(needMore);
 					}
 				});
+
 				$('#optionTwo').unbind('click');
 				$('#optionTwo').click(function() {
 					dontGo = false;
-					$('.options').hide();
+					$('.option').hide();
 					$('#interactionText').writeText(no);
 				});
 			};

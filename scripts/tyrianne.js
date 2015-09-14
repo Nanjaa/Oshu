@@ -103,20 +103,21 @@ $('pre').click(function() {
 				$('#interactionText').writeText(marketText.intro)
 			}
 		break;
-		// case 'tyrianneMechanic':
-		// 	changeLocation('.tyrianneMechanic');
-		// 	$('.tyrianneMechanic').show();
-		// break;
-		// case 'poorMan':
-		// 	changeLocation('.poorMan');
-		// 	$('.poorMan').show();
-		// 	$('#interactionText').writeText(poorText.intro);
-		// break;
-		// case 'tyrianneJewelry':
-		// 	changeLocation('.tyrianneJewelry');
-		// 	$('.tyrianneJewelry').show();
-		// 	$('#interactionText').writeText(jewelryText.intro);
-		// break;
+		case 'tyrianneMechanic':
+			changeLocation('.tyrianneMechanic');
+			$('.tyrianneMechanic').show();
+			$('#interactionText').writeText()
+		break;
+		case 'poorMan':
+			changeLocation('.poorMan');
+			$('.poorMan').show();
+			$('#interactionText').writeText(poorText.intro);
+		break;
+		case 'tyrianneJewelry':
+			changeLocation('.tyrianneJewelry');
+			$('.tyrianneJewelry').show();
+			$('#interactionText').writeText(jewelryText.intro);
+		break;
 	};
 });
 
@@ -127,73 +128,74 @@ $('pre').click(function() {
 // |															   |
 // |===============================================================|
 // |_______________________________________________________________|
-// var poorStatus = 'intro';
+var poorStatus = 'intro';
 
-// var poorText = {
-// 	intro: "You walk up to a man with a cardboard sign. He looks incredibly hungry.",
-// 	manIntro: "I'm sorry to ask, but do you have any food? I wish there was something I could give you in return...",
-// 	yesFoodLie: "I pity the man who lies and creates false excitement.",
-// 	yesFoodTruth: "Oh, bless your soul. Is there anything I can help you with? I have no money...",
-// 	ganifruitOnly: "Thank you so much, but I'm actually allergic to electange...",
-// 	philosophers: "I'm just an apprentice, but follow me. I will tell them of your good deed.",
-// 	noFood: "I understand, my friend. Travel happily and live well.",
-// 	end: "Thank you so much for your gift. I hope you enjoyed seeing the philosophers"
-// };
+var poorText = {
+	intro: "You walk up to a man with a cardboard sign. He looks incredibly hungry.",
+	manIntro: "I'm sorry to ask, but do you have any food? I wish there was something I could give you in return...",
+	yesFoodLie: "I pity the man who lies and creates false excitement.",
+	yesFoodTruth: "Oh, bless your soul. Is there anything I can help you with? I have no money...",
+	ganifruitOnly: "Thank you so much, but I'm actually allergic to electange...",
+	philosophers: "I'm just an apprentice, but follow me. I will tell them of your good deed.",
+	noFood: "I understand, my friend. Travel happily and live well.",
+	end: "Thank you so much for your gift. I hope you enjoyed seeing the philosophers"
+};
 
-// $('#poorManClose').unbind('click');
-// $('#poorManClose').click(function() {
-// 	console.log(1);
-// 	if(go) {
-// 		if(poorStatus == 'end') {
-// 			$('#interactionText').writeText(poorStatus.end);
-// 		}
-// 		else {
-// 			twoOptions(poorText.manIntro, "Yes, I do.", "No, I don't");
+$('#poorManClose').unbind('click');
+$('#poorManClose').click(function() {
+	console.log(1);
+	if(go) {
+		if(poorStatus == 'end') {
+			$('#interactionText').writeText(poorText.end);
+		}
+		else {
+			twoOptions(poorText.manIntro, "Yes, I do.", "No, I don't");
 
-// 			$('#optionOne').unbind('click');
-// 			$('#optionOne').click(function() {
-// 				if(poorStatus == 'intro') {
-// 					if(Oshu.items.ganifruit > 0) {
-// 						useItem(Oshu.items.ganifruit, '#ganifruitAmt');
-// 						oneOption(poorText.yesFoodTruth, "Actually, can you help me see the philosophers?");
-// 						poorStatus = 'giveFruit';
-// 					}
-// 					else if(Oshu.items.electange > 0) {
-// 						endConversation(poorText.ganifruitOnly);
-// 					}
-// 					else {
-// 						endConversation(poorText.yesFoodLie);
-// 					}				
-// 				}
-// 				else if(poorStatus == 'giveFruit') {
-// 					poorStatus = 'end';
-// 					endConversation(poorText.philosophers);
-// 					var timeout = setTimeout(function() {
-// 						lifeEvent(2);
-// 						completeItem(Oshu.quests[2][1][2], Oshu.questSpeech.tyrianne3);
+			$('#optionOne').unbind('click');
+			$('#optionOne').click(function() {
+				$('.option').hide();
+				if(poorStatus == 'intro') {
+					if(Oshu.items.ganifruit > 0) {
+						useItem(Oshu.items.ganifruit, '#ganifruitAmt');
+						oneOption(poorText.yesFoodTruth, "Actually, can you help me see the philosophers?");
+						poorStatus = 'giveFruit';
+					}
+					else if(Oshu.items.electange > 0) {
+						endConversation(poorText.ganifruitOnly);
+					}
+					else {
+						endConversation(poorText.yesFoodLie);
+					}				
+				}
+				else if(poorStatus == 'giveFruit') {
+					poorStatus = 'end';
+					endConversation(poorText.philosophers);
+					var timeout = setTimeout(function() {
+						lifeEvent(2);
+						completeItem(Oshu.quests[2][1][2], Oshu.questSpeech.tyrianne3);
 
-// 						$('#skip').unbind('click');
-// 						$('#skipButton').unbind('click');
-// 						$('#skipButton').click(function() {
-// 							$('.poorMan').show();
-// 							endSpeech();
-// 							$('#interactionText').writeText(poorText.end);
-// 						});		
-// 					}, 2000);
-// 				}	
-// 				else {
-// 					endConversation(poorText.end);
-// 				}
+						$('#skip').unbind('click');
+						$('#skipButton').unbind('click');
+						$('#skipButton').click(function() {
+							$('.poorMan').show();
+							endSpeech();
+							$('#interactionText').writeText(poorText.end);
+						});		
+					}, 2000);
+				}	
+				else {
+					endConversation(poorText.end);
+				}
+			});
 
-// 			});
-
-// 			$('#optionTwo').unbind('click');
-// 			$('#optionTwo').click(function() {
-// 				endConversation(poorText.noFood);
-// 			});
-// 		};		
-// 	}
-// });
+			$('#optionTwo').unbind('click');
+			$('#optionTwo').click(function() {
+				$('.option').hide();
+				endConversation(poorText.noFood);
+			});
+		};		
+	}
+});
 
 // ________________________________________________________________
 // | ==============================================================|
@@ -203,62 +205,63 @@ $('pre').click(function() {
 // |===============================================================|
 // |_______________________________________________________________|
 
-// var jewelryText = {
-// 	intro: "You walk into a jewelry store. It smells clean and the air is slightly cold.",
-// 	ladyIntro: "Welcome to my shop! My name is Mary. Point at whatever you want me to take down for you!",
-// 	advice1: "My friend works at the Intergalactic Library. He's on Luneda right now, though.",
-// 	advice2: "Sunstones are illegal to carry. It's a long story as to why. But you can only buy them on the black market now.",
-// 	purchase: "A bracelet! That beaded one you're looking at is 15 coins. Pretty cheap!",
-// 	options: "Do you want to buy the bracelet?",
-// 	noCoins: "I can only accept 15 coins. Nothing more, nothing less.",
-// 	yes: "Wonderful! Thank you for your purchase, miss!",
-// 	no: "Are you sure? It's so pretty!",
-// 	jewelryGoodbye: "I hope you like your bracelet!"
-// }
+var jewelryText = {
+	intro: "You walk into a jewelry store. It smells clean and the air is slightly cold.",
+	ladyIntro: "Welcome to my shop! My name is Mary. Point at whatever you want me to take down for you!",
+	advice1: "My friend works at the Intergalactic Library. He's on Luneda right now, though.",
+	advice2: "Sunstones are illegal to carry. It's a long story as to why. But you can only buy them on the black market now.",
+	purchase: "A bracelet! That beaded one you're looking at is 15 coins. Pretty cheap!",
+	options: "Do you want to buy the bracelet?",
+	noCoins: "I can only accept 15 coins. Nothing more, nothing less.",
+	yes: "Wonderful! Thank you for your purchase, miss!",
+	no: "Are you sure? It's so pretty!",
+	jewelryGoodbye: "I hope you like your bracelet!"
+}
 
-// var jewelryStatus = 1;
+var jewelryStatus = 1;
 
-// $('#tyrianneJewelry').click(function() {
-// 	jewelryStatus = 1;
-// });
+$('#tyrianneJewelry').click(function() {
+	jewelryStatus = 1;
+});
 
-// $('#tyrianneJewelryLady').click(function() {
-// 	if(go) {
-// 		switch(jewelryStatus) {
-// 			case 1:
-// 				$('#interactionText').writeText(jewelryText.ladyIntro);
-// 				jewelryStatus = 2;
-// 			break;
-// 			case 2:
-// 				$('#interactionText').writeText(jewelryText.advice1);
-// 				jewelryStatus = 3;
-// 			break
-// 			case 3:
-// 				$('#interactionText').writeText(jewelryText.advice2);
-// 				jewelryStatus = 1;
-// 			break;
-// 		};		
-// 	};
-// });
 
-// $('#tyrianneJewelryPieces').click(function() {
-// 	if(go) {
-// 		if(Oshu.items.tyrianneBracelet) {
-// 			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
-// 		}
-// 		else {
-// 			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
-// 			var wait = setInterval(function() {
-// 				if($('#interactionText').text() == jewelryText.yes) {
-// 					addItem('tyrianneBracelet', 'Bracelet from Tyrianne', '#tyrianneBracelet', Oshu.description.tyrianneBracelet);
-// 					Oshu.items.jewelry = true;
-// 					Oshu.items.tyrianneBracelet = true;
-// 					clearInterval(wait);
-// 				}
-// 			}, 1);			
-// 		};		
-// 	};
-// });
+$('#tyrianneJewelryLady').click(function() {
+	if(go) {
+		switch(jewelryStatus) {
+			case 1:
+				$('#interactionText').writeText(jewelryText.ladyIntro);
+				jewelryStatus = 2;
+			break;
+			case 2:
+				$('#interactionText').writeText(jewelryText.advice1);
+				jewelryStatus = 3;
+			break
+			case 3:
+				$('#interactionText').writeText(jewelryText.advice2);
+				jewelryStatus = 1;
+			break;
+		};		
+	};
+});
+
+$('#tyrianneJewelryPieces').click(function() {
+	if(go) {
+		if(Oshu.items.tyrianneBracelet) {
+			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
+		}
+		else {
+			displayOptions(jewelryText.purchase, jewelryText.options, 15, jewelryText.yes, jewelryText.no, jewelryText.noCoins);
+			var wait = setInterval(function() {
+				if($('#interactionText').text() == jewelryText.yes) {
+					addItem('tyrianneBracelet', 'Bracelet from Tyrianne', '#tyrianneBracelet', Oshu.description.tyrianneBracelet);
+					Oshu.items.jewelry = true;
+					Oshu.items.tyrianneBracelet = true;
+					clearInterval(wait);
+				}
+			}, 1);			
+		};		
+	};
+});
 
 // ________________________________________________________________
 // | ==============================================================|
@@ -283,7 +286,7 @@ var factoryText = {
 	quest: "Alright, fine. I'm guessing you know what this place is. Take this bottle and fill it with a fairy from Kaprika, and I'll let you in.",
 	acceptQuest: "Well, get to it. Here's that bottle I mentioned.",
 	questReturnUnfinished: "You know the deal. Fairy or nothin'.",
-	questReturnFinished: "Cool. Follow me, I'll take you inside."
+	questReturnFinished: "Cool. One second, I'll take you inside."
 };
 
 factoryStatus = 'intro';
@@ -292,83 +295,107 @@ $('#fuzzbuttDoorman').unbind('click');
 $('#fuzzbuttDoorman').click(function() {
 	if(go) {
 		$('.option').hide();
+		//This is the first conversation you have wth him.
 		if(factoryStatus == 'intro') {
+			console.log(1);
 			twoOptions(factoryText.goonIntro, "Maybe I can persuade you otherwise...", "I do have the proper authority.");
 			// select Option One
 			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
 				$('.option').hide();
-				if(factoryStatus == 'intro') {
-					twoOptions(factoryText.goonPersuade, "How about some coins?", "Any odd jobs you need finished?");				
-					factoryStatus = 'persuasion';
-				}
-				else if(factoryStatus == 'persuasion') {
-					twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
-					factoryStatus = 'bribe';
-				}
-				else if(factoryStatus == 'bribe') {
-					if(Oshu.coins >= 200) {
-						payMoney(200);
-						fuzzbuttEntry = true;
-						endConversation(factoryText.acceptBribe);
-						var timeout = setTimeout(function() {
-							$('#fuzzbuttDoorman').hide();
-							$('.fuzzbuttDetails').show();
-							$('#interactionText').writeText(marketText.intro);
-						}, 3500);						
-					}
-					else {
-						endConversation(factoryText.noMoney);
+				switch(factoryStatus) {
+					case 'intro':
+						twoOptions(factoryText.goonPersuade, "How about some coins?", "Any odd jobs you need finished?");				
+						factoryStatus = 'persuasion';
+					break;
+					case 'persuasion':
+						twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
+						factoryStatus = 'bribe';
+					break;
+					case 'bribe':
+						if(Oshu.coins >= 200) {
+							payMoney(200);
+							fuzzbuttEntry = true;
+							endConversation(factoryText.acceptBribe);
+							var timeout = setTimeout(function() {
+								$('#fuzzbuttDoorman').hide();
+								$('.fuzzbuttDetails').show();
+								$('#interactionText').writeText(marketText.intro);
+							}, 3500);						
+						}
+						else {
+							endConversation(factoryText.noMoney);
+							factoryStatus = 'declined';
+						};
+					break;
+					case 'pressured':
+						threeOptions(factoryText.lie, "I'll pay you.", "I'll help you out.", "Nevermind.");
 						factoryStatus = 'declined';
-					};
-				}
-				else if(factoryStatus == 'pressured') {
-					threeOptions(factoryText.lie, "I'll pay you.", "I'll help you out.", "Nevermind.");
-					factoryStatus = 'declined';
-				}
-				else if(factoryStatus == 'declined') {
-					twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
-					factoryStatus = 'bribe';
-				}
-				else if(factoryStatus == 'quest') {
-					endConversation(factoryText.declineOffer);
-					factoryStatus = 'declined';
-				}
+					break;
+					case 'declined':
+						twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
+						factoryStatus = 'bribe';
+					break;
+					case 'quest':
+						endConversation(factoryText.declineOffer);
+						factoryStatus = 'declined';
+					break;
+				};
 			});	
-			// select Option Two
+			// // select Option Two
 			$('#optionTwo').unbind('click');
 			$('#optionTwo').click(function() {
 				$('.option').hide();
-				if(factoryStatus == 'intro') {
-					twoOptions(factoryText.authority, "I... uh... have it... somewhere...", "Okay, fine. I don't have the authority.");
-					factoryStatus = 'pressured';
-				}
-				else if(factoryStatus == 'pressured') {
-					threeOptions(factoryText.authorityAdmit, "I'll pay you.", "I'll help you out.", "Nevermind.");
-					factoryStatus = 'declined';
-				}
-				else if(factoryStatus == 'bribe') {
-					endConversation(factoryText.declineOffer);
-					factoryStatus = 'declined';
-				}
-				else if(factoryStatus == 'declined') {
-					twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
-					factoryStatus = 'quest';
-				}
-				else if(factoryStatus == 'persuasion') {
-					twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
-					factoryStatus = 'quest';
-				}
-				else if(factoryStatus == 'quest') {
-					endConversation(factoryText.acceptQuest);
-					addItem('emptyBottle', 'Empty Fairy Bottle', '#emptyBottle', Oshu.description.emptyBottle);
-					Oshu.items.emptyBottle = true;
+				switch(factoryStatus) {
+					case 'intro':
+						twoOptions(factoryText.authority, "I... uh... have it... somewhere...", "Okay, fine. I don't have the authority.");
+						factoryStatus = 'pressured';
+					break;
+					case 'pressured':
+						threeOptions(factoryText.authorityAdmit, "I'll pay you.", "I'll help you out.", "Nevermind.");
+						factoryStatus = 'declined';
+					break;
+					case 'bribe':
+						endConversation(factoryText.declineOffer);
+						factoryStatus = 'declined';
+					break;
+					case 'declined':
+						twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
+						factoryStatus = 'quest';
+					break;
+					case 'persuasion':
+						twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
+						factoryStatus = 'quest';
+					break;
+					case 'quest':
+						endConversation(factoryText.acceptQuest);
+						addItem('emptyBottle', 'Empty Fairy Bottle', '#emptyBottle', Oshu.description.emptyBottle);
+						Oshu.items.emptyBottle = true;
+						factoryStatus = 'inQuest';
+					break;
 				};
 			});
 		}
 		else if(factoryStatus == 'declined'){
+			console.log(2);
 			threeOptions(factoryText.declinedReturn, "I'll pay you.", "I'll help you out.", "Nevermind.");
 		}
+		else {
+			if(Oshu.items.fullBottle) {
+				$('#interactionText').writeText(factoryText.questReturnFinished);
+				fuzzbuttEntry = true;
+				var timeout = setTimeout(function() {
+					$('#fuzzbuttDoorman').hide();
+					$('.fuzzbuttDetails').show();
+					$('#interactionText').writeText(marketText.intro);
+				}, 3500);	
+			}
+			else if(Oshu.items.emptyBottle) {
+				$('#interactionText').writeText(factoryText.questReturnUnfinished);
+			}
+		}
+
+		$('#optionThree').unbind('click');
 		$('#optionThree').click(function() {
 			endConversation(factoryText.declineOffer);
 		});		
@@ -376,36 +403,45 @@ $('#fuzzbuttDoorman').click(function() {
 });
 
 
-// var marketText = {
-// 	intro: "Inside what was believed to be Fuzzbutt Factory is a black market, with stands full of illegal goods.",
-// 	sunstoneIntro: "A voice is heard through the shadows: 'Would you like to purchase a sunstone? 50 coins each...'",
-// 	displayOptions: "Would you like to buy a sunstone?",
-// 	yes: "Enjoy the sunstone, stranger....",
-// 	no: "Your choice, stranger...",
-// 	needMore: "That's not enough... Come back when you're serious about doing business here.",
-// 	marketReturn: "Limit 1 per customer..."
-// }
+var marketText = {
+	intro: "Inside what was believed to be Fuzzbutt Factory is a black market, with stands full of illegal goods.",
+	sunstoneIntro: "A voice is heard through the shadows: 'Would you like to purchase a sunstone? 50 coins each...'",
+	displayOptions: "Would you like to buy a sunstone?",
+	yes: "Enjoy the sunstone, stranger....",
+	no: "Your choice, stranger...",
+	needMore: "That's not enough... Come back when you're serious about doing business here.",
+	marketReturn: "Limit 1 per customer..."
+}
 
-// $('.fuzzbuttDetails').click(function() {
-// 	if(go) {
-// 		if(Oshu.items.sunstone) {
-// 			$('#interactionText').writeText(marketText.marketReturn);
-// 		}
-// 		else {
-// 			displayOptions(marketText.sunstoneIntro, marketText.displayOptions, 50, marketText.yes, marketText.no, marketText.needMore);
-// 			var wait = setInterval(function() {
-// 				if($('#interactionText').text() == marketText.yes) {
-// 					clearInterval(wait);
-// 					var hold = setTimeout(function() {
-// 						completeItem(Oshu.quests[2][1][1], Oshu.questSpeech.tyrianne2)
-// 					}, 2000);
-// 					addItem('sunstone', 'Sunstone', '#sunstone', Oshu.description.sunstone);
-// 					Oshu.items.sunstone = true;
-// 				};
-// 			}, 1);		
-// 		};		
-// 	};
-// });
+$('.fuzzbuttDetails').unbind('click');
+$('.fuzzbuttDetails').click(function() {
+	if(go) {
+		if(Oshu.items.sunstone) {
+			$('#interactionText').writeText(marketText.marketReturn);
+		}
+		else {
+			displayOptions(marketText.sunstoneIntro, marketText.displayOptions, 50, marketText.yes, marketText.no, marketText.needMore);
+			var wait = setInterval(function() {
+				if($('#interactionText').text() == marketText.yes) {
+					clearInterval(wait);
+					var hold = setTimeout(function() {
+						completeItem(Oshu.quests[2][1][1], Oshu.questSpeech.tyrianne2);
+						$('#skip').show();
+						$('#skipButton').unbind('click');
+						$('#skipButton').click(function() {
+							endSpeech();
+							$('.fuzzbutt').show();
+							$('.fuzzbuttDetails').show();
+							$('#interactionText').writeText(marketText.marketReturn);
+						});
+					}, 1500);
+					addItem('sunstone', 'Sunstone', '#sunstone', Oshu.description.sunstone);
+					Oshu.items.sunstone = true;
+				};
+			}, 1);		
+		};		
+	};
+});
 
 
 // ________________________________________________________________
@@ -494,5 +530,124 @@ $('#bookDisplay').click(function() {
 		else {
 			$('#interactionText').writeText(libraryText.end);
 		}		
+	};
+});
+
+// ________________________________________________________________
+// | ==============================================================|
+// |															   |
+// |						MECHANIC 							   |
+// |															   |
+// |===============================================================|
+// |_______________________________________________________________|
+
+
+// Shut off Lifecycle Program
+var shutoffText = {
+	intro: "You walk into the mechanic's shop, and see a menu with his options and prices.",
+	shutoffIntro: "If you'd like, I can turn off the Lifecycle Program, and you can go on living as long as you'd like.",
+	options: "Are you absolutely sure you want to shut off the Lifecycle Program? It will, in effect, end your travels.",
+	noCoins: "Sorry, but that's not enough to pay for that.",
+	yes: "Alright, one moment, I'll turn off that program of yours.",
+	no: "Come back anytime!"
+}
+
+$('#tyrianneLifecycleShutoff').unbind('click');
+$('#tyrianneLifecycleShutoff').click(function() {
+	if(go) {
+		displayOptions(shutoffText.shutoffIntro, shutoffText.options, 15, shutoffText.yes, shutoffText.no, shutoffText.noCoins);
+
+		var wait7 = setInterval(function() {
+			if($('#interactionText').text() == shutoffText.yes) {
+				clearInterval(wait7);
+				lifeEvent(-15);				
+			}
+		}, 1)	
+	};
+});
+
+var generalText = {
+	introRobot: "I see you have a broken robot in need of fixing! 20 coins will do 'ya!",
+	introNoRobot: "Would you like to feel fresh and new? Like a spa day for robots!",
+	robotOptions: "Would you like to fix the robot?",
+	noRobotOptions: "Would you like to be worked on?",
+	noCoins: "Sorry, but I'm gonna need more than that.",
+	yesRobot: "Alright, hand him over, and give me just a sec...",
+	yesRobotEnd: "Here ya go. Bright and shiny like new!",
+	yesNoRobot: "You're gonna feel like a brand new robot!",
+	yesNoRobotEnd: "An hour later, and you're feeling fantastic! There's even a skip in your step.",
+	no: "That's fine."
+}
+
+function robotWait(text1, text2) {
+	var wait4 = setInterval(function() {
+		if($('#interactionText').text() == text1) {
+			clearInterval(wait4);
+			var wait5 = setTimeout(function() {
+				lifeEvent(1);
+				$('#tyrianneMechanicMenu').fadeOut(1000);
+				$('#tyrianneMechanicMenu').fadeIn(1000);
+				replace = true;
+				var wait6 = setTimeout(function() {
+					$('#interactionText').writeText(text2);
+				}, 2000);
+			}, 1500);
+		};
+	}, 1);
+};
+
+var replace = false;
+
+// General Robot Repairs
+$('#tyrianneGeneralRobot').unbind('click');
+$('#tyrianneGeneralRobot').click(function() {
+	if(go) {
+		if(Oshu.items.brokenRobot) {
+			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
+			robotWait(generalText.yesRobot, generalText.yesRobotEnd);
+			var wait8 = setInterval(function() {
+				if(replace) {
+					clearInterval(wait8);
+					$('#brokenRobot').remove();
+					Oshu.items.brokenRobot = false;
+					Oshu.items.fixedRobot = true;
+					addItem('fixedRobot', 'Fixed Robot', '#fixedRobot', Oshu.description.fixedRobot);
+				}
+			}, 1);
+		}
+		else {
+			displayOptions(generalText.introNoRobot, generalText.noRobotOptions, 20, generalText.yesNoRobot, generalText.no, generalText.noCoins);
+			robotWait(generalText.yesNoRobot, generalText.yesNoRobotEnd);
+		}
+	};
+});
+
+
+var addText = {
+	intro: "We'll adjust the countdown on your Lifecycle Program! 15 coins!",
+	options: "Would you like to add time to your life?",
+	noCoins: "That's not enough money!",
+	yes: "15 minutes has been added to your life",
+	no: "Have a good day!",
+	noMore: "I'm sorry, but you're not low enough on time for me to change it!"
+}
+
+// Lifecycle Adjustment
+$('tyrianneLifecycleAdd').unbind('click');
+$('#tyrianneLifecycleAdd').click(function() {
+	if(go) {
+		if(Oshu.remainingLife <= 2700) {
+			displayOptions(addText.intro, addText.options, 5, addText.yes, addText.no, addText.noCoins);
+
+			var wait7 = setInterval(function() {
+				if($('#interactionText').text() == addText.yes) {
+					clearInterval(wait7);
+					lifeEvent(-15);				
+				}
+			}, 1)	
+		}
+		else {
+			$('#interactionText').writeText(addText.noMore);
+		}
 	};
 });
