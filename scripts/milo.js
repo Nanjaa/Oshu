@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
 
-         				   
 //         										____________________/{}\____________________
 // 										______/{{ WELCOME TO THE WONDERFUL WORLD OF MILO! }}\_______
 //  								  /{   The following dialogue objects are a bit confusing...    }\
@@ -9,9 +8,19 @@ $(document).ready(function() {
 //  						        |{    refer to the speech timeline, found in the speech folder    }|
 //   								  \_____________________________/{}\_____________________________/
 
+//    _____________________________________________
+//   //											  \\
+//  //											   \\
+// //											    \\
+// ||		STATUS - HOW CLOSE YOU ARE TO MILO 		||
+// \\											    //
+//  \\											   //
+//   \\___________________________________________//
+var status = 0;
+
 	// Let's say MILO only has one thing to say, not a full conversation...
 
-	function quickMilo(text, audio, map) {
+	function quickMilo(text, audio) {
 		$('#miloInteraction').show();
 		$('#miloResponse').hide();
 		$('#miloSays').writeText(text);
@@ -75,26 +84,16 @@ $(document).ready(function() {
 	// $('#bad').click(function() {
 	// 	bad();
 	// });
-	// $('#neut').unbind('click');
-	// $('#neut').click(function() {
-	// 	neut();
-	// });
 
 	function good() {
 		clearInteraction();
-		status = status - -1;
-		// I know how terrible this is, but it won't work correctly if I +1, it just adds a 1 after the previous numbers
+		status = status + 1;
 		console.log(status)			
 	}
 	function bad() {
 		clearInteraction();
 		status = status - 1;
 		console.log(status)			
-	}
-
-	function neut() {
-		clearInteraction();	
-		console.log(status);	
 	}
 
 	// conclude interaction 
@@ -116,7 +115,7 @@ $(document).ready(function() {
 
 	function concludeToLocation(timeout) {
 		$('#miloResponse').hide();
-		var concludeWait = setTimeout(function() {
+		var concludeWait2 = setTimeout(function() {
 			$('#miloInteraction').hide();
 			$('#map').show();
 			$('#skip').hide();
@@ -125,8 +124,8 @@ $(document).ready(function() {
 		$('#skipButton').unbind('click');
 		$('#skipButton').click(function() {
 			ignore('#map');
-			clearTimeout(concludeWait);
-			console.log('cleared');
+			clearTimeout(concludeWait2);
+			console.log('cleared2');
 		});
 	}
 
@@ -169,7 +168,6 @@ $(document).ready(function() {
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
 			if(go) {
-				neut();
 				ignore('#map');				
 			}
 		});
@@ -195,6 +193,7 @@ $(document).ready(function() {
 		$('#skipButton').unbind('click');
 		$('#skipButton').click(function() {
 			clearTimeout(wait);
+			console.log('cleared3')
 			$('#map').hide();
 			showContent(locationHtml, location);
 			ignore();
@@ -264,46 +263,70 @@ $(document).ready(function() {
 		};
 	});
 
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |															INTRODUCING														 |
+// |											  				   LUNEDA														 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 	function lunedaFirst() {
 		changeLocation('#lunedaMap');
-		quickMilo(text.lunedaIntro, 'speech/lunedaIntro.wav', '#lunedaMap', 28000);
+		quickMilo(text.lunedaIntro, 'speech/lunedaIntro.wav');
 		miloIntroduction(19500, 'luneda.html #lunedaContent', 'scripts/luneda.js');
 	}
 
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |															INTRODUCING														 |
+// |											  				  KANEDOS														 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 	function kanedosFirst() {
 		startKanedos = true;
 		changeLocation('#kanedosMap');
 		miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
-
 		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(go) {
-				if(status >= 1) {
-					quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3', '#kanedosMap');
-					miloIntroduction(3000, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+				good();
+				if(status >= -1) {
+					quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3');
+					miloIntroduction(2500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 				}
 				else {
-					quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3', '#kanedosMap');
-					miloIntroduction(6500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+					quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3');
+					miloIntroduction(6000, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 				}								
 			}
 		});
-
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(go) {
+				bad();
 				if(status >= -5) {
-					quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3', '#kanedosMap');
+					quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3');
 					miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 				}
 				else if(status < -5) {
-					quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3', '#kanedosMap');
+					quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3');
 					miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
 				}								
 			}
 		});
-
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
 			if(go) {
@@ -313,38 +336,52 @@ $(document).ready(function() {
 		});
 	}
 
-
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |															INTRODUCING														 |
+// |											  				  TYRIANNE														 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 	function tyrianneFirst() {
 		changeLocation('#tyrianneMap');
 		$('#miloInteraction').show();
 		$('#miloSays').writeText(text.tyrianneIntro);
-		$('#skip').show();
-		$('#skipButton').unbind('click');
-		$('#skipButton').click(function() {
-			showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
-			ignore();
-		});
-
 		play('speech/tyrianneIntro.wav');
-		var wait = setInterval(function() {
-			if($('#miloSays').text() == text.tyrianneIntro) {
-				clearInterval(wait);
-				setTimeout(function() {
-					$('#miloSays').text('');
-					$('#miloResponse').show();
-					$('#good').writeText(response.tyrianneGood);
-					$('#bad').writeText(response.tyrianneBad);
-					$('#neut').writeText(response.ignore);
-				}, 3000);
+		var wait4 = setTimeout(function() {
+			$('#dots').hide();
+			$('#miloSays').text('');
+			$('#miloResponse').show();
+			$('#good').writeText(response.tyrianneGood);
+			$('#bad').writeText(response.tyrianneBad);
+			$('#neut').writeText(response.ignore);
+		}, 28500);
+		$('#dots').show();
+		$('#dotsButton').click(function() {
+			if(go) {
+				clearTimeout(wait4);
+				$('#dots').hide();
+				$('#miloSays').text('');
+				$('#miloResponse').show();
+				$('#good').writeText(response.tyrianneGood);
+				$('#bad').writeText(response.tyrianneBad);
+				$('#neut').writeText(response.ignore);				
 			}
-		}, 1);
+
+		});
 
 		var tyrianneTimeline = 'tyrianneIntro';
 
 		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(go) {
+				good();
 				if(tyrianneTimeline == 'tyrianneIntro') {
 					missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
 					$('#miloResponse').hide();
@@ -353,14 +390,16 @@ $(document).ready(function() {
 				}
 				else {
 					missVsOshu(text.tyrianneBadGoodMiss, 'speech/tyrianneBadGoodMiss.mp3', text.tyrianneBadGoodOshu, 'speech/tyrianneBadGoodOshu.mp3', '','','');
-					miloIntroduction(10500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js')
+					miloIntroduction(11000, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+					$('#miloResponse').hide();
 				}								
 			}
 		});
 
-		$('#good').unbind('click');
+		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(go) {
+				bad();
 				if(tyrianneTimeline == 'tyrianneIntro') {
 					miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneBadNeut, response.ignore);
 					tyrianneTimeline = 'I am, miss';
@@ -375,6 +414,7 @@ $(document).ready(function() {
 
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
+			console.log('neut1');
 			if(go) {
 				if(tyrianneTimeline == 'tyrianneIntro') {
 					showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
@@ -383,12 +423,40 @@ $(document).ready(function() {
 			};
 		});
 	}
+
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |															INTRODUCING														 |
+// |											  				  KAPRIKA														 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 	function kaprikaFirst() {
 		changeLocation('#kaprikaMap');
 		$('#skip').show();
 		quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.wav', '#kaprikaMap');
 		miloIntroduction(19000, 'kaprika.html #kaprikaContent', 'scripts/kaprika.js');
 	}
+
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |															INTRODUCING														 |
+// |											  				  ALINADA														 |
+// |																															 |
+// |																															 |
+// |																															 |
+// |																															 |
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 	function aliNadaFirst() {
 		changeLocation('#aliNadaMap');
 		miloResponse(text.aliNadaIntro, 'speech/aliNadaIntro.mp3', response.aliNadaGoodOrBad, '', response.ignore);

@@ -124,17 +124,6 @@ var myLocation = {
 
 var sound = true;
 
-
-//    _____________________________________________
-//   //											  \\
-//  //											   \\
-// //											    \\
-// ||		STATUS - HOW CLOSE YOU ARE TO MILO 		||
-// \\											    //
-//  \\											   //
-//   \\___________________________________________//
-var status = 0;
-
 //    _____________________________________________
 //   //											  \\
 //  //											   \\
@@ -156,7 +145,7 @@ var text = {
 	// luneda interactions
 	lunedaIntro: "We have arrived on the planet Luneda. This planet is well known throughout the galaxy, as its peoples harness and reside with electricity unlike any other species in the galaxy. Here, you can visit the seas of electricity, and experience the unique culture through its series of small markets.",
 	// kanedos interactions
-	kanedosIntro: "Kanedos is known for its unique fighting styles. many of the natives began learning the martial art of their choice at a very young age. It is advisable to take extra caution when visiting this planet. I would suggest another route.",
+	kanedosIntro: "Kanedos is known for its unique fighting styles. many of the natives begin learning the martial art of their choice at a very young age. It is advisable to take extra caution when visiting this planet. I would suggest another route.",
 	kanedosThankGood: "I will see you upon your return.",
 	kanedosThankBad: "Oh I... well, you're welcome, miss. I wish you all the best.",
 	kanedosMiloGood: "With all due respect, it is in my programming to always make the user aware of any dangers that may reside on this or any other planet. I am not attempting to 'tell you what to do.'",
