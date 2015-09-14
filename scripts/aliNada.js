@@ -36,22 +36,21 @@ $('pre').click(function() {
 				$('.capitol').show();
 			}
 			else {
-				$('#aliNadaMap').show();
-				console.log('capitol nospec');
 				$('#interactionText').writeText(weatherText.noAccess);
+				changeLocation('.capitolGuard');
+				$('.capitolGuard').show();
 			}
 			break;
 		case 'stainedGlass':
 			if(Oshu.items.weatherSpecimen) {
-				console.log('glass spec');
 				$('#interactionText').writeText(weatherText.weather);
 				changeLocation('.capitol');
 				$('.capitol').show();
 			}
 			else {
-				$('.aliNadaCity').show();
-				console.log('glass no spec');
 				$('#interactionText').writeText(weatherText.noAccess);
+				changeLocation('.capitolGuard');
+				$('.capitolGuard').show();
 			}
 			break;
 		case 'cemetery':
@@ -65,6 +64,7 @@ $('pre').click(function() {
 			$('.cemetery').show();
 			break;
 		case 'aliNadaMechanic':
+			$('#interactionText').writeText(shutoffText.intro);
 			changeLocation('.aliNadaMechanic');
 			$('.aliNadaMechanic').show();
 			break;
@@ -128,12 +128,147 @@ $('#capitolWeatherman').click(function() {
 // |_______________________________________________________________|
 
 var graveText = {
-	intro: "You walk into the cemetery and find your brother's grave."
+	intro: "You walk into the cemetery and find your brother's grave.",
+	end: "You'll always miss your brother, but you know he'd be proud of you if he were here today."
 }
+
+var graveStatus = true;
 
 $('#brothersGrave').unbind('click');
 $('#brothersGrave').click(function() {
 	if(go) {
-		completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);		
-	}
+		if(graveStatus) {
+			graveStatus = false;
+			completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
+			$('#skip').show();
+			$('#skipButton').unbind('click');
+			$('#skipButton').click(function() {
+				endSpeech();
+				$('.cemetery').show();
+				$('#interactionText').writeText(graveText.end);
+			});			
+		}
+		else {
+			$('#interactionText').writeText(graveText.end);
+		};
+	};
+});
+
+// ________________________________________________________________
+// | ==============================================================|
+// |															   |
+// |						MECHANIC 							   |
+// |															   |
+// |===============================================================|
+// |_______________________________________________________________|
+
+
+// Shut off Lifecycle Program
+var shutoffText = {
+	intro: "You walk into the mechanic's shop, and see a menu with his options and prices.",
+	shutoffIntro: "If you'd like, I can turn off the Lifecycle Program, and you can go on living as long as you'd like.",
+	options: "Are you absolutely sure you want to shut off the Lifecycle Program? It will, in effect, end your travels.",
+	noCoins: "Sorry, but that's not enough to pay for that.",
+	yes: "Alright, one moment, I'll turn off that program of yours.",
+	no: "Come back anytime!"
+}
+
+$('#aliNadaLifecycleShutoff').unbind('click');
+$('#aliNadaLifecycleShutoff').click(function() {
+	if(go) {
+		displayOptions(shutoffText.shutoffIntro, shutoffText.options, 15, shutoffText.yes, shutoffText.no, shutoffText.noCoins);
+
+		var wait7 = setInterval(function() {
+			if($('#interactionText').text() == shutoffText.yes) {
+				clearInterval(wait7);
+				lifeEvent(-15);				
+			}
+		}, 1)	
+	};
+});
+
+var generalText = {
+	introRobot: "I see you have a broken robot in need of fixing! 20 coins will do 'ya!",
+	introNoRobot: "Would you like to feel fresh and new? Like a spa day for robots!",
+	robotOptions: "Would you like to fix the robot?",
+	noRobotOptions: "Would you like to be worked on?",
+	noCoins: "Sorry, but I'm gonna need more than that.",
+	yesRobot: "Alright, hand him over, and give me just a sec...",
+	yesRobotEnd: "Here ya go. Bright and shiny like new!",
+	yesNoRobot: "You're gonna feel like a brand new robot!",
+	yesNoRobotEnd: "An hour later, and you're feeling fantastic! There's even a skip in your step.",
+	no: "That's fine."
+}
+
+function robotWait(text1, text2) {
+	var wait4 = setInterval(function() {
+		if($('#interactionText').text() == text1) {
+			clearInterval(wait4);
+			var wait5 = setTimeout(function() {
+				lifeEvent(1);
+				$('#aliNadaMechanicMenu').fadeOut(1000);
+				$('#aliNadaMechanicMenu').fadeIn(1000);
+				replace = true;
+				var wait6 = setTimeout(function() {
+					$('#interactionText').writeText(text2);
+				}, 2000);
+			}, 1500);
+		};
+	}, 1);
+};
+
+var replace = false;
+
+// General Robot Repairs
+$('#aliNadaGeneralRobot').unbind('click');
+$('#aliNadaGeneralRobot').click(function() {
+	if(go) {
+		if(Oshu.items.brokenRobot) {
+			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
+			robotWait(generalText.yesRobot, generalText.yesRobotEnd);
+			var wait8 = setInterval(function() {
+				if(replace) {
+					clearInterval(wait8);
+					$('#brokenRobot').remove();
+					Oshu.items.brokenRobot = false;
+					Oshu.items.fixedRobot = true;
+					addItem('fixedRobot', 'Fixed Robot', '#fixedRobot', Oshu.description.fixedRobot);
+				}
+			}, 1);
+		}
+		else {
+			displayOptions(generalText.introNoRobot, generalText.noRobotOptions, 20, generalText.yesNoRobot, generalText.no, generalText.noCoins);
+			robotWait(generalText.yesNoRobot, generalText.yesNoRobotEnd);
+		}
+	};
+});
+
+
+var addText = {
+	intro: "We'll adjust the countdown on your Lifecycle Program! 15 coins!",
+	options: "Would you like to add time to your life?",
+	noCoins: "That's not enough money!",
+	yes: "15 minutes has been added to your life",
+	no: "Have a good day!",
+	noMore: "I'm sorry, but you're not low enough on time for me to change it!"
+}
+
+// Lifecycle Adjustment
+$('aliNadaLifecycleAdd').unbind('click');
+$('#aliNadaLifecycleAdd').click(function() {
+	if(go) {
+		if(Oshu.remainingLife <= 2700) {
+			displayOptions(addText.intro, addText.options, 5, addText.yes, addText.no, addText.noCoins);
+
+			var wait7 = setInterval(function() {
+				if($('#interactionText').text() == addText.yes) {
+					clearInterval(wait7);
+					lifeEvent(-15);				
+				}
+			}, 1)	
+		}
+		else {
+			$('#interactionText').writeText(addText.noMore);
+		}
+	};
 });

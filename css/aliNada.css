@@ -8,8 +8,8 @@
 
 #capitol {
 	color: #cccccc;
-	margin-left: 50px;
-	margin-top: 115px;
+	margin-left: 86px;	
+	margin-top: 130px;
 }
 #stainedGlass {
 	color: #68c6ff;
@@ -35,6 +35,11 @@
 	color: #8fc78a;
 	margin-left: 45px;
 	margin-top: 400px;
+}
+#capitolGuard {
+	color: #697cd6;
+	margin-left: 240px;
+	margin-top: 50px;
 }
 #capitolDesk1 {
 	color: #1d85b8;
