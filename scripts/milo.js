@@ -586,12 +586,12 @@ var status = 0;
 /////////////////////////////////////////////////
 // 					  		50% - The Novatacea
 		else if((finished > 0) && (novaTimeline = 'novaIntro')) {
-			fifty();
+			nova();
 		}
 /////////////////////////////////////////////////
 // 					 				75% - Family
 		else if((finished > 2) && (familyTimeline == 'familyIntro')) {
-			seventyFive();
+			family();
 		}
 /////////////////////////////////////////////////
 // 					            90% - The Goodbye
@@ -705,20 +705,21 @@ var status = 0;
 
 	function endFamilyBad() {
 		miloResponse(text.familyBad, 'speech/familyBad.mp3', '','','');
-		concludeInteraction(7000);	
+		concludeToMap(6500);	
 		$('#skip').show();
 		$('#skipButton').click(function() {
 			ignore('#map');
 		});
 	};
 
-	function seventyFive() {
+	function family() {
 		$('#map').hide();
 		missVsOshu(text.familyIntroMiss, 'speech/familyIntroMiss.mp3', text.familyIntroOshu, 'speech/familyIntroOshu.mp3', response.familyGood, response.familyBad, response.familyNeut);
 		
 		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(go) {
+				good();
 				if(familyTimeline == 'familyIntro') {
 					miloResponse(text.familyGood, 'speech/familyGood.mp3', response.familyGoodGood, response.familyGoodBad, response.familyGoodNeut);
 					familyTimeline = 'Its a lot of ups and downs';
@@ -744,7 +745,7 @@ var status = 0;
 				}
 				else if(familyTimeline == 'My brother') {
 					miloResponse(text.familyGoodGoodGoodGood, 'speech/familyGoodGoodGoodGood.mp3', '','','');
-					concludeInteraction(3000);
+					concludeToMap(2500);
 				}
 				else if(familyTimeline == 'It gives meaning') {
 					miloResponse('I see.', 'speech/familyneutGood.mp3', '','','');
@@ -758,17 +759,18 @@ var status = 0;
 				}
 				else if(familyTimeline == 'I do feel') {
 					quickMilo(text.familyNeutNeutGood, 'speech/familyNeutNeutGood.mp3');
-					concludeInteraction(2500);
+					concludeToMap(2500);
 				}				
 			}
 		});
 
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
+			bad();
 			if(go) {
 				if(familyTimeline == 'I do feel') {
 					quickMilo(text.familyNeutNeutBad, 'speech/familyNeutNeutBad.mp3');
-					concludeInteraction(3500);
+					concludeToMap(3500);
 				}
 				else {
 					endFamilyBad();
@@ -803,7 +805,7 @@ var status = 0;
 				}
 				else if(familyTimeline == 'Yes I always felt accepted') {
 					quickMilo(text.familyGoodGoodNeut, 'speech/familyGoodGoodNeut.mp3');
-					concludeInteraction(5500);
+					concludeToMap(5500);
 				}
 				else {
 					ignore('#map');
