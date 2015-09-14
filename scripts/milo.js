@@ -113,21 +113,21 @@ var status = 0;
 		});
 	}
 
-	function concludeToLocation(timeout) {
-		$('#miloResponse').hide();
-		var concludeWait2 = setTimeout(function() {
-			$('#miloInteraction').hide();
-			$('#map').show();
-			$('#skip').hide();
-		}, timeout);
-		$('#skip').show();
-		$('#skipButton').unbind('click');
-		$('#skipButton').click(function() {
-			ignore('#map');
-			clearTimeout(concludeWait2);
-			console.log('cleared2');
-		});
-	}
+	// function concludeToLocation(timeout) {
+	// 	$('#miloResponse').hide();
+	// 	var concludeWait2 = setTimeout(function() {
+	// 		$('#miloInteraction').hide();
+	// 		$('#map').show();
+	// 		$('#skip').hide();
+	// 	}, timeout);
+	// 	$('#skip').show();
+	// 	$('#skipButton').unbind('click');
+	// 	$('#skipButton').click(function() {
+	// 		ignore('#map');
+	// 		clearTimeout(concludeWait2);
+	// 		console.log('cleared2');
+	// 	});
+	// }
 
 	// skip back to the world map
 
@@ -173,13 +173,13 @@ var status = 0;
 		});
 	};
 
+// 			\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////
+// 			////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	
 
-    // _________________________________________//
-	//											//
-	//											//
-	//         PLANETARY  INTRODUCTIONS         //
-	//											//
-	//__________________________________________//
+//										 PLANETARY INTRODUCTIONS		
+
+// 			\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////
+// 			////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	// function that will wait for the speech to finish before loading the planet
 
@@ -523,12 +523,13 @@ var status = 0;
 		});
 	}
 
-    // _________________________________________//
-	//											//
-	//											//
-	//        MILO DISCOVERS YOUR SECRET        //
-	//											//
-	//__________________________________________//
+// 			\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////
+// 			////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	
+
+//									   CLICKING (RETURN TO SHIP)		
+
+// 			\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////
+// 			////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 	var startKanedos = false;
 
@@ -584,17 +585,17 @@ var status = 0;
 
 /////////////////////////////////////////////////
 // 					  		50% - The Novatacea
-		else if((finished == 1) && (fiftyTimeline = 'novaIntro')) {
+		else if((finished > 0) && (novaTimeline = 'novaIntro')) {
 			fifty();
 		}
 /////////////////////////////////////////////////
-// 					 				75% - FAMILY
-		else if((finished == 3) && (familyTimeline == 'familyIntro')) {
+// 					 				75% - Family
+		else if((finished > 2) && (familyTimeline == 'familyIntro')) {
 			seventyFive();
 		}
 /////////////////////////////////////////////////
-// 					  MILO DISCOVERS YOUR SECRET
-		else if((finished == 4) && (goodbyeTimeline == 'intro')) {
+// 					            90% - The Goodbye
+		else if(($('#minutes').text() < 10) && (goodbyeTimeline == 'intro')) {
 			eightyfive();
 		}
 		// Or you just go to the map
@@ -610,83 +611,86 @@ var status = 0;
 	//											//
 	//__________________________________________//
 
-	var fiftyTimeline = 'novaIntro';
+	var novaTimeline = 'novaIntro';
 
-	function fifty() {
+	function nova() {
 		$('#map').hide();
-		missVsOshu(text.novaIntroMiss, 'speech/novaIntroMiss', text.novaIntroOshu, 'speech/novaIntroOshu.mp3', response.novaGood, response.novaBad, response.novaNeut)
+		missVsOshu(text.novaIntroMiss, 'speech/novaIntroMiss.mp3', text.novaIntroOshu, 'speech/novaIntroOshu.mp3', response.novaGood, response.novaBad, response.novaNeut)
 		// What is it?
 
 		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(go) {
-				if(fiftyTimeline == 'novaIntro') {
+				good();
+				if(novaTimeline == 'novaIntro') {
 					miloResponse(text.novaGood, 'speech/novaGood.mp3', response.novaGoodGood, response.novaGoodBad, response.ignore);
-					fiftyTimeline = 'What is it';
+					novaTimeline = 'What is it';
 				}
-				else if(fiftyTimeline == 'What is it') {
+				else if(novaTimeline == 'What is it') {
 					missVsOshu(text.novaGoodGoodMiss, 'speech/novaGoodGoodMiss.mp3', text.novaGoodGoodOshu, 'speech/novaGoodGoodOshu.mp3', response.novaGoodGoodGood, response.novaGoodGoodBad, response.ignore);
-					fiftyTimeline = 'A what? Let me see.';
+					novaTimeline = 'A what? Let me see.';
 				}
-				else if(fiftyTimeline == 'I dont have time for this') {
+				else if(novaTimeline == 'I dont have time for this') {
 					miloResponse(text.novaGood, 'speech/novaGood.mp3', response.novaGoodGood, response.novaGoodBad, response.ignore);
-					fiftyTimeline = 'What is it';
+					novaTimeline = 'What is it';
 				}
-				else if(fiftyTimeline == 'Why would I care') {
+				else if(novaTimeline == 'Why would I care') {
 					if(knowledge.mortality == true) {
 						missVsOshu(text.novaBadGoodKnowsMiss, 'speech/novaBadGoodKnowsOshu.mp3', text.novaBadGoodKnowsMiss, 'novaBadGoodKnowsMiss.mp3', '', '', '')
-						concludeInteraction(7000);
+						concludeToMap(9500);
 					}
 					else {
 						miloResponse(text.novaBadGood, 'speech/novaBadGood.mp3', '','','');
-						concludeInteraction(7000);
+						concludeToMap(4500);
 					}
 				}
 				else if('A what? Let me see.') {
 					$('#miloSays').writeText(text.novaGoodGoodGood); 
 					play('speech/novaGoodGoodGood.mp3');
-					concludeInteraction(7000)
+					concludeToMap(12500)
 				};				
-			}
+			};
 		});
 
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(go) {
-				if(fiftyTimeline == 'novaIntro') {
+				bad();
+				if(novaTimeline == 'novaIntro') {
 					miloResponse(text.novaBad, 'speech/novaBad.mp3', response.novaBadGood, response.novaBadBad, response.ignore);
-					fiftyTimeline = 'Why would I care';
+					novaTimeline = 'Why would I care';
 				}
-				else if(fiftyTimeline == 'Why would I care') {
+				else if(novaTimeline == 'Why would I care') {
 					miloResponse(text.novaBadBad, 'speech/novaBadBad.mp3', '','','');
-					concludeInteraction(7000);	
+					concludeToMap(7500);	
 				}
-				else if(fiftyTimeline == 'What is it') {
+				else if(novaTimeline == 'What is it') {
 					miloResponse(text.novaGoodBad, 'speech/novaGoodBad.mp3', '','','');
-					concludeInteraction(7000);
+					concludeToMap(5500);
 				}
-				else if(fiftyTimeline == 'A what? Let me see.') {
+				else if(novaTimeline == 'A what? Let me see.') {
 					miloResponse(text.novaGoodGoodBad, 'speech/novaGoodGoodBad.mp3', '','','');
-					concludeInteraction(7000);
+					concludeToMap(5500);
 				}
-				else if(fiftyTimeline == 'I dont have time for this') {
+				else if(novaTimeline == 'I dont have time for this') {
 					miloResponse(text.novaNeutBad, 'speech/novaNeutBad.mp3', '','','');
-					concludeInteraction(7000);
-				}				
-			}
+					concludeToMap(3000);
+				};			
+			};
 		});
 
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
 			if(go) {
-				if(fiftyTimeline == 'novaIntro') {
+				if(novaTimeline == 'novaIntro') {
 					missVsOshu(text.novaNeutMiss, 'speech/novaNeutMiss.mp3', text.novaNeutOshu, 'speech/novaNeutOshu.mp3', response.novaNeutGood, response.novaNeutBad, response.ignore);
-					fiftyTimeline = 'I dont have time for this';
+					novaTimeline = 'I dont have time for this';
 				}
 				else {
-					concludeInteraction(7000);
-				}				
-			}
+					ignore();
+					concludeToMap(1);
+				};				
+			};
 		});
 	};
 
