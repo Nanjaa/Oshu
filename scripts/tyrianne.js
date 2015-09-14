@@ -9,7 +9,7 @@ $('.tyrianneCity').click(function() {
 // takes you back to the city map from any city details
 $('.return').unbind('click');
 $('.return').click(function() {
-	console.log(Oshu.currentLocation);
+	$('.option').hide();
 	// Returning from the library - it'll remind you you can't return before you can do so
 	if(Oshu.currentLocation == '.libraryShop') {
 		if(go) {
@@ -56,8 +56,8 @@ $('pre').click(function() {
 			if(Oshu.items.libraryPass) {
 				lifeEvent(3);
 				completeItem(Oshu.quests[2][1][0], Oshu.questSpeech.tyrianne1);
-				// Oshu.items.libraryPass = false;
-				// $('#libraryPass').remove();
+				Oshu.items.libraryPass = false;
+				$('#libraryPass').remove();
 
 				$('#skipButton').unbind('click');
 				$('#skipButton').click(function() {
@@ -82,27 +82,27 @@ $('pre').click(function() {
 					});
 				});
 			}
-			// else {
-			// 	changeLocation('.library');
-			// 	$('.library').show();
-			// 	$('#interactionText').writeText("The library is closed to the public. The building stands tall above you.");					
-			// }
+			else {
+				changeLocation('.library');
+				$('.library').show();
+				$('#interactionText').writeText("The library is closed to the public. The building stands tall above you.");
+			}
 
 		break;
-		// case 'fuzzbuttFactory':
-		// 	changeLocation('.fuzzbutt');
-		// 	$('.fuzzbutt').show();
-		// 	if(fuzzbuttEntry == false) {
-		// 		$('.fuzzbuttDetails').hide();
-		// 		$('#fuzzbuttDoorman').show();
-		// 		$('#interactionText').writeText(factoryText.intro);
-		// 	}
-		// 	else {
-		// 		$('.fuzzbuttDetails').show();
-		// 		$('#fuzzbuttDoorman').hide();
-		// 		$('#interactionText').writeText(marketText.intro)
-		// 	}
-		// break;
+		case 'fuzzbuttFactory':
+			changeLocation('.fuzzbutt');
+			$('.fuzzbutt').show();
+			if(fuzzbuttEntry == false) {
+				$('.fuzzbuttDetails').hide();
+				$('#fuzzbuttDoorman').show();
+				$('#interactionText').writeText(factoryText.intro);
+			}
+			else {
+				$('.fuzzbuttDetails').show();
+				$('#fuzzbuttDoorman').hide();
+				$('#interactionText').writeText(marketText.intro)
+			}
+		break;
 		// case 'tyrianneMechanic':
 		// 	changeLocation('.tyrianneMechanic');
 		// 	$('.tyrianneMechanic').show();
@@ -268,104 +268,112 @@ $('pre').click(function() {
 // |===============================================================|
 // |_______________________________________________________________|
 
-// var factoryText = {
-// 	intro: "The door to the factory is blocked by a huge, muscular man.",
-// 	goonIntro: "Nobody is allowed into the factory without authorization.",
-// 	goonPersuade: "Oh yeah? And how would you go about doing that?",
-// 	bribe: "I'll take it. 200 will get you in.",
-// 	acceptBribe: "Alright. Give me a second, I'll let you in...",
-// 	noMoney: "Hey! This isn't 200! Come on, man...",
-// 	declinedReturn: "Can I help you?",
-// 	authority: "Oh yeah? And what authority is that? Let me see your identification.",
-// 	authorityAdmit: "Yeah, I know. Now, can I help you?",
-// 	lie: "No, you don't. Now, can I help you?",
-// 	declineOffer: "Eh, whatever.",
-// 	quest: "Alright, fine. I'm guessing you know what this place is. Take this bottle and fill it with a fairy from Kaprika, and I'll let you in.",
-// 	acceptQuest: "Well, get to it. Here's that bottle I mentioned.",
-// 	questReturnUnfinished: "You know the deal. Fairy or nothin'.",
-// 	questReturnFinished: "Cool. Follow me, I'll take you inside."
-// };
+var factoryText = {
+	intro: "The door to the factory is blocked by a huge, muscular man.",
+	goonIntro: "Nobody is allowed into the factory without authorization.",
+	goonPersuade: "Oh yeah? And how would you go about doing that?",
+	bribe: "I'll take it. 200 will get you in.",
+	acceptBribe: "Alright. Give me a second, I'll let you in...",
+	noMoney: "Hey! This isn't 200! Come on, man...",
+	declinedReturn: "Can I help you?",
+	authority: "Oh yeah? And what authority is that? Let me see your identification.",
+	authorityAdmit: "Yeah, I know. Now, can I help you?",
+	lie: "No, you don't. Now, can I help you?",
+	declineOffer: "Eh, whatever.",
+	quest: "Alright, fine. I'm guessing you know what this place is. Take this bottle and fill it with a fairy from Kaprika, and I'll let you in.",
+	acceptQuest: "Well, get to it. Here's that bottle I mentioned.",
+	questReturnUnfinished: "You know the deal. Fairy or nothin'.",
+	questReturnFinished: "Cool. Follow me, I'll take you inside."
+};
 
-// factoryStatus = 'intro';
+factoryStatus = 'intro';
 
-// $('#fuzzbuttDoorman').click(function() {
-// 	if(go) {
-// 		if(factoryStatus == 'intro') {
-// 			twoOptions(factoryText.goonIntro, "Maybe I can persuade you otherwise...", "I do have the proper authority.");
-// 			$('#optionOne').click(function() {
-// 				if(factoryStatus == 'intro') {
-// 					twoOptions(factoryText.goonPersuade, "How about some coins?", "Any odd jobs you need finished?");				
-// 					factoryStatus = 'persuasion';
-// 				}
-// 				else if(factoryStatus == 'persuasion') {
-// 					twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
-// 					factoryStatus = 'bribe';
-// 				}
-// 				else if(factoryStatus == 'bribe') {
-// 					if(Oshu.coins >= 200) {
-// 						payMoney(200);
-// 						fuzzbuttEntry = true;
-// 						endConversation(factoryText.acceptBribe);
-// 						var timeout = setTimeout(function() {
-// 							$('#fuzzbuttDoorman').hide();
-// 							$('.fuzzbuttDetails').show();
-// 							$('#interactionText').writeText(marketText.intro);
-// 						}, 3500);						
-// 					}
-// 					else {
-// 						endConversation(factoryText.noMoney);
-// 						factoryStatus = 'declined';
-// 					};
-// 				}
-// 				else if(factoryStatus == 'pressured') {
-// 					threeOptions(factoryText.lie, "I'll pay you.", "I'll help you out.", "Nevermind.");
-// 					factoryStatus = 'declined';
-// 				}
-// 				else if(factoryStatus == 'declined') {
-// 					twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
-// 					factoryStatus = 'bribe';
-// 				}
-// 				else if(factoryStatus == 'quest') {
-// 					endConversation(factoryText.declineOffer);
-// 					factoryStatus = 'declined';
-// 				}
-// 			});	
-// 			$('#optionTwo').click(function() {
-// 				if(factoryStatus == 'intro') {
-// 					twoOptions(factoryText.authority, "I... uh... have it... somewhere...", "Okay, fine. I don't have the authority.");
-// 					factoryStatus = 'pressured';
-// 				}
-// 				else if(factoryStatus == 'pressured') {
-// 					threeOptions(factoryText.authorityAdmit, "I'll pay you.", "I'll help you out.", "Nevermind.");
-// 					factoryStatus = 'declined';
-// 				}
-// 				else if(factoryStatus == 'bribe') {
-// 					endConversation(factoryText.declineOffer);
-// 					factoryStatus = 'declined';
-// 				}
-// 				else if(factoryStatus == 'declined') {
-// 					twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
-// 					factoryStatus = 'quest';
-// 				}
-// 				else if(factoryStatus == 'persuasion') {
-// 					twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
-// 					factoryStatus = 'quest';
-// 				}
-// 				else if(factoryStatus == 'quest') {
-// 					endConversation(factoryText.acceptQuest);
-// 					addItem('emptyBottle', 'Empty Fairy Bottle', '#emptyBottle', Oshu.description.emptyBottle);
-// 					Oshu.items.emptyBottle = true;
-// 				};
-// 			});
-// 		}
-// 		else if(factoryStatus == 'declined'){
-// 			threeOptions(factoryText.declinedReturn, "I'll pay you.", "I'll help you out.", "Nevermind.");
-// 		}
-// 		$('#optionThree').click(function() {
-// 			endConversation(factoryText.declineOffer);
-// 		});		
-// 	};
-// });
+$('#fuzzbuttDoorman').unbind('click');
+$('#fuzzbuttDoorman').click(function() {
+	if(go) {
+		$('.option').hide();
+		if(factoryStatus == 'intro') {
+			twoOptions(factoryText.goonIntro, "Maybe I can persuade you otherwise...", "I do have the proper authority.");
+			// select Option One
+			$('#optionOne').unbind('click');
+			$('#optionOne').click(function() {
+				$('.option').hide();
+				if(factoryStatus == 'intro') {
+					twoOptions(factoryText.goonPersuade, "How about some coins?", "Any odd jobs you need finished?");				
+					factoryStatus = 'persuasion';
+				}
+				else if(factoryStatus == 'persuasion') {
+					twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
+					factoryStatus = 'bribe';
+				}
+				else if(factoryStatus == 'bribe') {
+					if(Oshu.coins >= 200) {
+						payMoney(200);
+						fuzzbuttEntry = true;
+						endConversation(factoryText.acceptBribe);
+						var timeout = setTimeout(function() {
+							$('#fuzzbuttDoorman').hide();
+							$('.fuzzbuttDetails').show();
+							$('#interactionText').writeText(marketText.intro);
+						}, 3500);						
+					}
+					else {
+						endConversation(factoryText.noMoney);
+						factoryStatus = 'declined';
+					};
+				}
+				else if(factoryStatus == 'pressured') {
+					threeOptions(factoryText.lie, "I'll pay you.", "I'll help you out.", "Nevermind.");
+					factoryStatus = 'declined';
+				}
+				else if(factoryStatus == 'declined') {
+					twoOptions(factoryText.bribe, "Alright, deal.", "No way!");
+					factoryStatus = 'bribe';
+				}
+				else if(factoryStatus == 'quest') {
+					endConversation(factoryText.declineOffer);
+					factoryStatus = 'declined';
+				}
+			});	
+			// select Option Two
+			$('#optionTwo').unbind('click');
+			$('#optionTwo').click(function() {
+				$('.option').hide();
+				if(factoryStatus == 'intro') {
+					twoOptions(factoryText.authority, "I... uh... have it... somewhere...", "Okay, fine. I don't have the authority.");
+					factoryStatus = 'pressured';
+				}
+				else if(factoryStatus == 'pressured') {
+					threeOptions(factoryText.authorityAdmit, "I'll pay you.", "I'll help you out.", "Nevermind.");
+					factoryStatus = 'declined';
+				}
+				else if(factoryStatus == 'bribe') {
+					endConversation(factoryText.declineOffer);
+					factoryStatus = 'declined';
+				}
+				else if(factoryStatus == 'declined') {
+					twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
+					factoryStatus = 'quest';
+				}
+				else if(factoryStatus == 'persuasion') {
+					twoOptions(factoryText.quest, "That's so unethical... I can't.", "SURE!");
+					factoryStatus = 'quest';
+				}
+				else if(factoryStatus == 'quest') {
+					endConversation(factoryText.acceptQuest);
+					addItem('emptyBottle', 'Empty Fairy Bottle', '#emptyBottle', Oshu.description.emptyBottle);
+					Oshu.items.emptyBottle = true;
+				};
+			});
+		}
+		else if(factoryStatus == 'declined'){
+			threeOptions(factoryText.declinedReturn, "I'll pay you.", "I'll help you out.", "Nevermind.");
+		}
+		$('#optionThree').click(function() {
+			endConversation(factoryText.declineOffer);
+		});		
+	};
+});
 
 
 // var marketText = {

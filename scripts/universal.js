@@ -396,22 +396,45 @@ function twoOptions(referenceText, option1, option2) {
 	}, 1);
 };
 function threeOptions(referenceText, option1, option2, option3) {
-	$('#interactionText').writeText(referenceText);
-	var wait = setInterval(function() {
-		if($('#interactionText').text() == referenceText) {
-			clearInterval(wait);
-			var timeout = setTimeout(function() {
+	if(dontGo !== true) {
+		$('#interactionText').writeText(referenceText);
+		dontGo = true;
+		var displayGo = false;
+
+		// the following chunk has to do with displaying the "do you want to buy" question
+		var wait3 = setTimeout(function() {
+			dontGo = false;
+			$('#interactionText').text('');
+			$('#optionOne').show();
+			$('#optionTwo').show();
+			$('#optionThree').show();
+			$('#optionOne').text(option1);
+			$('#optionTwo').text(option2);
+			$('#optionThree').text(option3);
+		}, 4000);					
+
+		// click your mouse button to skip the wait
+		$(this).click(function() {
+			var wait4 = setInterval(function() {
+				if($('#interactionText').text() == referenceText) {
+					clearInterval(wait4);
+					displayGo = true;
+				}
+			}, 1)
+			if(displayGo == true) {
+				displayGo = false;
+				clearTimeout(wait3);
+				dontGo = false;
 				$('#interactionText').text('');
 				$('#optionOne').show();
 				$('#optionTwo').show();
 				$('#optionThree').show();
 				$('#optionOne').text(option1);
 				$('#optionTwo').text(option2);
-				$('#optionThree').text(option3);				
-			}, 2000)
-
-		};
-	}, 1);
+				$('#optionThree').text(option3);
+			};
+		});
+	};
 };
 
 $('.option').click(function() {
