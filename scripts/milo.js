@@ -414,7 +414,6 @@ var status = 0;
 
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
-			console.log('neut1');
 			if(go) {
 				if(tyrianneTimeline == 'tyrianneIntro') {
 					showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
@@ -435,11 +434,10 @@ var status = 0;
 // |																															 |
 // |																															 |
 // |																															 |
-// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||3
 
 	function kaprikaFirst() {
 		changeLocation('#kaprikaMap');
-		$('#skip').show();
 		quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.wav', '#kaprikaMap');
 		miloIntroduction(19000, 'kaprika.html #kaprikaContent', 'scripts/kaprika.js');
 	}
@@ -466,6 +464,7 @@ var status = 0;
 		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(go) {
+				good();
 				if(aliTimeline == 'aliIntro') {
 					if(status >= 0) {
 						$('#bad').show();
@@ -484,8 +483,7 @@ var status = 0;
 				}
 				else if(aliTimeline == 'who') {
 					quickMilo(text.aliNadaGoodGoodGood, 'speech/aliNadaGoodGoodGood.mp3');
-					miloIntroduction(6500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
-					ignore();
+					miloIntroduction(6000, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
 				}								
 			}
 		});
@@ -493,6 +491,7 @@ var status = 0;
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(go) {
+				bad();
 				if(aliTimeline == 'so sorry') {
 					missVsOshu(text.aliNadaGoodBadMiss, 'speech/aliNadaGoodBadMiss.mp3', text.aliNadaGoodBadOshu, 'speech/aliNadaGoodBadOshu.mp3', '','','');
 					$('#miloResponse').hide();
@@ -500,7 +499,7 @@ var status = 0;
 				}
 				else if(aliTimeline == 'who') {
 					quickMilo(text.aliNadaGoodGoodBad, 'speech/aliNadaGoodGoodBad.mp3');
-					miloIntroduction(4500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
+					miloIntroduction(3500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
 				}								
 			}
 		});

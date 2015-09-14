@@ -178,7 +178,7 @@ var text = {
 	kaprikaIntro: "The planet Kaprika is unlike any other in this galaxy. A fantastical place of fairies, life pools, and trees that climb to the heavens, it is a dream materialized. A popular vacation destination, be advised of the pickpockets that walk the streets.",
 	// alinada interactions
 	aliNadaIntro: "AliNada is the capitol planet of this galaxy. Here you can find the Galaxy Trade Centres, as well as the Worlds United Headquarters. The galaxy’s most renowned military cemetery is also located here.",
-	aliNadaGood: "I’m so sorry to hear that. I would have never mentioned it if I knew that was where you were going. Considering the other items on your list, I thought for sure… I thought it would be something carefree. Please forgive my intrusion.",
+	aliNadaGood: "I’m so sorry to hear that. I would have never mentioned it if I knew that was where you were going. Please forgive my intrusion.",
 	aliNadaGoodGood: "Thank you. Is it too intrusive of me to ask who you are visiting?",
 	aliNadaGoodGoodGood: "I’m sorry for your loss. If he was your brother, he must have been a great man.",
 	aliNadaGoodGoodNeut: "You’re right. My apologies. Take care.",
