@@ -146,8 +146,8 @@ var status = 0;
 
 var text = {
 	intro: "Greetings! My name is MILO, or Multilingual Interplanetary Locations Operator. I am the Artificial Intelligence unit for this ship. I have downloaded all the necessary information to traverse this quadrant, and I will assist you along the way. As always, thank you for renting your ship at Outshine Rentals. May I have your name please?",
-	introGood: "Thank you, Oshu. I have prepared a map based on your coordinates. Where would you like to travel first? We are currently on the moon Capricorn.",
-	introBad: "Well, I apologize for any unintentional rudeness I may have presented. If you do not wish to share your name, I will not press the matter. I have prepared a map based on your coordinates. Where would you like to travel first? We are currently on the moon Capricorn.",
+	introGood: "Thank you, Oshu. I have prepared a map based on your coordinates. Where would you like to travel first?",
+	introBad: "Well, I apologize for any unintentional rudeness I may have presented. If you do not wish to share your name, I will not press the matter. I have prepared a map based on your coordinates. Where would you like to travel first?",
 	// =============================================================================================================================================
 	// |																																			|
 	// |														PLANETARY INTRODUCTIONS																|

@@ -8,14 +8,6 @@ $(document).ready(function() {
 // 									 /{       If you want to follow the dialogue a bit easier,       }\
 //  						        |{    refer to the speech timeline, found in the speech folder    }|
 //   								  \_____________________________/{}\_____________________________/
-//    _____________________________________________
-//   //											  \\
-//  //											   \\
-// //											    \\
-// ||		THE DIALOGUE - LET'S TALK TO MILO!		||
-// \\											    //
-//  \\											   //
-//   \\___________________________________________//
 
 	// Let's say MILO only has one thing to say, not a full conversation...
 
@@ -73,44 +65,72 @@ $(document).ready(function() {
 
 	// adjust the standing with MILO after choosing an option, and also clear all the options
 
-	$('#good').click(function() {
-		if(go) {
-			clearInteraction();
-			status = status + 1;
-			console.log(status)				
-		}
-	});
-	$('#bad').click(function() {
-		if(go) {
-			clearInteraction();
-			status = status - 1;
-			console.log(status)				
-		}
-	});
-	$('#neut').click(function() {
-		if(go) {
-			clearInteraction();			
-		}
-	});
+	// $('#miloInteraction').show();
+	// presentOptions('','','');
+	// $('#good').unbind('click');
+	// $('#good').click(function() {
+	// 	good();
+	// });
+	// $('#bad').unbind('click');
+	// $('#bad').click(function() {
+	// 	bad();
+	// });
+	// $('#neut').unbind('click');
+	// $('#neut').click(function() {
+	// 	neut();
+	// });
+
+	function good() {
+		clearInteraction();
+		status = status - -1;
+		// I know how terrible this is, but it won't work correctly if I +1, it just adds a 1 after the previous numbers
+		console.log(status)			
+	}
+	function bad() {
+		clearInteraction();
+		status = status - 1;
+		console.log(status)			
+	}
+
+	function neut() {
+		clearInteraction();	
+		console.log(status);	
+	}
 
 	// conclude interaction 
-	function concludeInteraction(timeout) {
+	function concludeToMap(timeout) {
 		$('#miloResponse').hide();
-		setTimeout(function() {
+		var concludeWait = setTimeout(function() {
 			$('#miloInteraction').hide();
 			$('#map').show();
 			$('#skip').hide();
 		}, timeout);
+		$('#skip').show();
+		$('#skipButton').unbind('click');
+		$('#skipButton').click(function() {
+			ignore('#map');
+			clearTimeout(concludeWait);
+			console.log('cleared');
+		});
+	}
+
+	function concludeToLocation(timeout) {
+		$('#miloResponse').hide();
+		var concludeWait = setTimeout(function() {
+			$('#miloInteraction').hide();
+			$('#map').show();
+			$('#skip').hide();
+		}, timeout);
+		$('#skip').show();
+		$('#skipButton').unbind('click');
+		$('#skipButton').click(function() {
+			ignore('#map');
+			clearTimeout(concludeWait);
+			console.log('cleared');
+		});
 	}
 
 	// skip back to the world map
-
-	function skipToMap() {
-		$('#skip').show();
-		$('#skipButton').click(function() {
-			ignore('#map');
-		});
-	};
 
 	$('#myShip').click(function() {
 		if($('#miloInteraction').css('display') == 'block') {
@@ -129,23 +149,27 @@ $(document).ready(function() {
 
 	function startGame() {
 		miloResponse(text.intro, 'speech/intro.mp3', response.introGood, response.introBad, response.ignore);
+		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(go) {
+				good();
 				knowledge.name = true;
-				quickMilo(text.introGood, 'speech/introOshu.mp3');
-				concludeInteraction(10500);
-				skipToMap();				
+				quickMilo(text.introGood, 'speech/introOshu.wav');
+				concludeToMap(7500);				
 			}
 		});
+		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(go) {
-				quickMilo(text.introBad, 'speech/introNot.mp3');
-				concludeInteraction(18500);
-				skipToMap();				
+				bad();
+				quickMilo(text.introBad, 'speech/introNot.wav');
+				concludeToMap(15000);			
 			};
 		});
+		$('#neut').unbind('click');
 		$('#neut').click(function() {
 			if(go) {
+				neut();
 				ignore('#map');				
 			}
 		});
@@ -469,7 +493,6 @@ $(document).ready(function() {
 				$('#skip').unbind('click');
 				$('#skipButton').unbind('click');
 				$('#skipButton').click(function() {
-					console.log(3);
 					ignore('#map');
 					clearTimeout(wait2);
 				});
@@ -486,7 +509,6 @@ $(document).ready(function() {
 				$('#skip').unbind('click');
 				$('#skipButton').unbind('click');
 				$('#skipButton').click(function() {
-					console.log(4);
 					ignore('#map');
 					clearTimeout(wait3);
 				});
