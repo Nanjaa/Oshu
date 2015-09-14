@@ -61,6 +61,7 @@ var Oshu = {
 		book: "A copy of 'Moonbank Tide', signed by Hugo Riven himself!",
 		tyrianneBracelet: "A beautiful beaded bracelet with tons of colors",
 		emptyBottle: "A small bottle, just big enough to house a fairy",
+		fullBottle: "A fairy is trapped inside the bottle. She gives off a soft light",
 		sunstone: "The sunstone is small and orange, and gives off a calming warmth",
 		shrunkenHead: "A tiny version of a head, with hair and everything",
 		sleepPotion: "A small vial with bright pink fluid",
@@ -85,7 +86,7 @@ var Oshu = {
 		['Kaprika', [
 			'Find a fairy on Kaprika',
 			'Sleep in the life pools of Kaprika',
-			'Climb the highest tree in Kaprika']
+			'Climb the tallest tree in Kaprika']
 		],
 		['AliNada', [
 			"Visit brother's grave on AliNada"]

@@ -74,7 +74,8 @@ var mysteryText = {
 	sleepPotion: "This is great for putting even the most awake individual to sleep. Good choice!",
 	noSleep: "Sorry, only one potion per customer! I'm sure you understand why...",
 	goodLuckCharm: "Ah, yes. May this bring you the best of luck.",
-	nevermind: "Alright."
+	nevermind: "Alright.",
+	poolEnd: "Aren't the Life Pools just something else? I adore every time I get to use them."
 
 }
 
@@ -121,6 +122,13 @@ $('#fortuneTeller').click(function() {
 				var timeout = setTimeout(function() {
 					lifeEvent(4);
 					completeItem(Oshu.quests[3][1][1], Oshu.questSpeech.kaprika2);
+					$('#skip').show();
+					$('#skipButton').unbind('click');
+					$('#skipButton').click(function() {
+						endSpeech();
+						$('.mysteriousShop').show();
+						$('#interactionText').writeText(mysteryText.poolEnd);
+					})
 				}, 2000)
 			}
 			else if(mysteryStatus == 'shop') {
@@ -187,7 +195,7 @@ $('.treeGoons').click(function() {
 		if((Oshu.items.sleepPotion) && (goonStatus == 'intro')) {
 			oneOption(treeText.goonsIntro, "Can you smell this potion for me?");
 		}
-		else if(Oshu.items.sleepPotion) {
+		else if(goonStatus == 'sleeping') {
 			$('#interactionText').writeText(treeText.sleepReturn);
 		}
 		else {
@@ -198,6 +206,8 @@ $('.treeGoons').click(function() {
 		$('#optionOne').click(function() {
 			$('.option').hide();
 			if(Oshu.items.sleepPotion) {
+				$('#sleepPotion').parent().remove();
+				Oshu.items.sleepPotion = false;
 				goonStatus = 'sleeping';
 				$('#interactionText').writeText(treeText.sleep);
 				var timeout = setTimeout(function() {
@@ -205,6 +215,14 @@ $('.treeGoons').click(function() {
 					var wait = setTimeout(function() {
 						lifeEvent(1);
 						completeItem(Oshu.quests[3][1][2], Oshu.questSpeech.kaprika3);
+
+						$('#skip').show();
+						$('#skipButton').unbind('click');
+						$('#skipButton').click(function() {
+							endSpeech();
+							$('.kaprikaTree').show();
+							$('#interactionText').writeText(treeText.treeNoGoons);
+						});
 					}, 2200)
 				}, 3000);
 			} 
@@ -244,11 +262,14 @@ var groveText = {
 	capture: "You pull out your bottle, and place the jewelry inside. A fairy wanders in, and you close the hole-filled cap. You look at the fairy closely. It's just like you imagined in the storybooks."
 }
 
-$('#fairies').unbind('click');
 $('#fairies').click(function() {
 	if(go) {
 		if(Oshu.items.emptyBottle) {
-			$('#interactionText').writeText('This is where I change the div');
+			$('#interactionText').writeText(groveText.capture);
+			$('#emptyBottle').parent().remove();
+			addItem('fullBottle', 'Bottled Fairy', '#fullBottle', Oshu.description.fullBottle);
+			Oshu.items.emptyBottle = false;
+			Oshu.items.fullBottle = true;
 		}
 		else {
 			$('#interactionText').writeText(groveText.fairyDescription);
@@ -256,14 +277,22 @@ $('#fairies').click(function() {
 	};
 });
 
-$('#fairies').unbind('click');
 $('#quietGrove').click(function() {
-	if(go) {
-		if(Oshu.items.jewelry && firstTime) {
-			firstTime = false;
-			var wait = setTimeout(function() {
-				completeItem(Oshu.quests[3][1][0], Oshu.questSpeech.kaprika1);
-			}, 3000);
-		}		
-	};
+	console.log(0);
+	if(Oshu.items.jewelry && firstTime) {
+		console.log(1);
+		firstTime = false;
+		var wait = setTimeout(function() {
+			console.log(2);
+			completeItem(Oshu.quests[3][1][0], Oshu.questSpeech.kaprika1);
+
+			$('#skip').show();
+			$('#skipButton').unbind('click');
+			$('#skipButton').click(function() {
+				endSpeech();
+				$('.quietGrove').show();
+				$('#interactionText').writeText(groveText.fairyDescription);
+			});
+		}, 3000);
+	}		
 });
