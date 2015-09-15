@@ -95,6 +95,7 @@ var weatherStatus = 'intro';
 $('#capitolWeatherman').unbind('click');
 $('#capitolWeatherman').click(function() {
 	if(go) {
+		femVoice3();
 		if(weatherStatus == 'intro') {
 			$('#interactionText').writeText(weatherText.intro);
 			weatherStatus = 1;

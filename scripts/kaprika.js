@@ -82,6 +82,7 @@ var mysteryText = {
 $('#fortuneTeller').unbind('click');
 $('#fortuneTeller').click(function() {
 	if(go) {
+		femVoice3();
 		$('.option').hide();
 
 		mysteryStatus = 'intro';
@@ -191,6 +192,7 @@ var goonStatus = 'intro';
 
 $('.treeGoons').click(function() {
 	if(go) {
+		maleVoice2();
 		$('.option').hide();
 		if((Oshu.items.sleepPotion) && (goonStatus == 'intro')) {
 			oneOption(treeText.goonsIntro, "Can you smell this potion for me?");

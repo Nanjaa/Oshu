@@ -85,7 +85,7 @@ function resetText() {
 				elem.text(elem.text() + content);
 				clicked = true;
 				if(dontGo !== true) {
-					go = true;					
+					go = true;		
 				}
 
 			}				

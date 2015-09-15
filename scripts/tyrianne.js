@@ -57,7 +57,7 @@ $('pre').click(function() {
 				lifeEvent(3);
 				completeItem(Oshu.quests[2][1][0], Oshu.questSpeech.tyrianne1);
 				Oshu.items.libraryPass = false;
-				$('#libraryPass').remove();
+				$('#libraryPass').parent().remove();
 
 				$('#skipButton').unbind('click');
 				$('#skipButton').click(function() {
@@ -106,7 +106,7 @@ $('pre').click(function() {
 		case 'tyrianneMechanic':
 			changeLocation('.tyrianneMechanic');
 			$('.tyrianneMechanic').show();
-			$('#interactionText').writeText()
+			$('#interactionText').writeText(shutoffText.intro);
 		break;
 		case 'poorMan':
 			changeLocation('.poorMan');
@@ -143,7 +143,7 @@ var poorText = {
 
 $('#poorManClose').unbind('click');
 $('#poorManClose').click(function() {
-	console.log(1);
+	maleVoice();
 	if(go) {
 		if(poorStatus == 'end') {
 			$('#interactionText').writeText(poorText.end);
@@ -227,6 +227,7 @@ $('#tyrianneJewelry').click(function() {
 
 $('#tyrianneJewelryLady').click(function() {
 	if(go) {
+		femVoice2();
 		switch(jewelryStatus) {
 			case 1:
 				$('#interactionText').writeText(jewelryText.ladyIntro);
@@ -246,6 +247,7 @@ $('#tyrianneJewelryLady').click(function() {
 
 $('#tyrianneJewelryPieces').click(function() {
 	if(go) {
+		femVoice2();
 		if(Oshu.items.tyrianneBracelet) {
 			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
 		}
@@ -294,6 +296,7 @@ factoryStatus = 'intro';
 $('#fuzzbuttDoorman').unbind('click');
 $('#fuzzbuttDoorman').click(function() {
 	if(go) {
+		maleVoice3();
 		$('.option').hide();
 		//This is the first conversation you have wth him.
 		if(factoryStatus == 'intro') {
@@ -481,6 +484,7 @@ $('#bookmarks').click(function() {
 				if($('#interactionText').text() == libraryText.yes) {
 					addItem('bookmark', 'Library Bookmark', '#bookmark', Oshu.description.bookmark);
 					Oshu.items.bookmark = true;
+					Oshu.items.gift = true;
 					clearInterval(wait2);
 				};
 			}, 1);
@@ -501,6 +505,7 @@ $('#libraryBobbleheads').click(function() {
 				if($('#interactionText').text() == libraryText.yes) {
 					addItem('libraryBobblehead', 'Reader Bobblehead', '#libraryBobblehead', Oshu.description.libraryBobblehead);
 					Oshu.items.libraryBobblehead = true;
+					Oshu.items.gift = true;
 					clearInterval(wait3);
 				};
 			}, 1);
@@ -523,6 +528,7 @@ $('#bookDisplay').click(function() {
 					$('#emptyBookDisplay').show();
 					addItem('book', 'Autographed Book', '#book', Oshu.description.book);
 					Oshu.items.book = true;
+					Oshu.items.gift = true;
 					clearInterval(wait4);
 				};
 			}, 1);
@@ -608,7 +614,7 @@ $('#tyrianneGeneralRobot').click(function() {
 			var wait8 = setInterval(function() {
 				if(replace) {
 					clearInterval(wait8);
-					$('#brokenRobot').remove();
+					$('#brokenRobot').parent().remove();
 					Oshu.items.brokenRobot = false;
 					Oshu.items.fixedRobot = true;
 					addItem('fixedRobot', 'Fixed Robot', '#fixedRobot', Oshu.description.fixedRobot);

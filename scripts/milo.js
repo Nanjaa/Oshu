@@ -16,14 +16,26 @@ $(document).ready(function() {
 // \\											    //
 //  \\											   //
 //   \\___________________________________________//
-var status = -100;
+var status = 0;
 
+var miloGo = true;
 	// Let's say MILO only has one thing to say, not a full conversation...
+
+	function go(text) {
+		miloGo = false;
+		var goWait = setInterval(function() {
+			if($('#miloSays').text() == text) {
+				clearInterval(goWait);
+				miloGo = true;
+			};
+		}, 1);
+	};
 
 	function quickMilo(text, audio) {
 		$('#miloInteraction').show();
 		$('#miloResponse').hide();
 		$('#miloSays').writeText(text);
+		go(text);
 		play(audio);
 	}
 
@@ -35,11 +47,13 @@ var status = -100;
 		if(knowledge.name == false) {
 			$('#miloInteraction').show();
 			$('#miloSays').writeText(missText);
+			go(missText);
 			play(missAudio);			
 		}
 		else {
 			$('#miloInteraction').show();
 			$('#miloSays').writeText(oshuText);
+			go(oshuText);
 			play(oshuAudio);
 		}
 	}
@@ -49,6 +63,7 @@ var status = -100;
 	function miloResponse(miloText, miloAudio, responseOne, responseTwo, responseThree) {
 		$('#miloInteraction').show();
 		$('#miloSays').writeText(miloText);
+		go(miloText);
 		play(miloAudio)
 		presentOptions(responseOne, responseTwo, responseThree);
 	}
@@ -74,17 +89,6 @@ var status = -100;
 
 	// adjust the standing with MILO after choosing an option, and also clear all the options
 
-	// $('#miloInteraction').show();
-	// presentOptions('','','');
-	// $('#good').unbind('click');
-	// $('#good').click(function() {
-	// 	good();
-	// });
-	// $('#bad').unbind('click');
-	// $('#bad').click(function() {
-	// 	bad();
-	// });
-
 	function good() {
 		clearInteraction();
 		status = status + 1;
@@ -109,25 +113,9 @@ var status = -100;
 		$('#skipButton').click(function() {
 			ignore('#map');
 			clearTimeout(concludeWait);
-			console.log('cleared');
+
 		});
 	}
-
-	// function concludeToLocation(timeout) {
-	// 	$('#miloResponse').hide();
-	// 	var concludeWait2 = setTimeout(function() {
-	// 		$('#miloInteraction').hide();
-	// 		$('#map').show();
-	// 		$('#skip').hide();
-	// 	}, timeout);
-	// 	$('#skip').show();
-	// 	$('#skipButton').unbind('click');
-	// 	$('#skipButton').click(function() {
-	// 		ignore('#map');
-	// 		clearTimeout(concludeWait2);
-	// 		console.log('cleared2');
-	// 	});
-	// }
 
 	// skip back to the world map
 
@@ -144,13 +132,28 @@ var status = -100;
 	//											//
 	//__________________________________________//
 
-	// startGame();
+	startGame();
 
 	function startGame() {
+		// First, determine if the sound should be playing.
+		sound = localStorage.getItem('sound');
+		if(sound == null) {
+			$('#audio').prop('muted', false);
+		}
+		else if(sound == 'true') {
+			$('#audio').prop('muted', false);
+		}
+		else {
+			$('#audio').prop('muted', true);
+			$('#soundsOn').hide();
+			$('#soundsOff').show();
+			sound = false;
+		}
+		// Then, begin the game.
 		miloResponse(text.intro, 'speech/intro.mp3', response.introGood, response.introBad, response.ignore);
 		$('#good').unbind('click');
 		$('#good').click(function() {
-			if(go) {
+			if(miloGo) {
 				good();
 				knowledge.name = true;
 				quickMilo(text.introGood, 'speech/introOshu.wav');
@@ -159,7 +162,7 @@ var status = -100;
 		});
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
-			if(go) {
+			if(miloGo) {
 				bad();
 				quickMilo(text.introBad, 'speech/introNot.wav');
 				concludeToMap(15000);			
@@ -167,7 +170,7 @@ var status = -100;
 		});
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
-			if(go) {
+			if(miloGo) {
 				ignore('#map');				
 			}
 		});
@@ -193,7 +196,6 @@ var status = -100;
 		$('#skipButton').unbind('click');
 		$('#skipButton').click(function() {
 			clearTimeout(wait);
-			console.log('cleared3')
 			$('#map').hide();
 			showContent(locationHtml, location);
 			ignore();
@@ -301,7 +303,7 @@ var status = -100;
 		miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
 		$('#good').unbind('click');
 		$('#good').click(function() {
-			if(go) {
+			if(miloGo) {
 				good();
 				if(status >= -1) {
 					quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3');
@@ -315,7 +317,7 @@ var status = -100;
 		});
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
-			if(go) {
+			if(miloGo) {
 				bad();
 				if(status >= -5) {
 					quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3');
@@ -329,7 +331,7 @@ var status = -100;
 		});
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
-			if(go) {
+			if(miloGo) {
 				showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
 				ignore();								
 			};
@@ -354,6 +356,9 @@ var status = -100;
 		$('#miloInteraction').show();
 		$('#miloSays').writeText(text.tyrianneIntro);
 		play('speech/tyrianneIntro.wav');
+		$('#good').text('');
+		$('#bad').text('');
+		$('#neut').text('');
 		var wait4 = setTimeout(function() {
 			$('#dots').hide();
 			$('#miloSays').text('');
@@ -365,7 +370,7 @@ var status = -100;
 		$('#dots').show();
 		$('#dotsButton').unbind('click');
 		$('#dotsButton').click(function() {
-			if(go) {
+			if(miloGo) {
 				clearTimeout(wait4);
 				$('#dots').hide();
 				$('#miloSays').text('');
@@ -380,7 +385,7 @@ var status = -100;
 
 		$('#good').unbind('click');
 		$('#good').click(function() {
-			if(go) {
+			if(miloGo) {
 				good();
 				if(tyrianneTimeline == 'tyrianneIntro') {
 					missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
@@ -398,7 +403,7 @@ var status = -100;
 
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
-			if(go) {
+			if(miloGo) {
 				bad();
 				if(tyrianneTimeline == 'tyrianneIntro') {
 					miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneBadNeut, response.ignore);
@@ -414,12 +419,16 @@ var status = -100;
 
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
-			if(go) {
+			if(miloGo) {
 				if(tyrianneTimeline == 'tyrianneIntro') {
 					showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 					ignore();
 				}								
-			};
+			}
+			else {
+				concludeToMap();
+				ignore();
+			}
 		});
 	}
 
@@ -463,7 +472,7 @@ var status = -100;
 
 		$('#good').unbind('click');
 		$('#good').click(function() {
-			if(go) {
+			if(miloGo) {
 				good();
 				if(aliTimeline == 'aliIntro') {
 					if(status >= 0) {
@@ -490,7 +499,7 @@ var status = -100;
 
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
-			if(go) {
+			if(miloGo) {
 				bad();
 				if(aliTimeline == 'so sorry') {
 					missVsOshu(text.aliNadaGoodBadMiss, 'speech/aliNadaGoodBadMiss.mp3', text.aliNadaGoodBadOshu, 'speech/aliNadaGoodBadOshu.mp3', '','','');
@@ -506,7 +515,7 @@ var status = -100;
 
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
-			if(go) {
+			if(miloGo) {
 				if(aliTimeline == 'aliIntro') {
 					ignore();
 					showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
@@ -622,6 +631,7 @@ var status = -100;
 	function gift() {
 		$('#map').hide();
 		if(Oshu.items.book) {
+			giftStatus = 'book';
 			missVsOshu(text.moonbankMiss, 'speech/bookMiss.wav', text.bookOshu, 'speech/bookOshu.wav', '','','');
 			$('#miloResponse').hide();
 			if(knowledge.mortality == true) {
@@ -648,6 +658,7 @@ var status = -100;
 			};
 		}
 		else if(Oshu.items.libraryBobblehead) {
+			giftStatus = 'bobblehead';
 			missVsOshu(text.bobbleheadMiss, 'speech/bobbleheadMiss.mp3', text.bobbleheadOshu, 'speech/bobbleheadOshu.mp3', '','','');
 			$('#miloResponse').hide();
 			if(knowledge.mortality == true) {
@@ -674,6 +685,7 @@ var status = -100;
 			};
 		}
 		else if(Oshu.items.bookmark) {
+			giftStatus = 'bookmark';
 			missVsOshu(text.bookmarkMiss, 'speech/bookmarkMiss.mp3', text.bookmarkOshu, 'speech/bookmarkOshu.mp3', '','','');
 			$('#miloResponse').hide();
 			if(knowledge.mortality == true) {
@@ -742,7 +754,7 @@ var status = -100;
 
 		$('#good').unbind('click');
 		$('#good').click(function() {
-			if(go) {
+			if(miloGo) {
 				good();
 				if(novaTimeline == 'novaIntro') {
 					miloResponse(text.novaGood, 'speech/novaGood.mp3', response.novaGoodGood, response.novaGoodBad, response.ignore);
@@ -776,7 +788,7 @@ var status = -100;
 
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
-			if(go) {
+			if(miloGo) {
 				bad();
 				if(novaTimeline == 'novaIntro') {
 					miloResponse(text.novaBad, 'speech/novaBad.mp3', response.novaBadGood, response.novaBadBad, response.ignore);
@@ -803,7 +815,7 @@ var status = -100;
 
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
-			if(go) {
+			if(miloGo) {
 				if(novaTimeline == 'novaIntro') {
 					missVsOshu(text.novaNeutMiss, 'speech/novaNeutMiss.mp3', text.novaNeutOshu, 'speech/novaNeutOshu.mp3', response.novaNeutGood, response.novaNeutBad, response.ignore);
 					novaTimeline = 'I dont have time for this';
@@ -840,7 +852,7 @@ var status = -100;
 		
 		$('#good').unbind('click');
 		$('#good').click(function() {
-			if(go) {
+			if(miloGo) {
 				good();
 				if(familyTimeline == 'familyIntro') {
 					miloResponse(text.familyGood, 'speech/familyGood.mp3', response.familyGoodGood, response.familyGoodBad, response.familyGoodNeut);
@@ -889,7 +901,7 @@ var status = -100;
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			bad();
-			if(go) {
+			if(miloGo) {
 				if(familyTimeline == 'I do feel') {
 					quickMilo(text.familyNeutNeutBad, 'speech/familyNeutNeutBad.mp3');
 					concludeToMap(3500);
@@ -902,7 +914,7 @@ var status = -100;
 
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
-			if(go) {
+			if(miloGo) {
 				if(familyTimeline == 'familyIntro') {
 					familyTimeline = 'It gives meaning';
 					if(knowledge.mortality == true) {
@@ -997,8 +1009,8 @@ var status = -100;
 
 		$('#good').unbind('click');
 		$('#good').click(function() {
-			if(go) {
-				if(goodbyeTimeline == 'badIntro') {
+			if(miloGo) {
+				if(miloGoodbyeTimeline == 'badIntro') {
 					quickMilo(text.angryGood, 'speech/angryGood.mp3');
 					concludeToMap(8500);
 					$('#skip').show();
@@ -1006,11 +1018,11 @@ var status = -100;
 						ignore('#map');
 					});
 				}
-				else if(goodbyeTimeline == 'goodIntro') {
+				else if(miloGoodbyeTimeline == 'goodIntro') {
 					missVsOshu(text.happyGoodMiss, 'speech/happyGoodMiss.mp3', text.happyGoodOshu, 'speech/happyGoodOshu.mp3', response.happyGoodGood, response.happyGoodBad, response.ignore);
 					goodbyeTimeline = 'lets do it';
 				}
-				else if(goodbyeTimeline == 'lets do it') {
+				else if(miloGoodbyeTimeline == 'lets do it') {
 					knowledge.committed = true;
 					quickMilo(text.happyGoodGood, 'speech/happyGoodGood.mp3');
 					concludeToMap(6500);
@@ -1024,12 +1036,12 @@ var status = -100;
 
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
-			if(go) {
-				if(goodbyeTimeline == 'badIntro') {
+			if(miloGo) {
+				if(miloGoodbyeTimeline == 'badIntro') {
 					quickMilo(text.angryBad, 'speech/angryBad.wav');
 					concludeToMap(4000);
 				}
-				else if(goodbyeTimeline == 'goodIntro') {
+				else if(miloGoodbyeTimeline == 'goodIntro') {
 					audio.pause();
 					$('#miloSays').writeText(text.happyBad);
 					concludeToMap(2000);
@@ -1038,7 +1050,7 @@ var status = -100;
 						ignore('#map');
 					});
 				}
-				else if(goodbyeTimeline == 'lets do it') {
+				else if(miloGoodbyeTimeline == 'lets do it') {
 					quickMilo(text.happyGoodBad, 'speech/happyGoodBad.mp3');
 					concludeToMap(8500);
 				}				
@@ -1047,8 +1059,8 @@ var status = -100;
 
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
-			if(go) {
-				if(goodbyeTimeline == 'goodIntro') {
+			if(miloGo) {
+				if(miloGoodbyeTimeline == 'goodIntro') {
 					if(knowledge.commitConversation) {
 						quickMilo(text.happyNeutConversed, 'speech/happyNeutConversed.mp3');
 						concludeToMap(6200);

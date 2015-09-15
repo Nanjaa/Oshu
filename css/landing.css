@@ -1,8 +1,15 @@
+#bigSub, .test {
+	color: green;
+	font-size: 40px;
+}
+#author {
+	font-family: 'Orbitron', sans-serif;
+}
 body {
-	background-color: black;
+	background-color: #0e0e0e;
 	color: white;
 	text-align: center;
-	padding: 50px;
+	padding: 25px;
 }
 #oshuBack {
 	margin-top: 100px;
@@ -25,29 +32,28 @@ body {
 }
 #play {
 	font-family: 'Orbitron', sans-serif;
-}
-#author {
-	font-family: 'Orbitron', sans-serif;
+	border: 1px solid white;
+	border-radius: 15px;
+	display: inline-block;
+	font-size: 30px;
+	background-color: black;
+	padding: 5px 10px;
 }
 #intro {
 	font-family: 'Share Tech Mono';
 	color: green;
-	font-size: 25px;
+	font-size: 20px;
 	margin: 5%;
+	margin-top: 0px;
 	text-align: left;
 }
 #bigTitle, #bigSub {
 	display: none;
+	font-family: 'Audiowide', cursive;
 }
-#bigTitle {
-	font-family: 'Audiowide', cursive;	
+#bigTitle {	
 	font-size: 100px;	
 };
-#bigSub {
-	font-family: 'Orbitron', sans-serif;
-	font-size: 75px;
-}
-
 
 #one {
 	font-family: 'Audiowide', cursive;
@@ -67,6 +73,7 @@ body {
 	font-size: 30px;
 	text-align: right;
 	margin-right: 10px;
+	margin-bottom: 0px;
 	cursor: pointer;
 }
 #instructions {
@@ -81,6 +88,64 @@ body {
 }
 #instructionList {
 	font-family: "Share Tech Mono";
-	border: 1px solid green;
+	border-top: 2px solid green;
 	padding: 35px;
+}
+#planet1 {
+	color: #84b8c3;
+	margin-left: 350px;
+	margin-top: 50px;
+}
+#planet2 {
+	color: #ff491b;
+	margin-left: 250px;
+	margin-top: 50px;
+}
+#spaceship {
+	color: white;
+	margin-left: 85px;
+	margin-top: 175px;
+}
+#flames {
+	color: #ffc332;
+	margin-left: 85px;
+	margin-top: 190px;
+}
+#stars, #stars2 {
+	color: #f2e2ff;
+	margin-left: 25px;
+	margin-top: 15px;
+}
+#stars2 {
+	color: white;
+	display: none;
+}
+pre {
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+	text-align: left;
+	position: absolute;
+}
+#artwork {
+	border: 1px solid white;
+	height: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 600px;
+	background-color: black;
+}
+i {
+	color: white;
+	font-size: 35px;
+	float: left;
+	display: block;
+	position: absolute;
+	cursor: pointer;
+}
+#soundsOff {
+	display: none;
+}
+#soundWrapper {
+	float: left;
 }

@@ -140,6 +140,7 @@ var camelText = {
 $('#camelGuy').unbind('click');
 $('#camelGuy').click(function() {
 	if(go) {
+		maleVoice3();
 		if(camelEnd) {
 			$('#interactionText').writeText(camelText.end);
 		}
@@ -199,6 +200,7 @@ $('#kanedosJewelry').click(function() {
 $('#kanedosJewelryLady').unbind('click');
 $('#kanedosJewelryLady').click(function() {
 	if(go) {
+		femVoice();
 		switch(jewelryStatus) {
 			case 1:
 				$('#interactionText').writeText(jewelryText.ladyIntro);
@@ -219,6 +221,7 @@ $('#kanedosJewelryLady').click(function() {
 $('.kanedosJewelryDisplay').unbind('click');
 $('.kanedosJewelryDisplay').click(function() {
 	if(go) {
+		femVoice();
 		if(Oshu.items.kanedosNecklace) {
 			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
 		}
@@ -263,6 +266,7 @@ var barText = {
 $('#suckerBartender').unbind('click');
 $('#suckerBartender').click(function() {
 	if(go) {
+		maleVoice3();
 		twoOptions(barText.bartenderIntro, 'Can I get into the Kanedome without paying?', 'How do I get access to martial arts classes?');
 		$('#optionOne').unbind('click');
 		$('#optionOne').click(function() {
@@ -283,6 +287,7 @@ apprenticeStatus = 'intro';
 $('#apprentice').unbind('click');
 $('#apprentice').click(function() {
 	if(go) {
+		maleVoice();
 		if(apprenticeStatus == 'finished') {
 			$('#interactionText').writeText(barText.apprenticeEnd);
 		}
@@ -399,7 +404,7 @@ var brawlerStatus = 'intro';
 $('#brawler').unbind('click');
 $('#brawler').click(function() {
 	if(go) {
-
+		maleVoice2();
 		if(brawlerStatus == 'intro') {
 			oneOption(brawlerText.intro, 'Can you get me into the Kanedome?');
 

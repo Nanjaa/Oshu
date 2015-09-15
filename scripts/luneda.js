@@ -216,10 +216,8 @@ var tikiText = {
 	advice2: "They have a strict dress code at the Dance Hall. You absolutely have to wear formal clothes!",
 	advice3: "The best place to buy electric fruit is at the marketplace.",
 	manIntro: "Hey, stranger. I'll tell you a secret if you do me a good turn...",
-	questIntro: "I'm 500 years old. I'll tell you the secret to getting into the Life Pools if you help me fix this.",
-	robotDescription: "He hands you a small, broken robot.",
-	questDescription: "I got into a fight with the mechanic years ago. If you have him fix the robot for me, I'll tell you how to get in.",
-	questInquiry: "What do you say?",
+	questIntro: "'I'm 500 years old. I'll tell you the secret to getting into the Life Pools if you help me fix this.' He hands you a small, broken robot.",
+	questDescription: "I got into a fight with the mechanic years ago. If you have him fix the robot for me, I'll tell you how to get in. What do you say?",
 	questYes: "Alright. Come back when he's all good and repaired.",
 	questNo: "You'll come back soon enough. The Life Pools are too tempting... And when you do, you're free to accept the quest.",
 	questReturnIncomplete: "Come back when the robot's fixed. I won't tell you the secret without him.",
@@ -282,37 +280,19 @@ $('#mysteriousMan').click(function() {
 		$('#optionOne').unbind('click');
 		$('#optionOne').click(function() {
 			if(go) {
+				$('.option').hide();
 				switch(manStatus) {
 					case 'listening':
-						console.log(1);
-						$('#interactionText').writeText(tikiText.questIntro);
-						var robot1 = setInterval(function() {
-							if($('#interactionText').text() == tikiText.questIntro) {
-								clearInterval(robot1);
-								var robot2 = setTimeout(function() {
-									$('#interactionText').text('');
-									oneOption(tikiText.robotDescription, "Why can't you do this yourself?");
-								}, 3000)
-							};
-						}, 1);
+						$('#interactionText').text('');
+						oneOption(tikiText.questIntro, "Why can't you do this yourself?");
 						manStatus = 'yourself';
 						break;
 					case 'yourself':
-						console.log(2);
-						$('#interactionText').writeText(tikiText.questDescription);
-						var robot3 = setInterval(function() {
-							if($('#interactionText').text() == tikiText.questDescription) {
-								clearInterval(robot3);
-								var robot4 = setTimeout(function() {
-									$('#interactionText').text('');
-									twoOptions(tikiText.questInquiry, "I'm in.", "what");
-								}, 3000)
-							};
-						}, 1);
+						$('#interactionText').text('');
+						twoOptions(tikiText.questDescription, "I'm in.", "No, thanks.");
 						manStatus = 'inquiry';
 						break;
 					case 'inquiry': 
-						console.log(3);
 						endConversation(tikiText.questYes);
 						// adds broken robot
 						Oshu.items.brokenRobot = true;
@@ -320,7 +300,6 @@ $('#mysteriousMan').click(function() {
 						manStatus = 'accepted';
 						break;
 					case 'rejected': 
-						console.log(4);
 						endConversation(tikiText.questYes);
 						// adds broken robot
 						Oshu.items.brokenRobot = true;
@@ -334,6 +313,7 @@ $('#mysteriousMan').click(function() {
 		$('#optionTwo').unbind('click');
 		$('#optionTwo').click(function() {
 			if(go) {
+				$('.option').hide();
 				switch(manStatus) {
 					case 'inquiry':
 						manStatus = 'rejected';
@@ -499,7 +479,6 @@ $('#dresses').click(function() {
 				if($('#interactionText').text() == marketText.clothesYes) {
 					addItem('myClothes', 'Lunedian Dress', '#myClothes', Oshu.description.clothes);
 					Oshu.items.clothes = true;
-					Oshu.itemFirst.clothes = false;
 					clearInterval(boughtClothes);
 				};
 			}, 1);			
@@ -520,7 +499,6 @@ $('#snowglobes').click(function() {
 				if($('#interactionText').text() == marketText.souvenirYes) {
 					addItem('lunedaSnowglobe', 'Beach Snowglobe', '#lunedaSnowglobe', Oshu.description.lunedaSnowglobe);
 					Oshu.items.lunedaSnowglobe = true;
-					Oshu.itemFirst.lunedaSnowglobe = false;
 					clearInterval(boughtSnowglobe);
 				};
 			}, 1);
@@ -541,7 +519,6 @@ $('#bobbleheads').click(function() {
 				if($('#interactionText').text() == marketText.souvenirYes) {
 					addItem('lunedaBobblehead', 'Stormchaser Bobblehead', '#lunedaBobblehead', Oshu.description.lunedaBobblehead);
 					Oshu.items.lunedaBobblehead = true;
-					Oshu.itemFirst.lunedaBobblehead = false;
 					clearInterval(boughtBobbleheads);
 				};
 			}, 1);
@@ -562,7 +539,6 @@ $('#postcards').click(function() {
 				if($('#interactionText').text() == marketText.souvenirYes) {
 					addItem('lunedaPostcard', 'Luneda Postcard', '#lunedaPostcard', Oshu.description.lunedaPostcard);
 					Oshu.items.lunedaPostcard = true;
-					Oshu.itemFirst.lunedaPostcard = false;
 					clearInterval(boughtPostcards);
 				};
 			}, 1);
@@ -651,7 +627,6 @@ $('.dancer').click(function() {
 	};
 })
 
-$('#dancer4').unbind('click');
 $('#dancer4').click(function() {
 	if(go) {
 		$('.option').hide();
@@ -665,39 +640,33 @@ $('#dancer4').click(function() {
 
 			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
-				if(go) {
-					$('.option').hide();
-					switch(dancerStatus) {
-						case 'intro': 
-							oneOption(danceText.barryOffer, 'Alright.');
-							dancerStatus = 'alright';
-						break;
-						case 'alright':
-							dancerStatus = 'riddle';
-							threeOptions(danceText.barryRiddle, 'Your shadow?', 'Time?', 'A Television?');
-						break;
-						case 'riddle':
-							endConversation(danceText.barryWrong);
-						break;
-					};				
-				};
+				$('.option').hide();
+				switch(dancerStatus) {
+					case 'intro': 
+						oneOption(danceText.barryOffer, 'Alright.');
+						dancerStatus = 'alright';
+					break;
+					case 'alright':
+						dancerStatus = 'riddle';
+						threeOptions(danceText.barryRiddle, 'Your shadow?', 'Time?', 'A Television?');
+					break;
+					case 'riddle':
+						endConversation(danceText.barryWrong);
+					break;
+				};				
 			});
 			
 			$('#optionTwo').unbind('click');
 			$('#optionTwo').click(function() {
-				if(go) {
-					$('.option').hide();
-					$('#interactionText').writeText(danceText.barryRight);
-					addItem('libraryPass', 'Intergalactic Library Pass', '#libraryPass', Oshu.description.libraryPass);
-					Oshu.items.libraryPass = true;					
-				}
+				$('.option').hide();
+				$('#interactionText').writeText(danceText.barryRight);
+				addItem('libraryPass', 'Intergalactic Library Pass', '#libraryPass', Oshu.description.libraryPass);
+				Oshu.items.libraryPass = true;					
 			});
 
 			$('#optionThree').unbind('click');
 			$('#optionThree').click(function() {
-				if(go) {
-					endConversation(danceText.barryWrong);
-				};
+				endConversation(danceText.barryWrong);
 			});
 		};		
 	};
@@ -896,7 +865,7 @@ $('#lunedaGeneralRobot').click(function() {
 			var wait8 = setInterval(function() {
 				if(replace) {
 					clearInterval(wait8);
-					$('#brokenRobot').remove();
+					$('#brokenRobot').parent().remove();
 					Oshu.items.brokenRobot = false;
 					Oshu.items.fixedRobot = true;
 					addItem('fixedRobot', 'Fixed Robot', '#fixedRobot', Oshu.description.fixedRobot);

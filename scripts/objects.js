@@ -1,20 +1,15 @@
 var Oshu = {
 	onBoard: true,
 	remainingLife: 3600,
-	coins: 50000,
+	coins: 50,
 	currentLocation: '#lunedaMap',
 	itemFirst: {
 		ganifruit: true,
-		electange: true,
-		electroSuit: true,
-		clothes: true,
-		lunedaSnowglobe: true,
-		lunedaBobblehead: true,
-		lunedaPostcard: true
+		electange: true
 	},
 	
 	items: {
-		ganifruit: 1,
+		ganifruit: 0,
 		electange: 0,
 		brokenRobot: false,
 		fixedRobot: false,
@@ -30,7 +25,7 @@ var Oshu = {
 		weatherComplete: false,
 		kanedosNecklace: false,
 		kanedomeTicket: false,
-		gift: true,
+		gift: false,
 		libraryBobblehead: false,
 		bookmark: false,
 		book: false,
