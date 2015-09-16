@@ -61,6 +61,7 @@ function resetText() {
 (function($) {
 	resetText();
 	$.fn.writeText = function(content) {
+		console.log(content);
 		go = false;
 		resetText();
 		var contentArray = content.split(""),
@@ -148,79 +149,63 @@ function payMoney(price) {
 };
 
 var optionsStatus = 1;
+var displayGo = false;
 
 function displayOptions(text1, text2, price, yes, no, needMore) {
 	if(dontGo !== true) {
 		$('#interactionText').writeText(text1);
 		dontGo = true;
-		var displayGo = false;
+		optionsTest(text1, text2, price, yes, no, needMore);
+	};
+};
 
-		// the following chunk has to do with displaying the "do you want to buy" question
-		var holding = setTimeout(function() {
+function optionsTest(text1, text2, price, yes, no, needMore) {
+	// the following chunk has to do with displaying the "do you want to buy" question
+	var holding = setTimeout(function() {
+		dontGo = false;
+		// now to display the yes or no options
+		twoOptions(text2, 'Yes', 'No');
+		optionsFunction(price, yes, no, needMore);
+	}, 4000);					
+
+	// click your mouse button to skip the wait
+	$(this).unbind('click');
+	$(this).click(function() {
+		if($('#interactionText').text() == text1) {
+			clearTimeout(holding);
+			displayGo = false;
 			dontGo = false;
 			// now to display the yes or no options
 			twoOptions(text2, 'Yes', 'No');
-			dontGo = true;
-			$('#optionOne').unbind('click');
-			$('#optionOne').click(function() {
-				dontGo = false;
-				$('.option').hide();
-				var coins = Oshu.coins;
-				if(coins >= price) {
-		 			$('#interactionText').writeText(yes);	
-		 			payMoney(price);			
-				}
-				else {
-					$('#interactionText').writeText(needMore);
-				}
-			});
-			$('#optionTwo').unbind('click');
-			$('#optionTwo').click(function() {
-				dontGo = false;
-				$('.options').hide();
-				$('#interactionText').writeText(no);
-			})
-		}, 4000);					
+			optionsFunction(price, yes, no, needMore);
+		}
+	});
+}
 
-		// click your mouse button to skip the wait
-		$(this).click(function() {
-			var wait2 = setInterval(function() {
-				if($('#interactionText').text() == text1) {
-					clearInterval(wait2);
-					displayGo = true;
-				}
-			}, 1)
-			if(displayGo == true) {
-				displayGo = false;
-				clearTimeout(holding);
-				dontGo = false;
-				// now to display the yes or no options
-				twoOptions(text2, 'Yes', 'No');
-				dontGo = true;
-				$('#optionOne').unbind('click');
-				$('#optionOne').click(function() {
-					dontGo = false;
-					$('.option').hide();
-					var coins = Oshu.coins;
-					if(coins >= price) {
-			 			$('#interactionText').writeText(yes);	
-			 			payMoney(price);			
-					}
-					else {
-						$('#interactionText').writeText(needMore);
-					}
-				});
+function optionsFunction(price, yes, no, needMore) {
+	dontGo = true;
+	$('#optionOne').unbind('click');
+	$('#optionOne').click(function() {
+		dontGo = false;
+		$('.option').hide();
+		var coins = Oshu.coins;
+		if(coins >= price) {
+ 			$('#interactionText').writeText(yes);	
+ 			payMoney(price);			
+		}
+		else {
+			$('#interactionText').writeText(needMore);
+		}
+	});
 
-				$('#optionTwo').unbind('click');
-				$('#optionTwo').click(function() {
-					dontGo = false;
-					$('.option').hide();
-					$('#interactionText').writeText(no);
-				});
-			};
-		});
-	};
-};
+	$('#optionTwo').unbind('click');
+	$('#optionTwo').click(function() {
+		dontGo = false;
+		$('.option').hide();
+		$('#interactionText').writeText(no);
+		console.log(no);
+	});
+}
 
 // ------------------------------------------------------
 // 					ADD INVENTORY ITEM
@@ -483,12 +468,14 @@ $('#sounds').click(function() {
 		$('#soundsOff').show();
 		sound = false;
 		$('#audio').prop('muted', true);
+		localStorage.setItem('sound', false);
 	}
 	else {
 		$('#soundsOff').hide();
 		$('#soundsOn').show();
 		$('#audio').prop('muted', false);
 		sound = true;
+		localStorage.setItem('sound', true);
 	}
 });
 
@@ -516,3 +503,31 @@ $('#myShip').click(function() {
 	hideContent('#kaprikaContent');
 	hideContent('#aliNadaContent');
 });
+
+// ------------------------------------------------------
+// 					CONCLUDE GAME
+// ------------------------------------------------------
+
+function concludeGame(complete) {
+	var finishedStatus = '';
+	if(Oshu.status > 0) {
+		finishedStatus = 'good';
+	} 
+	else if(Oshu.status == 0) {
+		finishedStatus = 'neut';
+	}
+	else {
+		finishedStatus = 'bad';
+	}
+	localStorage.setItem('status', finishedStatus);
+	localStorage.setItem('complete', complete);
+	if(complete == false) {
+		var endGame = setTimeout(function() {
+			window.location = 'conclusion.html';
+		}, 2000);
+	}
+	else {
+		window.location = 'conclusion.html';
+	}
+
+};

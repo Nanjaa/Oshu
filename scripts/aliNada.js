@@ -54,14 +54,42 @@ $('pre').click(function() {
 			}
 			break;
 		case 'cemetery':
-			$('#interactionText').writeText(graveText.intro);
+			if(graveStatus) {
+				graveStatus = false;
+				completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
+				$('#skip').show();
+				$('#skipButton').unbind('click');
+				$('#skipButton').click(function() {
+					$('.cemetery').show();
+					endSpeech();
+					$('.cemetery').show();
+					$('#interactionText').writeText(graveText.end);
+				});			
+			}
+			else {
+				$('.cemetery').show();
+				$('#interactionText').writeText(graveText.end);
+			};
 			changeLocation('.cemetery');
-			$('.cemetery').show();
 			break;
 		case 'tombstones':
-			$('#interactionText').writeText(graveText.intro);
+			if(graveStatus) {
+				graveStatus = false;
+				completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
+				$('#skip').show();
+				$('#skipButton').unbind('click');
+				$('#skipButton').click(function() {
+					$('.cemetery').show();
+					endSpeech();
+					$('.cemetery').show();
+					$('#interactionText').writeText(graveText.end);
+				});			
+			}
+			else {
+				$('.cemetery').show();
+				$('#interactionText').writeText(graveText.end);
+			};
 			changeLocation('.cemetery');
-			$('.cemetery').show();
 			break;
 		case 'aliNadaMechanic':
 			$('#interactionText').writeText(shutoffText.intro);
@@ -135,26 +163,6 @@ var graveText = {
 
 var graveStatus = true;
 
-$('#brothersGrave').unbind('click');
-$('#brothersGrave').click(function() {
-	if(go) {
-		if(graveStatus) {
-			graveStatus = false;
-			completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
-			$('#skip').show();
-			$('#skipButton').unbind('click');
-			$('#skipButton').click(function() {
-				endSpeech();
-				$('.cemetery').show();
-				$('#interactionText').writeText(graveText.end);
-			});			
-		}
-		else {
-			$('#interactionText').writeText(graveText.end);
-		};
-	};
-});
-
 // ________________________________________________________________
 // | ==============================================================|
 // |															   |
@@ -182,7 +190,7 @@ $('#aliNadaLifecycleShutoff').click(function() {
 		var wait7 = setInterval(function() {
 			if($('#interactionText').text() == shutoffText.yes) {
 				clearInterval(wait7);
-				lifeEvent(-15);				
+				concludeGame(false);			
 			}
 		}, 1)	
 	};
@@ -205,10 +213,12 @@ function robotWait(text1, text2) {
 	var wait4 = setInterval(function() {
 		if($('#interactionText').text() == text1) {
 			clearInterval(wait4);
+			dontGo = true;
 			var wait5 = setTimeout(function() {
 				lifeEvent(1);
 				$('#aliNadaMechanicMenu').fadeOut(1000);
 				$('#aliNadaMechanicMenu').fadeIn(1000);
+				dontGo = false;
 				replace = true;
 				var wait6 = setTimeout(function() {
 					$('#interactionText').writeText(text2);

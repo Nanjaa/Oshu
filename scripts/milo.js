@@ -92,11 +92,13 @@ var miloGo = true;
 	function good() {
 		clearInteraction();
 		status = status + 1;
+		Oshu.status = status;
 		console.log(status)			
 	}
 	function bad() {
 		clearInteraction();
 		status = status - 1;
+		Oshu.status = status;
 		console.log(status)			
 	}
 

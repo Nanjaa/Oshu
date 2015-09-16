@@ -1,4 +1,5 @@
 var Oshu = {
+	status: 0,
 	onBoard: true,
 	remainingLife: 3600,
 	coins: 50,
@@ -350,7 +351,7 @@ var response = {
 var knowledge= {
 	name: false,
 	danger: false,
-	mortality: true,
+	mortality: false,
 	committed: false,
 	commitConversation: false,
 	brother: false

@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/conclusion.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -34,31 +35,49 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-<div id="oshuText">Oshu Text</div>
-<div id="thanks">Thank you for playing!</div>
-<div id="credits">
-  <h3>All art, writing, and coding<h3>
-    <p>Stephanie Olfert</p>
-  </h3>
-  <p>A special thank you</p>
-  <h3>sound effects</h3>
-  <h5>Return Click</h5>
-  <p>https://www.freesound.org/people/Q.K./sounds/56243/</p>
-  <h5>Change Location Click</h5>
-  <p>https://www.freesound.org/people/Motion_S/sounds/177851/</p>
-  <h5>Return to Ship Whip</h5>
-  <p>https://www.freesound.org/people/snowflakes/sounds/72191/</p>
-  <h5>Return to Ship Blip</h5>
-  <p>https://www.freesound.org/people/Chriddof/sounds/135517/</p>
-  <h5>Return to Ship Blips</h5>
-  <p>https://www.freesound.org/people/GameAudio/sounds/220173/</p>
+<div id="skip"><span id="skipButton">Skip</span></div>
+<div id="oshuText"></div>
+<div class="ending" id="thanks">Thank you for playing!</div>
+<div class="ending" id="credits">
+  <div id="creditsWrap">
+    <div class="littleWrap">
+      <h3>All art, writing, music, and coding</h3>
+      <p id="me">Stephanie Olfert</p>
+    </div>
+    <div class="littleWrap">
+      <h3>All voices</h3>
+      <a href="http://fromtexttospeech.com/">From Text To Speech</a>
+    </div>
+    
+    <h1>Sound Effects</h1>
+    <div class="littleWrap">
+      <h3>Return Click</h3>
+      <a href="https://www.freesound.org/people/Q.K./sounds/56243/">Latch_01.wav by Q.K.</a>      
+    </div>
+    <div class="littleWrap">
+      <h3>Change Location Click</h3>
+      <a href="https://www.freesound.org/people/Motion_S/sounds/177851/">Box Latch.wav by Motion_S</a>
+    </div>
+    <div class="littleWrap">
+     <h3>Return to Ship Blips</h3>
+      <a href="https://www.freesound.org/people/GameAudio/sounds/220173/">Spacey 1up/Power up by GameAudio</a>
+    </div>
+    <a href="game.html" id="beginAgain">Play Again</a>
+  </div>
 </div>  
+
+
+<audio id="audio">
+  <source src="soundEffects/error.wav">
+</audio>
 
 
 <!-- javascript -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="scripts/conclusion.js"></script>
+<script src="scripts/objects.js"></script>
+<script src="scripts/universal.js"></script>
 
 
 <!-- End Document

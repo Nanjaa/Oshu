@@ -47,8 +47,12 @@ $(document).ready(function() {
 	};
 
 	var life = setInterval(function() {
+		if(Oshu.finished == 5) {
+			concludeGame(true);
+		}
 		if(Oshu.remainingLife === 0) {
 			clearInterval(life);
+			concludeGame(false);
 			return;
 		}
 		loseLife();

@@ -1,0 +1,72 @@
+#skip {
+	float: right;
+	cursor: pointer;
+	font-family: 'Audiowide', cursive;
+	font-size: 30px;
+	display: block;
+}
+.ending {
+	display: none;
+}
+#oshuText {
+	font-family: 'Share Tech Mono';
+	color: green;
+	font-size: 20px;
+	margin: 5%;
+	margin-top: 0px;
+	text-align: left;
+}
+#oshuText {
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+	border: 1px solid white;
+	padding: 25px;
+	margin-top: 75px;
+	height: 250px;
+	background-color: black;
+}
+#thanks {
+	color: green;
+	font-family: "Audiowide",cursive;
+	font-size: 35px;
+	margin-bottom: 15px;
+}
+#credits {
+	border: 1px solid white;
+	height: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 600px;
+	background-color: black;
+	padding: 25px;
+	overflow: hidden;
+}
+h3 {
+	font-family: "Audiowide",cursive;
+	color: green;
+	font-size: 30px;
+	margin-top: 10px;
+}
+#creditsWrap {
+	margin-top: 350px;
+}
+a, #me {
+	text-decoration: none;
+	font-family: "Share Tech Mono";
+	font-size: 20px;
+	color: white;
+}
+.littleWrap {
+	margin: 100px;
+}
+h1 {
+	font-family: 'Orbitron', sans-serif;
+	color: white;
+	font-size: 45px;
+}
+#beginAgain {
+	font-family: 'Orbitron', sans-serif;
+	color: white;
+	font-size: 45px;
+}

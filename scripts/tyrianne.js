@@ -566,7 +566,7 @@ $('#tyrianneLifecycleShutoff').click(function() {
 		var wait7 = setInterval(function() {
 			if($('#interactionText').text() == shutoffText.yes) {
 				clearInterval(wait7);
-				lifeEvent(-15);				
+				concludeGame(false);			
 			}
 		}, 1)	
 	};
