@@ -542,7 +542,11 @@ var miloGo = true;
 // 			\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////////////////
 // 			////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-	var startKanedos = false;
+	var startKanedos = false,
+		giftGo = true,
+		novaGo = true,
+		familyGo = true,
+		goodbyeGo = true
 
 	$('#myShip').click(function() {
 		$('.return').hide();
@@ -594,6 +598,7 @@ var miloGo = true;
 			};		
 		}
 
+
 /////////////////////////////////////////////////
 // 					  	  The Gift from Tyrianne
 		else if(Oshu.items.gift) {
@@ -602,17 +607,17 @@ var miloGo = true;
 
 /////////////////////////////////////////////////
 // 					  		50% - The Novatacea
-		else if((finished > 0) && (novaTimeline = 'novaIntro')) {
+		else if((finished > 0) && novaGo) {
 			nova();
 		}
 /////////////////////////////////////////////////
 // 					 				75% - Family
-		else if((finished > 2) && (familyTimeline == 'familyIntro')) {
+		else if((finished > 2) && familyGo) {
 			family();
 		}
 /////////////////////////////////////////////////
 // 					            90% - The Goodbye
-		else if(($('#minutes').text() < 10) && (goodbyeTimeline == 'intro')) {
+		else if(($('#minutes').text() < 10) && (goodbyeGo)) {
 			goodbye();
 		}
 		// Or you just go to the map
@@ -631,6 +636,7 @@ var miloGo = true;
 	var giftStatus = 'intro';
 
 	function gift() {
+		giftGo = false;
 		$('#map').hide();
 		if(Oshu.items.book) {
 			giftStatus = 'book';
@@ -750,6 +756,7 @@ var miloGo = true;
 	var novaTimeline = 'novaIntro';
 
 	function nova() {
+		novaGo = false;
 		$('#map').hide();
 		missVsOshu(text.novaIntroMiss, 'speech/novaIntroMiss.mp3', text.novaIntroOshu, 'speech/novaIntroOshu.mp3', response.novaGood, response.novaBad, response.novaNeut)
 		// What is it?
@@ -840,6 +847,7 @@ var miloGo = true;
 	var familyTimeline = 'familyIntro';
 
 	function endFamilyBad() {
+		familyGo = false;
 		miloResponse(text.familyBad, 'speech/familyBad.mp3', '','','');
 		concludeToMap(6500);	
 		$('#skip').show();
@@ -960,6 +968,7 @@ var miloGo = true;
 	var goodbyeTimeline = 'intro';
 
 	function goodbye() {
+		goodbyeGo = false;
 		$('#map').hide();
 		if(knowledge.mortality) {
 			if(knowledge.committed) {

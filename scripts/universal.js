@@ -61,7 +61,6 @@ function resetText() {
 (function($) {
 	resetText();
 	$.fn.writeText = function(content) {
-		console.log(content);
 		go = false;
 		resetText();
 		var contentArray = content.split(""),
@@ -155,11 +154,11 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 	if(dontGo !== true) {
 		$('#interactionText').writeText(text1);
 		dontGo = true;
-		optionsTest(text1, text2, price, yes, no, needMore);
+		optionsNext(text1, text2, price, yes, no, needMore);
 	};
 };
 
-function optionsTest(text1, text2, price, yes, no, needMore) {
+function optionsNext(text1, text2, price, yes, no, needMore) {
 	// the following chunk has to do with displaying the "do you want to buy" question
 	var holding = setTimeout(function() {
 		dontGo = false;
@@ -203,7 +202,6 @@ function optionsFunction(price, yes, no, needMore) {
 		dontGo = false;
 		$('.option').hide();
 		$('#interactionText').writeText(no);
-		console.log(no);
 	});
 }
 
@@ -385,10 +383,10 @@ function threeOptions(referenceText, option1, option2, option3) {
 	if(dontGo !== true) {
 		$('#interactionText').writeText(referenceText);
 		dontGo = true;
-		var displayGo = false;
 
 		// the following chunk has to do with displaying the "do you want to buy" question
 		var wait3 = setTimeout(function() {
+			console.log('hello darkness my old friend');
 			dontGo = false;
 			$('#interactionText').text('');
 			$('#optionOne').show();
@@ -400,14 +398,9 @@ function threeOptions(referenceText, option1, option2, option3) {
 		}, 4000);					
 
 		// click your mouse button to skip the wait
+		$(this).unbind('click');
 		$(this).click(function() {
-			var wait4 = setInterval(function() {
-				if($('#interactionText').text() == referenceText) {
-					clearInterval(wait4);
-					displayGo = true;
-				}
-			}, 1)
-			if(displayGo == true) {
+			if($('#interactionText').text() == referenceText) {
 				displayGo = false;
 				clearTimeout(wait3);
 				dontGo = false;
@@ -418,7 +411,7 @@ function threeOptions(referenceText, option1, option2, option3) {
 				$('#optionOne').text(option1);
 				$('#optionTwo').text(option2);
 				$('#optionThree').text(option3);
-			};
+			}
 		});
 	};
 };

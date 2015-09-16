@@ -285,7 +285,7 @@ var factoryText = {
 	authorityAdmit: "Yeah, I know. Now, can I help you?",
 	lie: "No, you don't. Now, can I help you?",
 	declineOffer: "Eh, whatever.",
-	quest: "Alright, fine. I'm guessing you know what this place is. Take this bottle and fill it with a fairy from Kaprika, and I'll let you in.",
+	quest: "Alright, fine. Take this bottle and fill it with a fairy from Kaprika, and I'll let you in. You know this ain't a factory anymore though, right?",
 	acceptQuest: "Well, get to it. Here's that bottle I mentioned.",
 	questReturnUnfinished: "You know the deal. Fairy or nothin'.",
 	questReturnFinished: "Cool. One second, I'll take you inside."

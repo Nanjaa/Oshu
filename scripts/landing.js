@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+	// $('#play').mouseOver(function() {
+	// 	$('play').css('background-color', pink);
+	// })
+	// $('#play').mouseOUt(function() {
+	// 	$('play').css('background-color', black);
+	// })
+
 	audio.addEventListener('ended', function() {
 		this.currentTime = 0;
 		this.play();

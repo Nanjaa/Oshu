@@ -39,6 +39,9 @@ body {
 	background-color: black;
 	padding: 5px 10px;
 }
+#play.hover {
+	background-color: pink;
+}
 #intro {
 	font-family: 'Share Tech Mono';
 	color: green;
