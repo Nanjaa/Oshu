@@ -87,9 +87,8 @@ function resetText() {
 				if(dontGo !== true) {
 					go = true;		
 				}
-
 			}				
-		}, 30);
+		}, 20);
 	};
 }) (jQuery);
 
