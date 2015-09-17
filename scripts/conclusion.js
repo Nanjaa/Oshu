@@ -32,8 +32,6 @@ var text = {
 
 var complete = localStorage.getItem('complete');
 var status = localStorage.getItem('status');
-console.log(complete);
-console.log(status);
 
 function speech() {
 	if(complete == 'true') {

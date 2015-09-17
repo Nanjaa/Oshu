@@ -1,7 +1,7 @@
 
 // brings up the common divs between all the city details
 $('.aliNadaCity').click(function() {
-	$('.aliNadaCity').hide();
+	$('#aliNadaMap').hide();
 	$('.return').show();
 	$('#planetInteraction').show();
 })
@@ -10,7 +10,7 @@ $('.aliNadaCity').click(function() {
 function aliNadaReturn() {
 	$('.return').hide();
 	$('.cityDetails').hide();
-	$('.aliNadaCity').show();	
+	$('#aliNadaMap').show();	
 }
 $('.return').click(function() {
 	aliNadaReturn();
@@ -30,7 +30,6 @@ $('pre').click(function() {
 	switch(location) {
 		case 'capitol':
 			if(Oshu.items.weatherSpecimen) {
-				console.log('capitol specimen');
 				$('#interactionText').writeText(weatherText.weather);
 				changeLocation('.capitol');
 				$('.capitol').show();
@@ -240,7 +239,7 @@ $('#aliNadaGeneralRobot').click(function() {
 			var wait8 = setInterval(function() {
 				if(replace) {
 					clearInterval(wait8);
-					$('#brokenRobot').remove();
+					$('#brokenRobot').parent().remove();
 					Oshu.items.brokenRobot = false;
 					Oshu.items.fixedRobot = true;
 					addItem('fixedRobot', 'Fixed Robot', '#fixedRobot', Oshu.description.fixedRobot);

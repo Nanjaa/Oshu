@@ -386,7 +386,6 @@ function threeOptions(referenceText, option1, option2, option3) {
 
 		// the following chunk has to do with displaying the "do you want to buy" question
 		var wait3 = setTimeout(function() {
-			console.log('hello darkness my old friend');
 			dontGo = false;
 			$('#interactionText').text('');
 			$('#optionOne').show();

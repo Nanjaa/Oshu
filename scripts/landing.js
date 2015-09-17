@@ -19,7 +19,6 @@ $(document).ready(function() {
 			$('#soundsOn').hide();
 			$('#soundsOff').show();
 			localStorage.setItem('sound', false);
-			console.log(localStorage.getItem('sound'));
 			$('#audio').prop('muted', true);
 			$('#oshuIntro').prop('muted', true);
 		}
@@ -29,7 +28,6 @@ $(document).ready(function() {
 			$('#audio').prop('muted', false);
 			$('#oshuIntro').prop('muted', false);
 			localStorage.setItem('sound', true);
-			console.log(localStorage.getItem('sound'));
 		}
 	});
 

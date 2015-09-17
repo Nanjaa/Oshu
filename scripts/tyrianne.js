@@ -300,7 +300,6 @@ $('#fuzzbuttDoorman').click(function() {
 		$('.option').hide();
 		//This is the first conversation you have wth him.
 		if(factoryStatus == 'intro') {
-			console.log(1);
 			twoOptions(factoryText.goonIntro, "Maybe I can persuade you otherwise...", "I do have the proper authority.");
 			// select Option One
 			$('#optionOne').unbind('click');
@@ -380,7 +379,6 @@ $('#fuzzbuttDoorman').click(function() {
 			});
 		}
 		else if(factoryStatus == 'declined'){
-			console.log(2);
 			threeOptions(factoryText.declinedReturn, "I'll pay you.", "I'll help you out.", "Nevermind.");
 		}
 		else {

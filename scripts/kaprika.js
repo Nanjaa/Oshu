@@ -280,12 +280,9 @@ $('#fairies').click(function() {
 });
 
 $('#quietGrove').click(function() {
-	console.log(0);
 	if(Oshu.items.jewelry && firstTime) {
-		console.log(1);
 		firstTime = false;
 		var wait = setTimeout(function() {
-			console.log(2);
 			completeItem(Oshu.quests[3][1][0], Oshu.questSpeech.kaprika1);
 
 			$('#skip').show();

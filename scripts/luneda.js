@@ -257,25 +257,24 @@ var manStatus = 'intro';
 $('#mysteriousMan').click(function() {
 	if(go) {
 		maleVoice2();
-		switch(manStatus) {
-			case 'intro':
-				oneOption(tikiText.manIntro, "I'm listening...");
-				manStatus = 'listening';
+		if(Oshu.items.fixedRobot) {
+			$('#interactionText').writeText(tikiText.questReturnComplete);
+			Oshu.items.password = true;
+		}
+		else {
+			switch(manStatus) {
+				case 'intro':
+					oneOption(tikiText.manIntro, "I'm listening...");
+					manStatus = 'listening';
 				break;
-			case 'accepted':
-				if(Oshu.items.fixedRobot == false) {
-					$('#interactionText').writeText(tikiText.questReturnIncomplete);
-					break;					
-				}
-				else {
-					$('#interactionText').writeText(tikiText.questReturnComplete);
-					Oshu.items.password = true;
-				};
+				case 'accepted':
+					$('#interactionText').writeText(tikiText.questReturnIncomplete);				
 				break;
-			case 'rejected':
-				twoOptions(tikiText.questReturnAccept, 'Well, yeah!', 'Nevermind.');
+				case 'rejected':
+					twoOptions(tikiText.questReturnAccept, 'Well, yeah!', 'Nevermind.');
 				break;
-		};	
+			};				
+		}
 		
 		$('#optionOne').unbind('click');
 		$('#optionOne').click(function() {
