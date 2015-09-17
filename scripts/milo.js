@@ -601,23 +601,23 @@ var miloGo = true;
 
 /////////////////////////////////////////////////
 // 					  	  The Gift from Tyrianne
-		else if(Oshu.items.gift) {
+		else if(Oshu.items.gift && (giftGo == true)) {
 			gift()
 		}
 
 /////////////////////////////////////////////////
 // 					  		50% - The Novatacea
-		else if((finished > 0) && novaGo) {
+		else if((finished > 0) && (novaGo == true)) {
 			nova();
 		}
 /////////////////////////////////////////////////
 // 					 				75% - Family
-		else if((finished > 2) && familyGo) {
+		else if((finished > 2) && (familyGo == true)) {
 			family();
 		}
 /////////////////////////////////////////////////
 // 					            90% - The Goodbye
-		else if(($('#minutes').text() < 10) && (goodbyeGo)) {
+		else if(($('#minutes').text() < 10) && (goodbyeGo == true)) {
 			goodbye();
 		}
 		// Or you just go to the map
@@ -847,7 +847,6 @@ var miloGo = true;
 	var familyTimeline = 'familyIntro';
 
 	function endFamilyBad() {
-		familyGo = false;
 		miloResponse(text.familyBad, 'speech/familyBad.mp3', '','','');
 		concludeToMap(6500);	
 		$('#skip').show();
@@ -857,6 +856,7 @@ var miloGo = true;
 	};
 
 	function family() {
+		familyGo = false;
 		$('#map').hide();
 		missVsOshu(text.familyIntroMiss, 'speech/familyIntroMiss.mp3', text.familyIntroOshu, 'speech/familyIntroOshu.mp3', response.familyGood, response.familyBad, response.familyNeut);
 		

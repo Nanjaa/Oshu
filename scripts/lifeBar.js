@@ -1,27 +1,5 @@
 $(document).ready(function() {
 
-// begin
-
-	function lifeBar() {
-		var remainingLife = Oshu.remainingLife;
-		remainingLife = remainingLife - 1;
-		Oshu.remainingLife = remainingLife;
-		
-		var percent = ((Oshu.remainingLife/3600)*100) + "%";
-		$('#life').css('width', percent);
-		if(Oshu.remainingLife >= 2400) {
-			$('#life').css('background-color', 'green');
-		}
-		else if(Oshu.remainingLife >= 1200) {
-			$('#life').css('background-color', 'orange');
-		}
-		else {
-			$('#life').css('background-color', 'red');
-		}
-	};
-
-
-
 	var minutes = 60;
 	var seconds = 00;
 
@@ -56,7 +34,6 @@ $(document).ready(function() {
 			return;
 		}
 		loseLife();
-		lifeBar();
 	}, 1000);
 
 	window.setInterval(life);

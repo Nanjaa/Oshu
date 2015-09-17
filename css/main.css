@@ -73,9 +73,6 @@ pre {
 	position: absolute;
 	cursor: pointer;
 }
-#gameConsole {
-	border-top: none;
-}
 #inventory {
 	border: 1px solid black;
 	padding: 10px;
