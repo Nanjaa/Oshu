@@ -285,7 +285,7 @@ var factoryText = {
 	authorityAdmit: "Yeah, I know. Now, can I help you?",
 	lie: "No, you don't. Now, can I help you?",
 	declineOffer: "Eh, whatever.",
-	quest: "Alright, fine. Take this bottle and fill it with a fairy from Kaprika, and I'll let you in. You know this ain't a factory anymore though, right?",
+	quest: "Alright, fine. Take this bottle and fill it with a fairy from Kaprika, and I'll let you in.",
 	acceptQuest: "Well, get to it. Here's that bottle I mentioned.",
 	questReturnUnfinished: "You know the deal. Fairy or nothin'.",
 	questReturnFinished: "Cool. One second, I'll take you inside."
@@ -299,7 +299,20 @@ $('#fuzzbuttDoorman').click(function() {
 		maleVoice3();
 		$('.option').hide();
 		//This is the first conversation you have wth him.
-		if(factoryStatus == 'intro') {
+		if(Oshu.items.fullBottle) {
+			$('#interactionText').writeText(factoryText.questReturnFinished);
+			$('#fullBottle').parent().remove();
+			fuzzbuttEntry = true;
+			var timeout = setTimeout(function() {
+				$('#fuzzbuttDoorman').hide();
+				$('.fuzzbuttDetails').show();
+				$('#interactionText').writeText(marketText.intro);
+			}, 3500);	
+		}
+		else if(Oshu.items.emptyBottle) {
+			$('#interactionText').writeText(factoryText.questReturnUnfinished);
+		}
+		else if(factoryStatus == 'intro') {
 			twoOptions(factoryText.goonIntro, "Maybe I can persuade you otherwise...", "I do have the proper authority.");
 			// select Option One
 			$('#optionOne').unbind('click');
@@ -381,21 +394,6 @@ $('#fuzzbuttDoorman').click(function() {
 		else if(factoryStatus == 'declined'){
 			threeOptions(factoryText.declinedReturn, "I'll pay you.", "I'll help you out.", "Nevermind.");
 		}
-		else {
-			if(Oshu.items.fullBottle) {
-				$('#interactionText').writeText(factoryText.questReturnFinished);
-				fuzzbuttEntry = true;
-				var timeout = setTimeout(function() {
-					$('#fuzzbuttDoorman').hide();
-					$('.fuzzbuttDetails').show();
-					$('#interactionText').writeText(marketText.intro);
-				}, 3500);	
-			}
-			else if(Oshu.items.emptyBottle) {
-				$('#interactionText').writeText(factoryText.questReturnUnfinished);
-			}
-		}
-
 		$('#optionThree').unbind('click');
 		$('#optionThree').click(function() {
 			endConversation(factoryText.declineOffer);
@@ -457,6 +455,7 @@ libraryStatus = 'intro';
 
 libraryText = {
 	intro: "There is a small gift shop outside the library. Would you like to buy anything?",
+	ladyIntro: "Welcome to my humble shop! I just love the library so much. I've been able to get passes a few times now!",
 	options: "You enter the small gift shop, filled with items for sale.",
 	bookmarkIntro: "A bookmark is always a great, simple purchase!",
 	bookmarkOptions: "Would you like to buy the bookmark?",
@@ -469,6 +468,13 @@ libraryText = {
 	no: "That's alright!",
 	end: "Thank you for your purchase!"
 }
+
+$('#librarian').unbind('click');
+$('#librarian').click(function() {
+	if(go) {
+		$('#interactionText').writeText(libraryText.ladyIntro);
+	};
+});
 
 // THE LIBRARY SHOP
 

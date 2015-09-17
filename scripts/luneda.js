@@ -643,7 +643,39 @@ $('#dancer4').click(function() {
 					break;
 					case 'alright':
 						dancerStatus = 'riddle';
-						threeOptions(danceText.barryRiddle, 'Your shadow?', 'Time?', 'A Television?');
+						if(dontGo !== true) {
+							$('#interactionText').writeText(danceText.barryRiddle);
+							dontGo = true;
+
+							// the following chunk has to do with displaying the "do you want to buy" question
+							var wait3 = setTimeout(function() {
+								dontGo = false;
+								$('#interactionText').text('');
+								$('#optionOne').show();
+								$('#optionTwo').show();
+								$('#optionThree').show();
+								$('#optionOne').text('Your shadow?');
+								$('#optionTwo').text('Time?');
+								$('#optionThree').text('A Television?');
+							}, 6000);					
+
+							// click your mouse button to skip the wait
+							$(this).unbind('click');
+							$(this).click(function() {
+								if($('#interactionText').text() == danceText.barryRiddle) {
+									displayGo = false;
+									clearTimeout(wait3);
+									dontGo = false;
+									$('#interactionText').text('');
+									$('#optionOne').show();
+									$('#optionTwo').show();
+									$('#optionThree').show();
+									$('#optionOne').text('Your shadow?');
+									$('#optionTwo').text('Time?');
+									$('#optionThree').text('A Television?');
+								}
+							});
+						};
 					break;
 					case 'riddle':
 						endConversation(danceText.barryWrong);
