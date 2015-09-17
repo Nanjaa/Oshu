@@ -89,11 +89,23 @@ $('pre').click(function() {
 			}
 		break;
 		case 'danceHall':
+			$('.danceHall').show();
+			$('#lunedaMap').hide();
+			if(Oshu.items.clothes == false) {
+				$('.noDancing').show();
+				$('#interactionText').writeText(danceText.doorman);
+			}
+			else {
+				$('.noDancing').hide();
+				$('.danceDetails').show();
+				$('#interactionText').writeText(danceText.danceIntro);
+			}	
 			changeLocation('.danceHall');
 		break;
 		case 'weather':
 			$('#lunedaMap').hide();
 			$('.weather').show();
+			$('#interactionText').writeText(weatherText.intro);
 			changeLocation('.weather');
 		break;
 		case 'marketCircle':
@@ -570,24 +582,8 @@ var danceText = {
 	barryGoodbye: "Go use your library pass! You won't believe how amazing it is there!"
 }
 
-$('#danceHall').click(function() {
-	if(go) {
-		$('.danceHall').show();
-		$('#lunedaMap').hide();
-		if(Oshu.items.clothes == false) {
-			$('.noDancing').show();
-			$('#interactionText').writeText(danceText.doorman);
-		}
-		else {
-			$('.noDancing').hide();
-			$('.danceDetails').show();
-			$('#interactionText').writeText(danceText.danceIntro);
-		}		
-	}
-
-});
-
 var dancerSpeech = 1;
+
 $('#dancer1').click(function() {
 	if(go) {
 		femVoice2();		
@@ -692,29 +688,21 @@ var weatherText = {
 	end: "Those were some pretty incredible storms, weren't they?"
 };
 
-var weatherComplete = false,
-	weatherStatus = 'intro';
-
-// write the description of the weather monitoring facility
-$('#weather').click(function() {
-	if(go) {
-		$('#interactionText').writeText(weatherText.intro);		
-	};
-});
+var weatherStatus = 'intro';
 
 // speak to the weatherman
 $('#weatherman').unbind('click');
 $('#weatherman').click(function() {
 	if(go) {
 		maleVoice2();
-		if(Oshu.items.weatherSpecimen == false && weatherComplete == false) {
+		if(Oshu.items.weatherSpecimen == false && Oshu.items.weatherComplete == false) {
 			twoOptions(weatherText.weathermanIntro, "Here you go", "I don't have that kind of money!");
 		}
-		else if(weatherComplete) {
+		else if(Oshu.items.weatherComplete) {
 			$('#interactionText').writeText(weatherText.end);
 		}
 		else {
-			if(Oshu.items.weatherComplete) {
+			if(Oshu.items.weatherDroppedOff) {
 				weatherStatus = 'return complete';
 				oneOption(weatherText.Return, 'Sure did!');
 			}
@@ -739,6 +727,7 @@ $('#weatherman').click(function() {
 							payMoney(1000);
 							lifeEvent(3);
 							completeItem(Oshu.quests[0][1][1], Oshu.questSpeech.luneda2);
+							Oshu.items.weatherComplete = true;
 
 							$('#skip').unbind('click');
 							$('#skipButton').unbind('click');
@@ -747,7 +736,6 @@ $('#weatherman').click(function() {
 								endSpeech();
 								$('#interactionText').writeText(weatherText.end);
 							});
-							weatherComplete = true;
 						}
 						else {
 							Oshu.items.weatherSpecimen = true;
@@ -760,9 +748,11 @@ $('#weatherman').click(function() {
 						endConversation(weatherText.specimen);
 						var wait = setInterval(function() {
 							if($('#interactionText').text() == weatherText.specimen) {
+								clearInterval(wait);
 								var hold = setTimeout(function() {
 									lifeEvent(3);
 									completeItem(Oshu.quests[0][1][1], Oshu.questSpeech.luneda2);
+									Oshu.items.weatherComplete = true;
 
 									$('#skip').unbind('click');
 									$('#skipButton').unbind('click');

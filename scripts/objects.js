@@ -23,6 +23,7 @@ var Oshu = {
 		jewelry: false,
 		libraryPass: false, 
 		weatherSpecimen: false,
+		weatherDroppedOff: false,
 		weatherComplete: false,
 		kanedosNecklace: false,
 		kanedomeTicket: false,

@@ -110,12 +110,12 @@ $('pre').click(function() {
 var weatherText = {
 	noAccess: "Only people that have business with the capitol are allowed in.",
 	weather: "You are led to the Galactic Weather Department's main office. The room looks very similar to the monitoring room on Luneda.",
-	intro: "Oh, did you bring the specimen from Luneda? Thanks! They told us you'd be on the way. Here, have some coins. Thanks for your help.",
+	intro: "Oh, did you bring the specimen from Luneda? They told us you'd be on the way. Thanks for your help!",
 	computers: "The computers are displaying programs that look incredibly confusing.",
 	goodbye: "Thanks for your help, but if you were supposed to get something from the guys on Luneda, you'll have to bring it up with them.",
-	advice1: "Advice2",
-	advice2: "Advice2 for real",
-	advice3: "advice 3"
+	advice1: "Sunstones are illegal now. I wonder where you could buy one...",
+	advice2: "Fairies on Kaprika only like shiny things! If you want to see one, make sure you bring something shiny!",
+	advice3: "If you ever need more time, make sure to go see a mechanic. They can adjust your Lifecycle Program!"
 };
 
 var weatherStatus = 'intro';
@@ -125,6 +125,7 @@ $('#capitolWeatherman').click(function() {
 		femVoice3();
 		if(weatherStatus == 'intro') {
 			$('#interactionText').writeText(weatherText.intro);
+			Oshu.items.weatherDroppedOff = true;
 			weatherStatus = 1;
 		}
 		else if(weatherStatus == 1) {
