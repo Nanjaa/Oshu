@@ -307,7 +307,11 @@ $('#fuzzbuttDoorman').click(function() {
 		else if(Oshu.items.emptyBottle) {
 			$('#interactionText').writeText(factoryText.questReturnUnfinished);
 		}
-		else if(factoryStatus == 'intro') {
+		else if(factoryStatus == 'declined'){
+			threeOptions(factoryText.declinedReturn, "I'll pay you.", "I'll help you out.", "Nevermind.");
+		}
+		else {
+			factoryStatus = 'intro';
 			twoOptions(factoryText.goonIntro, "Maybe I can persuade you otherwise...", "I do have the proper authority.");
 			// select Option One
 			$('#optionOne').unbind('click');
@@ -385,9 +389,6 @@ $('#fuzzbuttDoorman').click(function() {
 					break;
 				};
 			});
-		}
-		else if(factoryStatus == 'declined'){
-			threeOptions(factoryText.declinedReturn, "I'll pay you.", "I'll help you out.", "Nevermind.");
 		}
 		$('#optionThree').unbind('click');
 		$('#optionThree').click(function() {
@@ -633,7 +634,7 @@ var addText = {
 	yes: "15 minutes has been added to your life",
 	no: "Have a good day!",
 	noMore: "I'm sorry, but you're not low enough on time for me to change it!"
-}
+};
 
 // Lifecycle Adjustment
 $('tyrianneLifecycleAdd').unbind('click');

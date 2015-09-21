@@ -82,14 +82,15 @@ $('#fortuneTeller').click(function() {
 	if(go) {
 		femVoice3();
 		$('.option').hide();
-
 		mysteryStatus = 'intro';
+
 		if(Oshu.items.password) {
 			twoOptions(mysteryText.gypsyIntro, "What have you got for sale?", "'Phoenix'");
 		}
 		else {
 			oneOption(mysteryText.gypsyIntro, 'What have you got for sale?');
 		}
+		
 		$('#optionOne').unbind('click');
 		$('#optionOne').click(function() {
 			$('.option').hide();
