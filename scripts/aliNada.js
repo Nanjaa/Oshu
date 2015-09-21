@@ -55,15 +55,19 @@ $('pre').click(function() {
 		case 'cemetery':
 			if(graveStatus) {
 				graveStatus = false;
-				completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
-				$('#skip').show();
-				$('#skipButton').unbind('click');
-				$('#skipButton').click(function() {
-					$('.cemetery').show();
-					endSpeech();
-					$('.cemetery').show();
-					$('#interactionText').writeText(graveText.end);
-				});			
+				var cemeteryWait = setTimeout(function() {
+					console.log(1000);
+					play('soundEffects/completeItem.wav');
+					completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
+					$('#skip').show();
+					$('#skipButton').unbind('click');
+					$('#skipButton').click(function() {
+						$('.cemetery').show();
+						endSpeech();
+						$('.cemetery').show();
+						$('#interactionText').writeText(graveText.end);
+					});							
+				}, 1);
 			}
 			else {
 				$('.cemetery').show();
@@ -74,15 +78,19 @@ $('pre').click(function() {
 		case 'tombstones':
 			if(graveStatus) {
 				graveStatus = false;
-				completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
-				$('#skip').show();
-				$('#skipButton').unbind('click');
-				$('#skipButton').click(function() {
-					$('.cemetery').show();
-					endSpeech();
-					$('.cemetery').show();
-					$('#interactionText').writeText(graveText.end);
-				});			
+				var cemeteryWait = setTimeout(function() {
+					console.log(1000);
+					play('soundEffects/completeItem.wav');
+					completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
+					$('#skip').show();
+					$('#skipButton').unbind('click');
+					$('#skipButton').click(function() {
+						$('.cemetery').show();
+						endSpeech();
+						$('.cemetery').show();
+						$('#interactionText').writeText(graveText.end);
+					});							
+				}, 1);	
 			}
 			else {
 				$('.cemetery').show();

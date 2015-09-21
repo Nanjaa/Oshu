@@ -483,10 +483,6 @@ var audioPaused = false,
 	paused = false,
 	audioStopped = false;
 
-$('#inventoryTitle').click(function() {
-	console.log(audio.paused);
-})
-
 function pauseGame() {
 	paused = true;
 	$('#pausedOverlay').show();

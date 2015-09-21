@@ -442,14 +442,14 @@ function ignore(map) {
 				if(tyrianneTimeline == 'tyrianneIntro') {
 					showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 					ignore();
-				}								
-			}
-			else {
-				concludeToMap();
-				ignore();
-			}
+				}	
+				else {
+					concludeToMap();
+					ignore();
+				};	
+			};
 		});
-	}
+	};
 
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 // |																															 |
@@ -485,7 +485,7 @@ function ignore(map) {
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 	function aliNadaFirst() {
-		audioStopped = false;f
+		audioStopped = false;
 		changeLocation('#aliNadaMap');
 		miloResponse(text.aliNadaIntro, 'speech/aliNadaIntro.mp3', response.aliNadaGoodOrBad, '', response.ignore);
 		$('#bad').hide();
@@ -644,6 +644,11 @@ function ignore(map) {
 		else {
 			$('#map').show();
 		};
+	});
+
+	$('#inventoryTitle').click(function() {
+		finished = finished + 1;
+		console.log(finished);
 	});
 
     // _________________________________________//
@@ -892,9 +897,9 @@ function ignore(map) {
 					miloResponse(text.familyGoodGood1, 'speech/familyGoodGood1.mp3', '','','');
 					$('#miloResponse').hide();
 					setTimeout(function() {
-						$('#miloResponse').show();
 						$('#miloSays').text('');
 						miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
+						$('#miloResponse').show();
 					}, 1000);
 					familyTimeline = 'Yes I always felt accepted';
 				}
@@ -915,9 +920,9 @@ function ignore(map) {
 					miloResponse('I see.', 'speech/familyneutGood.mp3', '','','');
 					$('#miloResponse').hide();
 					setTimeout(function() {
-						$('#miloResponse').show();
 						$('#miloSays').text('');
 						miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
+						$('#miloResponse').show();
 					}, 1000);
 					familyTimeline = 'Yes I always felt accepted';				
 				}
