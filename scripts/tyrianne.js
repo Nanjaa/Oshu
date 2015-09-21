@@ -178,7 +178,7 @@ $('#poorManClose').click(function() {
 							endSpeech();
 							$('#interactionText').writeText(poorText.end);
 						});		
-					}, 2000);
+					}, 3000);
 				}	
 				else {
 					endConversation(poorText.end);

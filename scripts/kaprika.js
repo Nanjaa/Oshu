@@ -287,6 +287,6 @@ $('#quietGrove').click(function() {
 				$('.quietGrove').show();
 				$('#interactionText').writeText(groveText.fairyDescription);
 			});
-		}, 3000);
+		}, 3500);
 	}		
 });

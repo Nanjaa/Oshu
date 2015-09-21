@@ -127,7 +127,6 @@ function ignore(map) {
 	$(map).show();
 	audio.pause();
 	audioStopped = true;
-	console.log(audioStopped);
 	$('#skip').hide();
 	$('#skip').unbind('click');
 	$('#skipButton').unbind('click');
