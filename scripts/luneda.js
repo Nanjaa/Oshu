@@ -184,8 +184,6 @@ var beachText = {
 
 //************************ interact with the equipment shack ************************
 
-var beachEnd = false;
-
 $('.rentalDetails').unbind('click');
 $('.rentalDetails').click(function() {
 	rentalActivate();
@@ -263,8 +261,6 @@ $('#bar').click(function() {
 		};		
 	}
 });
-
-var manStatus = 'intro';
 
 $('#mysteriousMan').click(function() {
 	if(go) {
@@ -622,9 +618,7 @@ $('.dancer').click(function() {
 				break;
 		}		
 	};
-})
-
-var dancerStatus = 'intro';
+});
 
 $('#dancer4').click(function() {
 	if(go) {
@@ -723,8 +717,6 @@ var weatherText = {
 	specimen: "Great! Thank you so much. Follow me, let's go chase some storms!",
 	end: "Those were some pretty incredible storms, weren't they?"
 };
-
-var weatherStatus = 'intro';
 
 // speak to the weatherman
 $('#weatherman').unbind('click');

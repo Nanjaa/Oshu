@@ -74,8 +74,6 @@ $('pre').click(function() {
 // |===============================================================|
 // |_______________________________________________________________|
 
-var watched = false;
-
 var kanedomeText = {
 	intro: "There is a large man in a ticket stand at the gate.",
 	ticketIntro: "Would you like to buy a ticket for the fight tonight? Only 75 coins!",
@@ -124,8 +122,6 @@ $('#ticketGuy').click(function() {
 // |															   |
 // |===============================================================|
 // |_______________________________________________________________|
-
-var camelEnd = false;
 
 var camelText = {
 	intro: "You walk into the camel rental building and an interesting smell fills your nostrils.",

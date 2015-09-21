@@ -129,8 +129,24 @@ var myLocation = {
 //  \\											   //
 //   \\___________________________________________//
 
-var brawlerStatus = 'intro';
-apprenticeStatus = 'intro';
+var	watched = false,
+	camelEnd = false,
+	beachEnd = false,
+	graveStatus = true,
+	firstTime = true,
+	fuzzbuttEntry = false;
+
+var	brawlerStatus = 'intro',
+	apprenticeStatus = 'intro',
+	manStatus = 'intro',
+	dancerStatus = 'intro',
+	weatherStatus = 'intro',
+	aliWeatherStatus = 'intro',
+	mysteryStatus = 'intro',
+	goonStatus = 'intro',
+	poorStatus = 'intro',
+	factoryStatus = 'intro',
+	libraryStatus = 'intro';
 
 //    _____________________________________________
 //   //											  \\

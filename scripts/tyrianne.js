@@ -47,8 +47,6 @@ $('.return').click(function() {
 // |===============================================================|
 // |_______________________________________________________________|
 
-var fuzzbuttEntry = false;
-
 $('pre').click(function() {
 	var location = $(this).attr('id');
 	switch(location) {
@@ -128,7 +126,6 @@ $('pre').click(function() {
 // |															   |
 // |===============================================================|
 // |_______________________________________________________________|
-var poorStatus = 'intro';
 
 var poorText = {
 	intro: "You walk up to a man with a cardboard sign. He looks incredibly hungry.",
@@ -291,8 +288,6 @@ var factoryText = {
 	questReturnFinished: "Cool. One second, I'll take you inside."
 };
 
-factoryStatus = 'intro';
-
 $('#fuzzbuttDoorman').unbind('click');
 $('#fuzzbuttDoorman').click(function() {
 	if(go) {
@@ -450,8 +445,6 @@ $('.fuzzbuttDetails').click(function() {
 // |															   |
 // |===============================================================|
 // |_______________________________________________________________|
-
-libraryStatus = 'intro';
 
 libraryText = {
 	intro: "There is a small gift shop outside the library. Would you like to buy anything?",

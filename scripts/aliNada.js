@@ -118,31 +118,30 @@ var weatherText = {
 	advice3: "If you ever need more time, make sure to go see a mechanic. They can adjust your Lifecycle Program!"
 };
 
-var weatherStatus = 'intro';
 $('#capitolWeatherman').unbind('click');
 $('#capitolWeatherman').click(function() {
 	if(go) {
 		femVoice3();
-		if(weatherStatus == 'intro') {
+		if(aliWeatherStatus == 'intro') {
 			$('#interactionText').writeText(weatherText.intro);
 			Oshu.items.weatherDroppedOff = true;
-			weatherStatus = 1;
+			aliWeatherStatus = 1;
 		}
-		else if(weatherStatus == 1) {
+		else if(aliWeatherStatus == 1) {
 			$('#interactionText').writeText(weatherText.goodbye);
-			weatherStatus = 2;
+			aliWeatherStatus = 2;
 		}
-		else if(weatherStatus == 2) {
+		else if(aliWeatherStatus == 2) {
 			$('#interactionText').writeText(weatherText.advice1);
-			weatherStatus = 3;
+			aliWeatherStatus = 3;
 		}
-		else if(weatherStatus == 3) {
+		else if(aliWeatherStatus == 3) {
 			$('#interactionText').writeText(weatherText.advice2);
-			weatherStatus = 4;
+			aliWeatherStatus = 4;
 		}
-		else if(weatherStatus == 4) {
+		else if(aliWeatherStatus == 4) {
 			$('#interactionText').writeText(weatherText.advice3);
-			weatherStatus = 1;
+			aliWeatherStatus = 1;
 		};		
 	}
 
@@ -160,8 +159,6 @@ var graveText = {
 	intro: "You walk into the cemetery and find your brother's grave.",
 	end: "You'll always miss your brother, but you know he'd be proud of you if he were here today."
 }
-
-var graveStatus = true;
 
 // ________________________________________________________________
 // | ==============================================================|

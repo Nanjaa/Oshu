@@ -60,8 +60,6 @@ $('pre').click(function() {
 // |===============================================================|
 // |_______________________________________________________________|
 
-var mysteryStatus = 'intro';
-
 var mysteryText = {
 	intro: "You step into a very mysterious shop, with skulls hanging from the ceiling!",
 	gypsyIntro: "I'm Lillyandra. I feel you are in turmoil... What may I help you with?",
@@ -186,9 +184,7 @@ var treeText = {
 	awake: "No way! Now what did I just say? SCRAM!",
 	treeGoons: "The tree stands tall above you, but goons guard the roots!",
 	treeNoGoons: "Climbing the tree was exhilirating! The world looked so small beneath you."
-}
-
-var goonStatus = 'intro';
+};
 
 $('.treeGoons').click(function() {
 	if(go) {
@@ -254,8 +250,6 @@ $('#treeClose').click(function() {
 // |															   |
 // |===============================================================|
 // |_______________________________________________________________|
-
-var firstTime = true;
 
 var groveText = {
 	noFairies: "The grove is very quiet. You know this is where the fairies are supposed to be, but they're nowhere to be seen.",
