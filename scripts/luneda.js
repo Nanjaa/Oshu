@@ -58,9 +58,11 @@ $('.return').click(function() {
 // |_______________________________________________________________|
 
 $('pre').click(function() {
+	console.log(1);
 	var location = $(this).attr('id');
 	switch(location) {
 		case 'electricSeas': 
+			console.log(2);
 			$('#beach').show();
 			$('.beachDetails').show();
 			$('#interactionText').writeText(beachText.welcome);
@@ -601,6 +603,7 @@ $('#dancer3').click(function() {
 });
 $('.dancer').click(function() {
 	if(go) {
+		$('.option').hide();
 		switch(dancerSpeech) {
 			case 1: 
 				$('#interactionText').writeText(danceText.barryAdvice);
