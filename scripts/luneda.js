@@ -267,6 +267,7 @@ $('#bar').click(function() {
 var manStatus = 'intro';
 
 $('#mysteriousMan').click(function() {
+	console.log(manStatus);
 	if(go) {
 		maleVoice2();
 		if(Oshu.items.fixedRobot) {
@@ -277,7 +278,6 @@ $('#mysteriousMan').click(function() {
 			switch(manStatus) {
 				case 'intro':
 					oneOption(tikiText.manIntro, "I'm listening...");
-					manStatus = 'listening';
 				break;
 				case 'accepted':
 					$('#interactionText').writeText(tikiText.questReturnIncomplete);				
@@ -293,7 +293,7 @@ $('#mysteriousMan').click(function() {
 			if(go) {
 				$('.option').hide();
 				switch(manStatus) {
-					case 'listening':
+					case 'intro':
 						$('#interactionText').text('');
 						oneOption(tikiText.questIntro, "Why can't you do this yourself?");
 						manStatus = 'yourself';
