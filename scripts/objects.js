@@ -120,7 +120,46 @@ var myLocation = {
 	AliNada: false
 };
 
+//    _____________________________________________
+//   //											  \\
+//  //											   \\
+// //											    \\
+// || 		STATUSES - THROUGHOUT ALL WORLDS 		||
+// \\											    //
+//  \\											   //
+//   \\___________________________________________//
+
+var brawlerStatus = 'intro';
+apprenticeStatus = 'intro';
+
+//    _____________________________________________
+//   //											  \\
+//  //											   \\
+// //											    \\
+// || 		SOUND - INCLUDES MUSIC AND DIALOGUE 	||
+// \\											    //
+//  \\											   //
+//   \\___________________________________________//
+
 var sound = true;
+
+//    _____________________________________________
+//   //											  \\
+//  //											   \\
+// //											    \\
+// || 		KNOWLEDGE - WHAT DOES MILO KNOW 		||
+// \\											    //
+//  \\											   //
+//   \\___________________________________________//
+
+var knowledge= {
+	name: false,
+	danger: false,
+	mortality: false,
+	committed: false,
+	commitConversation: false,
+	brother: false
+};
 
 //    _____________________________________________
 //   //											  \\
@@ -338,22 +377,4 @@ var response = {
 	happyGoodGood: "I promise!",
 	happyGoodBad: "I can't make any promises, MILO,",
 	happyBad: "If living meant dealing with you another second, I'd take death without hesitation."
-}
-
-//    _____________________________________________
-//   //											  \\
-//  //											   \\
-// //											    \\
-// || 		KNOWLEDGE - WHAT DOES MILO KNOW 		||
-// \\											    //
-//  \\											   //
-//   \\___________________________________________//
-
-var knowledge= {
-	name: false,
-	danger: false,
-	mortality: false,
-	committed: false,
-	commitConversation: false,
-	brother: false
 };

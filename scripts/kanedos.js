@@ -282,7 +282,6 @@ $('#suckerBartender').click(function() {
 })
 
 // ************************ THE APPRENTICE ************************
-apprenticeStatus = 'intro';
 
 $('#apprentice').unbind('click');
 $('#apprentice').click(function() {
@@ -324,6 +323,8 @@ $('#apprentice').click(function() {
 			});
 		}
 		else {
+			apprenticeStatus = 'intro';
+			$('.option').hide();
 			oneOption(barText.apprenticeIntro, "Can you help me get into a martial arts class?");
 
 			$('#optionOne').unbind('click');
@@ -399,13 +400,29 @@ var brawlerText = {
 	die: "Yeah? and how many millions of other people from all the other planets in this galaxy are in the same situation? You're not special, you're a brat. Leave me alone.",
 	dieEnd: "Don't try my patience, or you'll die earlier than you were expecting..."
 }
-var brawlerStatus = 'intro';
 
 $('#brawler').unbind('click');
 $('#brawler').click(function() {
 	if(go) {
 		maleVoice2();
-		if(brawlerStatus == 'intro') {
+		if(brawlerStatus == 'sold') {
+			$('#interactionText').writeText(brawlerText.ticketReturn);
+		}
+		else if(brawlerStatus == 'noSmuggle') {
+			$('#interactionText').writeText(brawlerText.smuggleReturn);
+		}
+		else if(brawlerStatus == 'smuggleEnd') {
+			$('#interactionText').writeText(brawlerText.smuggleEnd);
+		}
+		else if(brawlerStatus == 'wrestleEnd') {
+			$('#interactionText').writeText(brawlerText.wrestleEnd);
+		}
+		else if(brawlerStatus == 'dieEnd') {
+			$('#interactionText').writeText(brawlerText.dieEnd);
+		}	
+
+		else {
+			$('.option').hide();
 			oneOption(brawlerText.intro, 'Can you get me into the Kanedome?');
 
 			$('#optionOne').unbind('click');
@@ -482,33 +499,16 @@ $('#brawler').click(function() {
 
 			$('#optionThree').unbind('click');
 			$('#optionThree').click(function() {
-				if(go) {
-					$('.option').hide();
-					if(brawlerStatus == 'how') {
-						endConversation(brawlerText.wrestle);
-						brawlerStatus = 'wrestleEnd';
-					}
-					else if(brawlerStatus == 'why') {
-						endConversation(brawlerText.die);
-						brawlerStatus = 'dieEnd';
-					}					
+				$('.option').hide();
+				if(brawlerStatus == 'how') {
+					endConversation(brawlerText.wrestle);
+					brawlerStatus = 'wrestleEnd';
 				}
+				else if(brawlerStatus == 'why') {
+					endConversation(brawlerText.die);
+					brawlerStatus = 'dieEnd';
+				}					
 			})
-		}
-		else if(brawlerStatus == 'sold') {
-			$('#interactionText').writeText(brawlerText.ticketReturn);
-		}
-		else if(brawlerStatus == 'noSmuggle') {
-			$('#interactionText').writeText(brawlerText.smuggleReturn);
-		}
-		else if(brawlerStatus == 'smuggleEnd') {
-			$('#interactionText').writeText(brawlerText.smuggleEnd);
-		}
-		else if(brawlerStatus == 'wrestleEnd') {
-			$('#interactionText').writeText(brawlerText.wrestleEnd);
-		}
-		else if(brawlerStatus == 'dieEnd') {
-			$('#interactionText').writeText(brawlerText.dieEnd);
-		}		
+		}	
 	};
 });
