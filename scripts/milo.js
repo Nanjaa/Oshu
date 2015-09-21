@@ -119,6 +119,19 @@ var miloGo = true;
 		});
 	}
 
+	// ignore function
+
+function ignore(map) {
+	$('#miloResponse').hide();
+	$('#miloInteraction').hide();
+	$(map).show();
+	audio.pause();
+	audioStopped = true;
+	console.log(audioStopped);
+	$('#skip').hide();
+	$('#skip').unbind('click');
+	$('#skipButton').unbind('click');
+}
 	// skip back to the world map
 
 	$('#myShip').click(function() {
@@ -137,6 +150,7 @@ var miloGo = true;
 	startGame();
 
 	function startGame() {
+		audioStopped = false;
 		// First, determine if the sound should be playing.
 		sound = localStorage.getItem('sound');
 		if(sound == null) {
@@ -217,6 +231,7 @@ var miloGo = true;
 			Oshu.onBoard = false;
 			$('#map').hide();
 			myLocation.current = $(this).attr('distance');
+			audioStopped = false;
 
 			// Run the milo introduction if this is the first time. The introductory functions are below this $('.planet').click function
 			if($(this).attr('first') == 'true') {
@@ -281,6 +296,7 @@ var miloGo = true;
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 	function lunedaFirst() {
+		audioStopped = false;
 		changeLocation('#lunedaMap');
 		quickMilo(text.lunedaIntro, 'speech/lunedaIntro.wav');
 		miloIntroduction(19500, 'luneda.html #lunedaContent', 'scripts/luneda.js');
@@ -300,6 +316,7 @@ var miloGo = true;
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 	function kanedosFirst() {
+		audioStopped = false;
 		startKanedos = true;
 		changeLocation('#kanedosMap');
 		miloResponse(text.kanedosIntro, 'speech/kanedosIntro.mp3', response.kanedosGood, response.kanedosBad, response.ignore);
@@ -354,6 +371,7 @@ var miloGo = true;
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 	function tyrianneFirst() {
+		audioStopped = false;
 		changeLocation('#tyrianneMap');
 		$('#miloInteraction').show();
 		$('#miloSays').writeText(text.tyrianneIntro);
@@ -448,6 +466,7 @@ var miloGo = true;
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||3
 
 	function kaprikaFirst() {
+		audioStopped = false;
 		changeLocation('#kaprikaMap');
 		quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.wav', '#kaprikaMap');
 		miloIntroduction(19000, 'kaprika.html #kaprikaContent', 'scripts/kaprika.js');
@@ -467,6 +486,7 @@ var miloGo = true;
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 	function aliNadaFirst() {
+		audioStopped = false;f
 		changeLocation('#aliNadaMap');
 		miloResponse(text.aliNadaIntro, 'speech/aliNadaIntro.mp3', response.aliNadaGoodOrBad, '', response.ignore);
 		$('#bad').hide();
@@ -553,6 +573,7 @@ var miloGo = true;
 		$('.cityDetails').hide();
 		$('.visitPlanet').hide();
 		Oshu.onBoard = true;
+		audioStopped = false;
 
 /////////////////////////////////////////////////
 // 					  MILO DISCOVERS YOUR SECRET
@@ -1053,6 +1074,7 @@ var miloGo = true;
 					concludeToMap(4000);
 				}
 				else if(miloGoodbyeTimeline == 'goodIntro') {
+					audioStopped = true;
 					audio.pause();
 					$('#miloSays').writeText(text.happyBad);
 					concludeToMap(2000);

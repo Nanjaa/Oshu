@@ -25,15 +25,29 @@ $(document).ready(function() {
 	};
 
 	var life = setInterval(function() {
-		if(Oshu.finished == 5) {
-			concludeGame(true);
+		// check that the game is still the primary focus
+		if(document.hasFocus() == false) {
+			$('#pausedOverlay').show();
+			pauseGame();
 		}
-		if(Oshu.remainingLife === 0) {
-			clearInterval(life);
-			concludeGame(false);
-			return;
+		// check that the game is unpaused
+		else if(!paused) {
+			// check that you haven't completed all the quests 
+			if(Oshu.finished == 5) {
+				concludeGame(true);
+			}
+			// check that you still have life
+			else if(Oshu.remainingLife === 0) {
+				clearInterval(life);
+				concludeGame(false);
+				return;
+			}
+			// if you are good to go, drain the life bar
+			else {
+				loseLife();			
+			}			
 		}
-		loseLife();
+
 	}, 1000);
 
 	window.setInterval(life);

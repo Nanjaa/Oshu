@@ -1,3 +1,4 @@
+
 var Oshu = {
 	status: 0,
 	onBoard: true,

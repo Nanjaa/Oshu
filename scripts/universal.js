@@ -93,20 +93,6 @@ function resetText() {
 }) (jQuery);
 
 // ------------------------------------------------------
-// 					IGNORE OR SKIP TEXT
-// ------------------------------------------------------
-
-function ignore(map) {
-	$('#miloResponse').hide();
-	$('#miloInteraction').hide();
-	$(map).show();
-	audio.pause();
-	$('#skip').hide();
-	$('#skip').unbind('click');
-	$('#skipButton').unbind('click');
-}
-
-// ------------------------------------------------------
 // 				SHOW PLANET CONTENT!!
 // ------------------------------------------------------
 
@@ -127,9 +113,11 @@ function hideContent(content) {
 function getPaid(price) {
 	var coins = Oshu.coins;
 	var payment = setInterval(function() {
-		coins = coins + 1;
-		Oshu.coins = coins;
-		$('#coinsAmt').text(coins);		
+		if(!paused) {
+			coins = coins + 1;
+			Oshu.coins = coins;
+			$('#coinsAmt').text(coins);				
+		};
 	}, 500);
 };
 
@@ -481,6 +469,43 @@ $('#sounds').click(function() {
 		localStorage.setItem('sound', true);
 	}
 });
+
+// ------------------------------------------------------
+// 					PAUSE THE GAME
+// ------------------------------------------------------
+
+$('#pause').unbind('click');
+$('#pause').click(function() {
+	pauseGame();
+});
+
+var audioPaused = false,
+	paused = false,
+	audioStopped = false;
+
+$('#inventoryTitle').click(function() {
+	console.log(audio.paused);
+})
+
+function pauseGame() {
+	paused = true;
+	$('#pausedOverlay').show();
+	if(audio.paused !== true) {
+		audio.pause();
+		audioPaused = true;
+	}
+	var pausedWait = setTimeout(function() {
+		$(this).click(function() {
+			paused = false;
+			$(this).unbind('click');
+			$('#pausedOverlay').hide();
+
+			if(audioPaused == true && audioStopped == false) {
+				audio.play();
+			}
+		});
+	}, 100);
+};
 
 // ------------------------------------------------------
 // 					RESET THE OPTIONS
