@@ -147,10 +147,15 @@ function payMoney(price) {
 };
 
 var optionsStatus = 1;
-var displayGo = false;
+
+function resetOptions() {
+	dontGo = false;
+	$('.option').hide();
+}
 
 function displayOptions(text1, text2, price, yes, no, needMore) {
 	if(dontGo !== true) {
+		$('.return').click(function() {})
 		$('#interactionText').writeText(text1);
 		dontGo = true;
 		optionsNext(text1, text2, price, yes, no, needMore);
@@ -164,14 +169,18 @@ function optionsNext(text1, text2, price, yes, no, needMore) {
 		// now to display the yes or no options
 		twoOptions(text2, 'Yes', 'No');
 		optionsFunction(price, yes, no, needMore);
-	}, 4000);					
+	}, 4000);
+
+	$('.return').click(function() {
+		resetOptions();
+		clearTimeout(holding);
+	});				
 
 	// click your mouse button to skip the wait
 	$(this).unbind('click');
 	$(this).click(function() {
 		if($('#interactionText').text() == text1) {
 			clearTimeout(holding);
-			displayGo = false;
 			dontGo = false;
 			// now to display the yes or no options
 			twoOptions(text2, 'Yes', 'No');
@@ -182,6 +191,10 @@ function optionsNext(text1, text2, price, yes, no, needMore) {
 
 function optionsFunction(price, yes, no, needMore) {
 	dontGo = true;
+	$('.return').click(function() {
+		resetOptions();
+	});
+
 	$('#optionOne').unbind('click');
 	$('#optionOne').click(function() {
 		dontGo = false;
@@ -399,7 +412,6 @@ function threeOptions(referenceText, option1, option2, option3) {
 		$(this).unbind('click');
 		$(this).click(function() {
 			if($('#interactionText').text() == referenceText) {
-				displayGo = false;
 				clearTimeout(wait3);
 				dontGo = false;
 				$('#interactionText').text('');
