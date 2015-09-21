@@ -58,11 +58,9 @@ $('.return').click(function() {
 // |_______________________________________________________________|
 
 $('pre').click(function() {
-	console.log(1);
 	var location = $(this).attr('id');
 	switch(location) {
 		case 'electricSeas': 
-			console.log(2);
 			$('#beach').show();
 			$('.beachDetails').show();
 			$('#interactionText').writeText(beachText.welcome);
@@ -269,8 +267,9 @@ $('#bar').click(function() {
 var manStatus = 'intro';
 
 $('#mysteriousMan').click(function() {
-	console.log(manStatus);
 	if(go) {
+		manStatus = 'intro';
+		$('.option').hide();
 		maleVoice2();
 		if(Oshu.items.fixedRobot) {
 			$('#interactionText').writeText(tikiText.questReturnComplete);
@@ -625,8 +624,11 @@ $('.dancer').click(function() {
 	};
 })
 
+var dancerStatus = 'intro';
+
 $('#dancer4').click(function() {
 	if(go) {
+		dancerStatus = 'intro';
 		$('.option').hide();
 		maleVoice3();
 		if(Oshu.items.libraryPass) {
@@ -634,7 +636,6 @@ $('#dancer4').click(function() {
 		}
 		else {
 			oneOption(danceText.barryIntro, 'Is there a way you could get me into the library?');
-			var dancerStatus = 'intro';
 
 			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
@@ -729,6 +730,8 @@ var weatherStatus = 'intro';
 $('#weatherman').unbind('click');
 $('#weatherman').click(function() {
 	if(go) {
+		$('.option').hide();
+		weatherStatus = 'intro';
 		maleVoice2();
 		if(Oshu.items.weatherSpecimen == false && Oshu.items.weatherComplete == false) {
 			twoOptions(weatherText.weathermanIntro, "Here you go", "I don't have that kind of money!");
