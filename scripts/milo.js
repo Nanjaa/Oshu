@@ -109,6 +109,7 @@ var miloGo = true;
 			$('#miloInteraction').hide();
 			$('#map').show();
 			$('#skip').hide();
+			$('#dots').hide();
 		}, timeout);
 		$('#skip').show();
 		$('#skipButton').unbind('click');
@@ -131,13 +132,6 @@ function ignore(map) {
 	$('#skip').unbind('click');
 	$('#skipButton').unbind('click');
 }
-	// skip back to the world map
-
-	$('#myShip').click(function() {
-		if($('#miloInteraction').css('display') == 'block') {
-			ignore('#map');
-		}
-	})
 
     // _________________________________________//
 	//											//
@@ -642,7 +636,7 @@ function ignore(map) {
 		}
 		// Or you just go to the map
 		else {
-			$('#map').show();
+			concludeToMap();
 		};
 	});
 

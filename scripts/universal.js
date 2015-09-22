@@ -22,24 +22,68 @@ function randomizeQuests() {
 }
 
 // ------------------------------------------------------
+// 				DRAIN LIFE SLOWLY OVER TIME
+// ------------------------------------------------------
+
+function secondsTimer(seconds) {
+	Oshu.seconds = (Oshu.seconds - 1);
+	if(Oshu.seconds == -1) {
+		Oshu.seconds = 59;	
+		$('#seconds').text(Oshu.seconds);
+		Oshu.minutes = (Oshu.minutes -1);
+		$('#minutes').text(Oshu.minutes);
+	}
+	else if(Oshu.seconds < 10) {
+		displaySeconds = '0' + Oshu.seconds;
+		$('#seconds').text(displaySeconds);
+	}
+	else {
+		$('#seconds').text(Oshu.seconds);
+	}
+};
+
+var life = setInterval(function() {
+	// check that the game is still the primary focus
+	if(document.hasFocus() == false) {
+		$('#pausedOverlay').show();
+		pauseGame();
+	}
+	// check that the game is unpaused
+	else if(!paused) {
+		// check that you haven't completed all the quests 
+		if(finished == 5) {
+			concludeGame(true);
+		}
+		// check that you still have life
+		else if(Oshu.remainingLife === 0) {
+			clearInterval(life);
+			concludeGame(false);
+			return;
+		}
+		// if you are good to go, drain the life bar
+		else {
+			secondsTimer(Oshu.seconds);
+			Oshu.remainingLife = Oshu.remainingLife - 1;	
+		};
+	};
+}, 1000);
+
+// ------------------------------------------------------
 // 					LOSE LIFE
 // ------------------------------------------------------
 
 function lifeEvent(minutesLost) {
 // calculate loss
 	// first, the timer
-	var currentTime = $('#minutes').text(),
-		newTime = currentTime - minutesLost,
+	var newTime = Oshu.minutes - minutesLost,
 		bar = minutesLost * 60;		
 
-	// next, the life bar
+	// next, update the objects
 
-	var remainingLife = Oshu.remainingLife;
-	Oshu.remainingLife = remainingLife - bar;
+	Oshu.minutes = newTime;
+	Oshu.remainingLife = Oshu.remainingLife - bar;
 	
 	// display the loss
-	var percent = ((Oshu.remainingLife/3600)*100) + "%";
-	$('#life').css('width', percent);
 	$('#minutes').text(newTime);
 
 };
@@ -343,6 +387,7 @@ function changeLocation(newLocation, clickReturn, clickShip) {
 		play('soundEffects/return.wav');
 	}
 	else if(clickShip) {
+		audio.pause();
 		play('soundEffects/returnToShip.wav');
 	}
 	else {
@@ -484,6 +529,7 @@ var audioPaused = false,
 	audioStopped = false;
 
 function pauseGame() {
+	document.title = 'Oshu - Paused';
 	paused = true;
 	$('#pausedOverlay').show();
 	if(audio.paused !== true) {
@@ -492,6 +538,7 @@ function pauseGame() {
 	}
 	var pausedWait = setTimeout(function() {
 		$(this).click(function() {
+			document.title = 'Oshu';
 			paused = false;
 			$(this).unbind('click');
 			$('#pausedOverlay').hide();

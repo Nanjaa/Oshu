@@ -140,8 +140,8 @@ var poorText = {
 
 $('#poorManClose').unbind('click');
 $('#poorManClose').click(function() {
-	maleVoice();
 	if(go) {
+		maleVoice();
 		if(poorStatus == 'end') {
 			$('#interactionText').writeText(poorText.end);
 		}

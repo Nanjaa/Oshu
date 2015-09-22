@@ -2,6 +2,8 @@
 var Oshu = {
 	status: 0,
 	onBoard: true,
+	minutes: 60,
+	seconds: 0,
 	remainingLife: 3600,
 	coins: 50,
 	currentLocation: '#lunedaMap',

@@ -305,7 +305,7 @@ $('#apprentice').click(function() {
 							endSpeech();
 							$('#interactionText').writeText(barText.apprenticeEnd);
 						});		
-					}, 2000)
+					}, 6000)
 					apprenticeStatus = 'finished';					
 				}
 			});

@@ -13,16 +13,4 @@ $(document).ready(function() {
 		$('#planetName').text('');
 	});
 
-
-	// lose time as you travel to another planet
-	// $('.planet').unbind('click');
-	// $('.planet').click(function() {
-	// 	var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
-	// 	if(($('#minutes').text() - minutesLost) <= 0) {
-	// 		play('soundEffects/error.wav')
-	// 	}
-
-	// });
-
-
 });	
