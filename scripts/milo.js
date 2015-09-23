@@ -217,6 +217,10 @@ function ignore(map) {
 	// lose time as you travel to another planet
 	$('.planet').unbind('click');
 	$('.planet').click(function() {
+		// change the color of the interaction on the planet
+		var destination = $(this).attr('id');
+		changeColor(destination);
+		// determine if you can travel there or not
 		var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
 		if(($('#minutes').text() - minutesLost) > 0) {
 			var destination = $(this).attr('id');	

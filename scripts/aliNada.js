@@ -8,6 +8,7 @@ $('.aliNadaCity').click(function() {
 
 // takes you back to the city map from any city details
 function aliNadaReturn() {
+	$('.option').hide();
 	$('.return').hide();
 	$('.cityDetails').hide();
 	$('#aliNadaMap').show();	

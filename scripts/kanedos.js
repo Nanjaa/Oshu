@@ -8,6 +8,7 @@ $('.kanedosCity').click(function() {
 
 // takes you back to the city map from any city details
 function kanedosReturn() {
+	$('.option').hide();
 	$('.return').hide();
 	$('.cityDetails').hide();
 	$('.kanedosCity').show();		

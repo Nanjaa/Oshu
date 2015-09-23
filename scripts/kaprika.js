@@ -8,6 +8,7 @@ $('.kaprikaCity').click(function() {
 
 // takes you back to the city map from any city details
 function kaprikaReturn() {
+	$('.option').hide();
 	$('.return').hide();
 	$('.cityDetails').hide();
 	$('.kaprikaCity').show();	
