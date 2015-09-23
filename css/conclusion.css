@@ -70,3 +70,22 @@ h1 {
 	color: white;
 	font-size: 45px;
 }
+footer {
+	padding: 15px;
+	text-align: center;
+	background-color: #0e0e0e;
+	font-family: "Share Tech Mono";
+}
+#footerLink {
+	color: white;
+	outline: 0;
+}
+a:hover {
+	color: gray;	
+}
+
+@media only screen and (min-width: 1225px) {
+	#inventory, #bucketList {
+		width: 45%;
+	}
+}

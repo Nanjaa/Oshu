@@ -640,11 +640,6 @@ function ignore(map) {
 		};
 	});
 
-	$('#inventoryTitle').click(function() {
-		finished = finished + 1;
-		console.log(finished);
-	});
-
     // _________________________________________//
 	//											//
 	//											//

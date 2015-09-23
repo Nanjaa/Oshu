@@ -11,6 +11,8 @@ body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	height: 100vh;
+	background-color: gray;
 }
 p {
 	margin: 0;
@@ -40,12 +42,11 @@ footer {
 	float: left;
 }
 #wrapper {
-	background-color: gray;
 	padding-top: 2%;
 	padding-bottom: 2%;
 }
 .console {
-	background-color: white;
+	background-color: #1a1a1a;
 	padding: 5px;
 	width: 90%;
 	border: 3px solid black;
@@ -247,24 +248,6 @@ pre {
 #pause {
 	margin-left: 15px;
 }
-
-/******* MEDIA QUERIES *******/
-
-@media (max-width: 1700px;) {
-	#inventory, #bucketList {
-		width: 60%;
-	}
-}
-@media (max-width: 1500px;) {
-	#inventory, #bucketList {
-		width: 50%;
-	}
-}
-@media (max-width: 1000px;) {
-	#inventory, #bucketList {
-		width: 45%;
-	}
-}
 #pausedOverlay {
 	display: none;
 	width: 100%;
@@ -279,4 +262,78 @@ pre {
 	font-size: 100px;
 	text-align: center;
 	margin-top: 35vh;
+}
+
+
+/******* MEDIA QUERIES *******/
+
+@media only screen and (min-width: 320px) {
+	.testwrap, #inventory, #bucketList {
+		margin-left: auto;
+		margin-right: auto;
+		width: 600px;
+		box-sizing: border-box;
+		float: none;
+	}
+}
+@media only screen and (min-width: 1100px) {
+	#inventory, #bucketList {
+		float: right;
+		width: 39%;
+	}
+	#inventory {
+		max-height: 370px;
+		overflow-y: auto;
+	}
+	.testwrap {
+		float: left;
+	}
+	.console {
+		height: 655px;
+	}
+}
+@media only screen and (min-width: 1150px) {
+	#inventory, #bucketList {
+		width: 42%;
+	}
+}
+@media only screen and (min-width: 1225px) {
+	#inventory, #bucketList {
+		width: 45%;
+	}
+}
+@media only screen and (min-width: 1300px) {
+	#inventory, #bucketList {
+		width: 48%;
+	}
+}
+@media only screen and (min-width: 1350px) {
+	#inventory, #bucketList {
+		width: 50%;
+	}
+}
+@media only screen and (min-width: 1425px) {
+	#inventory, #bucketList {
+		width: 52%;
+	}
+}
+@media only screen and (min-width: 1475px) {
+	#inventory, #bucketList {
+		width: 54%;
+	}
+}
+@media only screen and (min-width: 1550px) {
+	#inventory, #bucketList {
+		width: 56%;
+	}
+}
+@media only screen and (min-width: 1650px) {
+	#inventory, #bucketList {
+		width: 59%;
+	}
+}
+@media only screen and (min-width: 1800) {
+	#inventory, #bucketList {
+		width: 62%;
+	}
 }

@@ -51,7 +51,7 @@ var life = setInterval(function() {
 	// check that the game is unpaused
 	else if(!paused) {
 		// check that you haven't completed all the quests 
-		if(finished == 5) {
+		if((finished == 5) && (Oshu.inQuestSpeech == false)) {
 			concludeGame(true);
 		}
 		// check that you still have life
@@ -166,6 +166,19 @@ function getPaid(price) {
 };
 
 getPaid();
+
+// ------------------------------------------------------
+// 					Hover over Planets
+// ------------------------------------------------------
+
+$('.planet').mouseover(function() {
+	var minutesLost = Math.abs(($(this).attr('distance') - myLocation.current) * 1.5);
+	$('#planetName').text($(this).attr('id'));
+});
+
+$('.planet').mouseout(function() {
+	$('#planetName').text('');
+});
 
 // ------------------------------------------------------
 // 					PAY MONEY
@@ -308,6 +321,7 @@ $('.planet').click(function() {
 // ------------------------------------------------------
 
 function completeItem(quest, speech) {
+	Oshu.inQuestSpeech = true;
 	finished = finished + 1;
 	$('#oshuInteraction').text('');
 	play('soundEffects/completeItem.wav');
@@ -327,6 +341,7 @@ function completeItem(quest, speech) {
 };
 
 function endSpeech() {
+	Oshu.inQuestSpeech = false;
 	$('#skip').hide();
 	$('#oshuInteraction').hide();
 	$('#oshuInteraction').text('');
@@ -602,3 +617,7 @@ function concludeGame(complete) {
 	}
 
 };
+
+$('#inventoryTitle').click(function() {
+	addItem('test', 'Test', '#test', '');
+});

@@ -66,12 +66,13 @@ $(document).ready(function() {
 
 	function playGame() {
 		$('#audio').animate({volume: .3}, 1000);
-		$('.hide').slideUp();
-		$('.landingArtwork').fadeOut();
 		$('#artwork').animate({
+			marginTop: '5%',
 			height: '450px',
 			width: '80%'
 		}, 1000);
+		$('.hide').slideUp();
+		$('.landingArtwork').fadeOut();
 		$('#welcome').show();
 
 		var wait1 = setTimeout(playText, 1000);
@@ -97,7 +98,6 @@ $(document).ready(function() {
 		oshuIntro.play();
 		$('#skip').show();
 		$('#intro').writeText(text.introduction);
-		// oshuIntro.play();
 	};
 
 	function showTitle() {

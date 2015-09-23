@@ -152,3 +152,34 @@ i {
 #soundWrapper {
 	float: left;
 }
+
+/******* MEDIA QUERIES *******/
+
+@media only screen and (min-width: 320px) {
+	#intro {
+		font-size: 15px;
+	}
+}
+@media only screen and (min-width: 775px) {
+	#intro {
+		font-size: 17px;
+	}
+	#instructionList {
+		padding: 20px;
+	}
+}
+@media only screen and (min-width: 1000px) {
+	#intro {
+		font-size: 19px;
+	}
+}
+@media only screen and (min-width: 1250px) {
+	#intro {
+		font-size: 20px;
+	}
+}
+@media only screen and (min-width: 1500px) {
+	#intro {
+		font-size: 22px;
+	}
+}
