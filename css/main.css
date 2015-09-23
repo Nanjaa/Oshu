@@ -252,8 +252,8 @@ pre {
 	display: none;
 	width: 100%;
 	height: 100%;
+	position: fixed;
 	background-color: white;
-	position: absolute;
 	opacity: 0.7;
 	z-index: 1;
 }

@@ -84,8 +84,30 @@ a:hover {
 	color: gray;	
 }
 
-@media only screen and (min-width: 1225px) {
-	#inventory, #bucketList {
-		width: 45%;
+/******* MEDIA QUERIES *******/
+
+@media only screen and (min-width: 320px) {
+	#oshuText {
+		font-size: 15px;
+	}
+}
+@media only screen and (min-width: 925px) {
+	#oshuText {
+		font-size: 17px;
+	}
+}
+@media only screen and (min-width: 1150px) {
+	#oshuText {
+		font-size: 19px;
+	}
+}
+@media only screen and (min-width: 1250px) {
+	#oshuText {
+		font-size: 20px;
+	}
+}
+@media only screen and (min-width: 1500px) {
+	#oshuText {
+		font-size: 22px;
 	}
 }
