@@ -9,33 +9,35 @@ $('.tyrianneCity').click(function() {
 // takes you back to the city map from any city details
 $('.return').unbind('click');
 $('.return').click(function() {
-	$('.option').hide();
-	// Returning from the library - it'll remind you you can't return before you can do so
-	if(Oshu.currentLocation == '.libraryShop') {
-		if(go) {
-			twoOptions("Are you sure you want to leave? You'll never be able to return to the shop again.", 'Yes', 'No');
+	if(go) {
+		$('.option').hide();
+		// Returning from the library - it'll remind you you can't return before you can do so
+		if(Oshu.currentLocation == '.libraryShop') {
+			if(go) {
+				twoOptions("Are you sure you want to leave? You'll never be able to return to the shop again.", 'Yes', 'No');
 
-			$('#optionOne').unbind('click');
-			$('#optionOne').click(function() {
-				$('.option').hide();
-				$('.return').hide();
-				$('.cityDetails').hide();
-				$('#tyrianneMap').show();
-				changeLocation('#tyrianneMap');
-			});
+				$('#optionOne').unbind('click');
+				$('#optionOne').click(function() {
+					$('.option').hide();
+					$('.return').hide();
+					$('.cityDetails').hide();
+					$('#tyrianneMap').show();
+					changeLocation('#tyrianneMap');
+				});
 
-			$('#optionTwo').unbind('click');
-			$('#optionTwo').click(function() {
-				$('#interactionText').text('');
-				$('.option').hide();
-			})
+				$('#optionTwo').unbind('click');
+				$('#optionTwo').click(function() {
+					$('#interactionText').text('');
+					$('.option').hide();
+				})
+			}
 		}
-	}
-	else {
-		$('.return').hide();
-		$('.cityDetails').hide();
-		$('#tyrianneMap').show();
-		changeLocation('#tyrianneMap', true);		
+		else {
+			$('.return').hide();
+			$('.cityDetails').hide();
+			$('#tyrianneMap').show();
+			changeLocation('#tyrianneMap', true);		
+		};		
 	};
 });
 
@@ -51,6 +53,7 @@ $('pre').click(function() {
 	var location = $(this).attr('id');
 	switch(location) {
 		case 'library': 
+			$('.option').hide();
 			if(Oshu.items.libraryPass) {
 				lifeEvent(3);
 				completeItem(Oshu.quests[2][1][0], Oshu.questSpeech.tyrianne1);
@@ -88,6 +91,7 @@ $('pre').click(function() {
 
 		break;
 		case 'fuzzbuttFactory':
+			$('.option').hide();
 			changeLocation('.fuzzbutt');
 			$('.fuzzbutt').show();
 			if(fuzzbuttEntry == false) {
@@ -102,16 +106,19 @@ $('pre').click(function() {
 			}
 		break;
 		case 'tyrianneMechanic':
+			$('.option').hide();
 			changeLocation('.tyrianneMechanic');
 			$('.tyrianneMechanic').show();
 			$('#interactionText').writeText(shutoffText.intro);
 		break;
 		case 'poorMan':
+			$('.option').hide();
 			changeLocation('.poorMan');
 			$('.poorMan').show();
 			$('#interactionText').writeText(poorText.intro);
 		break;
 		case 'tyrianneJewelry':
+			$('.option').hide();
 			changeLocation('.tyrianneJewelry');
 			$('.tyrianneJewelry').show();
 			$('#interactionText').writeText(jewelryText.intro);
@@ -141,6 +148,7 @@ var poorText = {
 $('#poorManClose').unbind('click');
 $('#poorManClose').click(function() {
 	if(go) {
+		$('.option').hide();
 		maleVoice();
 		if(poorStatus == 'end') {
 			$('#interactionText').writeText(poorText.end);
@@ -224,6 +232,7 @@ $('#tyrianneJewelry').click(function() {
 
 $('#tyrianneJewelryLady').click(function() {
 	if(go) {
+		$('.option').hide();
 		femVoice2();
 		switch(jewelryStatus) {
 			case 1:
@@ -244,6 +253,7 @@ $('#tyrianneJewelryLady').click(function() {
 
 $('#tyrianneJewelryPieces').click(function() {
 	if(go) {
+		$('.option').hide();
 		femVoice2();
 		if(Oshu.items.tyrianneBracelet) {
 			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
@@ -411,6 +421,7 @@ var marketText = {
 $('.fuzzbuttDetails').unbind('click');
 $('.fuzzbuttDetails').click(function() {
 	if(go) {
+		$('.option').hide();
 		if(Oshu.items.sunstone) {
 			$('#interactionText').writeText(marketText.marketReturn);
 		}
@@ -466,6 +477,7 @@ libraryText = {
 $('#librarian').unbind('click');
 $('#librarian').click(function() {
 	if(go) {
+		$('.option').hide();
 		$('#interactionText').writeText(libraryText.ladyIntro);
 	};
 });
@@ -475,6 +487,7 @@ $('#librarian').click(function() {
 $('#bookmarks').unbind('click');
 $('#bookmarks').click(function() {
 	if(go) {
+		$('.option').hide();
 		femVoice3();
 		if(Oshu.items.bookmark == false) {
 			displayOptions(libraryText.bookmarkIntro, libraryText.bookmarkOptions, 25, libraryText.yes, libraryText.no, libraryText.needMore);
@@ -496,6 +509,7 @@ $('#bookmarks').click(function() {
 $('#libraryBobbleheads').unbind('click');
 $('#libraryBobbleheads').click(function() {
 	if(go) {
+		$('.option').hide();
 		femVoice3();
 		if(Oshu.items.libraryBobblehead == false) {
 			displayOptions(libraryText.bobbleheadIntro, libraryText.bobbleheadOptions, 50, libraryText.yes, libraryText.no, libraryText.needMore);
@@ -517,6 +531,7 @@ $('#libraryBobbleheads').click(function() {
 $('#bookDisplay').unbind('click');
 $('#bookDisplay').click(function() {
 	if(go) {
+		$('.option').hide();
 		femVoice3();
 		if(Oshu.items.book == false) {
 			displayOptions(libraryText.bookIntro, libraryText.bookOptions, 2500, libraryText.yes, libraryText.no, libraryText.needMore);
@@ -559,6 +574,7 @@ var shutoffText = {
 $('#tyrianneLifecycleShutoff').unbind('click');
 $('#tyrianneLifecycleShutoff').click(function() {
 	if(go) {
+		$('.option').hide();
 		displayOptions(shutoffText.shutoffIntro, shutoffText.options, 15, shutoffText.yes, shutoffText.no, shutoffText.noCoins);
 
 		var wait7 = setInterval(function() {
@@ -606,6 +622,7 @@ var replace = false;
 $('#tyrianneGeneralRobot').unbind('click');
 $('#tyrianneGeneralRobot').click(function() {
 	if(go) {
+		$('.option').hide();
 		if(Oshu.items.brokenRobot) {
 			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
 			robotWait(generalText.yesRobot, generalText.yesRobotEnd);
@@ -640,6 +657,7 @@ var addText = {
 $('tyrianneLifecycleAdd').unbind('click');
 $('#tyrianneLifecycleAdd').click(function() {
 	if(go) {
+		$('.option').hide();
 		if(Oshu.remainingLife <= 2700) {
 			displayOptions(addText.intro, addText.options, 5, addText.yes, addText.no, addText.noCoins);
 

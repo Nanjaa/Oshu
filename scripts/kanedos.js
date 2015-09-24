@@ -14,8 +14,10 @@ function kanedosReturn() {
 	$('.kanedosCity').show();		
 }
 $('.return').click(function() {
-	kanedosReturn();
-	changeLocation('#kanedosMap', true);
+	if(go) {
+		kanedosReturn();
+		changeLocation('#kanedosMap', true);		
+	};
 });
 
 // ________________________________________________________________
@@ -30,6 +32,7 @@ $('pre').click(function() {
 	var location = $(this).attr('id');
 	switch(location) {
 		case 'kanedome': 
+			$('.option').hide();
 			changeLocation('.theKanedome');
 			// complete the kanedome event if you have the authorizaton
 			if(Oshu.items.kanedomeTicket) {
@@ -50,16 +53,19 @@ $('pre').click(function() {
 			};
 		break;
 		case 'suckerPunch':
+			$('.option').hide();
 			changeLocation('.suckerPunch');
 			$('.suckerPunch').show();
 			$('#interactionText').writeText(barText.intro);
 		break;
 		case 'camelRental':
+			$('.option').hide();
 			changeLocation('.camelRental');
 			$('.camelRental').show();
 			$('#interactionText').writeText(camelText.intro);
 		break;
 		case 'kanedosJewelry':
+			$('.option').hide();
 			changeLocation('.kanedosJewelry');
 			$('.kanedosJewelry').show();
 			$('#interactionText').writeText(jewelryText.intro);
@@ -88,6 +94,7 @@ var kanedomeText = {
 $('#ticketGuy').unbind('click');
 $('#ticketGuy').click(function() {
 	if(go) {
+		$('.option').hide();
 		maleVoice2();
 		if(watched) {
 			$('#interactionText').writeText(kanedomeText.end);
@@ -137,6 +144,8 @@ var camelText = {
 $('#camelGuy').unbind('click');
 $('#camelGuy').click(function() {
 	if(go) {
+		console.log('hello go is go');
+		$('.option').hide();
 		maleVoice3();
 		if(camelEnd) {
 			$('#interactionText').writeText(camelText.end);
@@ -162,7 +171,10 @@ $('#camelGuy').click(function() {
 				};
 			}, 1); 				
 		};
-	};
+	}
+	else {
+		console.log(go);
+	}
 });
 
 
@@ -197,6 +209,7 @@ $('#kanedosJewelry').click(function() {
 $('#kanedosJewelryLady').unbind('click');
 $('#kanedosJewelryLady').click(function() {
 	if(go) {
+		$('.option').hide();
 		femVoice();
 		switch(jewelryStatus) {
 			case 1:
@@ -218,6 +231,7 @@ $('#kanedosJewelryLady').click(function() {
 $('.kanedosJewelryDisplay').unbind('click');
 $('.kanedosJewelryDisplay').click(function() {
 	if(go) {
+		$('.option').hide();
 		femVoice();
 		if(Oshu.items.kanedosNecklace) {
 			$('#interactionText').writeText(jewelryText.jewelryGoodbye);
@@ -263,6 +277,7 @@ var barText = {
 $('#suckerBartender').unbind('click');
 $('#suckerBartender').click(function() {
 	if(go) {
+		$('.option').hide();
 		maleVoice3();
 		twoOptions(barText.bartenderIntro, 'Can I get into the Kanedome without paying?', 'How do I get access to martial arts classes?');
 		$('#optionOne').unbind('click');
@@ -283,6 +298,7 @@ $('#suckerBartender').click(function() {
 $('#apprentice').unbind('click');
 $('#apprentice').click(function() {
 	if(go) {
+		$('.option').hide();
 		maleVoice();
 		if(apprenticeStatus == 'finished') {
 			$('#interactionText').writeText(barText.apprenticeEnd);
@@ -401,6 +417,7 @@ var brawlerText = {
 $('#brawler').unbind('click');
 $('#brawler').click(function() {
 	if(go) {
+		$('.option').hide();
 		maleVoice2();
 		if(brawlerStatus == 'sold') {
 			$('#interactionText').writeText(brawlerText.ticketReturn);

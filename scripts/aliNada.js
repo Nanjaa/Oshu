@@ -14,8 +14,10 @@ function aliNadaReturn() {
 	$('#aliNadaMap').show();	
 }
 $('.return').click(function() {
-	aliNadaReturn();
-	changeLocation('#aliNadaMap', true);
+	if(go) {
+		aliNadaReturn();
+		changeLocation('#aliNadaMap', true);		
+	};
 });
 
 // ________________________________________________________________
@@ -30,6 +32,7 @@ $('pre').click(function() {
 	var location = $(this).attr('id');
 	switch(location) {
 		case 'capitol':
+			$('.option').hide();
 			if(Oshu.items.weatherSpecimen) {
 				$('#interactionText').writeText(weatherText.weather);
 				changeLocation('.capitol');
@@ -40,8 +43,9 @@ $('pre').click(function() {
 				changeLocation('.capitolGuard');
 				$('.capitolGuard').show();
 			}
-			break;
+		break;
 		case 'stainedGlass':
+			$('.option').hide();
 			if(Oshu.items.weatherSpecimen) {
 				$('#interactionText').writeText(weatherText.weather);
 				changeLocation('.capitol');
@@ -52,8 +56,9 @@ $('pre').click(function() {
 				changeLocation('.capitolGuard');
 				$('.capitolGuard').show();
 			}
-			break;
+		break;
 		case 'cemetery':
+			$('.option').hide();
 			if(graveStatus) {
 				graveStatus = false;
 				var cemeteryWait = setTimeout(function() {
@@ -75,8 +80,9 @@ $('pre').click(function() {
 				$('#interactionText').writeText(graveText.end);
 			};
 			changeLocation('.cemetery');
-			break;
+		break;
 		case 'tombstones':
+			$('.option').hide();
 			if(graveStatus) {
 				graveStatus = false;
 				var cemeteryWait = setTimeout(function() {
@@ -98,12 +104,13 @@ $('pre').click(function() {
 				$('#interactionText').writeText(graveText.end);
 			};
 			changeLocation('.cemetery');
-			break;
+		break;
 		case 'aliNadaMechanic':
+			$('.option').hide();
 			$('#interactionText').writeText(shutoffText.intro);
 			changeLocation('.aliNadaMechanic');
 			$('.aliNadaMechanic').show();
-			break;
+		break;
 	};
 });
 
@@ -130,6 +137,7 @@ var weatherText = {
 $('#capitolWeatherman').unbind('click');
 $('#capitolWeatherman').click(function() {
 	if(go) {
+		$('.option').hide();
 		femVoice3();
 		if(aliWeatherStatus == 'intro') {
 			$('#interactionText').writeText(weatherText.intro);
@@ -191,6 +199,7 @@ var shutoffText = {
 $('#aliNadaLifecycleShutoff').unbind('click');
 $('#aliNadaLifecycleShutoff').click(function() {
 	if(go) {
+		$('.option').hide();
 		displayOptions(shutoffText.shutoffIntro, shutoffText.options, 15, shutoffText.yes, shutoffText.no, shutoffText.noCoins);
 
 		var wait7 = setInterval(function() {
@@ -240,6 +249,7 @@ var replace = false;
 $('#aliNadaGeneralRobot').unbind('click');
 $('#aliNadaGeneralRobot').click(function() {
 	if(go) {
+		$('.option').hide();
 		if(Oshu.items.brokenRobot) {
 			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
 			robotWait(generalText.yesRobot, generalText.yesRobotEnd);
@@ -274,6 +284,7 @@ var addText = {
 $('aliNadaLifecycleAdd').unbind('click');
 $('#aliNadaLifecycleAdd').click(function() {
 	if(go) {
+		$('.option').hide();
 		if(Oshu.remainingLife <= 2700) {
 			displayOptions(addText.intro, addText.options, 5, addText.yes, addText.no, addText.noCoins);
 

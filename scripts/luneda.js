@@ -9,43 +9,44 @@ $('.lunedaCity').click(function() {
 // takes you back to the city map from any city details
 $('.return').unbind('click');
 $('.return').click(function() {
-	$('.option').hide();
-	go = true;
-	$(Oshu.currentLocation).hide();
+	if(go) {
+		$('.option').hide();
+		$(Oshu.currentLocation).hide();
 
-	if(Oshu.currentLocation == '.rentalDetails') {
-		$('.beachDetails').show();
-		$('#interactionText').writeText(beachText.welcome);
-		changeLocation('#beach', true);	
-	}
-	else if(Oshu.currentLocation == '.drinkStand') {
-		$('.beachDetails').show();	
-		$('#interactionText').writeText(beachText.welcome);
-		changeLocation('#beach', true);	
-	}
-	else if(Oshu.currentLocation == '.fruitStand') {
-		$('.theMarkets').show();
-		$('.marketDetails').show();	
-		$('#interactionText').writeText(marketText.marketWelcome);
-		changeLocation('#lunedaMap', true);	
-	}
-	else if(Oshu.currentLocation == '.souvenirStand') {
-		$('.theMarkets').show();
-		$('.marketDetails').show();
-		$('#interactionText').writeText(marketText.marketWelcome);
-		changeLocation('.theMarkets', true);	
-	}
-	else if(Oshu.currentLocation == '.clothesStand') {
-		$('.theMarkets').show();
-		$('.marketDetails').show();
-		$('#interactionText').writeText(marketText.marketWelcome);
-		changeLocation('.theMarkets', true);	
-	}
-	else {
-		$('.cityDetails').hide();
-		$('.return').hide();
-		$('#lunedaMap').show();	
-		changeLocation('.theMarkets', true);		
+		if(Oshu.currentLocation == '.rentalDetails') {
+			$('.beachDetails').show();
+			$('#interactionText').writeText(beachText.welcome);
+			changeLocation('#beach', true);	
+		}
+		else if(Oshu.currentLocation == '.drinkStand') {
+			$('.beachDetails').show();	
+			$('#interactionText').writeText(beachText.welcome);
+			changeLocation('#beach', true);	
+		}
+		else if(Oshu.currentLocation == '.fruitStand') {
+			$('.theMarkets').show();
+			$('.marketDetails').show();	
+			$('#interactionText').writeText(marketText.marketWelcome);
+			changeLocation('#lunedaMap', true);	
+		}
+		else if(Oshu.currentLocation == '.souvenirStand') {
+			$('.theMarkets').show();
+			$('.marketDetails').show();
+			$('#interactionText').writeText(marketText.marketWelcome);
+			changeLocation('.theMarkets', true);	
+		}
+		else if(Oshu.currentLocation == '.clothesStand') {
+			$('.theMarkets').show();
+			$('.marketDetails').show();
+			$('#interactionText').writeText(marketText.marketWelcome);
+			changeLocation('.theMarkets', true);	
+		}
+		else {
+			$('.cityDetails').hide();
+			$('.return').hide();
+			$('#lunedaMap').show();	
+			changeLocation('.theMarkets', true);		
+		};		
 	};
 });
 

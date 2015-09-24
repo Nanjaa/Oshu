@@ -196,9 +196,14 @@ var optionsStatus = 1;
 function resetOptions() {
 	dontGo = false;
 	$('.option').hide();
+	console.log(dontGo);
+	console.log(go);
 }
 
 function displayOptions(text1, text2, price, yes, no, needMore) {
+	$('.return').click(function() {
+		resetOptions();
+	});
 	if(dontGo !== true) {
 		$('.return').click(function() {})
 		$('#interactionText').writeText(text1);
@@ -291,7 +296,6 @@ function play(source) {
 // ------------------------------------------------------
 
 function changeColor(destination) {
-	console.log(destination);
 	switch(destination) {
 		case 'Luneda':
 			$('#planetInteraction').css('color', '#00bece');

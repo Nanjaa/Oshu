@@ -30,6 +30,7 @@ $('pre').click(function() {
 	var location = $(this).attr('id');
 	switch(location) {
 		case 'quietGrove':
+			$('.option').hide();
 			changeLocation('.quietGrove');
 			$('.quietGrove').show();
 			if(Oshu.items.jewelry == false) {
@@ -39,17 +40,19 @@ $('pre').click(function() {
 			else {
 				$('#interactionText').writeText(groveText.fairies);
 			}
-			break;
+		break;
 		case 'theTree':
+			$('.option').hide();
 			changeLocation('.kaprikaTree');
 			$('.kaprikaTree').show();
 			$('#interactionText').writeText(treeText.intro);
 			break;
 		case 'mysteriousShop':
+			$('.option').hide();
 			changeLocation('.mysteriousShop');
 			$('.mysteriousShop').show();
 			$('#interactionText').writeText(mysteryText.intro)
-			break;
+		break;
 	};
 });
 
@@ -262,6 +265,7 @@ var groveText = {
 
 $('#fairies').click(function() {
 	if(go) {
+		$('.option').hide();
 		if(Oshu.items.emptyBottle) {
 			$('#interactionText').writeText(groveText.capture);
 			$('#emptyBottle').parent().remove();
@@ -277,6 +281,7 @@ $('#fairies').click(function() {
 
 $('#quietGrove').click(function() {
 	if(Oshu.items.jewelry && firstTime) {
+		$('.option').hide();
 		firstTime = false;
 		var wait = setTimeout(function() {
 			completeItem(Oshu.quests[3][1][0], Oshu.questSpeech.kaprika1);
