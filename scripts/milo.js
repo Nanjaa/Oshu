@@ -21,7 +21,7 @@ var status = 0;
 var miloGo = true;
 	// Let's say MILO only has one thing to say, not a full conversation...
 
-	function go(text) {
+	function setGo(text) {
 		miloGo = false;
 		var goWait = setInterval(function() {
 			if($('#miloSays').text() == text) {
@@ -35,7 +35,7 @@ var miloGo = true;
 		$('#miloInteraction').show();
 		$('#miloResponse').hide();
 		$('#miloSays').writeText(text);
-		go(text);
+		setGo(text);
 		play(audio);
 	}
 
@@ -47,13 +47,13 @@ var miloGo = true;
 		if(knowledge.name == false) {
 			$('#miloInteraction').show();
 			$('#miloSays').writeText(missText);
-			go(missText);
+			setGo(missText);
 			play(missAudio);			
 		}
 		else {
 			$('#miloInteraction').show();
 			$('#miloSays').writeText(oshuText);
-			go(oshuText);
+			setGo(oshuText);
 			play(oshuAudio);
 		}
 	}
@@ -63,7 +63,7 @@ var miloGo = true;
 	function miloResponse(miloText, miloAudio, responseOne, responseTwo, responseThree) {
 		$('#miloInteraction').show();
 		$('#miloSays').writeText(miloText);
-		go(miloText);
+		setGo(miloText);
 		play(miloAudio)
 		presentOptions(responseOne, responseTwo, responseThree);
 	}
@@ -566,81 +566,94 @@ function ignore(map) {
 		goodbyeGo = true
 
 	$('#myShip').click(function() {
-		$('.return').hide();
-		$('.cityDetails').hide();
-		$('.visitPlanet').hide();
-		Oshu.onBoard = true;
-		audioStopped = false;
+		// If you're cleared to go, go
+		if((go == true) && (dontGo == false)) {
+			// hide all the planets and planet details
+			changeLocation('#map', false, true);
+			hideContent('#lunedaContent');
+			hideContent('#kanedosContent');
+			hideContent('#tyrianneContent');
+			hideContent('#kaprikaContent');
+			hideContent('#aliNadaContent');
+			$('.return').hide();
+			$('.cityDetails').hide();
+			$('.visitPlanet').hide();
+			Oshu.onBoard = true;
+			audioStopped = false;
 
-/////////////////////////////////////////////////
-// 					  MILO DISCOVERS YOUR SECRET
-		if(startKanedos) {
-			startKanedos = false;
-			$('#skip').show();
-			knowledge.mortality = true;
-			$('#map').hide();
-			$('#miloSays').text('');
-			$('#miloInteraction').show();
+			/////////////////////////////////////////////////
+			// 					  MILO DISCOVERS YOUR SECRET
+			if(startKanedos) {
+				startKanedos = false;
+				$('#skip').show();
+				knowledge.mortality = true;
+				$('#map').hide();
+				$('#miloSays').text('');
+				$('#miloInteraction').show();
 
-			// milo respects you, good response
-			if(status > 0) {
-				quickMilo(text.realizationGood, 'speech/realizationGood.wav');
-				var wait2 = setTimeout(function() {
-					$('#miloInteraction').hide();
-					$('#skip').hide();
-					$('#map').show();
-				}, 22500);
-				// click the skip button
-				$('#skip').unbind('click');
-				$('#skipButton').unbind('click');
-				$('#skipButton').click(function() {
-					ignore('#map');
-					clearTimeout(wait2);
-				});
+				// milo respects you, good response
+				if(status > 0) {
+					quickMilo(text.realizationGood, 'speech/realizationGood.wav');
+					var wait2 = setTimeout(function() {
+						$('#miloInteraction').hide();
+						$('#skip').hide();
+						$('#map').show();
+					}, 22500);
+					// click the skip button
+					$('#skip').unbind('click');
+					$('#skipButton').unbind('click');
+					$('#skipButton').click(function() {
+						ignore('#map');
+						clearTimeout(wait2);
+					});
+				}
+				// milo is already angry with you, bad response
+				else {
+					quickMilo(text.realizationNeut, 'speech/realizationNeut.wav');
+					var wait3 = setTimeout(function() {
+						$('#miloInteraction').hide();
+						$('#skip').hide();
+						$('#map').show();
+					}, 12500);
+					// click the skip button
+					$('#skip').unbind('click');
+					$('#skipButton').unbind('click');
+					$('#skipButton').click(function() {
+						ignore('#map');
+						clearTimeout(wait3);
+					});
+				};		
 			}
-			// milo is already angry with you, bad response
+
+
+			/////////////////////////////////////////////////
+			// 					  	  The Gift from Tyrianne
+			else if(Oshu.items.gift && (giftGo == true)) {
+				gift()
+			}
+
+			/////////////////////////////////////////////////
+			// 					  		50% - The Novatacea
+			else if((finished > 0) && (novaGo == true)) {
+				nova();
+			}
+			/////////////////////////////////////////////////
+			// 					 				75% - Family
+			else if((finished > 2) && (familyGo == true)) {
+				family();
+			}
+			/////////////////////////////////////////////////
+			// 					            90% - The Goodbye
+			else if(($('#minutes').text() < 10) && (goodbyeGo == true)) {
+				goodbye();
+			}
+			// Or you just go to the map
 			else {
-				quickMilo(text.realizationNeut, 'speech/realizationNeut.wav');
-				var wait3 = setTimeout(function() {
-					$('#miloInteraction').hide();
-					$('#skip').hide();
-					$('#map').show();
-				}, 12500);
-				// click the skip button
-				$('#skip').unbind('click');
-				$('#skipButton').unbind('click');
-				$('#skipButton').click(function() {
-					ignore('#map');
-					clearTimeout(wait3);
-				});
-			};		
+				concludeToMap();
+			};			
 		}
-
-
-/////////////////////////////////////////////////
-// 					  	  The Gift from Tyrianne
-		else if(Oshu.items.gift && (giftGo == true)) {
-			gift()
-		}
-
-/////////////////////////////////////////////////
-// 					  		50% - The Novatacea
-		else if((finished > 0) && (novaGo == true)) {
-			nova();
-		}
-/////////////////////////////////////////////////
-// 					 				75% - Family
-		else if((finished > 2) && (familyGo == true)) {
-			family();
-		}
-/////////////////////////////////////////////////
-// 					            90% - The Goodbye
-		else if(($('#minutes').text() < 10) && (goodbyeGo == true)) {
-			goodbye();
-		}
-		// Or you just go to the map
-		else {
-			concludeToMap();
+		else if(pleaseChooseOption){
+			$('#interactionText').text('Please choose an option!');
 		};
 	});
 
@@ -987,11 +1000,9 @@ function ignore(map) {
 		// deterimine what your timeline status is
 		if(status > -10) {
 			var goodbyeTimeline = 'goodIntro';
-			console.log(goodbyeTimeline);
 		}
 		else {
 			var goodbyeTimeline = 'badIntro';
-			console.log(goodbyeTimeline);
 		};
 		// begin the interaction
 		goodbyeGo = false;
@@ -1043,9 +1054,7 @@ function ignore(map) {
 		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(miloGo) {
-				console.log(goodbyeTimeline);
 				if(goodbyeTimeline == 'badIntro') {
-					console.log('test');
 					quickMilo(text.angryGood, 'speech/angryGood.mp3');
 					concludeToMap(8500);
 					$('#skip').show();

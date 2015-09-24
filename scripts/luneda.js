@@ -50,7 +50,7 @@ $('.return').click(function() {
 	}
 	else if(pleaseChooseOption){
 		$('#interactionText').text('Please choose an option!');
-	}
+	};
 });
 
 // ________________________________________________________________

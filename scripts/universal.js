@@ -196,7 +196,6 @@ var optionsStatus = 1,
 
 function resetOptions() {
 	dontGo = false;
-	console.log(dontGo);
 	$('.option').hide();
 }
 
@@ -555,31 +554,6 @@ function pauseGame() {
 		});
 	}, 100);
 };
-
-// ------------------------------------------------------
-// 					RESET THE OPTIONS
-// ------------------------------------------------------
-
-// $('.clickable').click(function() {
-// 	$('.option').hide();
-// });
-// $('.return').click(function() {
-// 	$('.option').hide();
-// });
-
-// ------------------------------------------------------
-// 					CLICK ON MY SHIP
-// ------------------------------------------------------
-
-$('#myShip').click(function() {
-	go = true;
-	changeLocation('#map', false, true);
-	hideContent('#lunedaContent');
-	hideContent('#kanedosContent');
-	hideContent('#tyrianneContent');
-	hideContent('#kaprikaContent');
-	hideContent('#aliNadaContent');
-});
 
 // ------------------------------------------------------
 // 					CONCLUDE GAME
