@@ -34,6 +34,13 @@ footer {
 	background-color: gray;
 	font-family: "Share Tech Mono";
 }
+pre {
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+	position: absolute;
+	cursor: pointer;
+}
 #footerLink {
 	color: white;
 	outline: 0;
@@ -76,13 +83,6 @@ footer {
 	border: 5px solid black;
 	box-sizing: border-box;
 	height: 130px;
-}
-pre {
-	margin: 0;
-	padding: 0;
-	line-height: 1;
-	position: absolute;
-	cursor: pointer;
 }
 #inventory {
 	border: 1px solid black;

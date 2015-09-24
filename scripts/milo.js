@@ -140,7 +140,7 @@ function ignore(map) {
 	//											//
 	//__________________________________________//
 
-	startGame();
+	// startGame();
 
 	function startGame() {
 		audioStopped = false;
@@ -983,12 +983,23 @@ function ignore(map) {
 	//											//
 	//__________________________________________//
 
-	var goodbyeTimeline = 'intro';
+	goodbye();
+
+	// deterimine what your timeline status is
+	if(status > -10) {
+		var goodbyeTimeline = 'goodIntro';
+		console.log(goodbyeTimeline);
+	}
+	else {
+		var goodbyeTimeline = 'badIntro';
+		console.log(goodbyeTimeline);
+	};
 
 	function goodbye() {
 		goodbyeGo = false;
 		$('#map').hide();
 		if(knowledge.mortality) {
+			// Reminder to shut off program
 			if(knowledge.committed) {
 				missVsOshu(text.reminderMiss, 'speech/reminderMiss.mp3', text.reminderOshu, 'speech/reminderOshu.mp3', '','','');
 				$('#miloResponse').hide();
@@ -997,20 +1008,15 @@ function ignore(map) {
 			else {
 				// good goodbye
 				if(status > -10) {
-					goodbyeTimeline = 'goodIntro';
-					missVsOshu(text.happyIntroMiss, 'speech/happyIntroMiss.mp3', text.happyIntroOshu, 'speech/happyIntroOshu.mp3', '','','');
-					$('#good').writeText(response.happyGood);
-					$('#bad').writeText(response.happyBad);
 					if(knowledge.commitConversation) {
-						$('#neut').writeText(response.happyNeutConversed);
+						missVsOshu(text.happyIntroMiss, 'speech/happyIntroMiss.mp3', text.happyIntroOshu, 'speech/happyIntroOshu.mp3', response.happyGood, response.happyBad, response.happyNeutConversed);
 					}
 					else {
-						$('#neut').writeText(response.happyNeutNoConversed);
+						missVsOshu(text.happyIntroMiss, 'speech/happyIntroMiss.mp3', text.happyIntroOshu, 'speech/happyIntroOshu.mp3', response.happyGood, response.happyBad, response.happyNeutNoConversed);
 					}
 				}	
 				// bad goodbye
 				else {
-					goodbyeTimeline = 'badIntro';
 					missVsOshu(text.angryIntroMiss, 'speech/angryMiss.mp3', text.angryIntroOshu, 'speech/angryOshu.mp3', '','','');
 					$('#miloResponse').hide();
 					var wait5 = setTimeout(function() {
@@ -1039,7 +1045,9 @@ function ignore(map) {
 		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(miloGo) {
-				if(miloGoodbyeTimeline == 'badIntro') {
+				console.log(goodbyeTimeline);
+				if(goodbyeTimeline == 'badIntro') {
+					console.log('test');
 					quickMilo(text.angryGood, 'speech/angryGood.mp3');
 					concludeToMap(8500);
 					$('#skip').show();
@@ -1047,11 +1055,11 @@ function ignore(map) {
 						ignore('#map');
 					});
 				}
-				else if(miloGoodbyeTimeline == 'goodIntro') {
+				else if(goodbyeTimeline == 'goodIntro') {
 					missVsOshu(text.happyGoodMiss, 'speech/happyGoodMiss.mp3', text.happyGoodOshu, 'speech/happyGoodOshu.mp3', response.happyGoodGood, response.happyGoodBad, response.ignore);
 					goodbyeTimeline = 'lets do it';
 				}
-				else if(miloGoodbyeTimeline == 'lets do it') {
+				else if(goodbyeTimeline == 'lets do it') {
 					knowledge.committed = true;
 					quickMilo(text.happyGoodGood, 'speech/happyGoodGood.mp3');
 					concludeToMap(6500);
@@ -1066,11 +1074,11 @@ function ignore(map) {
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(miloGo) {
-				if(miloGoodbyeTimeline == 'badIntro') {
+				if(goodbyeTimeline == 'badIntro') {
 					quickMilo(text.angryBad, 'speech/angryBad.wav');
 					concludeToMap(4000);
 				}
-				else if(miloGoodbyeTimeline == 'goodIntro') {
+				else if(goodbyeTimeline == 'goodIntro') {
 					audioStopped = true;
 					audio.pause();
 					$('#miloSays').writeText(text.happyBad);
@@ -1080,7 +1088,7 @@ function ignore(map) {
 						ignore('#map');
 					});
 				}
-				else if(miloGoodbyeTimeline == 'lets do it') {
+				else if(goodbyeTimeline == 'lets do it') {
 					quickMilo(text.happyGoodBad, 'speech/happyGoodBad.mp3');
 					concludeToMap(8500);
 				}				
@@ -1090,7 +1098,7 @@ function ignore(map) {
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
 			if(miloGo) {
-				if(miloGoodbyeTimeline == 'goodIntro') {
+				if(goodbyeTimeline == 'goodIntro') {
 					if(knowledge.commitConversation) {
 						quickMilo(text.happyNeutConversed, 'speech/happyNeutConversed.mp3');
 						concludeToMap(6200);
