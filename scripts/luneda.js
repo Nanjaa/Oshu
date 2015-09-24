@@ -48,8 +48,8 @@ $('.return').click(function() {
 			changeLocation('.theMarkets', true);		
 		};		
 	}
-	else {
-		resetOptions();
+	else if(pleaseChooseOption){
+		$('#interactionText').text('Please choose an option!');
 	}
 });
 

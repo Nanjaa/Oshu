@@ -19,6 +19,9 @@ $('.return').click(function() {
 	if(go) {
 		kanedosReturn();
 		changeLocation('#kanedosMap', true);		
+	}
+	else if(pleaseChooseOption){
+		$('#interactionText').text('Please choose an option!');
 	};
 });
 

@@ -191,7 +191,8 @@ function payMoney(price) {
 	$('#coinsAmt').text(coins);
 };
 
-var optionsStatus = 1;
+var optionsStatus = 1,
+	pleaseChooseOption = false;
 
 function resetOptions() {
 	dontGo = false;
@@ -230,6 +231,7 @@ function optionsFunction(price, yes, no, needMore) {
 
 	$('#optionOne').unbind('click');
 	$('#optionOne').click(function() {
+		pleaseChooseOption = false;
 		dontGo = false;
 		$('.option').hide();
 		var coins = Oshu.coins;
@@ -244,6 +246,7 @@ function optionsFunction(price, yes, no, needMore) {
 
 	$('#optionTwo').unbind('click');
 	$('#optionTwo').click(function() {
+		pleaseChooseOption = false;
 		dontGo = false;
 		$('.option').hide();
 		$('#interactionText').writeText(no);
@@ -418,6 +421,7 @@ function twoOptions(referenceText, option1, option2) {
 	$('#interactionText').writeText(referenceText);
 	var wait = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
+			pleaseChooseOption = true;
 			clearInterval(wait);
 			$('#optionOne').show();
 			$('#optionTwo').show();

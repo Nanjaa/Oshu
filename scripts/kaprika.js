@@ -14,8 +14,13 @@ function kaprikaReturn() {
 	$('.kaprikaCity').show();	
 }
 $('.return').click(function() {
-	kaprikaReturn();
-	changeLocation('#kaprikaMap', true);
+	if(go) {
+		kaprikaReturn();
+		changeLocation('#kaprikaMap', true);		
+	}
+	else if(pleaseChooseOption){
+		$('#interactionText').text('Please choose an option!');
+	};
 });
 
 // ________________________________________________________________

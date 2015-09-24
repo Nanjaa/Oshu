@@ -38,6 +38,9 @@ $('.return').click(function() {
 			$('#tyrianneMap').show();
 			changeLocation('#tyrianneMap', true);		
 		};		
+	}
+	else if(pleaseChooseOption){
+		$('#interactionText').text('Please choose an option!');
 	};
 });
 

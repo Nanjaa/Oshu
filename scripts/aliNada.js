@@ -17,6 +17,9 @@ $('.return').click(function() {
 	if(go) {
 		aliNadaReturn();
 		changeLocation('#aliNadaMap', true);		
+	}
+	else if(pleaseChooseOption){
+		$('#interactionText').text('Please choose an option!');
 	};
 });
 
