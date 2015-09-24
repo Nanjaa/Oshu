@@ -140,7 +140,7 @@ function ignore(map) {
 	//											//
 	//__________________________________________//
 
-	// startGame();
+	startGame();
 
 	function startGame() {
 		audioStopped = false;
@@ -983,19 +983,17 @@ function ignore(map) {
 	//											//
 	//__________________________________________//
 
-	goodbye();
-
-	// deterimine what your timeline status is
-	if(status > -10) {
-		var goodbyeTimeline = 'goodIntro';
-		console.log(goodbyeTimeline);
-	}
-	else {
-		var goodbyeTimeline = 'badIntro';
-		console.log(goodbyeTimeline);
-	};
-
 	function goodbye() {
+		// deterimine what your timeline status is
+		if(status > -10) {
+			var goodbyeTimeline = 'goodIntro';
+			console.log(goodbyeTimeline);
+		}
+		else {
+			var goodbyeTimeline = 'badIntro';
+			console.log(goodbyeTimeline);
+		};
+		// begin the interaction
 		goodbyeGo = false;
 		$('#map').hide();
 		if(knowledge.mortality) {

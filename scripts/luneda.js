@@ -268,26 +268,22 @@ $('#bar').click(function() {
 
 $('#mysteriousMan').click(function() {
 	if(go) {
-		manStatus = 'intro';
 		$('.option').hide();
 		maleVoice2();
 		if(Oshu.items.fixedRobot) {
 			$('#interactionText').writeText(tikiText.questReturnComplete);
 			Oshu.items.password = true;
 		}
-		else {
-			switch(manStatus) {
-				case 'intro':
-					oneOption(tikiText.manIntro, "I'm listening...");
-				break;
-				case 'accepted':
-					$('#interactionText').writeText(tikiText.questReturnIncomplete);				
-				break;
-				case 'rejected':
-					twoOptions(tikiText.questReturnAccept, 'Well, yeah!', 'Nevermind.');
-				break;
-			};				
+		else if(manStatus == 'accepted') {
+			$('#interactionText').writeText(tikiText.questReturnIncomplete);
 		}
+		else if(manStatus == 'rejected') {
+			twoOptions(tikiText.questReturnAccept, 'Well, yeah!', 'Nevermind.');
+		}
+		else {
+			manStatus = 'intro';
+			oneOption(tikiText.manIntro, "I'm listening...");
+		};
 		
 		$('#optionOne').unbind('click');
 		$('#optionOne').click(function() {
