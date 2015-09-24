@@ -195,55 +195,38 @@ var optionsStatus = 1;
 
 function resetOptions() {
 	dontGo = false;
-	$('.option').hide();
 	console.log(dontGo);
-	console.log(go);
+	$('.option').hide();
 }
 
 function displayOptions(text1, text2, price, yes, no, needMore) {
-	$('.return').click(function() {
-		resetOptions();
-	});
 	if(dontGo !== true) {
-		$('.return').click(function() {})
 		$('#interactionText').writeText(text1);
 		dontGo = true;
-		optionsNext(text1, text2, price, yes, no, needMore);
-	};
-};
-
-function optionsNext(text1, text2, price, yes, no, needMore) {
-	// the following chunk has to do with displaying the "do you want to buy" question
-	var holding = setTimeout(function() {
-		dontGo = false;
-		// now to display the yes or no options
-		twoOptions(text2, 'Yes', 'No');
-		optionsFunction(price, yes, no, needMore);
-	}, 4000);
-
-	$('.return').click(function() {
-		resetOptions();
-		clearTimeout(holding);
-	});				
-
-	// click your mouse button to skip the wait
-	$(this).unbind('click');
-	$(this).click(function() {
-		if($('#interactionText').text() == text1) {
-			clearTimeout(holding);
+		// After a small amount of time, it goes to the next page
+		var holding = setTimeout(function() {
 			dontGo = false;
 			// now to display the yes or no options
 			twoOptions(text2, 'Yes', 'No');
 			optionsFunction(price, yes, no, needMore);
-		}
-	});
-}
+		}, 4000);			
+
+		// click your mouse button to skip the wait
+		$(this).unbind('click');
+		$(this).click(function() {
+			if($('#interactionText').text() == text1) {
+				clearTimeout(holding);
+				dontGo = false;
+				// now to display the yes or no options
+				twoOptions(text2, 'Yes', 'No');
+				optionsFunction(price, yes, no, needMore);
+			};
+		});
+	};
+};
 
 function optionsFunction(price, yes, no, needMore) {
 	dontGo = true;
-	$('.return').click(function() {
-		resetOptions();
-	});
 
 	$('#optionOne').unbind('click');
 	$('#optionOne').click(function() {
@@ -265,7 +248,7 @@ function optionsFunction(price, yes, no, needMore) {
 		$('.option').hide();
 		$('#interactionText').writeText(no);
 	});
-}
+};
 
 // ------------------------------------------------------
 // 					ADD INVENTORY ITEM
@@ -573,12 +556,12 @@ function pauseGame() {
 // 					RESET THE OPTIONS
 // ------------------------------------------------------
 
-$('.clickable').click(function() {
-	$('.option').hide();
-});
-$('.return').click(function() {
-	$('.option').hide();
-});
+// $('.clickable').click(function() {
+// 	$('.option').hide();
+// });
+// $('.return').click(function() {
+// 	$('.option').hide();
+// });
 
 // ------------------------------------------------------
 // 					CLICK ON MY SHIP

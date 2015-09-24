@@ -1,7 +1,7 @@
 
 // brings up the common divs between all the city details
 $('.kanedosCity').click(function() {
-	$('.kanedosCity').hide();
+	$('#kanedosMap').hide();
 	$('.return').show();
 	$('#planetInteraction').show();
 })
@@ -11,8 +11,10 @@ function kanedosReturn() {
 	$('.option').hide();
 	$('.return').hide();
 	$('.cityDetails').hide();
-	$('.kanedosCity').show();		
+	$('#kanedosMap').show();		
 }
+
+$('.return').unbind('click');
 $('.return').click(function() {
 	if(go) {
 		kanedosReturn();

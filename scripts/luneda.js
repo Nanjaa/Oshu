@@ -10,7 +10,7 @@ $('.lunedaCity').click(function() {
 $('.return').unbind('click');
 $('.return').click(function() {
 	if(go) {
-		$('.option').hide();
+		resetOptions();
 		$(Oshu.currentLocation).hide();
 
 		if(Oshu.currentLocation == '.rentalDetails') {
@@ -47,7 +47,10 @@ $('.return').click(function() {
 			$('#lunedaMap').show();	
 			changeLocation('.theMarkets', true);		
 		};		
-	};
+	}
+	else {
+		resetOptions();
+	}
 });
 
 // ________________________________________________________________
