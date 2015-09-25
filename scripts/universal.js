@@ -270,10 +270,17 @@ function addItem(id, name, fullId, description) {
 // 					PLAY AUDIO
 // ------------------------------------------------------
 
+var audioPlaying = false;
+
 function play(source) {
+	audioPlaying = true;
 	$('#audio').attr('src', source);
 	audio.play();
-}
+	audio.addEventListener('ended', function() {
+		audioPlaying = false;
+		console.log('done, boss!');
+	}, false);
+};
 
 
 // ------------------------------------------------------
@@ -537,10 +544,8 @@ function pauseGame() {
 	document.title = 'Oshu - Paused';
 	paused = true;
 	$('#pausedOverlay').show();
-	if(audio.paused !== true) {
-		audio.pause();
-		audioPaused = true;
-	}
+	audio.pause();
+
 	var pausedWait = setTimeout(function() {
 		$(this).click(function() {
 			document.title = 'Oshu';
@@ -548,7 +553,8 @@ function pauseGame() {
 			$(this).unbind('click');
 			$('#pausedOverlay').hide();
 
-			if(audioPaused == true && audioStopped == false) {
+			if(audioPlaying) {
+				console.log(1);
 				audio.play();
 			}
 		});
