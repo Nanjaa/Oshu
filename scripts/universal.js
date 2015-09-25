@@ -318,11 +318,11 @@ function changeColor(destination) {
 
 function completeItem(quest, speech) {
 	Oshu.inQuestSpeech = true;
-	finished = finished + 1;
 	$('#oshuInteraction').text('');
 	play('soundEffects/completeItem.wav');
 	$('.quest').each(function() {
 		if($(this).text() == quest) {
+			finished = finished + 1;
 			$(this).css('text-decoration', 'line-through');	
 		}
 	});
@@ -333,7 +333,7 @@ function completeItem(quest, speech) {
 		$('#oshuInteraction').show();
 		$('#skip').show();
 		$('#oshuInteraction').writeText(speech);
-	}, 500);
+	}, 700);
 };
 
 function endSpeech() {

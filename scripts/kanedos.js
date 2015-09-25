@@ -271,10 +271,13 @@ var barText = {
 	apprenticeIntro: "I'm just taking a break in between classes. Fighting is thirsty work...",
 	apprentice2: "And why should I help you?",
 	apprenticeSympathy: "If you're sick, why would you want to strain your body in the dojo?",
+	sympatyFail: "I'm sorry, but that just doesn't make sense to me. I dont' want to risk anything.",
 	sympathyConvince: "An android, huh? Androids do always get everyone excited... Dunno what it is, but people like to fight the machine. Sure, let's go talk to the sensei now.",
+	sympathyReturn: "I just don't feel comfortable letting sick people into the dojo...",
+	truth: "Oh! Well, you know lying is against our code, right? Never decieve even your enemy. But, we're also learning about mercy right now, so sure. I'll talk to the sensei for you. Follow me.",
 	apprenticeThreaten: "I'm going to pretend that was a joke.",
 	Threaten2: "Come back already? What are you going to do, threathen me again? Pitiful...",
-	apologize: "You know what, sure. Androids do always get everyone excited... Dunno what it is, but people like to fight the machine. I'll show to you to the dojo and talk to the sensei. We're learning about forgiveness and mercy anyway, it'll fit.",
+	apologize: "You know what, fine. Androids do always get everyone excited... Dunno what it is, but people like to fight the machine. I'll show to you to the dojo and talk to the sensei. We're learning about forgiveness and mercy anyway, it'll fit.",
 	threaten3: "Alright.",
 	apprenticeEnd: "You did great in class! I'm really glad I was able to get you in."
 }
@@ -340,6 +343,42 @@ $('#apprentice').click(function() {
 				}
 			});
 		}
+		else if(apprenticeStatus == 'doctor') {
+			$('.option').hide();
+			twoOptions(barText.sympathyReturn, "Actually, I was lying... I'm an android using the Lifecycle Program.", "Nevermind.");
+
+			$('#optionOne').unbind('click');
+			$('#optionOne').click(function() {
+				if(go) {
+					endConversation(barText.truth);
+					var check2 = setInterval(function() {
+						if($('#interactionText').text() == barText.truth) {
+							clearInterval(check2);
+							var wait2 = setTimeout(function() {
+								lifeEvent(1);
+								completeItem(Oshu.quests[1][1][1], Oshu.questSpeech.kanedos2);	
+
+								$('#skip').unbind('click');
+								$('#skipButton').unbind('click');
+								$('#skipButton').click(function() {
+									$('.suckerPunch').show();
+									endSpeech();
+									$('#interactionText').writeText(barText.apprenticeEnd);
+								});							
+							}, 2000);
+						};
+					}, 1);
+					apprenticeStatus = 'finished';					
+				};
+			});
+
+			$('#optionTwo').unbind('click');
+			$('#optionTwo').click(function() {
+				if(go) {
+					endConversation(barText.threaten3);			
+				};
+			});
+		}
 		else {
 			apprenticeStatus = 'intro';
 			$('.option').hide();
@@ -354,7 +393,7 @@ $('#apprentice').click(function() {
 						apprenticeStatus = 'why';
 					}
 					else if(apprenticeStatus == 'why') {
-						oneOption(barText.apprenticeSympathy, "I'm not sick, I'm an android. I'm using the Lifecycle Program.");
+						twoOptions(barText.apprenticeSympathy, "I'm not sick, I'm an android. I'm using the Lifecycle Program.", "I got a note from my doctor.");
 						apprenticeStatus = 'android';
 					}
 					else if(apprenticeStatus == 'android') {
@@ -374,10 +413,10 @@ $('#apprentice').click(function() {
 										$('#interactionText').writeText(barText.apprenticeEnd);
 									});							
 								}, 2000);
-							}
+							};
 						}, 1)
 						apprenticeStatus = 'finished';				
-					};					
+					};
 				};
 			});
 
@@ -388,7 +427,11 @@ $('#apprentice').click(function() {
 					if(apprenticeStatus == 'why') {
 						endConversation(barText.apprenticeThreaten);
 						apprenticeStatus = 'threaten';					
-					}					
+					}
+					else if(apprenticeStatus = 'android') {
+						endConversation(barText.sympatyFail);
+						apprenticeStatus = 'doctor';
+					};
 				};
 			});			
 		};		
