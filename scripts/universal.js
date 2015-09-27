@@ -227,6 +227,7 @@ function displayOptions(text1, text2, price, yes, no, needMore) {
 
 function optionsFunction(price, yes, no, needMore) {
 	dontGo = true;
+	pleaseChooseOption = true;
 
 	$('#optionOne').unbind('click');
 	$('#optionOne').click(function() {
