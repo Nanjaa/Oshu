@@ -273,6 +273,7 @@ $('#mysteriousMan').click(function() {
 		if(Oshu.items.fixedRobot) {
 			$('#interactionText').writeText(tikiText.questReturnComplete);
 			Oshu.items.password = true;
+			$('#fixedRobot').parent().remove();
 		}
 		else if(manStatus == 'accepted') {
 			$('#interactionText').writeText(tikiText.questReturnIncomplete);

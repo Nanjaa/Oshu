@@ -442,8 +442,7 @@ function ignore(map) {
 					ignore();
 				}	
 				else {
-					concludeToMap();
-					ignore();
+					ignore('#map');
 				};	
 			};
 		});
@@ -649,7 +648,7 @@ function ignore(map) {
 			}
 			// Or you just go to the map
 			else {
-				concludeToMap();
+				ignore('#map');
 			};			
 		}
 		else if(pleaseChooseOption){
@@ -690,8 +689,7 @@ function ignore(map) {
 				$('#skip').show();
 				$('#skipButton').unbind('click');
 				$('#skipButton').click(function() {
-					concludeToMap();
-					ignore();
+					ignore('#map');
 				});
 				concludeToMap(25500)
 			};
@@ -717,8 +715,7 @@ function ignore(map) {
 				$('#skip').show();
 				$('#skipButton').unbind('click');
 				$('#skipButton').click(function() {
-					concludeToMap();
-					ignore();
+					ignore('#map');
 				});
 				concludeToMap(8500)
 			};
@@ -744,8 +741,7 @@ function ignore(map) {
 				$('#skip').show();
 				$('#skipButton').unbind('click');
 				$('#skipButton').click(function() {
-					concludeToMap();
-					ignore();
+					ignore('#map');
 				});
 				concludeToMap(8500)
 			};
@@ -758,8 +754,7 @@ function ignore(map) {
 		$('#skip').show()
 		$('#skipButton').unbind('click');
 		$('#skipButton').click(function() {
-			ignore();
-			concludeToMap();
+			ignore('#map');
 		});
 		
 		$('#good').unbind('click');

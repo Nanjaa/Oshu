@@ -18,7 +18,7 @@ var Oshu = {
 		electange: 0,
 		brokenRobot: false,
 		fixedRobot: false,
-		password: false,
+		password: true,
 		electroSuit: false, 
 		clothes: false,
 		lunedaSnowglobe: false,
@@ -138,6 +138,7 @@ var	watched = false,
 	beachEnd = false,
 	graveStatus = true,
 	firstTime = true,
+	poolsComplete = false,
 	fuzzbuttEntry = false;
 
 var	brawlerStatus = 'intro',

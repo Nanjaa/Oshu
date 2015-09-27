@@ -399,7 +399,10 @@ function changeLocation(newLocation, clickReturn, clickShip) {
 	}
 	else if(clickShip) {
 		audio.pause();
-		play('soundEffects/returnToShip.wav');
+		var testWait = setTimeout(function() {
+			play('soundEffects/returnToShip.wav');
+			console.log('hello');			
+		}, 1);
 	}
 	else {
 		play('soundEffects/click.wav');		

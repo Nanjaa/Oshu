@@ -93,7 +93,7 @@ $('#fortuneTeller').click(function() {
 		$('.option').hide();
 		mysteryStatus = 'intro';
 
-		if(Oshu.items.password) {
+		if((Oshu.items.password) && (poolsComplete == false)) {
 			twoOptions(mysteryText.gypsyIntro, "What have you got for sale?", "'Phoenix'");
 		}
 		else {
@@ -129,6 +129,7 @@ $('#fortuneTeller').click(function() {
 				$('.option').hide();
 				$('#interactionText').writeText(mysteryText.lifePools);
 				var timeout = setTimeout(function() {
+					poolsComplete = true;
 					lifeEvent(4);
 					completeItem(Oshu.quests[3][1][1], Oshu.questSpeech.kaprika2);
 					$('#skip').show();
