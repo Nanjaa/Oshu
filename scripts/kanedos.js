@@ -98,7 +98,7 @@ var kanedomeText = {
 
 $('#ticketGuy').unbind('click');
 $('#ticketGuy').click(function() {
-	if(go) {
+	if(go  && (dontReturn == false)) {
 		$('.option').hide();
 		maleVoice2();
 		if(watched) {
@@ -149,7 +149,7 @@ var camelText = {
 
 $('#camelGuy').unbind('click');
 $('#camelGuy').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		console.log('hello go is go');
 		$('.option').hide();
 		maleVoice3();
@@ -307,7 +307,7 @@ $('#suckerBartender').click(function() {
 
 $('#apprentice').unbind('click');
 $('#apprentice').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		maleVoice();
 		if(apprenticeStatus == 'finished') {
@@ -476,7 +476,7 @@ $('#brawler').click(function() {
 		if(watched) {
 			$('#interactionText').writeText(brawlerText.alreadyWatched);
 		}
-		if(brawlerStatus == 'sold') {
+		else if(brawlerStatus == 'sold') {
 			$('#interactionText').writeText(brawlerText.ticketReturn);
 		}
 		else if(brawlerStatus == 'noSmuggle') {

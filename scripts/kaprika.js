@@ -88,7 +88,7 @@ var mysteryText = {
 
 $('#fortuneTeller').unbind('click');
 $('#fortuneTeller').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		femVoice3();
 		$('.option').hide();
 		mysteryStatus = 'intro';
@@ -272,7 +272,7 @@ var groveText = {
 }
 
 $('#fairies').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		if(Oshu.items.emptyBottle) {
 			$('#interactionText').writeText(groveText.capture);

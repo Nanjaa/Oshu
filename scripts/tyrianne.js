@@ -150,7 +150,7 @@ var poorText = {
 
 $('#poorManClose').unbind('click');
 $('#poorManClose').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		maleVoice();
 		if(poorStatus == 'end') {
@@ -178,6 +178,7 @@ $('#poorManClose').click(function() {
 				else if(poorStatus == 'giveFruit') {
 					poorStatus = 'end';
 					endConversation(poorText.philosophers);
+					dontReturn = true;
 					var timeout = setTimeout(function() {
 						lifeEvent(2);
 						completeItem(Oshu.quests[2][1][2], Oshu.questSpeech.tyrianne3);
@@ -423,7 +424,7 @@ var marketText = {
 
 $('.fuzzbuttDetails').unbind('click');
 $('.fuzzbuttDetails').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		if(Oshu.items.sunstone) {
 			$('#interactionText').writeText(marketText.marketReturn);
@@ -433,6 +434,7 @@ $('.fuzzbuttDetails').click(function() {
 			var wait = setInterval(function() {
 				if($('#interactionText').text() == marketText.yes) {
 					clearInterval(wait);
+					dontReturn = true;
 					var hold = setTimeout(function() {
 						completeItem(Oshu.quests[2][1][1], Oshu.questSpeech.tyrianne2);
 						$('#skip').show();

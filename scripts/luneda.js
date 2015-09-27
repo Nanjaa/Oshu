@@ -737,7 +737,7 @@ var weatherText = {
 // speak to the weatherman
 $('#weatherman').unbind('click');
 $('#weatherman').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		weatherStatus = 'intro';
 		maleVoice2();
