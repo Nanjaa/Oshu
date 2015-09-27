@@ -205,7 +205,7 @@ var shutoffText = {
 
 $('#aliNadaLifecycleShutoff').unbind('click');
 $('#aliNadaLifecycleShutoff').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		displayOptions(shutoffText.shutoffIntro, shutoffText.options, 15, shutoffText.yes, shutoffText.no, shutoffText.noCoins);
 
@@ -234,7 +234,6 @@ var generalText = {
 
 function robotWait(text1, text2) {
 	dontReturn = true;
-	console.log(dontReturn);
 	var wait4 = setInterval(function() {
 		if($('#interactionText').text() == text1) {
 			clearInterval(wait4);
@@ -259,7 +258,7 @@ var replace = false;
 // General Robot Repairs
 $('#aliNadaGeneralRobot').unbind('click');
 $('#aliNadaGeneralRobot').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		if(Oshu.items.brokenRobot) {
 			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
@@ -294,7 +293,7 @@ var addText = {
 // Lifecycle Adjustment
 $('aliNadaLifecycleAdd').unbind('click');
 $('#aliNadaLifecycleAdd').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		if(Oshu.remainingLife <= 2700) {
 			displayOptions(addText.intro, addText.options, 5, addText.yes, addText.no, addText.noCoins);

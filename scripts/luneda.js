@@ -644,6 +644,7 @@ $('#dancer4').click(function() {
 
 			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
+				console.log('hello world');
 				$('.option').hide();
 				switch(dancerStatus) {
 					case 'intro': 
@@ -656,37 +657,12 @@ $('#dancer4').click(function() {
 							$('#interactionText').writeText(danceText.barryRiddle);
 							dontGo = true;
 
-							// the following chunk has to do with displaying the "do you want to buy" question
-							var wait3 = setTimeout(function() {
-								dontGo = false;
-								$('#interactionText').text('');
-								$('#optionOne').show();
-								$('#optionTwo').show();
-								$('#optionThree').show();
-								$('#optionOne').text('Your shadow?');
-								$('#optionTwo').text('Time?');
-								$('#optionThree').text('A Television?');
-							}, 6000);					
-
-							// click your mouse button to skip the wait
-							$(this).unbind('click');
-							$(this).click(function() {
-								if($('#interactionText').text() == danceText.barryRiddle) {
-									displayGo = false;
-									clearTimeout(wait3);
-									dontGo = false;
-									$('#interactionText').text('');
-									$('#optionOne').show();
-									$('#optionTwo').show();
-									$('#optionThree').show();
-									$('#optionOne').text('Your shadow?');
-									$('#optionTwo').text('Time?');
-									$('#optionThree').text('A Television?');
-								}
-							});
+							// the following chunk has to do with displaying the answers and hiding the question
+							displayRiddleOptions();
 						};
 					break;
 					case 'riddle':
+						console.log('should be working boo');
 						endConversation(danceText.barryWrong);
 					break;
 				};				
@@ -708,6 +684,35 @@ $('#dancer4').click(function() {
 	};
 });
 
+function displayRiddleOptions() {
+	var wait3 = setTimeout(function() {
+		dontGo = false;
+		$('#interactionText').text('');
+		$('#optionOne').show();
+		$('#optionTwo').show();
+		$('#optionThree').show();
+		$('#optionOne').text('Your shadow?');
+		$('#optionTwo').text('Time?');
+		$('#optionThree').text('A Television?');
+	}, 6000);					
+
+	// click your mouse button to skip the wait
+	$(this).unbind('click');
+	$(this).click(function() {
+		if($('#interactionText').text() == danceText.barryRiddle) {
+			displayGo = false;
+			clearTimeout(wait3);
+			dontGo = false;
+			$('#interactionText').text('');
+			$('#optionOne').show();
+			$('#optionTwo').show();
+			$('#optionThree').show();
+			$('#optionOne').text('Your shadow?');
+			$('#optionTwo').text('Time?');
+			$('#optionThree').text('A Television?');
+		}
+	});
+}
 
 // ________________________________________________________________
 // | ==============================================================|
@@ -844,7 +849,7 @@ var shutoffText = {
 }
 
 $('#lunedaLifecycleShutoff').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		displayOptions(shutoffText.shutoffIntro, shutoffText.options, 15, shutoffText.yes, shutoffText.no, shutoffText.noCoins);
 
 		var wait7 = setInterval(function() {
@@ -893,7 +898,7 @@ var replace = false;
 
 // General Robot Repairs
 $('#lunedaGeneralRobot').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		if(Oshu.items.brokenRobot) {
 			displayOptions(generalText.introRobot, generalText.robotOptions, 20, generalText.yesRobot, generalText.no, generalText.noCoins);
 			robotWait(generalText.yesRobot, generalText.yesRobotEnd);
@@ -926,7 +931,7 @@ var addText = {
 
 // Lifecycle Adjustment
 $('#lunedaLifecycleAdd').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		if(Oshu.remainingLife <= 2700) {
 			displayOptions(addText.intro, addText.options, 5, addText.yes, addText.no, addText.noCoins);
 

@@ -248,6 +248,7 @@ function optionsFunction(price, yes, no, needMore) {
 	$('#optionTwo').click(function() {
 		pleaseChooseOption = false;
 		dontGo = false;
+		dontReturn = false;
 		$('.option').hide();
 		$('#interactionText').writeText(no);
 	});
