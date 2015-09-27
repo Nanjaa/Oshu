@@ -134,6 +134,7 @@ var myLocation = {
 //   \\___________________________________________//
 
 var	watched = false,
+	electangeEaten = false;
 	camelEnd = false,
 	beachEnd = false,
 	graveStatus = true,

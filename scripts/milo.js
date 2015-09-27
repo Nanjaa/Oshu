@@ -127,6 +127,7 @@ function ignore(map) {
 	$('#miloInteraction').hide();
 	$(map).show();
 	audio.pause();
+	audioPlaying = false;
 	audioStopped = true;
 	$('#skip').hide();
 	$('#skip').unbind('click');
@@ -905,7 +906,7 @@ function ignore(map) {
 				else if(familyTimeline == 'Its a lot of ups and downs') {
 					miloResponse(text.familyGoodGood1, 'speech/familyGoodGood1.mp3', '','','');
 					$('#miloResponse').hide();
-					setTimeout(function() {
+					var wait9 = setTimeout(function() {
 						$('#miloSays').text('');
 						miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
 						$('#miloResponse').show();
@@ -928,7 +929,7 @@ function ignore(map) {
 				else if(familyTimeline == 'It gives meaning') {
 					miloResponse('I see.', 'speech/familyneutGood.mp3', '','','');
 					$('#miloResponse').hide();
-					setTimeout(function() {
+					var wait10 = setTimeout(function() {
 						$('#miloSays').text('');
 						miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
 						$('#miloResponse').show();
@@ -974,7 +975,7 @@ function ignore(map) {
 				}
 				else if(familyTimeline == 'Its a lot of ups and downs') {
 					quickMilo(text.familyGoodNeut, 'speech/familyGoodNeut.mp3');
-					setTimeout(function() {
+					var wait11 = setTimeout(function() {
 						$('#miloResponse').show();
 						$('#miloSays').text('');
 						miloResponse(text.familyGoodGood2, 'speech/familyGoodGood2.mp3', response.familyGoodGoodGood, response.familyGoodGoodBad, response.familyGoodGoodNeut);
@@ -1090,7 +1091,6 @@ function ignore(map) {
 				}
 				else if(goodbyeTimeline == 'goodIntro') {
 					audioStopped = true;
-					audio.pause();
 					$('#miloSays').writeText(text.happyBad);
 					concludeToMap(2000);
 					$('#skip').show();

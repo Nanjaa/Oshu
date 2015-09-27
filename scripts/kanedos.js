@@ -459,7 +459,8 @@ var brawlerText = {
 	wrestleEnd: "I said leave me alone, dude!",
 	jobs: "Honestly, there's nothing I need done that you could do.",
 	die: "Yeah? and how many millions of other people from all the other planets in this galaxy are in the same situation? You're not special, you're a brat. Leave me alone.",
-	dieEnd: "Don't try my patience, or you'll die earlier than you were expecting..."
+	dieEnd: "Don't try my patience, or you'll die earlier than you were expecting...", 
+	alreadyWatched: "Man, that fight at the Kanedome was amazing... Too bad you didn't come see me earlier! I had an extra ticket I coulda sold you!"
 }
 
 $('#brawler').unbind('click');
@@ -467,6 +468,9 @@ $('#brawler').click(function() {
 	if(go) {
 		$('.option').hide();
 		maleVoice2();
+		if(watched) {
+			$('#interactionText').writeText(brawlerText.alreadyWatched);
+		}
 		if(brawlerStatus == 'sold') {
 			$('#interactionText').writeText(brawlerText.ticketReturn);
 		}

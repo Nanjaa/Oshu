@@ -384,6 +384,7 @@ $('#coins').click(function() {
 })
 
 function useItem(item, div) {
+	console.log(Oshu.items.electange);
 	if(item > 0) {
 		var amount = item - 1;
 		item = amount;

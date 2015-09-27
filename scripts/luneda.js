@@ -416,28 +416,36 @@ $('#electange').click(function() {
 			if($('#interactionText').text() == yes) {
 				// adds item to inventory if not already there
 				if(Oshu.itemFirst.electange == true) {
+					console.log('first timer');
 					Oshu.itemFirst.electange = false;
 					$('.inventoryList').append('<li class="inventoryItem"><span class="clickInventory" id="myElectange">Electange: <span id="electangeAmt"></span></span></li>');				
 				
 					// now you can eat the electange
 					$('#myElectange').click(function() {
-						useItem(Oshu.items.electange, '#electangeAmt')
 						if(Oshu.items.electange > 0) {
-							Oshu.items.electange = Oshu.items.electange - 1;
-							completeItem(Oshu.quests[0][1][2], Oshu.questSpeech.luneda3);
+							var electangeAmount = Oshu.items.electange - 1;
+							$('#electangeAmt').text(electangeAmount);
+							Oshu.items.electange = electangeAmount;
+							console.log(Oshu.items.electange);
+							// First, make sure you're not in the middle of a conversation with milo
+							if(($('#miloInteraction').css('display') !== 'block') && (electangeEaten == false)) {
+								electangeEaten = true;
+								completeItem(Oshu.quests[0][1][2], Oshu.questSpeech.luneda3);
 
-							$('#skip').unbind('click');
-							$('#skipButton').unbind('click');
-							$('#skipButton').click(function() {
-								$(Oshu.currentLocation).show();
-								endSpeech();
-							});
-						}
+								$('#skip').unbind('click');
+								$('#skipButton').unbind('click');
+								$('#skipButton').click(function() {
+									$(Oshu.currentLocation).show();
+									endSpeech();
+								});
+							};
+						};
 					});
-				}
+				};
 				// then adds quantity amt
 				var electange = Oshu.items.electange + 1;
 				Oshu.items.electange = electange;
+				console.log(Oshu.items.electange);
 				$('#electangeAmt').text(electange);
 
 				clearInterval(boughtElectange);
@@ -461,9 +469,10 @@ $('#ganifruit').click(function() {
 		
 					// now you can eat the ganifruit
 					$('#myGanifruit').click(function() {
-						useItem(Oshu.items.ganifruit, '#ganifruitAmt');
 						if(Oshu.items.ganifruit > 0) {
-							Oshu.items.ganifruit = Oshu.items.ganifruit - 1;
+							var ganifruitAmount = Oshu.items.ganifruit - 1;
+							$('#ganifruitAmt').text(ganifruitAmount);
+							Oshu.items.ganifruit = ganifruitAmount;
 						}
 					});
 				}
