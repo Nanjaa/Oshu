@@ -333,6 +333,7 @@ function completeItem(quest, speech) {
 	var timeout = setTimeout(function() {
 		go = true;
 		dontGo = false;
+		dontReturn = false;
 		$('#oshuInteraction').show();
 		$('#skip').show();
 		$('#oshuInteraction').writeText(speech);
@@ -433,7 +434,6 @@ function twoOptions(referenceText, option1, option2) {
 	$('#interactionText').writeText(referenceText);
 	var wait = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
-			pleaseChooseOption = true;
 			clearInterval(wait);
 			$('#optionOne').show();
 			$('#optionTwo').show();

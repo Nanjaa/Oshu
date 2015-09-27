@@ -73,6 +73,9 @@ var miloGo = true;
 		$('#bad').text('');
 		$('#neut').text('');
 		$('#miloResponse').show()
+		$('#good').show();
+		$('#bad').show();
+		$('#neut').show();
 		$('#good').writeText(responseOne);
 		$('#bad').writeText(responseTwo);
 		$('#neut').writeText(responseThree);
@@ -123,6 +126,7 @@ var miloGo = true;
 	// ignore function
 
 function ignore(map) {
+
 	$('#miloResponse').hide();
 	$('#miloInteraction').hide();
 	$(map).show();
@@ -373,6 +377,16 @@ function ignore(map) {
 // |																															 |
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
+	function setGo2() {
+		miloGo = false;
+		var goWait2 = setInterval(function() {
+			if($('#good').text() == response.tyrianneGood) {
+				clearInterval(goWait2);
+				miloGo = true;
+			};
+		}, 1);
+	}
+
 	function tyrianneFirst() {
 		audioStopped = false;
 		setGo(text.tyrianneIntro);
@@ -384,6 +398,7 @@ function ignore(map) {
 		$('#bad').text('');
 		$('#neut').text('');
 		var wait4 = setTimeout(function() {
+			setGo2();
 			$('#dots').hide();
 			$('#miloSays').text('');
 			$('#miloResponse').show();
@@ -396,6 +411,7 @@ function ignore(map) {
 		$('#dotsButton').click(function() {
 			if(miloGo) {
 				clearTimeout(wait4);
+				setGo2();
 				$('#dots').hide();
 				$('#miloSays').text('');
 				$('#miloResponse').show();
@@ -573,7 +589,7 @@ function ignore(map) {
 
 	$('#myShip').click(function() {
 		// If you're cleared to go, go
-		if((go == true) && (dontGo == false)) {
+		if((go == true) && (dontGo == false) && (dontReturn == false)) {
 			endSpeech();
 			// hide all the planets and planet details
 			changeLocation('#map');

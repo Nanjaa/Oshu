@@ -16,7 +16,7 @@ function kanedosReturn() {
 
 $('.return').unbind('click');
 $('.return').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		kanedosReturn();
 		changeLocation('#kanedosMap', true);		
 	}
@@ -109,6 +109,7 @@ $('#ticketGuy').click(function() {
 			var wait = setInterval(function() {
 				if($('#interactionText').text() == kanedomeText.yes) {
 					clearInterval(wait);
+					dontReturn = true;
 					var hold = setTimeout(function() {
 						lifeEvent(4);
 						completeItem(Oshu.quests[1][1][0], Oshu.questSpeech.kanedos1);	
@@ -160,6 +161,7 @@ $('#camelGuy').click(function() {
 			var hold = setInterval(function() {
 				if($('#interactionText').text() == camelText.yes) {
 					clearInterval(hold);
+					dontReturn = true;
 					var wait = setTimeout(function() {
 						lifeEvent(1);
 						completeItem(Oshu.quests[1][1][2], Oshu.questSpeech.kanedos3);
@@ -319,6 +321,7 @@ $('#apprentice').click(function() {
 				if(go) {
 					$('.option').hide();
 					$('#interactionText').writeText(barText.apologize);
+					dontReturn = true;
 					var wait = setTimeout(function() {
 						lifeEvent(1);
 						completeItem(Oshu.quests[1][1][1], Oshu.questSpeech.kanedos2);
@@ -354,6 +357,7 @@ $('#apprentice').click(function() {
 					var check2 = setInterval(function() {
 						if($('#interactionText').text() == barText.truth) {
 							clearInterval(check2);
+							dontReturn = true;
 							var wait2 = setTimeout(function() {
 								lifeEvent(1);
 								completeItem(Oshu.quests[1][1][1], Oshu.questSpeech.kanedos2);	
@@ -401,6 +405,7 @@ $('#apprentice').click(function() {
 						var check = setInterval(function() {
 							if($('#interactionText').text() == barText.sympathyConvince) {
 								clearInterval(check);
+								dontReturn = true;
 								var wait = setTimeout(function() {
 									lifeEvent(1);
 									completeItem(Oshu.quests[1][1][1], Oshu.questSpeech.kanedos2);	

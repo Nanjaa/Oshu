@@ -9,7 +9,7 @@ $('.lunedaCity').click(function() {
 // takes you back to the city map from any city details
 $('.return').unbind('click');
 $('.return').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		resetOptions();
 		$(Oshu.currentLocation).hide();
 
@@ -343,6 +343,7 @@ $('#closerSeas').click(function() {
 	if(go) {
 		if(Oshu.items.electroSuit) {
 			lifeEvent(2);
+			dontReturn = true;
 			completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda1);
 			beachEnd = true;
 			$('#skip').unbind('click');
@@ -766,6 +767,7 @@ $('#weatherman').click(function() {
 							$('#interactionText').writeText(weatherText.coins);
 							payMoney(1000);
 							lifeEvent(3);
+							dontReturn = true;
 							completeItem(Oshu.quests[0][1][1], Oshu.questSpeech.luneda2);
 							Oshu.items.weatherComplete = true;
 
@@ -789,6 +791,7 @@ $('#weatherman').click(function() {
 						var wait = setInterval(function() {
 							if($('#interactionText').text() == weatherText.specimen) {
 								clearInterval(wait);
+								dontReturn = true;
 								var hold = setTimeout(function() {
 									lifeEvent(3);
 									completeItem(Oshu.quests[0][1][1], Oshu.questSpeech.luneda2);

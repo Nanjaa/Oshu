@@ -14,7 +14,7 @@ function aliNadaReturn() {
 	$('#aliNadaMap').show();	
 }
 $('.return').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		aliNadaReturn();
 		changeLocation('#aliNadaMap', true);		
 	}
@@ -37,6 +37,7 @@ $('pre').click(function() {
 		case 'capitol':
 			$('.option').hide();
 			if(Oshu.items.weatherSpecimen) {
+				$('#weatherSpecimen').parent().remove();
 				$('#interactionText').writeText(weatherText.weather);
 				changeLocation('.capitol');
 				$('.capitol').show();
@@ -50,6 +51,7 @@ $('pre').click(function() {
 		case 'stainedGlass':
 			$('.option').hide();
 			if(Oshu.items.weatherSpecimen) {
+				$('#weatherSpecimen').parent().remove();
 				$('#interactionText').writeText(weatherText.weather);
 				changeLocation('.capitol');
 				$('.capitol').show();
@@ -64,6 +66,7 @@ $('pre').click(function() {
 			$('.option').hide();
 			if(graveStatus) {
 				graveStatus = false;
+				dontReturn = true;
 				var cemeteryWait = setTimeout(function() {
 					play('soundEffects/completeItem.wav');
 					completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
@@ -87,6 +90,7 @@ $('pre').click(function() {
 			$('.option').hide();
 			if(graveStatus) {
 				graveStatus = false;
+				dontReturn = true;
 				var cemeteryWait = setTimeout(function() {
 					console.log(1000);
 					play('soundEffects/completeItem.wav');

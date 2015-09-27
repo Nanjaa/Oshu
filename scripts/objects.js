@@ -114,6 +114,7 @@ var Oshu = {
 
 var finished = 0;
 
+var dontReturn = false;
 
 var myLocation = {
 	current: 1,

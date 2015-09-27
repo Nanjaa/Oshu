@@ -14,7 +14,7 @@ function kaprikaReturn() {
 	$('.kaprikaCity').show();	
 }
 $('.return').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		kaprikaReturn();
 		changeLocation('#kaprikaMap', true);		
 	}
@@ -128,6 +128,7 @@ $('#fortuneTeller').click(function() {
 			if(mysteryStatus == 'intro') {
 				$('.option').hide();
 				$('#interactionText').writeText(mysteryText.lifePools);
+				dontReturn = true;
 				var timeout = setTimeout(function() {
 					poolsComplete = true;
 					lifeEvent(4);
@@ -219,6 +220,7 @@ $('.treeGoons').click(function() {
 				Oshu.items.sleepPotion = false;
 				goonStatus = 'sleeping';
 				$('#interactionText').writeText(treeText.sleep);
+				dontReturn = true;
 				var timeout = setTimeout(function() {
 					$('#interactionText').writeText(treeText.sleepEnd);
 					var wait = setTimeout(function() {
@@ -289,6 +291,7 @@ $('#quietGrove').click(function() {
 	if(Oshu.items.jewelry && firstTime) {
 		$('.option').hide();
 		firstTime = false;
+		dontReturn = true;
 		var wait = setTimeout(function() {
 			completeItem(Oshu.quests[3][1][0], Oshu.questSpeech.kaprika1);
 

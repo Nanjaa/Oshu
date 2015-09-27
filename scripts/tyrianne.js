@@ -9,7 +9,7 @@ $('.tyrianneCity').click(function() {
 // takes you back to the city map from any city details
 $('.return').unbind('click');
 $('.return').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		// Returning from the library - it'll remind you you can't return before you can do so
 		if(Oshu.currentLocation == '.libraryShop') {
