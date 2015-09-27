@@ -278,7 +278,6 @@ function play(source) {
 	audio.play();
 	audio.addEventListener('ended', function() {
 		audioPlaying = false;
-		console.log('done, boss!');
 	}, false);
 };
 
@@ -317,6 +316,8 @@ function changeColor(destination) {
 // ------------------------------------------------------
 
 function completeItem(quest, speech) {
+	go = false;
+	dontGo = true;
 	Oshu.inQuestSpeech = true;
 	$('#oshuInteraction').text('');
 	play('soundEffects/completeItem.wav');
@@ -324,12 +325,14 @@ function completeItem(quest, speech) {
 		if($(this).text() == quest) {
 			finished = finished + 1;
 			$(this).css('text-decoration', 'line-through');	
-		}
+		};
 	});
 	$(Oshu.currentLocation).fadeOut();
 	$('.return').fadeOut();
 	$('#planetInteraction').hide();
 	var timeout = setTimeout(function() {
+		go = true;
+		dontGo = false;
 		$('#oshuInteraction').show();
 		$('#skip').show();
 		$('#oshuInteraction').writeText(speech);
@@ -345,7 +348,7 @@ function endSpeech() {
 		$('.return').show();
 		$('#planetInteraction').show();		
 	};
-}
+};
 
 // ------------------------------------------------------
 // 				USE INVENTORY
@@ -400,8 +403,7 @@ function changeLocation(newLocation, clickReturn, clickShip) {
 	else if(clickShip) {
 		audio.pause();
 		var testWait = setTimeout(function() {
-			play('soundEffects/returnToShip.wav');
-			console.log('hello');			
+			play('soundEffects/returnToShip.wav');			
 		}, 1);
 	}
 	else {
@@ -592,6 +594,8 @@ function concludeGame(complete) {
 
 };
 
-$('#inventoryTitle').click(function() {
-	addItem('test', 'Test', '#test', '');
+// fTEST
+
+$('pre').click(function() {
+	console.log(go);
 });

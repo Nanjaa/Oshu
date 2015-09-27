@@ -65,7 +65,6 @@ $('pre').click(function() {
 			if(graveStatus) {
 				graveStatus = false;
 				var cemeteryWait = setTimeout(function() {
-					console.log(1000);
 					play('soundEffects/completeItem.wav');
 					completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
 					$('#skip').show();

@@ -131,6 +131,7 @@ function ignore(map) {
 	$('#skip').hide();
 	$('#skip').unbind('click');
 	$('#skipButton').unbind('click');
+	$('#dots').hide();
 }
 
     // _________________________________________//
@@ -276,7 +277,11 @@ function ignore(map) {
 					}
 				};
 			};
-		};
+		}
+		// If you can't travel to the planet, play an error sound
+		else {
+			play('soundEffects/error.wav');
+		}
 	});
 
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -369,6 +374,7 @@ function ignore(map) {
 
 	function tyrianneFirst() {
 		audioStopped = false;
+		setGo(text.tyrianneIntro);
 		changeLocation('#tyrianneMap');
 		$('#miloInteraction').show();
 		$('#miloSays').writeText(text.tyrianneIntro);
@@ -567,8 +573,9 @@ function ignore(map) {
 	$('#myShip').click(function() {
 		// If you're cleared to go, go
 		if((go == true) && (dontGo == false)) {
+			endSpeech();
 			// hide all the planets and planet details
-			changeLocation('#map', false, true);
+			changeLocation('#map');
 			hideContent('#lunedaContent');
 			hideContent('#kanedosContent');
 			hideContent('#tyrianneContent');
@@ -649,6 +656,7 @@ function ignore(map) {
 			// Or you just go to the map
 			else {
 				ignore('#map');
+				changeLocation('#map', false, true);
 			};			
 		}
 		else if(pleaseChooseOption){
