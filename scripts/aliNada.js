@@ -210,6 +210,7 @@ $('#aliNadaLifecycleShutoff').click(function() {
 
 		var wait7 = setInterval(function() {
 			if($('#interactionText').text() == shutoffText.yes) {
+				dontReturn = true;
 				clearInterval(wait7);
 				concludeGame(false);			
 			}
@@ -231,10 +232,11 @@ var generalText = {
 }
 
 function robotWait(text1, text2) {
+	dontReturn = true;
+	console.log(dontReturn);
 	var wait4 = setInterval(function() {
 		if($('#interactionText').text() == text1) {
 			clearInterval(wait4);
-			dontGo = true;
 			var wait5 = setTimeout(function() {
 				lifeEvent(1);
 				$('#aliNadaMechanicMenu').fadeOut(1000);
@@ -242,6 +244,8 @@ function robotWait(text1, text2) {
 				dontGo = false;
 				replace = true;
 				var wait6 = setTimeout(function() {
+					dontReturn = false;
+					console.log(dontReturn);
 					$('#interactionText').writeText(text2);
 				}, 2000);
 			}, 1500);

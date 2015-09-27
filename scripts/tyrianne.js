@@ -582,6 +582,7 @@ $('#tyrianneLifecycleShutoff').click(function() {
 
 		var wait7 = setInterval(function() {
 			if($('#interactionText').text() == shutoffText.yes) {
+				dontReturn = true;
 				clearInterval(wait7);
 				concludeGame(false);			
 			}
@@ -603,6 +604,7 @@ var generalText = {
 }
 
 function robotWait(text1, text2) {
+	dontReturn = true;
 	var wait4 = setInterval(function() {
 		if($('#interactionText').text() == text1) {
 			clearInterval(wait4);
@@ -612,6 +614,7 @@ function robotWait(text1, text2) {
 				$('#tyrianneMechanicMenu').fadeIn(1000);
 				replace = true;
 				var wait6 = setTimeout(function() {
+					dontReturn = false;
 					$('#interactionText').writeText(text2);
 				}, 2000);
 			}, 1500);
