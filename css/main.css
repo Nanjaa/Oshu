@@ -12,7 +12,7 @@ body {
 	-ms-user-select: none;
 	user-select: none;
 	height: 100vh;
-	background-color: gray;
+	background-color: #4b4b4b;
 }
 p {
 	margin: 0;
@@ -31,7 +31,7 @@ h1 {
 footer {
 	padding: 15px;
 	text-align: right;
-	background-color: gray;
+	background-color: #4b4b4b;
 	font-family: "Share Tech Mono";
 }
 pre {
@@ -87,7 +87,7 @@ pre {
 #inventory {
 	border: 1px solid black;
 	padding: 10px;
-	background-color: blue;
+	background-color: #2e7bff;
 	float: right;
 	width: 45%;
 }
@@ -130,7 +130,7 @@ pre {
 }
 #myShip {
 	cursor: pointer;
-	border: 1px solid black;
+	border-left: 1px solid black;
 	padding: 7px;
 	position: relative;
 	display: inline-block;

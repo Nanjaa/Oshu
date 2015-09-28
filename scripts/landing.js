@@ -49,7 +49,7 @@ $(document).ready(function() {
 			twinkle = !twinkle;
 			if(twinkle) {
 				$('#stars2').fadeIn();
-				$('stars2').fadeOut();
+				$('#stars2').fadeOut();
 			}
 			else {
 				$('#stars2').hide();

@@ -108,10 +108,7 @@ var miloGo = true;
 	function concludeToMap(timeout) {
 		$('#miloResponse').hide();
 		var concludeWait = setTimeout(function() {
-			$('#miloInteraction').hide();
-			$('#map').show();
-			$('#skip').hide();
-			$('#dots').hide();
+			ignore('#map');
 		}, timeout);
 		$('#skip').show();
 		$('#skipButton').unbind('click');
@@ -132,6 +129,9 @@ function ignore(map) {
 	audio.pause();
 	audioPlaying = false;
 	audioStopped = true;
+	go = true;
+	dontGo = false;
+	dontReturn = false;
 	$('#skip').hide();
 	$('#skip').unbind('click');
 	$('#skipButton').unbind('click');
@@ -200,9 +200,9 @@ function ignore(map) {
 
 	// function that will wait for the speech to finish before loading the planet
 
-	function miloIntroduction(timeout, locationHtml, location) {
+	function miloIntroduction(timeout, locationHtml, location, map) {
 		var wait = setTimeout(function() {
-			ignore();
+			ignore(map);
 			showContent(locationHtml, location);
 		}, timeout)
 
@@ -212,11 +212,11 @@ function ignore(map) {
 			clearTimeout(wait);
 			$('#map').hide();
 			showContent(locationHtml, location);
-			ignore();
+			ignore(map);
 		});
 		$('#myShip').click(function() {
 			clearTimeout(wait);
-		})
+		});
 	};
 
 	// lose time as you travel to another planet
@@ -310,7 +310,7 @@ function ignore(map) {
 		audioStopped = false;
 		changeLocation('#lunedaMap');
 		quickMilo(text.lunedaIntro, 'speech/lunedaIntro.wav');
-		miloIntroduction(19500, 'luneda.html #lunedaContent', 'scripts/luneda.js');
+		miloIntroduction(19500, 'luneda.html #lunedaContent', 'scripts/luneda.js', '#lunedaMap');
 	}
 
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -337,11 +337,11 @@ function ignore(map) {
 				good();
 				if(status >= -1) {
 					quickMilo(text.kanedosThankGood, 'speech/kanedosThankGood.mp3');
-					miloIntroduction(2500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+					miloIntroduction(2500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js', '#kanedosMap');
 				}
 				else {
 					quickMilo(text.kanedosThankBad, 'speech/kanedosThankBad.mp3');
-					miloIntroduction(6000, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+					miloIntroduction(6000, 'kanedos.html #kanedosContent', 'scripts/kanedos.js', '#kanedosMap');
 				}								
 			}
 		});
@@ -351,11 +351,11 @@ function ignore(map) {
 				bad();
 				if(status >= -5) {
 					quickMilo(text.kanedosMiloGood, 'speech/kanedosMiloNeut.mp3');
-					miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+					miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js', '#kanedosMap');
 				}
 				else if(status < -5) {
 					quickMilo(text.kanedosMiloBad, 'speech/kanedosMiloBad.mp3');
-					miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js');
+					miloIntroduction(11500, 'kanedos.html #kanedosContent', 'scripts/kanedos.js', '#kanedosMap');
 				}								
 			}
 		});
@@ -363,7 +363,7 @@ function ignore(map) {
 		$('#neut').click(function() {
 			if(miloGo) {
 				showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
-				ignore();								
+				ignore('#kanedosMap');								
 			};
 		});
 	}
@@ -429,13 +429,13 @@ function ignore(map) {
 					knowledge.gift = true;
 					missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
 					$('#miloResponse').hide();
-					miloIntroduction(25500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+					miloIntroduction(25500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js', '#tyrianneMap');
 					tyrianneTimeline = 'Would you like';
 				}
 				else {
 					knowledge.gift = true;
 					missVsOshu(text.tyrianneBadGoodMiss, 'speech/tyrianneBadGoodMiss.mp3', text.tyrianneBadGoodOshu, 'speech/tyrianneBadGoodOshu.mp3', '','','');
-					miloIntroduction(11000, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+					miloIntroduction(11000, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js', '#tyrianneMap');
 					$('#miloResponse').hide();
 				}								
 			}
@@ -451,7 +451,7 @@ function ignore(map) {
 				}
 				else {
 					showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
-					ignore();
+					ignore('#tyrianneMap');
 				};
 			};
 		});
@@ -460,7 +460,7 @@ function ignore(map) {
 		$('#neut').click(function() {
 			if(miloGo) {
 				showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
-				ignore();
+				ignore('#tyrianneMap');
 			};
 		});
 	};
@@ -482,7 +482,7 @@ function ignore(map) {
 		audioStopped = false;
 		changeLocation('#kaprikaMap');
 		quickMilo(text.kaprikaIntro, 'speech/kaprikaIntro.wav', '#kaprikaMap');
-		miloIntroduction(19000, 'kaprika.html #kaprikaContent', 'scripts/kaprika.js');
+		miloIntroduction(19000, 'kaprika.html #kaprikaContent', 'scripts/kaprika.js', '#kaprikaMap');
 	}
 
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -516,7 +516,7 @@ function ignore(map) {
 					}
 					else {
 						quickMilo(text.aliNadaBad, 'speech/aliNadaNeg.mp3');
-						miloIntroduction(5500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+						miloIntroduction(5500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js', '#aliNadaMap');
 						$('#bad').show();
 					}
 				}
@@ -528,9 +528,9 @@ function ignore(map) {
 				else if(aliTimeline == 'who') {
 					good();
 					quickMilo(text.aliNadaGoodGoodGood, 'speech/aliNadaGoodGoodGood.mp3');
-					miloIntroduction(6000, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
-				}								
-			}
+					miloIntroduction(6000, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js', '#aliNadaMap');
+				}					
+			};
 		});
 
 		$('#bad').unbind('click');
@@ -540,11 +540,11 @@ function ignore(map) {
 				if(aliTimeline == 'so sorry') {
 					missVsOshu(text.aliNadaGoodBadMiss, 'speech/aliNadaGoodBadMiss.mp3', text.aliNadaGoodBadOshu, 'speech/aliNadaGoodBadOshu.mp3', '','','');
 					$('#miloResponse').hide();
-					miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+					miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js', '#aliNadaMap');
 				}
 				else if(aliTimeline == 'who') {
 					quickMilo(text.aliNadaGoodGoodBad, 'speech/aliNadaGoodGoodBad.mp3');
-					miloIntroduction(3500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js')
+					miloIntroduction(3500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js', '#aliNadaMap')
 				}								
 			}
 		});
@@ -553,16 +553,16 @@ function ignore(map) {
 		$('#neut').click(function() {
 			if(miloGo) {
 				if(aliTimeline == 'aliIntro') {
-					ignore();
+					ignore('#aliNadaMap');
 					showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
 				}
 				else if(aliTimeline == 'so sorry') {
 					quickMilo(text.aliNadaGoodNeut, 'speech/aliNadaGoodNeut.mp3');
-					miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+					miloIntroduction(7500, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js', '#aliNadaMap');
 				}
 				else if(aliTimeline == 'who') {
 					quickMilo(text.aliNadaGoodGoodNeut, 'speech/aliNadaGoodGoodNeut.mp3');
-					miloIntroduction(3700, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+					miloIntroduction(3700, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js', '#aliNadaMap');
 				}								
 			}
 		});
@@ -595,7 +595,7 @@ function ignore(map) {
 			$('#libraryPass').parent().remove();
 			Oshu.inQuestSpeech = false;
 			Oshu.items.libraryPass = false;
-		};
+		}
 		// If you're cleared to go, go
 		if((go == true) && (dontGo == false) && (dontReturn == false)) {
 			endSpeech();
@@ -892,7 +892,6 @@ function ignore(map) {
 					novaTimeline = 'I dont have time for this';
 				}
 				else {
-					ignore();
 					concludeToMap(1);
 				};				
 			};
@@ -1151,7 +1150,7 @@ function ignore(map) {
 					}						
 				}
 				else {
-					ignore();
+					ignore('#map');
 					$('#map').show();
 				}
 			};
