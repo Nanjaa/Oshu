@@ -25,7 +25,7 @@ var Oshu = {
 		lunedaBobblehead: false,
 		lunedaPostcard: false,
 		jewelry: false,
-		libraryPass: false, 
+		libraryPass: true, 
 		weatherSpecimen: false,
 		weatherDroppedOff: false,
 		weatherComplete: false,
@@ -184,6 +184,7 @@ var knowledge= {
 	name: false,
 	danger: false,
 	mortality: false,
+	gift: false,
 	committed: false,
 	commitConversation: false,
 	brother: false

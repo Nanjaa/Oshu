@@ -348,13 +348,9 @@ function endSpeech() {
 	$('#oshuInteraction').hide();
 	$('#oshuInteraction').text('');
 	if((Oshu.currentLocation !== '#map') && (Oshu.currentLocation !== '#lunedaMap') && (Oshu.currentLocation !== '#kanedosMap') && (Oshu.currentLocation !== '#tyrianneMap') && (Oshu.currentLocation !== '#kaprikaMap') && (Oshu.currentLocation !== '#aliNadaMap')) {
-		console.log(Oshu.currentLocation);
 		$('.return').show();
 		$('#planetInteraction').show();		
-	}
-	else {
-		console.log(Oshu.currentLocation);
-	}
+	};
 };
 
 // ------------------------------------------------------
@@ -425,6 +421,7 @@ function changeLocation(newLocation, clickReturn, clickShip) {
 function oneOption(referenceText, option) {
 	$('#optionTwo').hide();
 	$('#optionThree').hide();
+	$('#planetInteraction').show();
 	$('#interactionText').writeText(referenceText);
 	var option1 = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
@@ -436,6 +433,7 @@ function oneOption(referenceText, option) {
 };
 function twoOptions(referenceText, option1, option2) {
 	$('#optionThree').hide();
+	$('#planetInteraction').show();
 	$('#interactionText').writeText(referenceText);
 	var wait = setInterval(function() {
 		if($('#interactionText').text() == referenceText) {
@@ -448,6 +446,7 @@ function twoOptions(referenceText, option1, option2) {
 	}, 1);
 };
 function threeOptions(referenceText, option1, option2, option3) {
+	$('#planetInteraction').show();
 	if(dontGo !== true) {
 		$('#interactionText').writeText(referenceText);
 		dontGo = true;

@@ -427,12 +427,14 @@ function ignore(map) {
 			if(miloGo) {
 				good();
 				if(tyrianneTimeline == 'tyrianneIntro') {
+					knowledge.gift = true;
 					missVsOshu(text.tyrianneGoodMiss, 'speech/tyrianneGoodMiss.mp3', text.tyrianneGoodOshu, 'speech/tyrianneGoodOshu.mp3', '','','');
 					$('#miloResponse').hide();
 					miloIntroduction(25500, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 					tyrianneTimeline = 'Would you like';
 				}
 				else {
+					knowledge.gift = true;
 					missVsOshu(text.tyrianneBadGoodMiss, 'speech/tyrianneBadGoodMiss.mp3', text.tyrianneBadGoodOshu, 'speech/tyrianneBadGoodOshu.mp3', '','','');
 					miloIntroduction(11000, 'tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 					$('#miloResponse').hide();
@@ -663,7 +665,7 @@ function ignore(map) {
 
 			/////////////////////////////////////////////////
 			// 					  	  The Gift from Tyrianne
-			else if(Oshu.items.gift && (giftGo == true)) {
+			else if((knowledge.gift) && (Oshu.items.gift) && (giftGo == true)) {
 				gift()
 			}
 
