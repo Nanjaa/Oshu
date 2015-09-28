@@ -180,6 +180,8 @@ var sound = true;
 //  \\											   //
 //   \\___________________________________________//
 
+var status = 0;
+
 var knowledge= {
 	name: false,
 	danger: false,

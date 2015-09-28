@@ -16,7 +16,6 @@ $(document).ready(function() {
 // \\											    //
 //  \\											   //
 //   \\___________________________________________//
-var status = 0;
 
 var miloGo = true;
 	// Let's say MILO only has one thing to say, not a full conversation...
@@ -94,15 +93,15 @@ var miloGo = true;
 
 	function good() {
 		clearInteraction();
-		status = status + 1;
+		status = status - -1;
 		Oshu.status = status;
-		console.log(status)			
+		console.log(status);
 	}
 	function bad() {
 		clearInteraction();
 		status = status - 1;
 		Oshu.status = status;
-		console.log(status)			
+		console.log(status);
 	}
 
 	// conclude interaction 
@@ -445,17 +444,16 @@ function ignore(map) {
 		$('#bad').unbind('click');
 		$('#bad').click(function() {
 			if(miloGo) {
-				bad();
 				if(tyrianneTimeline == 'tyrianneIntro') {
+					bad();
 					miloResponse(text.tyrianneBad, 'speech/tyrianneBad.mp3', response.tyrianneGood, response.tyrianneBadNeut, response.ignore);
 					tyrianneTimeline = 'I am, miss';
 				}
 				else {
 					showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
 					ignore();
-					status = status + 1;
-				}
-			}
+				};
+			};
 		});
 
 		$('#neut').unbind('click');
