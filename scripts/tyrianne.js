@@ -59,6 +59,7 @@ $('pre').click(function() {
 			$('.option').hide();
 			if(Oshu.items.libraryPass) {
 				lifeEvent(3);
+				inUse.libraryPass = true;
 				completeItem(Oshu.quests[2][1][0], Oshu.questSpeech.tyrianne1);
 				Oshu.items.libraryPass = false;
 				$('#libraryPass').parent().remove();
@@ -304,7 +305,7 @@ var factoryText = {
 
 $('#fuzzbuttDoorman').unbind('click');
 $('#fuzzbuttDoorman').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		maleVoice3();
 		$('.option').hide();
 		//This is the first conversation you have wth him.
@@ -312,7 +313,9 @@ $('#fuzzbuttDoorman').click(function() {
 			$('#interactionText').writeText(factoryText.questReturnFinished);
 			$('#fullBottle').parent().remove();
 			fuzzbuttEntry = true;
+			dontReturn = true;
 			var timeout = setTimeout(function() {
+				dontReturn = false;
 				$('#fuzzbuttDoorman').hide();
 				$('.fuzzbuttDetails').show();
 				$('#interactionText').writeText(marketText.intro);
@@ -344,8 +347,10 @@ $('#fuzzbuttDoorman').click(function() {
 						if(Oshu.coins >= 200) {
 							payMoney(200);
 							fuzzbuttEntry = true;
+							dontReturn = true;
 							endConversation(factoryText.acceptBribe);
 							var timeout = setTimeout(function() {
+								dontReturn = false;
 								$('#fuzzbuttDoorman').hide();
 								$('.fuzzbuttDetails').show();
 								$('#interactionText').writeText(marketText.intro);

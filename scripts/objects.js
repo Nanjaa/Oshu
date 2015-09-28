@@ -114,6 +114,11 @@ var Oshu = {
 
 var finished = 0;
 
+var inUse = {
+	electroSuit: false,
+	libraryPass: false
+}
+
 var dontReturn = false;
 
 var myLocation = {

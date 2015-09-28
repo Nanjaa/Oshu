@@ -588,6 +588,19 @@ function ignore(map) {
 		goodbyeGo = true
 
 	$('#myShip').click(function() {
+		if(inUse.electroSuit) {
+			inUse.electroSuit = false;
+			$('#electroSuit').parent().remove();
+			beachEnd = true;
+			Oshu.inQuestSpeech = false;
+			Oshu.items.electroSuit = false;
+		}
+		else if(inUse.libraryPass) {
+			inUse.libraryPass = false;
+			$('#libraryPass').parent().remove();
+			Oshu.inQuestSpeech = false;
+			Oshu.items.libraryPass = false;
+		};
 		// If you're cleared to go, go
 		if((go == true) && (dontGo == false) && (dontReturn == false)) {
 			endSpeech();

@@ -344,6 +344,7 @@ $('#closerSeas').click(function() {
 		if(Oshu.items.electroSuit) {
 			lifeEvent(2);
 			dontReturn = true;
+			inUse.electroSuit = true;
 			completeItem(Oshu.quests[0][1][0], Oshu.questSpeech.luneda1);
 			beachEnd = true;
 			$('#skip').unbind('click');
@@ -644,7 +645,6 @@ $('#dancer4').click(function() {
 
 			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
-				console.log('hello world');
 				$('.option').hide();
 				switch(dancerStatus) {
 					case 'intro': 
