@@ -1,3 +1,4 @@
+var inGame = false;
 
 var Oshu = {
 	status: 0,

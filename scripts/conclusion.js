@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	inGame = false;
 
 	function sound() {
 		sound = localStorage.getItem('sound');

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+	inGame = true;
+
 
 //         										____________________/{}\____________________
 // 										______/{{ WELCOME TO THE WONDERFUL WORLD OF MILO! }}\_______
@@ -95,13 +97,11 @@ var miloGo = true;
 		clearInteraction();
 		status = status - -1;
 		Oshu.status = status;
-		console.log(status);
 	}
 	function bad() {
 		clearInteraction();
 		status = status - 1;
 		Oshu.status = status;
-		console.log(status);
 	}
 
 	// conclude interaction 

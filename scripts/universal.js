@@ -547,23 +547,25 @@ var audioPaused = false,
 	audioStopped = false;
 
 function pauseGame() {
-	document.title = 'Oshu - Paused';
-	paused = true;
-	$('#pausedOverlay').show();
-	audio.pause();
+	if(inGame) {
+		document.title = 'Oshu - Paused';
+		paused = true;
+		$('#pausedOverlay').show();
+		audio.pause();
 
-	var pausedWait = setTimeout(function() {
-		$(this).click(function() {
-			document.title = 'Oshu';
-			paused = false;
-			$(this).unbind('click');
-			$('#pausedOverlay').hide();
+		var pausedWait = setTimeout(function() {
+			$(this).click(function() {
+				document.title = 'Oshu';
+				paused = false;
+				$(this).unbind('click');
+				$('#pausedOverlay').hide();
 
-			if(audioPlaying) {
-				audio.play();
-			}
-		});
-	}, 100);
+				if(audioPlaying) {
+					audio.play();
+				}
+			});
+		}, 100);		
+	};
 };
 
 // ------------------------------------------------------
