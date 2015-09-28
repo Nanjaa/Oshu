@@ -459,13 +459,8 @@ function ignore(map) {
 		$('#neut').unbind('click');
 		$('#neut').click(function() {
 			if(miloGo) {
-				if(tyrianneTimeline == 'tyrianneIntro') {
-					showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
-					ignore();
-				}	
-				else {
-					ignore('#map');
-				};	
+				showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+				ignore();
 			};
 		});
 	};
