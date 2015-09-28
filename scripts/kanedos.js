@@ -150,7 +150,6 @@ var camelText = {
 $('#camelGuy').unbind('click');
 $('#camelGuy').click(function() {
 	if(go && (dontReturn == false)) {
-		console.log('hello go is go');
 		$('.option').hide();
 		maleVoice3();
 		if(camelEnd) {
@@ -178,10 +177,7 @@ $('#camelGuy').click(function() {
 				};
 			}, 1); 				
 		};
-	}
-	else {
-		console.log(go);
-	}
+	};
 });
 
 

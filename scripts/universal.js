@@ -597,9 +597,3 @@ function concludeGame(complete) {
 	}
 
 };
-
-// fTEST
-
-$('pre').click(function() {
-	console.log(go);
-});

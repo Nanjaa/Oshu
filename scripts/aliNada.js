@@ -20,7 +20,6 @@ $('.return').click(function() {
 	}
 	else if(pleaseChooseOption){
 		$('#interactionText').text('Please choose an option!');
-		console.log('ughhhghgh');
 	};
 });
 
@@ -93,7 +92,6 @@ $('pre').click(function() {
 				graveStatus = false;
 				dontReturn = true;
 				var cemeteryWait = setTimeout(function() {
-					console.log(1000);
 					play('soundEffects/completeItem.wav');
 					completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
 					$('#skip').show();
@@ -245,7 +243,6 @@ function robotWait(text1, text2) {
 				replace = true;
 				var wait6 = setTimeout(function() {
 					dontReturn = false;
-					console.log(dontReturn);
 					$('#interactionText').writeText(text2);
 				}, 2000);
 			}, 1500);

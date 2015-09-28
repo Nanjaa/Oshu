@@ -515,7 +515,6 @@ function ignore(map) {
 		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(miloGo) {
-				good();
 				if(aliTimeline == 'aliIntro') {
 					if(status >= 0) {
 						$('#bad').show();
@@ -529,10 +528,12 @@ function ignore(map) {
 					}
 				}
 				else if(aliTimeline == 'so sorry') {
+					good();
 					miloResponse(text.aliNadaGoodGood, 'speech/aliNadaGoodGood.mp3', response.aliNadaGoodGoodGood, response.aliNadaGoodGoodBad, response.aliNadaGoodGoodNeut);
 					aliTimeline = 'who';
 				}
 				else if(aliTimeline == 'who') {
+					good();
 					quickMilo(text.aliNadaGoodGoodGood, 'speech/aliNadaGoodGoodGood.mp3');
 					miloIntroduction(6000, 'aliNada.html #aliNadaContent', 'scripts/aliNada.js');
 				}								
