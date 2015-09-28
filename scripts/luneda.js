@@ -929,7 +929,7 @@ var addText = {
 $('#lunedaLifecycleAdd').click(function() {
 	if(go && (dontReturn == false)) {
 		if(Oshu.remainingLife <= 2700) {
-			displayOptions(addText.intro, addText.options, 5, addText.yes, addText.no, addText.noCoins);
+			displayOptions(addText.intro, addText.options, 15, addText.yes, addText.no, addText.noCoins);
 
 			var wait7 = setInterval(function() {
 				if($('#interactionText').text() == addText.yes) {

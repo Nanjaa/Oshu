@@ -1029,7 +1029,7 @@ function ignore(map) {
 
 	function goodbye() {
 		// deterimine what your timeline status is
-		if(status > -10) {
+		if(status >= -5) {
 			var goodbyeTimeline = 'goodIntro';
 		}
 		else {
@@ -1047,7 +1047,7 @@ function ignore(map) {
 			}
 			else {
 				// good goodbye
-				if(status > -10) {
+				if(status >= -5) {
 					if(knowledge.commitConversation) {
 						missVsOshu(text.happyIntroMiss, 'speech/happyIntroMiss.mp3', text.happyIntroOshu, 'speech/happyIntroOshu.mp3', response.happyGood, response.happyBad, response.happyNeutConversed);
 					}
