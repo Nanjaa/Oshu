@@ -347,10 +347,14 @@ function endSpeech() {
 	$('#skip').hide();
 	$('#oshuInteraction').hide();
 	$('#oshuInteraction').text('');
-	if(Oshu.currentLocation !== '#map') {
+	if((Oshu.currentLocation !== '#map') && (Oshu.currentLocation !== '#lunedaMap') && (Oshu.currentLocation !== '#kanedosMap') && (Oshu.currentLocation !== '#tyrianneMap') && (Oshu.currentLocation !== '#kaprikaMap') && (Oshu.currentLocation !== '#aliNadaMap')) {
+		console.log(Oshu.currentLocation);
 		$('.return').show();
 		$('#planetInteraction').show();		
-	};
+	}
+	else {
+		console.log(Oshu.currentLocation);
+	}
 };
 
 // ------------------------------------------------------
@@ -387,7 +391,6 @@ $('#coins').click(function() {
 })
 
 function useItem(item, div) {
-	console.log(Oshu.items.electange);
 	if(item > 0) {
 		var amount = item - 1;
 		item = amount;
@@ -562,7 +565,6 @@ function pauseGame() {
 			$('#pausedOverlay').hide();
 
 			if(audioPlaying) {
-				console.log(1);
 				audio.play();
 			}
 		});

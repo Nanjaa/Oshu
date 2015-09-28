@@ -266,20 +266,25 @@ function ignore(map) {
 					switch(destination) {
 						case 'Luneda':
 							showContent('luneda.html #lunedaContent', 'scripts/luneda.js');
+							changeLocation('#lunedaMap');
 							break;
 						case 'Kanedos':
 							showContent('kanedos.html #kanedosContent', 'scripts/kanedos.js');
+							changeLocation('#kanedosMap');
 							break;
 						case 'Tyrianne':
 							showContent('tyrianne.html #tyrianneContent', 'scripts/tyrianne.js');
+							changeLocation('#tyrianneMap');
 							break;
 						case 'Kaprika':
 							showContent('kaprika.html #kaprikaContent', 'scripts/kaprika.js');
+							changeLocation('#kanedosMap');
 							break;
 						case 'AliNada':
 							showContent('aliNada.html #aliNadaContent', 'scripts/aliNada.js');
+							changeLocation('#aliNadaMap');
 							break;
-					}
+					};
 				};
 			};
 		}

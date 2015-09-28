@@ -27,7 +27,7 @@ $('.return').click(function() {
 			$('.theMarkets').show();
 			$('.marketDetails').show();	
 			$('#interactionText').writeText(marketText.marketWelcome);
-			changeLocation('#lunedaMap', true);	
+			changeLocation('.theMarkets', true);	
 		}
 		else if(Oshu.currentLocation == '.souvenirStand') {
 			$('.theMarkets').show();
@@ -45,7 +45,7 @@ $('.return').click(function() {
 			$('.cityDetails').hide();
 			$('.return').hide();
 			$('#lunedaMap').show();	
-			changeLocation('.theMarkets', true);		
+			changeLocation('#lunedaMap', true);		
 		};		
 	}
 	else if(pleaseChooseOption){
@@ -418,7 +418,6 @@ $('#electange').click(function() {
 			if($('#interactionText').text() == yes) {
 				// adds item to inventory if not already there
 				if(Oshu.itemFirst.electange == true) {
-					console.log('first timer');
 					Oshu.itemFirst.electange = false;
 					$('.inventoryList').append('<li class="inventoryItem"><span class="clickInventory" id="myElectange">Electange: <span id="electangeAmt"></span></span></li>');				
 				
@@ -428,7 +427,6 @@ $('#electange').click(function() {
 							var electangeAmount = Oshu.items.electange - 1;
 							$('#electangeAmt').text(electangeAmount);
 							Oshu.items.electange = electangeAmount;
-							console.log(Oshu.items.electange);
 							// First, make sure you're not in the middle of a conversation with milo
 							if(($('#miloInteraction').css('display') !== 'block') && (electangeEaten == false)) {
 								electangeEaten = true;
@@ -447,7 +445,6 @@ $('#electange').click(function() {
 				// then adds quantity amt
 				var electange = Oshu.items.electange + 1;
 				Oshu.items.electange = electange;
-				console.log(Oshu.items.electange);
 				$('#electangeAmt').text(electange);
 
 				clearInterval(boughtElectange);
@@ -662,7 +659,6 @@ $('#dancer4').click(function() {
 						};
 					break;
 					case 'riddle':
-						console.log('should be working boo');
 						endConversation(danceText.barryWrong);
 					break;
 				};				
