@@ -155,12 +155,10 @@ function hideContent(content) {
 // ------------------------------------------------------
 
 function getPaid(price) {
-	var coins = Oshu.coins;
 	var payment = setInterval(function() {
 		if(!paused) {
-			coins = coins + 1;
-			Oshu.coins = coins;
-			$('#coinsAmt').text(coins);				
+			Oshu.coins = Oshu.coins + 1;
+			$('#coinsAmt').text(Oshu.coins);				
 		};
 	}, 500);
 };
@@ -185,10 +183,8 @@ $('.planet').mouseout(function() {
 // ------------------------------------------------------
 
 function payMoney(price) {
-	var coins = Oshu.coins;
-	coins = coins - price;
-	Oshu.coins = coins;
-	$('#coinsAmt').text(coins);
+	Oshu.coins = Oshu.coins - price;
+	$('#coinsAmt').text(Oshu.coins);
 };
 
 var optionsStatus = 1,
