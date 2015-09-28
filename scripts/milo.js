@@ -612,6 +612,7 @@ function ignore(map) {
 			hideContent('#kaprikaContent');
 			hideContent('#aliNadaContent');
 			$('.return').hide();
+			$('.option').hide();
 			$('.cityDetails').hide();
 			$('.visitPlanet').hide();
 			Oshu.onBoard = true;

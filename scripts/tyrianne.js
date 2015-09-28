@@ -146,6 +146,7 @@ var poorText = {
 	ganifruitOnly: "Thank you so much, but I'm actually allergic to electange...",
 	philosophers: "I'm just an apprentice, but follow me. I will tell them of your good deed.",
 	noFood: "I understand, my friend. Travel happily and live well.",
+	leftAndReturned: "Thank you so much for your gift! Is there any way I can repay you?",
 	end: "Thank you so much for your gift. I hope you enjoyed seeing the philosophers"
 };
 
@@ -157,15 +158,18 @@ $('#poorManClose').click(function() {
 		if(poorStatus == 'end') {
 			$('#interactionText').writeText(poorText.end);
 		}
+		else if(poorStatus == 'giveFruit') {
+			oneOption(poorText.leftAndReturned, 'Actually, can you help me see the philosophers?');
+		}
 		else {
 			twoOptions(poorText.manIntro, "Yes, I do.", "No, I don't");
-
 			$('#optionOne').unbind('click');
 			$('#optionOne').click(function() {
 				$('.option').hide();
 				if(poorStatus == 'intro') {
 					if(Oshu.items.ganifruit > 0) {
-						useItem(Oshu.items.ganifruit, '#ganifruitAmt');
+						Oshu.items.ganifruit = Oshu.items.ganifruit - 1;
+						$('#ganifruitAmt').text(Oshu.items.ganifruit);
 						oneOption(poorText.yesFoodTruth, "Actually, can you help me see the philosophers?");
 						poorStatus = 'giveFruit';
 					}
