@@ -199,16 +199,17 @@ var treeText = {
 };
 
 $('.treeGoons').click(function() {
-	if(go) {
-		maleVoice2();
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		if((Oshu.items.sleepPotion) && (goonStatus == 'intro')) {
+			maleVoice2();
 			oneOption(treeText.goonsIntro, "Can you smell this potion for me?");
 		}
 		else if(goonStatus == 'sleeping') {
 			$('#interactionText').writeText(treeText.sleepReturn);
 		}
 		else {
+			maleVoice2();
 			oneOption(treeText.goonsIntro, "Maybe there's some way I could convince you.");
 		};
 
@@ -244,7 +245,7 @@ $('.treeGoons').click(function() {
 });
 
 $('#treeClose').click(function() {
-	if(go) {
+	if(go && (dontReturn == false)) {
 		$('.option').hide();
 		if(goonStatus == 'sleeping') {
 			$('#interactionText').writeText(treeText.treeNoGoons);

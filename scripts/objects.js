@@ -18,7 +18,7 @@ var Oshu = {
 		electange: 0,
 		brokenRobot: false,
 		fixedRobot: false,
-		password: true,
+		password: false,
 		electroSuit: false, 
 		clothes: false,
 		lunedaSnowglobe: false,
