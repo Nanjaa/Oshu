@@ -402,9 +402,7 @@ function ignore(map) {
 			$('#dots').hide();
 			$('#miloSays').text('');
 			$('#miloResponse').show();
-			$('#good').writeText(response.tyrianneGood);
-			$('#bad').writeText(response.tyrianneBad);
-			$('#neut').writeText(response.ignore);
+			presentOptions(response.tyrianneGood, response.tyrianneBad, response.ignore);
 		}, 28500);
 		$('#dots').show();
 		$('#dotsButton').unbind('click');
@@ -413,12 +411,8 @@ function ignore(map) {
 				clearTimeout(wait4);
 				setGo2();
 				$('#dots').hide();
-				$('#miloSays').text('');
-				$('#miloResponse').show();
-				$('#good').writeText(response.tyrianneGood);
-				$('#bad').writeText(response.tyrianneBad);
-				$('#neut').writeText(response.ignore);				
-			}
+				presentOptions(response.tyrianneGood, response.tyrianneBad, response.ignore);			
+			};
 		});
 
 		var tyrianneTimeline = 'tyrianneIntro';
