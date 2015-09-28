@@ -69,6 +69,7 @@ $('pre').click(function() {
 					// Offer the user the chance to visit the shop
 					endSpeech();
 					twoOptions(libraryText.intro, 'Yes', 'No');
+					$('.return').show();
 
 					$('#optionOne').unbind('click');
 					$('#optionOne').click(function() {
@@ -476,11 +477,11 @@ libraryText = {
 	intro: "There is a small gift shop outside the library. Would you like to buy anything?",
 	ladyIntro: "Welcome to my humble shop! I just love the library so much. I've been able to get passes a few times now!",
 	options: "You enter the small gift shop, filled with items for sale.",
-	bookmarkIntro: "A bookmark is always a great, simple purchase!",
+	bookmarkIntro: "A bookmark is always a great, simple purchase! 25 coins, please!",
 	bookmarkOptions: "Would you like to buy the bookmark?",
-	bobbleheadIntro: "Bobbleheads! A great choice!",
+	bobbleheadIntro: "Bobbleheads! A great choice! 50 coins!",
 	bobbleheadOptions: "Would you like to buy a bobblehead?",
-	bookIntro: "Now that's something very specal. That's a copy of Moonbank Tide signed by the author, Hugo Riven.",
+	bookIntro: "Now that's something very specal. That's a copy of Moonbank Tide signed by the author, Hugo Riven. It's 2500 coins.",
 	bookOptions: "Would you like to buy the book?",
 	needMore: "Sorry, but that's not enough money!",
 	yes: "Perfect! Here's your souvenir!",

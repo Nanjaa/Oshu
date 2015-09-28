@@ -793,10 +793,12 @@ function ignore(map) {
 		
 		$('#good').unbind('click');
 		$('#good').click(function() {
+			good();
 			quickMilo(text.confrontationGood, 'speech/confrontationGood.mp3');
 			concludeToMap(11500);
 		});
 		$('#bad').click(function() {
+			bad();
 			quickMilo(text.confrontationBad, 'speech/confrontationBad.wav');
 			concludeToMap(13500)
 		});
@@ -1083,6 +1085,7 @@ function ignore(map) {
 		$('#good').unbind('click');
 		$('#good').click(function() {
 			if(miloGo) {
+				good();
 				if(goodbyeTimeline == 'badIntro') {
 					quickMilo(text.angryGood, 'speech/angryGood.mp3');
 					concludeToMap(8500);
@@ -1111,10 +1114,14 @@ function ignore(map) {
 		$('#bad').click(function() {
 			if(miloGo) {
 				if(goodbyeTimeline == 'badIntro') {
+					bad();
 					quickMilo(text.angryBad, 'speech/angryBad.wav');
 					concludeToMap(4000);
 				}
 				else if(goodbyeTimeline == 'goodIntro') {
+					bad();
+					audio.pause();
+					audioPlaying = false;
 					audioStopped = true;
 					$('#miloSays').writeText(text.happyBad);
 					concludeToMap(2000);
