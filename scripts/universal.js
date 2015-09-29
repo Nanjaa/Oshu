@@ -142,26 +142,28 @@ function resetText() {
 
 function showContent(content, script) {
 	$('#map').hide();
-	$('#planetContent').load(content);
-	setTimeout(function() {
-		switch(script) {
-			case 'scripts/kaprika.js': 
-				kaprikaInit();
-				break;
-			case 'scripts/luneda.js':
-				lunedaInit();
-				break;
-			case 'scripts/kanedos.js':
-				kanedosInit();
-				break;
-			case 'scripts/tyrianne.js':
-				tyrianneInit();
-				break;
-			case 'scripts/aliNada.js':
-				aliNadaInit();
-				break;
-		}
-	}, 50);
+	$('#planetContent').load(content, function() {
+		console.log('loaded');
+		setTimeout(function() {
+			switch(script) {
+				case 'scripts/kaprika.js': 
+					kaprikaInit();
+					break;
+				case 'scripts/luneda.js':
+					lunedaInit();
+					break;
+				case 'scripts/kanedos.js':
+					kanedosInit();
+					break;
+				case 'scripts/tyrianne.js':
+					tyrianneInit();
+					break;
+				case 'scripts/aliNada.js':
+					aliNadaInit();
+					break;
+			}
+		}, 50);		
+	});
 }
 
 function hideContent(content) {
