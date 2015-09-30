@@ -86,7 +86,7 @@ $(document).ready(function() {
 		$('.landingArtwork').fadeOut();
 		$('#welcome').show();
 
-		var wait1 = setTimeout(playText, 1000);
+		var wait1 = setTimeout(playText, 500);
 		var wait2 = setTimeout(showTitle, 55000);
 		var wait3 = setTimeout(showSub, 57000);
 		var wait4 = setTimeout(hideTitles, 61000);

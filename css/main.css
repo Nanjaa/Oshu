@@ -40,6 +40,7 @@ pre {
 	line-height: 1;
 	position: absolute;
 	cursor: pointer;
+	font-family: 'Inconsolata';
 }
 #footerLink {
 	color: white;
@@ -75,6 +76,7 @@ pre {
 	height: 525px;
 	color: white;
 	float: right;
+	position: relative;
 }
 #gameOptions {
 	width: 600px;

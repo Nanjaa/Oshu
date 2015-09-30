@@ -1,91 +1,86 @@
 /*the planet on the map*/
 #AliNada {
 	color: #969696;
-	margin-left: 325px;
-	margin-top: 75px;
+	left: 325px;
+	top: 75px;
 }
 /*planet details*/
 
 #capitol {
 	color: #cccccc;
-	margin-left: 86px;	
-	margin-top: 130px;
+	left: 105px;	
+	top: 130px;
 }
 #stainedGlass {
 	color: #68c6ff;
-	margin-left: 257px;
-	margin-top: 235px;
+	left: 257px;
+	top: 235px;
 }
 #cemetery {
 	color: #009603;
-	margin-left: 300px;
-	margin-top: 15px;
+	left: 304px;
+	top: 15px;
 }
 #tombstones {
 	color: #838383;
-	margin-left: 336px;
-	margin-top: 45px;
+	left: 336px;
+	top: 45px;
 }
 #aliNadaMechanic {
 	color: #f2a32a;
-	margin-left: 50px;
-	margin-top: 440px;
-}
-#aliNadaGas {
-	color: #8fc78a;
-	margin-left: 45px;
-	margin-top: 400px;
+	left: 50px;
+	top: 440px;
 }
 #capitolGuard {
 	color: #697cd6;
-	margin-left: 240px;
-	margin-top: 50px;
+	left: 240px;
+	top: 50px;
 }
 #capitolDesk1 {
 	color: #1d85b8;
-	margin-left: 25px;
-	margin-top: 200px;
+	left: 25px;
+	top: 200px;
 }
 #capitolDesk2 {
 	color: #ce42df;
-	margin-left: 340px;
-	margin-top: 200px;
+	left: 340px;
+	top: 200px;
 }
 #capitolWeatherman {
 	color: #41b81d;
-	margin-left: 275px;
-	margin-top: 25px;
+	left: 275px;
+	top: 25px;
 }
 #brothersGrave {
 	color: #a3bfc1;
-	margin-left: 115px;
-	margin-top: 100px;
+	left: 115px;
+	top: 100px;
 }
 #graveGrass {
 	color: green;
-	margin-left: 115px;
-	margin-top: 280px;
+	left: 115px;
+	top: 280px;
 }
 #aliNadaMechanicMenu {
-	margin-left: 50px;
-	margin-top: 100px;
+	left: 50px;
+	top: 100px;
 	border: 1px solid white;
 	height: 200px;
 	width: 500px;
 	padding-left: 15px;
 }
 #aliNadaLifecycleShutoff {
-	margin-top: 50px;
+	top: 50px;
 }
 #aliNadaGeneralRobot {
-	margin-top: 80px;
+	top: 80px;
 }
 #aliNadaLifecycleAdd {
-	margin-top: 110px;
+	top: 110px;
 }
 #aliNadaMenuTitle {
 	font-size: 20px;
-	margin-left: 150px;
+	left: 150px;
 	padding: 10px;
 }
 .aliNadaMechanic {
