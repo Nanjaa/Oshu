@@ -143,7 +143,6 @@ function resetText() {
 function showContent(content, script) {
 	$('#map').hide();
 	$('#planetContent').load(content, function() {
-		console.log('loaded');
 		setTimeout(function() {
 			switch(script) {
 				case 'scripts/kaprika.js': 

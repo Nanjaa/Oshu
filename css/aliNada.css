@@ -58,6 +58,7 @@
 	height: 200px;
 	width: 500px;
 	padding-left: 15px;
+	position: absolute;
 }
 #aliNadaLifecycleShutoff {
 	top: 50px;
