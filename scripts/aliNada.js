@@ -49,20 +49,6 @@ function aliNadaInit() {
 					$('.capitolGuard').show();
 				}
 			break;
-			case 'stainedGlass':
-				$('.option').hide();
-				if(Oshu.items.weatherSpecimen) {
-					$('#weatherSpecimen').parent().remove();
-					$('#interactionText').writeText(weatherText.weather);
-					changeLocation('.capitol');
-					$('.capitol').show();
-				}
-				else {
-					$('#interactionText').writeText(weatherText.noAccess);
-					changeLocation('.capitolGuard');
-					$('.capitolGuard').show();
-				}
-			break;
 			case 'cemetery':
 				$('.option').hide();
 				if(graveStatus) {
@@ -80,30 +66,6 @@ function aliNadaInit() {
 							$('#interactionText').writeText(graveText.end);
 						});							
 					}, 1);
-				}
-				else {
-					$('.cemetery').show();
-					$('#interactionText').writeText(graveText.end);
-				};
-				changeLocation('.cemetery');
-			break;
-			case 'tombstones':
-				$('.option').hide();
-				if(graveStatus) {
-					graveStatus = false;
-					dontReturn = true;
-					var cemeteryWait = setTimeout(function() {
-						play('soundEffects/completeItem.wav');
-						completeItem(Oshu.quests[4][1], Oshu.questSpeech.aliNada);
-						$('#skip').show();
-						$('#skipButton').unbind('click');
-						$('#skipButton').click(function() {
-							$('.cemetery').show();
-							endSpeech();
-							$('.cemetery').show();
-							$('#interactionText').writeText(graveText.end);
-						});							
-					}, 1);	
 				}
 				else {
 					$('.cemetery').show();
