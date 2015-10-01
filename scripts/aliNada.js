@@ -174,7 +174,7 @@ function aliNadaInit() {
 				if($('#interactionText').text() == shutoffText.yes) {
 					dontReturn = true;
 					clearInterval(wait7);
-					concludeGame(false);			
+					concludeGame('shutoff');			
 				}
 			}, 1)	
 		};

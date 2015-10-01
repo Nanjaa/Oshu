@@ -609,6 +609,11 @@ function concludeGame(complete) {
 			window.location = 'conclusion.html';
 		}, 2000);
 	}
+	else if(complete == 'shutoff') {
+		var endGame2 = setTimeout(function() {
+			window.location = 'conclusion.html';
+		}, 2000);
+	}
 	else {
 		window.location = 'conclusion.html';
 	}

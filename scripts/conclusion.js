@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 
 var text = {
-	shutoff: "The mechanic finished his work, and my Lifecycle Program was shut off. I felt a strange sense of relief. I had something the rest of my family didn't: A second chance. Although it was important that I felt human like them, I realized that this second chance was something any of them wanted dearly. If a human being were offered a second life on their deathbed, many would accept. I was now being given that offer, and I realize now that I want to accept. Who knows what will happen in the days to come. MILO and I spent time together anytime it didn't affect his work at the rental agency. We traversed much of space, and I saw and experienced things that dwarfed the original list. That bucket list grew and grew, and my life was filled with many happy memories.",
+	shutoff: "The mechanic finished his work, and my Lifecycle Program was shut off. I felt a strange sense of relief. I had something the rest of my family didn't: A second chance. Although it was important that I felt human like them, I realized that this second chance was something any of them wanted dearly. If a human being were offered a second life on their deathbed, many would accept. I was now being given that offer, and I realize now that I wanted to accept it. MILO and I spent time together anytime it didn't affect his work at the rental agency. We traversed much of space, and I saw and experienced things that dwarfed the original list. That bucket list grew and grew, and my life was filled with many happy memories.",
 	completeGood: "I did it. I actually finished everything. I looked down at my list, and thought about everything that had happened throughout it. I thought about what lay before me. I wished for the heaven that so many of my human companions dreamed of. I thought about how if it existed, Andy would be there. I missed Andy so much… MILO and I traveled to a nearby supernova, just out of distance to see it but not close enough to be affected. It was MILO’s idea. I watched the star explode, knowing that I’d soon meet a similar end. Had I been alive, I would cry. My programs began to shut down one by one, and I felt my body relax. My sight shut down, and I was left in darkness. I had made a very dear friend, and I had experienced everything I could ever ask for. This was the perfect ending.",
 	completeNeut: "I did it. I actually finished everything. I looked down at my list, and thought about everything that had happened throughout it. I thought about what lay before me. I wished for the heaven that so many of my human companions dreamed of. I thought about how if it existed, Andy would be there. I missed Andy so much… MILO and I traveled to a nearby supernova, just out of distance to see it but not close enough to be affected. It was MILO’s idea. I watched the star explode, knowing that I’d soon meet a similar end. Had I been alive, I would cry. My programs began to shut down one by one, and I felt my body relax. My sight shut down, and I was left in darkness. My last thoughts were blurry and quiet as I faded away. This was the perfect ending.",
 	completeBad: "I did it. I actually finished everything. I looked down at my list, and thought about everything that had happened throughout it. I thought about what lay before me. I wished for the heaven that so many of my human companions dreamed of. I thought about how if it existed, Andy would be there. I missed Andy so much… MILO and I traveled to a nearby supernova, just out of distance to see it but not close enough to be affected. It was MILO’s idea. I watched the star explode, knowing that I’d soon meet a similar end. Had I been alive, I would cry. My programs began to shut down one by one, and I felt my body relax. My sight shut down, and I was left in darkness. Although MILO and I fought a lot, it was nice to have him with me. It felt much less lonely. This was the perfect ending.",
@@ -35,7 +35,13 @@ var complete = localStorage.getItem('complete');
 var status = localStorage.getItem('status');
 
 function speech() {
-	if(complete == 'true') {
+	console.log(complete);
+	if(complete == 'shutoff') {
+		play('speech/shutoff.mp3');
+		$('#oshuText').writeText(text.shutoff);
+		var hold7 = setTimeout(credits, 47000);
+	}
+	else if(complete == 'true') {
 		if(status == 'good') {
 			play('speech/endingCompleteGood.wav');
 			$('#oshuText').writeText(text.completeGood);
