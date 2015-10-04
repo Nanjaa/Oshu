@@ -278,6 +278,10 @@ function tyrianneInit() {
 						Oshu.items.tyrianneBracelet = true;
 						clearInterval(wait);
 					}
+					// click no
+					else if($('#interactionText').text() == jewelryText.no) {
+						clearInterval(wait);
+					}
 				}, 1);			
 			};		
 		};
@@ -459,7 +463,11 @@ function tyrianneInit() {
 						}, 1500);
 						addItem('sunstone', 'Sunstone', '#sunstone', Oshu.description.sunstone);
 						Oshu.items.sunstone = true;
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == marketText.no) {
+						clearInterval(wait);
+					}
 				}, 1);		
 			};		
 		};
@@ -513,7 +521,11 @@ function tyrianneInit() {
 						Oshu.items.bookmark = true;
 						Oshu.items.gift = true;
 						clearInterval(wait2);
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == libraryText.no) {
+						clearInterval(wait2);
+					}
 				}, 1);
 			}
 			else {
@@ -535,7 +547,11 @@ function tyrianneInit() {
 						Oshu.items.libraryBobblehead = true;
 						Oshu.items.gift = true;
 						clearInterval(wait3);
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == libraryText.no) {
+						clearInterval(wait3);
+					}
 				}, 1);
 			}
 			else {
@@ -559,7 +575,11 @@ function tyrianneInit() {
 						Oshu.items.book = true;
 						Oshu.items.gift = true;
 						clearInterval(wait4);
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == libraryText.no) {
+						clearInterval(wait4);
+					}
 				}, 1);
 			}
 			else {
@@ -598,6 +618,10 @@ function tyrianneInit() {
 					dontReturn = true;
 					clearInterval(wait7);
 					concludeGame('shutoff');			
+				}
+				// click no
+				else if($('#interactionText').text() == shutoffText.no) {
+					clearInterval(wait7);
 				}
 			}, 1)	
 		};
@@ -653,6 +677,10 @@ function tyrianneInit() {
 						Oshu.items.fixedRobot = true;
 						addItem('fixedRobot', 'Fixed Robot', '#fixedRobot', Oshu.description.fixedRobot);
 					}
+					// click no
+					else if($('#interactionText').text() == generalText.no) {
+						clearInterval(wait8);
+					}
 				}, 1);
 			}
 			else {
@@ -684,6 +712,10 @@ function tyrianneInit() {
 					if($('#interactionText').text() == addText.yes) {
 						clearInterval(wait7);
 						lifeEvent(-15);				
+					}
+					// click no
+					else if($('#interactionText').text() == addText.no) {
+						clearInterval(wait7);
 					}
 				}, 1)	
 			}

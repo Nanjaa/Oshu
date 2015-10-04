@@ -124,7 +124,11 @@ function kanedosInit() {
 								$('#interactionText').writeText(kanedomeText.end);
 							});			
 						}, 1500);			
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == kanedomeText.no) {
+						clearInterval(wait);
+					}
 				}, 1);
 			};
 		};
@@ -175,7 +179,11 @@ function kanedosInit() {
 								$('.camelRental').show();
 							});		
 						}, 1500) 
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == camelText.no) {
+						clearInterval(hold);
+					}
 				}, 1); 				
 			};
 		};
@@ -248,7 +256,11 @@ function kanedosInit() {
 						Oshu.items.kanedosNecklace = true;
 						Oshu.items.jewelry = true;
 						clearInterval(buyJewelry);
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == jewelryText.no) {
+						clearInterval(buyJewelry);
+					}
 				}, 1);			
 			}		
 		};

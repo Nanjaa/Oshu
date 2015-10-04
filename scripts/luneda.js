@@ -216,6 +216,10 @@ function lunedaInit() {
 						Oshu.items.electroSuit = true;
 						clearInterval(wait);
 					}
+					// click no
+					else if($('#interactionText').text() == beachText.rentalNo) {
+						clearInterval(wait);
+					}
 				}, 1)
 			};		
 		}
@@ -232,7 +236,7 @@ function lunedaInit() {
 		advice3: "The best place to buy electric fruit is at the marketplace.",
 		manIntro: "Hey, stranger. I'll tell you a secret if you do me a good turn...",
 		questIntro: "'I'm 500 years old. I'll tell you the secret to getting into the Life Pools if you help me fix this.' He hands you a small, broken robot.",
-		questDescription: "I got into a fight with the mechanic years ago. If you have him fix the robot for me, I'll tell you how to get in. What do you say?",
+		questDescription: "I got into a fight with the mechanic years ago. If you have him fix the robot, I'll tell you how to get in. What do you say?",
 		questYes: "Alright. Come back when he's all good and repaired.",
 		questNo: "You'll come back soon enough. The Life Pools are too tempting... And when you do, you're free to accept the quest.",
 		questReturnIncomplete: "Come back when the robot's fixed. I won't tell you the secret without him.",
@@ -442,14 +446,18 @@ function lunedaInit() {
 								};
 							};
 						});
-					};
+					}
+
 					// then adds quantity amt
 					var electange = Oshu.items.electange + 1;
 					Oshu.items.electange = electange;
 					$('#electangeAmt').text(electange);
-
 					clearInterval(boughtElectange);
-				};
+				}
+				// click no
+				else if($('#interactionText').text() == no) {
+					clearInterval(boughtElectange);
+				}
 			}, 1);				
 		};
 	});
@@ -482,7 +490,11 @@ function lunedaInit() {
 					$('#ganifruitAmt').text(ganifruit);
 					
 					clearInterval(boughtGanifruit);
-				};
+				}
+				// click no
+				else if($('#interactionText').text() == no) {
+					clearInterval(boughtGanifruit);
+				}
 			}, 1);		
 		};
 	});
@@ -498,7 +510,11 @@ function lunedaInit() {
 						addItem('myClothes', 'Lunedian Dress', '#myClothes', Oshu.description.clothes);
 						Oshu.items.clothes = true;
 						clearInterval(boughtClothes);
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == marketText.clothesNo) {
+						clearInterval(boughtClothes);
+					}
 				}, 1);			
 			}
 			else {
@@ -518,7 +534,11 @@ function lunedaInit() {
 						addItem('lunedaSnowglobe', 'Beach Snowglobe', '#lunedaSnowglobe', Oshu.description.lunedaSnowglobe);
 						Oshu.items.lunedaSnowglobe = true;
 						clearInterval(boughtSnowglobe);
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == marketText.souvenirNo) {
+						clearInterval(boughtSnowglobe);
+					}
 				}, 1);
 			}
 			else {
@@ -538,7 +558,11 @@ function lunedaInit() {
 						addItem('lunedaBobblehead', 'Stormchaser Bobblehead', '#lunedaBobblehead', Oshu.description.lunedaBobblehead);
 						Oshu.items.lunedaBobblehead = true;
 						clearInterval(boughtBobbleheads);
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == marketText.souvenirNo) {
+						clearInterval(boughtBobbleheads);
+					}
 				}, 1);
 			}
 			else {
@@ -558,7 +582,11 @@ function lunedaInit() {
 						addItem('lunedaPostcard', 'Luneda Postcard', '#lunedaPostcard', Oshu.description.lunedaPostcard);
 						Oshu.items.lunedaPostcard = true;
 						clearInterval(boughtPostcards);
-					};
+					}
+					// click no
+					else if($('#interactionText').text() == marketText.souvenirNo) {
+						clearInterval(boughtPostcards);
+					}
 				}, 1);
 			}
 			else {
@@ -855,6 +883,10 @@ function lunedaInit() {
 					clearInterval(wait7);
 					concludeGame('shutoff');				
 				}
+				// click no
+				else if($('#interactionText').text() == shutoffText.no) {
+					clearInterval(wait7);
+				}
 			}, 1)	
 		};
 	});
@@ -907,6 +939,10 @@ function lunedaInit() {
 						Oshu.items.fixedRobot = true;
 						addItem('fixedRobot', 'Fixed Robot', '#fixedRobot', Oshu.description.fixedRobot);
 					}
+					// click no
+					else if($('#interactionText').text() == generalText.no) {
+						clearInterval(wait8);
+					}
 				}, 1);
 			}
 			else {
@@ -936,6 +972,10 @@ function lunedaInit() {
 					if($('#interactionText').text() == addText.yes) {
 						clearInterval(wait7);
 						lifeEvent(-15);				
+					}
+					// click no
+					else if($('#interactionText').text() == addText.no) {
+						clearInterval(wait7);
 					}
 				}, 1)	
 			}

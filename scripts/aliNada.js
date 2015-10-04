@@ -48,7 +48,7 @@ function aliNadaInit() {
 					changeLocation('.capitolGuard');
 					$('.capitolGuard').show();
 				}
-			break;
+				break;
 			case 'cemetery':
 				$('.option').hide();
 				if(graveStatus) {
@@ -72,13 +72,13 @@ function aliNadaInit() {
 					$('#interactionText').writeText(graveText.end);
 				};
 				changeLocation('.cemetery');
-			break;
+				break;
 			case 'aliNadaMechanic':
 				$('.option').hide();
 				$('#interactionText').writeText(shutoffText.intro);
 				changeLocation('.aliNadaMechanic');
 				$('.aliNadaMechanic').show();
-			break;
+				break;
 		};
 	});
 
@@ -176,6 +176,10 @@ function aliNadaInit() {
 					clearInterval(wait7);
 					concludeGame('shutoff');			
 				}
+				// click no
+				else if($('#interactionText').text() == shutoffText.no) {
+					clearInterval(wait7);
+				}
 			}, 1)	
 		};
 	});
@@ -231,6 +235,10 @@ function aliNadaInit() {
 						Oshu.items.fixedRobot = true;
 						addItem('fixedRobot', 'Fixed Robot', '#fixedRobot', Oshu.description.fixedRobot);
 					}
+					// click no
+					else if($('#interactionText').text() == generalText.no) {
+						clearInterval(wait8);
+					}
 				}, 1);
 			}
 			else {
@@ -262,6 +270,10 @@ function aliNadaInit() {
 					if($('#interactionText').text() == addText.yes) {
 						clearInterval(wait7);
 						lifeEvent(-15);				
+					}
+					// click no
+					else if($('#interactionText').text() == addText.no) {
+						clearInterval(wait7);
 					}
 				}, 1);
 			}
